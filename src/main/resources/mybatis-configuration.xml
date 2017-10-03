@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+  
+  <!-- 指定Mybatis使用log4j -->
+  <settings>
+     <setting name="logImpl" value="LOG4J"/>
+  </settings>
+  
+  <typeAliases>
+    <!-- 设置别名 -->
+  	<typeAlias type="com.futher.school.entity.Message" alias="Message"/>
+  	<typeAlias type="com.futher.school.entity.Resource" alias="Resource"/>
+  	<typeAlias type="com.futher.school.entity.Type" alias="Type"/>
+  	<typeAlias type="com.futher.school.entity.User" alias="User"/>
+  	<typeAlias type="java.lang.Integer" alias="int"/>
+  	<typeAlias type="java.lang.String" alias="String"/>
+  	<typeAlias type="java.util.HashSet" alias="HashSet"/>
+  	<typeAlias type="java.util.List" alias="List"/>
+  </typeAliases>
+  
+  
+  
+</configuration>

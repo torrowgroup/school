@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futher.school.dao.TypeMapper">
+  <resultMap id="BaseResultMap" type="com.futher.school.entity.Type">
+    <id column="ty_id" jdbcType="INTEGER" property="tyId" />
+    <result column="ty_pid" jdbcType="INTEGER" property="tyPid" />
+    <result column="ty_categoryName" jdbcType="VARCHAR" property="tyCategoryname" />
+    <result column="ty_spare" jdbcType="VARCHAR" property="tySpare" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ty_id, ty_pid, ty_categoryName, ty_spare
+  </sql>
+  <select id="selectByExample" parameterType="com.futher.school.entity.TypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_type
+    where ty_id = #{tyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_type
+    where ty_id = #{tyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.futher.school.entity.TypeExample">
+    delete from tb_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.futher.school.entity.Type">
+    insert into tb_type (ty_id, ty_pid, ty_categoryName, 
+      ty_spare)
+    values (#{tyId,jdbcType=INTEGER}, #{tyPid,jdbcType=INTEGER}, #{tyCategoryname,jdbcType=VARCHAR}, 
+      #{tySpare,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.futher.school.entity.Type">
+    insert into tb_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tyId != null">
+        ty_id,
+      </if>
+      <if test="tyPid != null">
+        ty_pid,
+      </if>
+      <if test="tyCategoryname != null">
+        ty_categoryName,
+      </if>
+      <if test="tySpare != null">
+        ty_spare,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tyId != null">
+        #{tyId,jdbcType=INTEGER},
+      </if>
+      <if test="tyPid != null">
+        #{tyPid,jdbcType=INTEGER},
+      </if>
+      <if test="tyCategoryname != null">
+        #{tyCategoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="tySpare != null">
+        #{tySpare,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.futher.school.entity.TypeExample" resultType="java.lang.Long">
+    select count(*) from tb_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_type
+    <set>
+      <if test="record.tyId != null">
+        ty_id = #{record.tyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tyPid != null">
+        ty_pid = #{record.tyPid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tyCategoryname != null">
+        ty_categoryName = #{record.tyCategoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tySpare != null">
+        ty_spare = #{record.tySpare,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_type
+    set ty_id = #{record.tyId,jdbcType=INTEGER},
+      ty_pid = #{record.tyPid,jdbcType=INTEGER},
+      ty_categoryName = #{record.tyCategoryname,jdbcType=VARCHAR},
+      ty_spare = #{record.tySpare,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.Type">
+    update tb_type
+    <set>
+      <if test="tyPid != null">
+        ty_pid = #{tyPid,jdbcType=INTEGER},
+      </if>
+      <if test="tyCategoryname != null">
+        ty_categoryName = #{tyCategoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="tySpare != null">
+        ty_spare = #{tySpare,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ty_id = #{tyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.Type">
+    update tb_type
+    set ty_pid = #{tyPid,jdbcType=INTEGER},
+      ty_categoryName = #{tyCategoryname,jdbcType=VARCHAR},
+      ty_spare = #{tySpare,jdbcType=VARCHAR}
+    where ty_id = #{tyId,jdbcType=INTEGER}
+  </update>
+</mapper>

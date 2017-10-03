@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futher.school.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.futher.school.entity.User">
+    <id column="us_id" jdbcType="INTEGER" property="usId" />
+    <result column="us_email" jdbcType="VARCHAR" property="usEmail" />
+    <result column="us_password" jdbcType="VARCHAR" property="usPassword" />
+    <result column="us_name" jdbcType="VARCHAR" property="usName" />
+    <result column="us_sex" jdbcType="VARCHAR" property="usSex" />
+    <result column="us_identityId" jdbcType="VARCHAR" property="usIdentityid" />
+    <result column="us_identityName" jdbcType="VARCHAR" property="usIdentityname" />
+    <result column="us_tel" jdbcType="VARCHAR" property="usTel" />
+    <result column="us_image" jdbcType="VARCHAR" property="usImage" />
+    <result column="us_introduce" jdbcType="VARCHAR" property="usIntroduce" />
+    <result column="us_teachingResults" jdbcType="VARCHAR" property="usTeachingresults" />
+    <result column="us_spare" jdbcType="VARCHAR" property="usSpare" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    us_id, us_email, us_password, us_name, us_sex, us_identityId, us_identityName, us_tel, 
+    us_image, us_introduce, us_teachingResults, us_spare
+  </sql>
+  <select id="selectByExample" parameterType="com.futher.school.entity.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_user
+    where us_id = #{usId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.futher.school.entity.UserExample">
+    delete from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.futher.school.entity.User">
+    insert into tb_user (us_id, us_email, us_password, 
+      us_name, us_sex, us_identityId, 
+      us_identityName, us_tel, us_image, 
+      us_introduce, us_teachingResults, us_spare
+      )
+    values (#{usId,jdbcType=INTEGER}, #{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR}, 
+      #{usName,jdbcType=VARCHAR}, #{usSex,jdbcType=VARCHAR}, #{usIdentityid,jdbcType=VARCHAR}, 
+      #{usIdentityname,jdbcType=VARCHAR}, #{usTel,jdbcType=VARCHAR}, #{usImage,jdbcType=VARCHAR}, 
+      #{usIntroduce,jdbcType=VARCHAR}, #{usTeachingresults,jdbcType=VARCHAR}, #{usSpare,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.futher.school.entity.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        us_id,
+      </if>
+      <if test="usEmail != null">
+        us_email,
+      </if>
+      <if test="usPassword != null">
+        us_password,
+      </if>
+      <if test="usName != null">
+        us_name,
+      </if>
+      <if test="usSex != null">
+        us_sex,
+      </if>
+      <if test="usIdentityid != null">
+        us_identityId,
+      </if>
+      <if test="usIdentityname != null">
+        us_identityName,
+      </if>
+      <if test="usTel != null">
+        us_tel,
+      </if>
+      <if test="usImage != null">
+        us_image,
+      </if>
+      <if test="usIntroduce != null">
+        us_introduce,
+      </if>
+      <if test="usTeachingresults != null">
+        us_teachingResults,
+      </if>
+      <if test="usSpare != null">
+        us_spare,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="usEmail != null">
+        #{usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usPassword != null">
+        #{usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="usSex != null">
+        #{usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityid != null">
+        #{usIdentityid,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityname != null">
+        #{usIdentityname,jdbcType=VARCHAR},
+      </if>
+      <if test="usTel != null">
+        #{usTel,jdbcType=VARCHAR},
+      </if>
+      <if test="usImage != null">
+        #{usImage,jdbcType=VARCHAR},
+      </if>
+      <if test="usIntroduce != null">
+        #{usIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="usTeachingresults != null">
+        #{usTeachingresults,jdbcType=VARCHAR},
+      </if>
+      <if test="usSpare != null">
+        #{usSpare,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.futher.school.entity.UserExample" resultType="java.lang.Long">
+    select count(*) from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user
+    <set>
+      <if test="record.usId != null">
+        us_id = #{record.usId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usEmail != null">
+        us_email = #{record.usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usPassword != null">
+        us_password = #{record.usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null">
+        us_name = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usSex != null">
+        us_sex = #{record.usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usIdentityid != null">
+        us_identityId = #{record.usIdentityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usIdentityname != null">
+        us_identityName = #{record.usIdentityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usTel != null">
+        us_tel = #{record.usTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usImage != null">
+        us_image = #{record.usImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usIntroduce != null">
+        us_introduce = #{record.usIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usTeachingresults != null">
+        us_teachingResults = #{record.usTeachingresults,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usSpare != null">
+        us_spare = #{record.usSpare,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user
+    set us_id = #{record.usId,jdbcType=INTEGER},
+      us_email = #{record.usEmail,jdbcType=VARCHAR},
+      us_password = #{record.usPassword,jdbcType=VARCHAR},
+      us_name = #{record.usName,jdbcType=VARCHAR},
+      us_sex = #{record.usSex,jdbcType=VARCHAR},
+      us_identityId = #{record.usIdentityid,jdbcType=VARCHAR},
+      us_identityName = #{record.usIdentityname,jdbcType=VARCHAR},
+      us_tel = #{record.usTel,jdbcType=VARCHAR},
+      us_image = #{record.usImage,jdbcType=VARCHAR},
+      us_introduce = #{record.usIntroduce,jdbcType=VARCHAR},
+      us_teachingResults = #{record.usTeachingresults,jdbcType=VARCHAR},
+      us_spare = #{record.usSpare,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.User">
+    update tb_user
+    <set>
+      <if test="usEmail != null">
+        us_email = #{usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usPassword != null">
+        us_password = #{usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        us_name = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="usSex != null">
+        us_sex = #{usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityid != null">
+        us_identityId = #{usIdentityid,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityname != null">
+        us_identityName = #{usIdentityname,jdbcType=VARCHAR},
+      </if>
+      <if test="usTel != null">
+        us_tel = #{usTel,jdbcType=VARCHAR},
+      </if>
+      <if test="usImage != null">
+        us_image = #{usImage,jdbcType=VARCHAR},
+      </if>
+      <if test="usIntroduce != null">
+        us_introduce = #{usIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="usTeachingresults != null">
+        us_teachingResults = #{usTeachingresults,jdbcType=VARCHAR},
+      </if>
+      <if test="usSpare != null">
+        us_spare = #{usSpare,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.User">
+    update tb_user
+    set us_email = #{usEmail,jdbcType=VARCHAR},
+      us_password = #{usPassword,jdbcType=VARCHAR},
+      us_name = #{usName,jdbcType=VARCHAR},
+      us_sex = #{usSex,jdbcType=VARCHAR},
+      us_identityId = #{usIdentityid,jdbcType=VARCHAR},
+      us_identityName = #{usIdentityname,jdbcType=VARCHAR},
+      us_tel = #{usTel,jdbcType=VARCHAR},
+      us_image = #{usImage,jdbcType=VARCHAR},
+      us_introduce = #{usIntroduce,jdbcType=VARCHAR},
+      us_teachingResults = #{usTeachingresults,jdbcType=VARCHAR},
+      us_spare = #{usSpare,jdbcType=VARCHAR}
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+</mapper>

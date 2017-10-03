@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futher.school.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.futher.school.entity.Message">
+    <id column="me_id" jdbcType="INTEGER" property="meId" />
+    <result column="me_title" jdbcType="VARCHAR" property="meTitle" />
+    <result column="me_content" jdbcType="VARCHAR" property="meContent" />
+    <result column="me_image" jdbcType="VARCHAR" property="meImage" />
+    <result column="me_anonymous" jdbcType="VARCHAR" property="meAnonymous" />
+    <result column="me_releaseDate" jdbcType="TIMESTAMP" property="meReleasedate" />
+    <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
+    <result column="me_replyContent" jdbcType="VARCHAR" property="meReplycontent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    me_id, me_title, me_content, me_image, me_anonymous, me_releaseDate, me_status, me_replyContent
+  </sql>
+  <select id="selectByExample" parameterType="com.futher.school.entity.MessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_message
+    where me_id = #{meId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_message
+    where me_id = #{meId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.futher.school.entity.MessageExample">
+    delete from tb_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.futher.school.entity.Message">
+    insert into tb_message (me_id, me_title, me_content, 
+      me_image, me_anonymous, me_releaseDate, 
+      me_status, me_replyContent)
+    values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meContent,jdbcType=VARCHAR}, 
+      #{meImage,jdbcType=VARCHAR}, #{meAnonymous,jdbcType=VARCHAR}, #{meReleasedate,jdbcType=TIMESTAMP}, 
+      #{meStatus,jdbcType=VARCHAR}, #{meReplycontent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.futher.school.entity.Message">
+    insert into tb_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meId != null">
+        me_id,
+      </if>
+      <if test="meTitle != null">
+        me_title,
+      </if>
+      <if test="meContent != null">
+        me_content,
+      </if>
+      <if test="meImage != null">
+        me_image,
+      </if>
+      <if test="meAnonymous != null">
+        me_anonymous,
+      </if>
+      <if test="meReleasedate != null">
+        me_releaseDate,
+      </if>
+      <if test="meStatus != null">
+        me_status,
+      </if>
+      <if test="meReplycontent != null">
+        me_replyContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meId != null">
+        #{meId,jdbcType=INTEGER},
+      </if>
+      <if test="meTitle != null">
+        #{meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="meContent != null">
+        #{meContent,jdbcType=VARCHAR},
+      </if>
+      <if test="meImage != null">
+        #{meImage,jdbcType=VARCHAR},
+      </if>
+      <if test="meAnonymous != null">
+        #{meAnonymous,jdbcType=VARCHAR},
+      </if>
+      <if test="meReleasedate != null">
+        #{meReleasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meStatus != null">
+        #{meStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meReplycontent != null">
+        #{meReplycontent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.futher.school.entity.MessageExample" resultType="java.lang.Long">
+    select count(*) from tb_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_message
+    <set>
+      <if test="record.meId != null">
+        me_id = #{record.meId,jdbcType=INTEGER},
+      </if>
+      <if test="record.meTitle != null">
+        me_title = #{record.meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meContent != null">
+        me_content = #{record.meContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meImage != null">
+        me_image = #{record.meImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meAnonymous != null">
+        me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meReleasedate != null">
+        me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.meStatus != null">
+        me_status = #{record.meStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meReplycontent != null">
+        me_replyContent = #{record.meReplycontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_message
+    set me_id = #{record.meId,jdbcType=INTEGER},
+      me_title = #{record.meTitle,jdbcType=VARCHAR},
+      me_content = #{record.meContent,jdbcType=VARCHAR},
+      me_image = #{record.meImage,jdbcType=VARCHAR},
+      me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
+      me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
+      me_status = #{record.meStatus,jdbcType=VARCHAR},
+      me_replyContent = #{record.meReplycontent,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.Message">
+    update tb_message
+    <set>
+      <if test="meTitle != null">
+        me_title = #{meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="meContent != null">
+        me_content = #{meContent,jdbcType=VARCHAR},
+      </if>
+      <if test="meImage != null">
+        me_image = #{meImage,jdbcType=VARCHAR},
+      </if>
+      <if test="meAnonymous != null">
+        me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
+      </if>
+      <if test="meReleasedate != null">
+        me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meStatus != null">
+        me_status = #{meStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meReplycontent != null">
+        me_replyContent = #{meReplycontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.Message">
+    update tb_message
+    set me_title = #{meTitle,jdbcType=VARCHAR},
+      me_content = #{meContent,jdbcType=VARCHAR},
+      me_image = #{meImage,jdbcType=VARCHAR},
+      me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
+      me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
+      me_status = #{meStatus,jdbcType=VARCHAR},
+      me_replyContent = #{meReplycontent,jdbcType=VARCHAR}
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
+</mapper>

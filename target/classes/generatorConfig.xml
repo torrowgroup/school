@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+<!--  <properties  resource="classpath:jdbc.properties"/> -->
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+   <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/school?useUnicode=true&amp;characterEncoding=utf8"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+    
+<!-- 指定Javabean生成的位置 -->
+    <javaModelGenerator targetPackage="com.futher.school.entity" targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+<!-- 指定SQL映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="mappers"  targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.futher.school.dao"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <table tableName="tb_user" domainObjectName="User" ></table>
+	<table tableName="tb_type" domainObjectName="Type" ></table>
+	<table tableName="tb_resource" domainObjectName="Resource" ></table>
+	<table tableName="tb_message" domainObjectName="Message" ></table>
+  </context>
+</generatorConfiguration>
