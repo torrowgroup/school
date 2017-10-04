@@ -1,6 +1,8 @@
 package com.futher.school.base;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,14 +15,17 @@ import com.futher.school.service.UserService;
 public abstract  class BaseController {
 
 	@Resource
-	private UserService userService;
+	protected UserService userService;
 	@Resource
-	private MessageService messageService;
+	protected MessageService messageService;
 	@Resource
-	private ResourceService resourceService;
+	protected ResourceService resourceService;
 	@Resource
-	private TypeService typeService;
-	
+	protected TypeService typeService;
+	@Resource
+	protected HttpServletRequest request;
+	@Resource
+	protected HttpSession session; 
 	 /**
      * 返回一个 ModelAndView 实例
      * @return

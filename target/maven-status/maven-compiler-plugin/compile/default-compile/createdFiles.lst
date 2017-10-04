@@ -1,4 +1,6 @@
 com\futher\school\entity\TypeExample.class
+com\futher\school\listener\SchoolListener.class
+com\futher\school\controller\LoginController.class
 com\futher\school\entity\ResourceExample.class
 com\futher\school\entity\User.class
 com\futher\school\entity\UserExample$GeneratedCriteria.class
@@ -12,6 +14,7 @@ com\futher\school\service\impl\MessageServiceImpl.class
 com\futher\school\entity\MessageExample$Criteria.class
 com\futher\school\entity\MessageExample.class
 com\futher\school\service\MessageService.class
+com\futher\school\base\BaseDao.class
 com\futher\school\entity\Resource.class
 com\futher\school\entity\Type.class
 com\futher\school\entity\ResourceExample$GeneratedCriteria.class
@@ -31,4 +34,5 @@ com\futher\school\dao\ResourceMapper.class
 com\futher\school\entity\UserExample$Criterion.class
 com\futher\school\entity\ResourceExample$Criteria.class
 com\futher\school\service\ResourceService.class
+com\futher\school\util\PageCut.class
 com\futher\school\dao\TypeMapper.class
