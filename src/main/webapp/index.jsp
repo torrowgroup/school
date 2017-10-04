@@ -21,7 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
-     <a href="spring/testMap">testMap</a><br>
+<!--     This is my JSP page. <br> -->
+     <a href="${rootPath}spring/testMap">testMap</a><br>
+     <form action=""></form>
   </body>
 </html>
