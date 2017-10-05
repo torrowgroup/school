@@ -1,4 +1,0 @@
-0:0:0:0:0:0:0:1 - - [04/Oct/2017:15:23:57 +0800] "GET /school HTTP/1.1" 302 - http-bio-8080-exec-1 0
-0:0:0:0:0:0:0:1 - - [04/Oct/2017:15:23:58 +0800] "GET /school/ HTTP/1.1" 200 717 http-bio-8080-exec-5 843
-0:0:0:0:0:0:0:1 - - [04/Oct/2017:15:23:58 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-6 0
-0:0:0:0:0:0:0:1 - - [04/Oct/2017:15:24:00 +0800] "GET /school/spring/testMap HTTP/1.1" 200 638 http-bio-8080-exec-7 606

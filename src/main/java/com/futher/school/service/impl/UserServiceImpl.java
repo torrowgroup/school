@@ -19,8 +19,23 @@ public class UserServiceImpl extends BaseDao<User,Serializable> implements UserS
 		private UserMapper userMapper;
 
 		@Override
-		public int getUser(User user) {
-			return userMapper.insert(user);
+		public User login(String usEmail, String usPassword) {
+			return userMapper.selectByUserValue(usEmail,usPassword);
+		}
+
+		@Override
+		public User getPassword(String usEmail) {
+			return userMapper.selectByEmail(usEmail);
+		}
+
+		@Override
+		public User getEmail(String identityname) {
+			return userMapper.selectByIdentity(identityname);
+		}
+
+		@Override
+		public int updatePassword(User user) {
+			return userMapper.updateByPrimaryKey(user);
 		}
 		
 }

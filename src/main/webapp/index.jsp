@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -22,7 +23,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <!--     This is my JSP page. <br> -->
-     <a href="${rootPath}spring/testMap">testMap</a><br>
-     <form action=""></form>
+    ${news}
+     <form action="${rootPath}login" method="post">
+     username:<input type="text" name="usEmail" placeholder="请输入你的邮箱号"><br>
+     password:<input type="text" name="usPassword" placeholder="请输入密码"><br>
+     <input type="submit" value="登录">
+     </form><br>
+     <a href="" onclick="windowOpennews()" >忘记密码</a>
+     <script type="text/javascript" src="${rootPath}static/js/forgotpassword.js"></script>
   </body>
 </html>

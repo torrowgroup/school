@@ -2,6 +2,7 @@ package com.futher.school.base;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -25,7 +26,9 @@ public abstract  class BaseController {
 	@Resource
 	protected HttpServletRequest request;
 	@Resource
-	protected HttpSession session; 
+	protected HttpSession session;
+	@Resource
+	protected HttpServletResponse response;
 	 /**
      * 返回一个 ModelAndView 实例
      * @return

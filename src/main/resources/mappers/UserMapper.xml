@@ -11,9 +11,11 @@
     <result column="us_identityName" jdbcType="VARCHAR" property="usIdentityname" />
     <result column="us_tel" jdbcType="VARCHAR" property="usTel" />
     <result column="us_image" jdbcType="VARCHAR" property="usImage" />
-    <result column="us_introduce" jdbcType="VARCHAR" property="usIntroduce" />
-    <result column="us_teachingResults" jdbcType="VARCHAR" property="usTeachingresults" />
     <result column="us_spare" jdbcType="VARCHAR" property="usSpare" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.UserWithBLOBs">
+    <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
+    <result column="us_teachingResults" jdbcType="LONGVARCHAR" property="usTeachingresults" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +77,27 @@
   </sql>
   <sql id="Base_Column_List">
     us_id, us_email, us_password, us_name, us_sex, us_identityId, us_identityName, us_tel, 
-    us_image, us_introduce, us_teachingResults, us_spare
+    us_image, us_spare
   </sql>
+  <sql id="Blob_Column_List">
+    us_introduce, us_teachingResults
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.futher.school.entity.UserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.futher.school.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -91,12 +112,27 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from tb_user
     where us_id = #{usId,jdbcType=INTEGER}
   </select>
+  
+   <select id="selectByUserValue" parameterType="java.lang.String"  resultMap="BaseResultMap">
+  select * from tb_user where us_email = #{usEmail} and us_password = #{usPassword}
+  </select>
+   
+  <select id="selectByEmail" parameterType="java.lang.String"  resultMap="BaseResultMap">
+  	select * from tb_user where us_email = #{usEmail}
+  </select>
+  	
+  <select id="selectByIdentity" parameterType="java.lang.String"  resultMap="BaseResultMap">
+  	select * from tb_user where us_identityName = #{identityname}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_user
     where us_id = #{usId,jdbcType=INTEGER}
@@ -107,19 +143,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.futher.school.entity.User">
+  <insert id="insert" parameterType="com.futher.school.entity.UserWithBLOBs">
     insert into tb_user (us_id, us_email, us_password, 
       us_name, us_sex, us_identityId, 
       us_identityName, us_tel, us_image, 
-      us_introduce, us_teachingResults, us_spare
+      us_spare, us_introduce, us_teachingResults
       )
     values (#{usId,jdbcType=INTEGER}, #{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR}, 
       #{usName,jdbcType=VARCHAR}, #{usSex,jdbcType=VARCHAR}, #{usIdentityid,jdbcType=VARCHAR}, 
       #{usIdentityname,jdbcType=VARCHAR}, #{usTel,jdbcType=VARCHAR}, #{usImage,jdbcType=VARCHAR}, 
-      #{usIntroduce,jdbcType=VARCHAR}, #{usTeachingresults,jdbcType=VARCHAR}, #{usSpare,jdbcType=VARCHAR}
+      #{usSpare,jdbcType=VARCHAR}, #{usIntroduce,jdbcType=LONGVARCHAR}, #{usTeachingresults,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.futher.school.entity.User">
+  <insert id="insertSelective" parameterType="com.futher.school.entity.UserWithBLOBs">
     insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="usId != null">
@@ -149,14 +185,14 @@
       <if test="usImage != null">
         us_image,
       </if>
+      <if test="usSpare != null">
+        us_spare,
+      </if>
       <if test="usIntroduce != null">
         us_introduce,
       </if>
       <if test="usTeachingresults != null">
         us_teachingResults,
-      </if>
-      <if test="usSpare != null">
-        us_spare,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -187,14 +223,14 @@
       <if test="usImage != null">
         #{usImage,jdbcType=VARCHAR},
       </if>
-      <if test="usIntroduce != null">
-        #{usIntroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="usTeachingresults != null">
-        #{usTeachingresults,jdbcType=VARCHAR},
-      </if>
       <if test="usSpare != null">
         #{usSpare,jdbcType=VARCHAR},
+      </if>
+      <if test="usIntroduce != null">
+        #{usIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usTeachingresults != null">
+        #{usTeachingresults,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -234,16 +270,34 @@
       <if test="record.usImage != null">
         us_image = #{record.usImage,jdbcType=VARCHAR},
       </if>
-      <if test="record.usIntroduce != null">
-        us_introduce = #{record.usIntroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="record.usTeachingresults != null">
-        us_teachingResults = #{record.usTeachingresults,jdbcType=VARCHAR},
-      </if>
       <if test="record.usSpare != null">
         us_spare = #{record.usSpare,jdbcType=VARCHAR},
       </if>
+      <if test="record.usIntroduce != null">
+        us_introduce = #{record.usIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.usTeachingresults != null">
+        us_teachingResults = #{record.usTeachingresults,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_user
+    set us_id = #{record.usId,jdbcType=INTEGER},
+      us_email = #{record.usEmail,jdbcType=VARCHAR},
+      us_password = #{record.usPassword,jdbcType=VARCHAR},
+      us_name = #{record.usName,jdbcType=VARCHAR},
+      us_sex = #{record.usSex,jdbcType=VARCHAR},
+      us_identityId = #{record.usIdentityid,jdbcType=VARCHAR},
+      us_identityName = #{record.usIdentityname,jdbcType=VARCHAR},
+      us_tel = #{record.usTel,jdbcType=VARCHAR},
+      us_image = #{record.usImage,jdbcType=VARCHAR},
+      us_spare = #{record.usSpare,jdbcType=VARCHAR},
+      us_introduce = #{record.usIntroduce,jdbcType=LONGVARCHAR},
+      us_teachingResults = #{record.usTeachingresults,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,14 +313,12 @@
       us_identityName = #{record.usIdentityname,jdbcType=VARCHAR},
       us_tel = #{record.usTel,jdbcType=VARCHAR},
       us_image = #{record.usImage,jdbcType=VARCHAR},
-      us_introduce = #{record.usIntroduce,jdbcType=VARCHAR},
-      us_teachingResults = #{record.usTeachingresults,jdbcType=VARCHAR},
       us_spare = #{record.usSpare,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.UserWithBLOBs">
     update tb_user
     <set>
       <if test="usEmail != null">
@@ -293,16 +345,31 @@
       <if test="usImage != null">
         us_image = #{usImage,jdbcType=VARCHAR},
       </if>
-      <if test="usIntroduce != null">
-        us_introduce = #{usIntroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="usTeachingresults != null">
-        us_teachingResults = #{usTeachingresults,jdbcType=VARCHAR},
-      </if>
       <if test="usSpare != null">
         us_spare = #{usSpare,jdbcType=VARCHAR},
       </if>
+      <if test="usIntroduce != null">
+        us_introduce = #{usIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usTeachingresults != null">
+        us_teachingResults = #{usTeachingresults,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.futher.school.entity.UserWithBLOBs">
+    update tb_user
+    set us_email = #{usEmail,jdbcType=VARCHAR},
+      us_password = #{usPassword,jdbcType=VARCHAR},
+      us_name = #{usName,jdbcType=VARCHAR},
+      us_sex = #{usSex,jdbcType=VARCHAR},
+      us_identityId = #{usIdentityid,jdbcType=VARCHAR},
+      us_identityName = #{usIdentityname,jdbcType=VARCHAR},
+      us_tel = #{usTel,jdbcType=VARCHAR},
+      us_image = #{usImage,jdbcType=VARCHAR},
+      us_spare = #{usSpare,jdbcType=VARCHAR},
+      us_introduce = #{usIntroduce,jdbcType=LONGVARCHAR},
+      us_teachingResults = #{usTeachingresults,jdbcType=LONGVARCHAR}
     where us_id = #{usId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.User">
@@ -315,8 +382,6 @@
       us_identityName = #{usIdentityname,jdbcType=VARCHAR},
       us_tel = #{usTel,jdbcType=VARCHAR},
       us_image = #{usImage,jdbcType=VARCHAR},
-      us_introduce = #{usIntroduce,jdbcType=VARCHAR},
-      us_teachingResults = #{usTeachingresults,jdbcType=VARCHAR},
       us_spare = #{usSpare,jdbcType=VARCHAR}
     where us_id = #{usId,jdbcType=INTEGER}
   </update>
