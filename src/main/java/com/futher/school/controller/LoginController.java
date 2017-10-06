@@ -19,32 +19,37 @@ import com.futher.school.util.Email;
 public class LoginController extends BaseController {
 
 	@RequestMapping("/login")
-	public String login(String usEmail, String usPassword, Model model) {
-		User user = userService.login(usEmail, usPassword);
+	public String login(String usEmail, String usPassword,String identityCode, Model model) {
+		String code = (String) session.getAttribute("piccode");
 		String pathurl = "index";
-		if (user != null) {
-			String identityname = user.getUsIdentityname();
-			if (identityname.equals("manager")) {
-				session.setAttribute("manager", user);
-				pathurl = "/WEB-INF/index";
-			} else if (identityname.equals("officialemail")) {
-				model.addAttribute("news", "此用户不用作登录");
+		if (identityCode.equals(code)) {
+			User user = userService.login(usEmail, usPassword);
+			if (user != null) {
+				String identityname = user.getUsIdentityname();
+				if (identityname.equals("manager")) {
+					session.setAttribute("manager", user);
+					pathurl = "/WEB-INF/index";
+				} else if (identityname.equals("officialemail")) {
+					model.addAttribute("news", "此用户不用作登录");
+				}
+				 
+//				} else if (identityname.equals("teacher")) {
+//					session.setAttribute("teacher", user);
+//					pathurl = "/WEB-INF/";
+//				} else if (identityname.equals("teachergroup")) {
+//					session.setAttribute("teachergroup", user);
+//					pathurl = "/WEB-INF/";
+//				} else if (identityname.equals("educationoffice")){
+//					session.setAttribute("educationoffice", user);
+//					pathurl = "/WEB-INF/";
+//				}
+			} else {
+				model.addAttribute("news", "用户名或密码错误,请重新输入");
 			}
-			 
-//			} else if (identityname.equals("teacher")) {
-//				session.setAttribute("teacher", user);
-//				pathurl = "/WEB-INF/";
-//			} else if (identityname.equals("teachergroup")) {
-//				session.setAttribute("teachergroup", user);
-//				pathurl = "/WEB-INF/";
-//			} else if (identityname.equals("educationoffice")){
-//				session.setAttribute("educationoffice", user);
-//				pathurl = "/WEB-INF/";
-//			}
 		} else {
-			model.addAttribute("news", "用户名或密码错误");
-
+			model.addAttribute("news", "验证码错误,请重新输入");
 		}
+		
 		return pathurl;
 	}
 	@RequestMapping("forgetPassword")

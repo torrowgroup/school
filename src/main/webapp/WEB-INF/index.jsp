@@ -16,11 +16,19 @@
   </head>
   
   <body>
+
   
     <form action="${rootPath}uploadfile" method="post" enctype="multipart/form-data">
 		<input type="file" name="file">
 		<input type="submit" value="上传文件"> 
 	</form>
+
+  修改个人资料：<a href="${rootPath}user/getMyMessage">ganga</a>
+<%--     <form action="${rootPath}uploadfile" method="post" enctype="multipart/form-data"> --%>
+<!-- 		<input type="file" name="file"> -->
+<!-- 		<input type="submit" value="上传文件"> -->
+<!-- 	</form> -->
+
     
   </body>
 </html>

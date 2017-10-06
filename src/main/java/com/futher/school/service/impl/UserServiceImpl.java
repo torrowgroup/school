@@ -1,6 +1,7 @@
 package com.futher.school.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -36,6 +37,11 @@ public class UserServiceImpl extends BaseDao<User,Serializable> implements UserS
 		@Override
 		public int updatePassword(User user) {
 			return userMapper.updateByPrimaryKey(user);
+		}
+
+		@Override
+		public List<User> getAllUsers() {
+			return userMapper.selectAll();
 		}
 		
 }

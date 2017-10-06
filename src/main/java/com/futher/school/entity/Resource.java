@@ -7,21 +7,21 @@ public class Resource implements  Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer reId;
+	private Integer reId;//资源编号
 
-    private Integer reTypeid;
+    private Integer reTypeid;//类别编号
 
-    private String reTypename;
+    private String reTypename;//类别名称
 
-    private String reTitle;
+    private String reTitle;//标题(图片URl，链接名称，文件名等)
 
-    private String reContent;
+    private String reContent;//内容(富文本等)
 
-    private String rePublisher;
+    private String rePublisher;//发布人
 
-    private Date reReleasedate;
+    private Date reReleasedate;//发布日期
 
-    private String reSpare;
+    private String reSpare;//备用
 
     public Resource() {
 

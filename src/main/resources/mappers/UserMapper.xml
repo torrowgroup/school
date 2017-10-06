@@ -133,6 +133,10 @@
   	select * from tb_user where us_identityName = #{identityname}
   </select>
   
+   <select id="selectAll" resultMap="BaseResultMap">
+  	select * from tb_user
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_user
     where us_id = #{usId,jdbcType=INTEGER}

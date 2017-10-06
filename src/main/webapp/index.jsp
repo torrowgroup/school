@@ -7,6 +7,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<script type="text/javascript">
+		function reloadCode(){
+			var time=new Date().getTime();
+			document.getElementById("imagecode").src="${rootPath}/IdentityCode?d="+time;
+	}
+</script>
+  <script type="text/javascript">  
+        function changeVerifyCode() {  
+            var time=new Date().getTime();  
+            document.getElementById("kaptchaImage").src="${rootPath}/kaptcha?d="+time;//为了不让验证码缓存，为了安全起见，需要次次都刷新  
+        }  
+    </script> 
   <head>
     <base href="<%=basePath%>">
     
@@ -27,6 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <form action="${rootPath}login" method="post">
      username:<input type="text" name="usEmail" placeholder="请输入你的邮箱号"><br>
      password:<input type="text" name="usPassword" placeholder="请输入密码"><br>
+     IdentityCode:<input type="text" name="identityCode" placeholder="请输入验证码"><br>
+     <img alt="验证码" id="kaptchaImage" src="${rootPath}/kaptcha"  onclick="changeVerifyCode()" /><br>
      <input type="submit" value="登录">
      </form><br>
      <a href="" onclick="windowOpennews()" >忘记密码</a>

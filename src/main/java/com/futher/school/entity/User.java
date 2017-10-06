@@ -6,34 +6,43 @@ public class User implements  Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer usId;
+	private Integer usId; //用户编号
 
-    private String usEmail;
+    private String usEmail;//邮箱(账户)
 
-    private String usPassword;
+    private String usPassword;//密码
 
-    private String usName;
+    private String usName;//姓名
 
-    private String usSex;
+    private String usSex;//性别
 
-    private String usIdentityid;
+    private String usIdentityid;//身份编号
 
-    private String usIdentityname;
+    private String usIdentityname;//身份名称(manager,teacher,officialemail(官方账号,用于发邮件),teachergroup,educationoffice)
 
-    private String usTel;
+    private String usTel;//联系电话
 
-    private String usImage;
+    private String usImage;//教师个人照片
 
-    private String usIntroduce;
+    private String usIntroduce;//教师介绍
 
-    private String usTeachingresults;
+    private String usTeachingresults;//教师教育成果
 
-    private String usSpare;
+    private String usSpare;//备用
 
     
     public User() {
 
     }
+
+	public User(Integer usId, String usEmail, String usPassword, String usName, String usSex, String usTel) {
+		this.usId = usId;
+		this.usEmail = usEmail;
+		this.usPassword = usPassword;
+		this.usName = usName;
+		this.usSex = usSex;
+		this.usTel = usTel;
+	}
 
 	public User( String usEmail, String usPassword, String usName, String usSex, String usIdentityid,
 			String usIdentityname, String usTel, String usImage, String usIntroduce, String usTeachingresults,
@@ -154,5 +163,5 @@ public class User implements  Serializable{
 				+ ", usTel=" + usTel + ", usImage=" + usImage + ", usIntroduce=" + usIntroduce + ", usTeachingresults="
 				+ usTeachingresults + ", usSpare=" + usSpare + "]";
 	}
-    
+
 }

@@ -12,6 +12,7 @@ import com.futher.school.service.MessageService;
 import com.futher.school.service.ResourceService;
 import com.futher.school.service.TypeService;
 import com.futher.school.service.UserService;
+import com.google.code.kaptcha.Producer;
 
 public abstract  class BaseController {
 
@@ -29,6 +30,8 @@ public abstract  class BaseController {
 	protected HttpSession session;
 	@Resource
 	protected HttpServletResponse response;
+	@Resource
+	protected Producer kaptchaProducer;
 	 /**
      * 返回一个 ModelAndView 实例
      * @return
