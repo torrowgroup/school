@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.User;
 import com.futher.school.util.Email;
+import com.google.code.kaptcha.Constants;
 
 @Controller()
 public class LoginController extends BaseController {
 
 	@RequestMapping("/login")
 	public String login(String usEmail, String usPassword,String identityCode, Model model) {
-		String code = (String) session.getAttribute("piccode");
+		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		String pathurl = "index";
 		if (identityCode.equals(code)) {
 			User user = userService.login(usEmail, usPassword);
