@@ -6,10 +6,12 @@
     <result column="re_typeId" jdbcType="INTEGER" property="reTypeid" />
     <result column="re_typeName" jdbcType="VARCHAR" property="reTypename" />
     <result column="re_title" jdbcType="VARCHAR" property="reTitle" />
-    <result column="re_content" jdbcType="VARCHAR" property="reContent" />
     <result column="re_publisher" jdbcType="VARCHAR" property="rePublisher" />
     <result column="re_releaseDate" jdbcType="TIMESTAMP" property="reReleasedate" />
     <result column="re_spare" jdbcType="VARCHAR" property="reSpare" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.Resource">
+    <result column="re_content" jdbcType="LONGVARCHAR" property="reContent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,9 +72,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    re_id, re_typeId, re_typeName, re_title, re_content, re_publisher, re_releaseDate, 
-    re_spare
+    re_id, re_typeId, re_typeName, re_title, re_publisher, re_releaseDate, re_spare
   </sql>
+  <sql id="Blob_Column_List">
+    re_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.futher.school.entity.ResourceExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.futher.school.entity.ResourceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -87,9 +107,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
   </select>
@@ -105,11 +127,11 @@
   </delete>
   <insert id="insert" parameterType="com.futher.school.entity.Resource">
     insert into tb_resource (re_id, re_typeId, re_typeName, 
-      re_title, re_content, re_publisher, 
-      re_releaseDate, re_spare)
+      re_title, re_publisher, re_releaseDate, 
+      re_spare, re_content)
     values (#{reId,jdbcType=INTEGER}, #{reTypeid,jdbcType=INTEGER}, #{reTypename,jdbcType=VARCHAR}, 
-      #{reTitle,jdbcType=VARCHAR}, #{reContent,jdbcType=VARCHAR}, #{rePublisher,jdbcType=VARCHAR}, 
-      #{reReleasedate,jdbcType=TIMESTAMP}, #{reSpare,jdbcType=VARCHAR})
+      #{reTitle,jdbcType=VARCHAR}, #{rePublisher,jdbcType=VARCHAR}, #{reReleasedate,jdbcType=TIMESTAMP}, 
+      #{reSpare,jdbcType=VARCHAR}, #{reContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.futher.school.entity.Resource">
     insert into tb_resource
@@ -126,9 +148,6 @@
       <if test="reTitle != null">
         re_title,
       </if>
-      <if test="reContent != null">
-        re_content,
-      </if>
       <if test="rePublisher != null">
         re_publisher,
       </if>
@@ -137,6 +156,9 @@
       </if>
       <if test="reSpare != null">
         re_spare,
+      </if>
+      <if test="reContent != null">
+        re_content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -152,9 +174,6 @@
       <if test="reTitle != null">
         #{reTitle,jdbcType=VARCHAR},
       </if>
-      <if test="reContent != null">
-        #{reContent,jdbcType=VARCHAR},
-      </if>
       <if test="rePublisher != null">
         #{rePublisher,jdbcType=VARCHAR},
       </if>
@@ -163,6 +182,9 @@
       </if>
       <if test="reSpare != null">
         #{reSpare,jdbcType=VARCHAR},
+      </if>
+      <if test="reContent != null">
+        #{reContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -187,9 +209,6 @@
       <if test="record.reTitle != null">
         re_title = #{record.reTitle,jdbcType=VARCHAR},
       </if>
-      <if test="record.reContent != null">
-        re_content = #{record.reContent,jdbcType=VARCHAR},
-      </if>
       <if test="record.rePublisher != null">
         re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
       </if>
@@ -199,7 +218,24 @@
       <if test="record.reSpare != null">
         re_spare = #{record.reSpare,jdbcType=VARCHAR},
       </if>
+      <if test="record.reContent != null">
+        re_content = #{record.reContent,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_resource
+    set re_id = #{record.reId,jdbcType=INTEGER},
+      re_typeId = #{record.reTypeid,jdbcType=INTEGER},
+      re_typeName = #{record.reTypename,jdbcType=VARCHAR},
+      re_title = #{record.reTitle,jdbcType=VARCHAR},
+      re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
+      re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
+      re_spare = #{record.reSpare,jdbcType=VARCHAR},
+      re_content = #{record.reContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,7 +246,6 @@
       re_typeId = #{record.reTypeid,jdbcType=INTEGER},
       re_typeName = #{record.reTypename,jdbcType=VARCHAR},
       re_title = #{record.reTitle,jdbcType=VARCHAR},
-      re_content = #{record.reContent,jdbcType=VARCHAR},
       re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
       re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
       re_spare = #{record.reSpare,jdbcType=VARCHAR}
@@ -230,9 +265,6 @@
       <if test="reTitle != null">
         re_title = #{reTitle,jdbcType=VARCHAR},
       </if>
-      <if test="reContent != null">
-        re_content = #{reContent,jdbcType=VARCHAR},
-      </if>
       <if test="rePublisher != null">
         re_publisher = #{rePublisher,jdbcType=VARCHAR},
       </if>
@@ -242,7 +274,21 @@
       <if test="reSpare != null">
         re_spare = #{reSpare,jdbcType=VARCHAR},
       </if>
+      <if test="reContent != null">
+        re_content = #{reContent,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where re_id = #{reId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.futher.school.entity.Resource">
+    update tb_resource
+    set re_typeId = #{reTypeid,jdbcType=INTEGER},
+      re_typeName = #{reTypename,jdbcType=VARCHAR},
+      re_title = #{reTitle,jdbcType=VARCHAR},
+      re_publisher = #{rePublisher,jdbcType=VARCHAR},
+      re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
+      re_spare = #{reSpare,jdbcType=VARCHAR},
+      re_content = #{reContent,jdbcType=LONGVARCHAR}
     where re_id = #{reId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.Resource">
@@ -250,7 +296,6 @@
     set re_typeId = #{reTypeid,jdbcType=INTEGER},
       re_typeName = #{reTypename,jdbcType=VARCHAR},
       re_title = #{reTitle,jdbcType=VARCHAR},
-      re_content = #{reContent,jdbcType=VARCHAR},
       re_publisher = #{rePublisher,jdbcType=VARCHAR},
       re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
       re_spare = #{reSpare,jdbcType=VARCHAR}

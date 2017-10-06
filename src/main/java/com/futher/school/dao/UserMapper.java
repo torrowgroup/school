@@ -27,4 +27,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    //用于登录，马黎明
+	User selectByUserValue(@Param("usEmail")String usEmail,@Param("usPassword") String usPassword);
+	//用于找回密码 马黎明
+	User selectByEmail(@Param("usEmail")String usEmail);
+	//用于找官方邮箱 马黎明
+	User selectByIdentity(@Param("identityname")String identityname);
 }
