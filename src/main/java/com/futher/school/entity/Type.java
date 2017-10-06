@@ -6,13 +6,13 @@ public class Type implements  Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer tyId;
+	private Integer tyId;//(身份)类别编号
 
-    private Integer tyPid;
+    private Integer tyPid;//父类编号(概括类，新闻类，用户类，资源类等)
 
-    private String tyCategoryname;
+    private String tyCategoryname;//类别名称
 
-    private String tySpare;
+    private String tySpare;//备用
 
     
     public Type() {

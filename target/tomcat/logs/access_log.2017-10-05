@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [05/Oct/2017:21:32:51 +0800] "GET /school/ HTTP/1.1" 200 1083 http-bio-8080-exec-1 1016
-0:0:0:0:0:0:0:1 - - [05/Oct/2017:21:32:58 +0800] "POST /school/login HTTP/1.1" 200 726 http-bio-8080-exec-3 627
-0:0:0:0:0:0:0:1 - - [05/Oct/2017:21:33:03 +0800] "POST /school/uploadfile HTTP/1.1" 200 726 http-bio-8080-exec-4 46

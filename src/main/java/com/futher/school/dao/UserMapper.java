@@ -33,4 +33,6 @@ public interface UserMapper {
 	User selectByEmail(@Param("usEmail")String usEmail);
 	//用于找官方邮箱 马黎明
 	User selectByIdentity(@Param("identityname")String identityname);
+	//查询所有用户
+	List<User> selectAll();
 }

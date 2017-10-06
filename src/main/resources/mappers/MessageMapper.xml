@@ -8,6 +8,7 @@
     <result column="me_anonymous" jdbcType="VARCHAR" property="meAnonymous" />
     <result column="me_releaseDate" jdbcType="TIMESTAMP" property="meReleasedate" />
     <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
+    <result column="me_spare" jdbcType="VARCHAR" property="meSpare" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.MessageWithBLOBs">
     <result column="me_content" jdbcType="LONGVARCHAR" property="meContent" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    me_id, me_title, me_image, me_anonymous, me_releaseDate, me_status
+    me_id, me_title, me_image, me_anonymous, me_releaseDate, me_status, me_spare
   </sql>
   <sql id="Blob_Column_List">
     me_content, me_replyContent
@@ -115,7 +116,6 @@
     from tb_message
     where me_id = #{meId,jdbcType=INTEGER}
   </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_message
     where me_id = #{meId,jdbcType=INTEGER}
@@ -129,10 +129,12 @@
   <insert id="insert" parameterType="com.futher.school.entity.MessageWithBLOBs">
     insert into tb_message (me_id, me_title, me_image, 
       me_anonymous, me_releaseDate, me_status, 
-      me_content, me_replyContent)
+      me_spare, me_content, me_replyContent
+      )
     values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meImage,jdbcType=VARCHAR}, 
       #{meAnonymous,jdbcType=VARCHAR}, #{meReleasedate,jdbcType=TIMESTAMP}, #{meStatus,jdbcType=VARCHAR}, 
-      #{meContent,jdbcType=LONGVARCHAR}, #{meReplycontent,jdbcType=LONGVARCHAR})
+      #{meSpare,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meReplycontent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.futher.school.entity.MessageWithBLOBs">
     insert into tb_message
@@ -154,6 +156,9 @@
       </if>
       <if test="meStatus != null">
         me_status,
+      </if>
+      <if test="meSpare != null">
+        me_spare,
       </if>
       <if test="meContent != null">
         me_content,
@@ -180,6 +185,9 @@
       </if>
       <if test="meStatus != null">
         #{meStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meSpare != null">
+        #{meSpare,jdbcType=VARCHAR},
       </if>
       <if test="meContent != null">
         #{meContent,jdbcType=LONGVARCHAR},
@@ -216,6 +224,9 @@
       <if test="record.meStatus != null">
         me_status = #{record.meStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.meSpare != null">
+        me_spare = #{record.meSpare,jdbcType=VARCHAR},
+      </if>
       <if test="record.meContent != null">
         me_content = #{record.meContent,jdbcType=LONGVARCHAR},
       </if>
@@ -235,6 +246,7 @@
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
       me_status = #{record.meStatus,jdbcType=VARCHAR},
+      me_spare = #{record.meSpare,jdbcType=VARCHAR},
       me_content = #{record.meContent,jdbcType=LONGVARCHAR},
       me_replyContent = #{record.meReplycontent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -248,7 +260,8 @@
       me_image = #{record.meImage,jdbcType=VARCHAR},
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
-      me_status = #{record.meStatus,jdbcType=VARCHAR}
+      me_status = #{record.meStatus,jdbcType=VARCHAR},
+      me_spare = #{record.meSpare,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -271,6 +284,9 @@
       <if test="meStatus != null">
         me_status = #{meStatus,jdbcType=VARCHAR},
       </if>
+      <if test="meSpare != null">
+        me_spare = #{meSpare,jdbcType=VARCHAR},
+      </if>
       <if test="meContent != null">
         me_content = #{meContent,jdbcType=LONGVARCHAR},
       </if>
@@ -287,6 +303,7 @@
       me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
       me_status = #{meStatus,jdbcType=VARCHAR},
+      me_spare = #{meSpare,jdbcType=VARCHAR},
       me_content = #{meContent,jdbcType=LONGVARCHAR},
       me_replyContent = #{meReplycontent,jdbcType=LONGVARCHAR}
     where me_id = #{meId,jdbcType=INTEGER}
@@ -297,7 +314,8 @@
       me_image = #{meImage,jdbcType=VARCHAR},
       me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
-      me_status = #{meStatus,jdbcType=VARCHAR}
+      me_status = #{meStatus,jdbcType=VARCHAR},
+      me_spare = #{meSpare,jdbcType=VARCHAR}
     where me_id = #{meId,jdbcType=INTEGER}
   </update>
 </mapper>
