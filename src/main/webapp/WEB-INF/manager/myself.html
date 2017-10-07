@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+</head>
+<body>
+	<span th:text="${news}"></span>
+	<form th:action="@{/user/updateMyNews}" method="post">
+	<input type="hidden" name="usId" th:value="${user.usId}">
+	username:<input type="text" name="usEmail" th:value="${user.usEmail}"><br>
+	password:<input type="text" name="usPassword" th:value="${user.usPassword}"><br>
+	name:<input type="text" name="usName" th:value="${user.usName}"><br>
+	sex:<input type="text" name="usSex" th:value="${user.usSex}"><br>
+	tellphone:<input type="text" name="usTel" th:value="${user.usTel}"><br>
+	<input type="hidden" name="usIdentityid" th:value="${user.usIdentityid}">
+	<input type="hidden" name="usIdentityname" th:value="${user.usIdentityname}">
+	<input type="submit" value="修改">
+	</form>
+</body>
+</html>

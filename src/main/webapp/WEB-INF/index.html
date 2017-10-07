@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <script type="text/javascript">  
+        function changeVerifyCode() {  
+            var time=new Date().getTime();  
+            document.getElementById("kaptchaImage").src="kaptcha?d="+time;//为了不让验证码缓存，为了安全起见，需要次次都刷新  
+        } 
+        function windowOpen() {
+//  		 var urlNewPage = "forgotpassword.jsp";//打开的新网页的地址是 
+//  		 var nameNewPage = "newWindow";//打开的新网页的名字是 newWindow
+//  		 var heightNewPage = "600";//打开的新网页的高度
+//  		 var widthNewPage = "560"; //打开的新网页的宽度
+//  		 var optionsForNewPage = "top=210,left=650,width=" + widthNewPage + ",height=" + heightNewPage;
+//  		 //打开
+//  		 var winObj = window.open(urlNewPage, nameNewPage, optionsForNewPage,"_self");
+			changeVerifyCode()
+			window.open('forgotpasswords.jsp', 'newwindow', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')   //该句写成一行代码
+} 
+ </script>
+</head>
+<body>
+	<p th:text="${news}"></p>
+   <form th:action="@{/login}" method="post" accept-charset="UTF-8">
+      username:<input type="text" name="usEmail" placeholder="请输入你的邮箱号" required="required"><br>
+      password:<input type="text" name="usPassword" placeholder="请输入密码" required="required"><br>
+      IdentityCode:<input type="text" name="identityCode" placeholder="请输入验证码" required="required"><br>
+      <img alt="验证码" id="kaptchaImage" th:src="@{/kaptcha}" onclick="changeVerifyCode()" /><br> 
+      <input type="submit" value="登录"> 
+   </form><br> 
+      <a th:href="@{/forget}">忘记密码</a> 
+<!--       <script type="text/javascript" th:src="@{static/js/forgotpassword.js}"></script> -->
+<!--         修改个人资料：<a href="${rootPath}user/getMyMessage">ganga</a>  -->
+</body>
+</html>
