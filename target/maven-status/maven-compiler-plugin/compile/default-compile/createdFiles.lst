@@ -1,4 +1,5 @@
 com\futher\school\entity\TypeExample.class
+com\futher\school\util\Upload.class
 com\futher\school\entity\UserWithBLOBs.class
 com\futher\school\entity\User.class
 com\futher\school\entity\UserExample$GeneratedCriteria.class
@@ -14,6 +15,7 @@ com\futher\school\service\impl\TypeServiceImpl.class
 com\futher\school\base\BaseController.class
 com\futher\school\service\impl\ResourceServiceImpl.class
 com\futher\school\controller\IdentityCodeController.class
+com\futher\school\controller\teacher\TeacherController.class
 com\futher\school\controller\manager\UserController.class
 com\futher\school\service\TypeService.class
 com\futher\school\dao\ResourceMapper.class
@@ -22,6 +24,7 @@ com\futher\school\listener\SchoolListener.class
 com\futher\school\controller\LoginController.class
 com\futher\school\entity\MessageWithBLOBs.class
 com\futher\school\entity\ResourceExample.class
+com\futher\school\base\test.class
 com\futher\school\entity\TypeExample$Criterion.class
 com\futher\school\entity\ResourceExample$Criterion.class
 com\futher\school\service\UserService.class

@@ -318,4 +318,5 @@
       me_spare = #{meSpare,jdbcType=VARCHAR}
     where me_id = #{meId,jdbcType=INTEGER}
   </update>
+  
 </mapper>
