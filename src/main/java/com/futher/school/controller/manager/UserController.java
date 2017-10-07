@@ -17,7 +17,7 @@ public class UserController extends BaseController {
 	public String getMyMessage(Model model) {
 		User user = (User) session.getAttribute("manager");
 		model.addAttribute("user", user);
-		return "/WEB-INF/manager/myself";
+		return "/manager/myself";
 	}
 
 	@RequestMapping("/updateMyNews")

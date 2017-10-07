@@ -24,7 +24,7 @@ public class IdentityCodeController extends BaseController{
 	        response.setHeader("Pragma", "no-cache");  
 	        response.setContentType("image/jpeg");  
 	        String capText = kaptchaProducer.createText();  
-	        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);  
+	        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);  
 	        BufferedImage bi = kaptchaProducer.createImage(capText);  
 	        ServletOutputStream out = response.getOutputStream();  
 	        ImageIO.write(bi, "jpg", out);  

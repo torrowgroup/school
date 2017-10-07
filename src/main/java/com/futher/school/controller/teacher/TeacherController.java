@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.User;
 
-@RequestMapping("/user")
+@RequestMapping("/upload")
 @Controller()
 public class TeacherController extends BaseController {
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	@RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     public String upload( @RequestParam("file") MultipartFile file){
         //分别获取的是变量名file---文件类型---文件名
         System.out.println(file.getName()+"---"+file.getContentType()+"---"+file.getOriginalFilename());
@@ -32,6 +32,6 @@ public class TeacherController extends BaseController {
             System.out.println("文件上传失败");
             e.printStackTrace();
         }
-        return "user/login";
+        return "teacher/upload";
     }
 }
