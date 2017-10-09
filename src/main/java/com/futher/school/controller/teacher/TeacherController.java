@@ -16,22 +16,26 @@ import org.springframework.web.multipart.MultipartFile;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.User;
 
-@RequestMapping("/upload")
+@RequestMapping("/teacher") 
 @Controller()
 public class TeacherController extends BaseController {
-	@RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
-    public String upload( @RequestParam("file") MultipartFile file){
-        //分别获取的是变量名file---文件类型---文件名
-        System.out.println(file.getName()+"---"+file.getContentType()+"---"+file.getOriginalFilename());
+	@RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public String upload( @RequestParam("file") MultipartFile file ,Model model){
+		 String path = request.getSession().getServletContext().getRealPath("/uploading"); 
+		String msg="";
         try {
             if (!file.isEmpty()){
-            //使用StreamsAPI方式拷贝文件
-                Streams.copy(file.getInputStream(),new FileOutputStream("E:/temp/"+file.getOriginalFilename()),true);
+                Streams.copy(file.getInputStream(),new FileOutputStream("static/uploading"+file.getOriginalFilename()),true);
+                System.out.println("文件上传成功");
+                msg="文件上传成功";
             }
         } catch (IOException e) {
-            System.out.println("文件上传失败");
-            e.printStackTrace();
+        	System.out.println("文件上传失败");
+        	msg="抱歉，未知错误,文件上传失败";
+        	e.printStackTrace();
         }
+      model.addAttribute("msg", msg);
         return "teacher/upload";
     }
 }
+
