@@ -6,6 +6,8 @@
 </head>
 <body>
         修改个人资料：<a th:href="@{user/getMyMessage}">修改个人资料</a>
-        修改个人资料：<a th:href="@{user/getMyMessage}">修改个人资料</a>  
+<!--         修改个人资料：<a th:href="@{user/getMyMessage}">修改个人资料</a> -->
+        添加管理员：<a th:href="@{user/toaddUser?identity=manager}">添加管理员</a>
+        添加用户：<a th:href="@{user/toaddUser?identity=teacher}">添加用户</a>        
 </body>
 </html>

@@ -4,31 +4,58 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <script type="text/javascript">  
-        function changeVerifyCode() {  
+    function changeVerifyCode() {  
             var time=new Date().getTime();  
             document.getElementById("kaptchaImage").src="kaptcha?d="+time;//为了不让验证码缓存，为了安全起见，需要次次都刷新  
         } 
-        function windowOpen() {
-//  		 var urlNewPage = "forgotpassword.jsp";//打开的新网页的地址是 
-//  		 var nameNewPage = "newWindow";//打开的新网页的名字是 newWindow
-//  		 var heightNewPage = "600";//打开的新网页的高度
-//  		 var widthNewPage = "560"; //打开的新网页的宽度
-//  		 var optionsForNewPage = "top=210,left=650,width=" + widthNewPage + ",height=" + heightNewPage;
-//  		 //打开
-//  		 var winObj = window.open(urlNewPage, nameNewPage, optionsForNewPage,"_self");
-			changeVerifyCode()
-			window.open('forgotpasswords.jsp', 'newwindow', 'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')   //该句写成一行代码
-} 
+// 	 function loadXmlDoc(){
+// 	        var xmlhttp;
+// 	        // 创建一个XMLHttpRequest对象，用于 IE7+, Firefox, Chrome
+// 	        if(window.XMLHttpRequest){
+// 	            xmlhttp=new XMLHttpRequest();
+// 	        }else {//这个用于老版本浏览器 IE6, IE5
+// 	            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+// 	        }
+// 	        var usEmail=document.getElementById("usEmail").value;
+// 	        //当xmlhttp的状态值改变时，执行下面方法
+// 	        xmlhttp.onreadystatechange=function(){
+// 	            //当解析响应完成并且数据交易成功时，执行下面步骤
+// 	            if(xmlhttp.readyState==4&&xmlhttp.status==200){
+// 	            //将id为mydiv的div内容替换为文本内容
+// 	                var msg=document.getElementById("msg");
+//               //根据返回的结果显示不同的信息
+//               alert(xmlhttp.responseText)
+//               if(xmlhttp.responseText.length==4){
+//                 msg.innerHTML="<font color='red'>账号存在，可登录</font>";
+//                   document.getElementById("submit").disabled = false;
+//               }else{
+//                 msg.innerHTML="<font color='green'>账号不存在或不可登录</font>";
+//                 document.getElementById("submit").disabled = true;
+//               }
+// 	            }
+// 	        }
+	        /* 参数1：method,请求发送的方式：GET/POST
+	         * 参数2：url,访问的路径,这里访问的是静态文本
+	         * 参数3：async，请求是否异步发生， false，请求是同步的，
+	         *  true 或省略，请求是异步的
+	         */
+// 	        xmlhttp.open("GET","/school/index?usEmail="+usEmail,true);
+// 	        //这个就见名知意了，发送请求
+// 	        xmlhttp.send();
+// 	    }
  </script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{static/js/verifyaccount.js}"></script>
 </head>
 <body>
 	<p th:text="${news}"></p>
    <form th:action="@{/login}" method="post" accept-charset="UTF-8">
-      username:<input type="text" name="usEmail" placeholder="请输入你的邮箱号" required="required"><br>
+      username:<input type="text" name="usEmail" id="usEmail" placeholder="请输入你的邮箱号" onblur="loadXmlDoc()" required="required"><span id="msg"></span><br>
       password:<input type="text" name="usPassword" placeholder="请输入密码" required="required"><br>
       IdentityCode:<input type="text" name="identityCode" placeholder="请输入验证码" required="required"><br>
       <img alt="验证码" id="kaptchaImage" th:src="@{/kaptcha}" onclick="changeVerifyCode()" /><br> 
-      <input type="submit" value="登录"> 
+      <input type="submit" value="登录" disabled="true" id="submit"> 
    </form><br> 
       <a th:href="@{/forget}">忘记密码</a> 
 <!--       <script type="text/javascript" th:src="@{static/js/forgotpassword.js}"></script> -->

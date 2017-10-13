@@ -35,4 +35,5 @@ public interface UserMapper {
 	User selectByIdentity(@Param("identityname")String identityname);
 	//查询所有用户
 	List<User> selectAll();
+
 }

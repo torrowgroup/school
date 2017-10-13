@@ -43,5 +43,15 @@ public class UserServiceImpl extends BaseDao<User,Serializable> implements UserS
 		public List<User> getAllUsers() {
 			return userMapper.selectAll();
 		}
+
+		@Override
+		public int addUser(User user) {
+			return userMapper.insert(user);
+		}
+
+		@Override
+		public User loginTest(String usEmail) {
+			return userMapper.selectByEmail(usEmail);
+		}
 		
 }

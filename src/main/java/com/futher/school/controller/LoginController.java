@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.User;
@@ -19,6 +20,45 @@ import com.google.code.kaptcha.Constants;
 @Controller()
 public class LoginController extends BaseController {
 
+//	@RequestMapping("/index")
+//	public void loginTest(String usEmail) throws IOException{
+//			response.setContentType("html/text");
+//		   PrintWriter pw=response.getWriter();
+//		User user = userService.loginTest(usEmail);
+//		if (user != null) {
+//			String identityname = user.getUsIdentityname();
+//			 if (identityname.equals("officialemail")) {
+//				 pw.print(false);
+//				} else {
+//					pw.print(true);
+//				}
+//		} else {
+//			pw.print(false);
+//		}
+//		pw.close();
+//	}
+	@RequestMapping("/verifyaccount")
+	@ResponseBody
+	public void loginTest(String usEmail) throws IOException{
+		response.setContentType("html/text");
+		PrintWriter out=response.getWriter();
+		String result = "";
+		User user = userService.loginTest(usEmail);
+		if (user != null) {
+			String identityname = user.getUsIdentityname();
+			 if (identityname.equals("officialemail")) {
+				 result = "false";
+				 out.print(result);
+				} else {
+					result = "true";
+					out.print(result);
+				}
+		} else {
+			 result = "false";
+			 out.print(result);
+		}
+		out.close();
+	}
 	@RequestMapping("/login")
 	public String login(String usEmail, String usPassword,String identityCode, Model model) {
 		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);

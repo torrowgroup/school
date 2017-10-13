@@ -12,8 +12,12 @@ public interface UserService {
 	public User getPassword(String usEmail);
 	//用于找官方发邮件账号
 	public User getEmail(String identityname);
-	//修改密码 修改个人资料
+	//修改密码 修改个人资料 
 	public int updatePassword(User user);
 	//用于得到所有用户
 	public List<User> getAllUsers();
+	//添加用户
+	public int addUser(User user);
+	//用于登录验证
+	public User loginTest(String usEmail);
 }
