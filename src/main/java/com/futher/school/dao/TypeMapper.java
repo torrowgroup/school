@@ -29,4 +29,6 @@ public interface TypeMapper {
     int updateByPrimaryKey(Type record);
     //得到添加用户类别的id
 	Type selectByCategoryname(@Param("usIdentityname") String usIdentityname);
+	//得到所有用户类别
+	List<Type> selectByTypid(@Param("tyPid")Integer tyPid);
 }

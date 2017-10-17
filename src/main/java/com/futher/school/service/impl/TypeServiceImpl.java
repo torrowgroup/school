@@ -1,6 +1,7 @@
 package com.futher.school.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,6 +22,11 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 	@Override
 	public Type getId(String usIdentityname) {
 		return typeMapper.selectByCategoryname(usIdentityname);
+	}
+
+	@Override
+	public List<Type> selectTypeName(Integer tyPid) {
+		return typeMapper.selectByTypid(tyPid);
 	}
 
 }

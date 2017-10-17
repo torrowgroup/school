@@ -37,9 +37,9 @@ public class LoginController extends BaseController {
 //		}
 //		pw.close();
 //	}
-	@RequestMapping("/verifyaccount")
+	@RequestMapping("/verifyAccount")
 	@ResponseBody
-	public void loginTest(String usEmail) throws IOException{
+	public void verifyAccount(String usEmail) throws IOException{
 		response.setContentType("html/text");
 		PrintWriter out=response.getWriter();
 		String result = "";

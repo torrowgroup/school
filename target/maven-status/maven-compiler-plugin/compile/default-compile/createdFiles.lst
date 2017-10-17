@@ -25,6 +25,7 @@ com\futher\school\controller\LoginController.class
 com\futher\school\entity\MessageWithBLOBs.class
 com\futher\school\entity\ResourceExample.class
 com\futher\school\base\test.class
+com\futher\school\util\PageBean.class
 com\futher\school\entity\TypeExample$Criterion.class
 com\futher\school\entity\ResourceExample$Criterion.class
 com\futher\school\service\UserService.class

@@ -3,6 +3,7 @@ package com.futher.school.service;
 import java.util.List;
 
 import com.futher.school.entity.User;
+import com.futher.school.util.PageBean;
 
 public interface UserService {
 
@@ -20,4 +21,10 @@ public interface UserService {
 	public int addUser(User user);
 	//用于登录验证
 	public User loginTest(String usEmail);
+	//查询所有用户，并分页
+	public PageBean<User> findByPage(int currentPage);
+	//删除用户
+	public int deletByUserId(int usId);
+	//得到修改的用户信息
+	public User selectByUserId(int usId);
 }

@@ -2,6 +2,8 @@ package com.futher.school.dao;
 
 import com.futher.school.entity.User;
 import com.futher.school.entity.UserExample;
+
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +38,5 @@ public interface UserMapper {
 	//查询所有用户
 	List<User> selectAll();
 
+	List<User> findByPage(HashMap<String, Object> map);
 }

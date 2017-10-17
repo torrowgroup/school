@@ -3,7 +3,7 @@ $(function(){
 		var value = $(this).val();
 		value = $.trim(value);
 		if(value != ""){
-			var url = "/school/verifyaccount";
+			var url = "/school/verifyAccount";
 			var args = {"usEmail":value, "time":new Date()};
 			var msg=document.getElementById("msg");
 			$.post(url,args,function(date){
