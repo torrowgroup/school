@@ -16,7 +16,7 @@ public class User implements  Serializable{
 
     private String usSex;//性别
 
-    private String usIdentityid;//身份编号
+    private Integer usIdentityid;//身份编号
 
     private String usIdentityname;//身份名称(manager,teacher,officialemail(官方账号,用于发邮件),teachergroup,educationoffice)
 
@@ -44,7 +44,7 @@ public class User implements  Serializable{
 		this.usTel = usTel;
 	}
 
-	public User( String usEmail, String usPassword, String usName, String usSex, String usIdentityid,
+	public User( String usEmail, String usPassword, String usName, String usSex, Integer usIdentityid,
 			String usIdentityname, String usTel, String usImage, String usIntroduce, String usTeachingresults,
 			String usSpare) {
 		this.usEmail = usEmail;
@@ -100,11 +100,11 @@ public class User implements  Serializable{
         this.usSex = usSex;
     }
 
-    public String getUsIdentityid() {
+    public Integer getUsIdentityid() {
         return usIdentityid;
     }
 
-    public void setUsIdentityid(String usIdentityid) {
+    public void setUsIdentityid(Integer usIdentityid) {
         this.usIdentityid = usIdentityid;
     }
 

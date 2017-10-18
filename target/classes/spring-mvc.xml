@@ -30,6 +30,26 @@
 	            </bean>
 	        </mvc:message-converters>
 	    </mvc:annotation-driven>
+	    
+<!-- 	    	启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+<!-- 	<bean -->
+<!-- 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> -->
+<!-- 		<property name="messageConverters"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="mappingJacksonHttpMessageConverter" /> JSON转换器 -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!--避免IE执行AJAX时，返回JSON出现下载文件 --> 
+<!-- 	<bean id="mappingJacksonHttpMessageConverter" -->
+<!-- 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> -->
+<!-- 		<property name="supportedMediaTypes"> -->
+<!-- 			<list> -->
+<!-- 				<value>text/html;charset=UTF-8</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
 	     <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="mediaTypes">

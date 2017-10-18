@@ -3,8 +3,9 @@
  */
 window.onload=clock;
 function closewin() {
-	self.opener = null;
-	self.close();
+	window.location.href="index.jsp"; 
+//	self.opener = null;
+//	self.close();
 }
 function clock() {
 	i = i - 1

@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+</head>
+<body>
+<span th:if="${usermessages.totalCount} == 0">还没有用户呢</span>
+<p th:text="${news}"></p>
+<div th:if="${usermessages.totalCount} != 0">
+	<table  cellspacing="0" border="1">
+		<caption>用户列表</caption>
+		<thead>
+			<tr>
+				<td>编号</td>
+				<td>账户</td>
+				<td>密码</td>
+				<td>名字</td>
+				<td>性别</td>
+				<td>电话</td>
+				<td>身份</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user,userStat:${usermessages.lists}">
+				<td th:text="${user.usId}"></td>
+				<td th:text="${user.usEmail}"></td>
+				<td th:text="${user.usPassword}"></td>
+				<td th:text="${user.usName}"></td>
+				<td th:text="${user.usSex}"></td>
+				<td th:text="${user.usTel}"></td>
+				<td th:text="${user.usIdentityname}"></td>
+				<td><a th:href="@{/user/toUpdateUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<table  border="0" cellspacing="0" cellpadding="0"  width="900px">
+		<tr>
+			<td th:if="${usermessages.totalPage} > 1">
+			   <span th:if="${usermessages.currPage} == 1">
+			   		<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
+			   		<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage+1})}">[下一页]</a>
+			   </span>
+			   <span th:if="${usermessages.currPage} > 1 ">
+					<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
+					<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage-1})}">[上一页]</a>
+					<span th:if="${usermessages.currPage != usermessages.totalPage}">
+						<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage+1})}">[下一页]</a>					
+					</span>
+			   		<a th:href="@{/user/selectUser?(currentPage=${usermessages.totalPage})}">[尾页]</a>
+			   </span>
+			</td>
+		</tr>
+</table>
+</div>
+</body>
+</html>

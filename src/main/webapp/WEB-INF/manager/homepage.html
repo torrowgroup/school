@@ -5,7 +5,16 @@
   <title>Home</title>
 </head>
 <body>
+<div style="width:20%;">
+	<details>
+		<summary>用户信息管理</summary>
+        <a th:href="@{user/toaddUser?tyPid=1}">添加管理员</a><br>
+        <a th:href="@{user/toaddUser?identity=teacher}">添加用户</a><br> 
+        <a th:href="@{user/selectUser}">用户管理</a><br>          
+    </details>
+</div>
+	
         修改个人资料：<a th:href="@{user/getMyMessage}">修改个人资料</a>
-        修改个人资料：<a th:href="@{user/getMyMessage}">修改个人资料</a>  
+      
 </body>
 </html>
