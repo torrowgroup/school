@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="div1">
+<td class="text" th:text="${msg}" ></td>
+</div>
+<button id="btn1">获取html</button>
+<button id="btn2">获取text</button>
+<button onclick="editor.txt.clear()">清空</button>
+<script th:src="@{/static/fonts/wangEditor.min.js}"></script>
+<input type="hidden" id="editor" value="${sessionScope.editor}"/>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    editor.customConfig.uploadImgShowBase64 = true 
+    editor.create()
+    document.getElementById('btn1').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html())
+    }, false)
+    document.getElementById('btn2').addEventListener('click', function () {
+        // 读取 text
+        alert(editor.txt.text())
+    }, false)
+</script>
+</body>
+</html>

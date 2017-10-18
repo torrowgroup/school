@@ -6,23 +6,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div>
 		<ul>
 			<li>
 				<ul>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">上传书法作品</a></li>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">上传优秀教案</a></li>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">上传优秀课件</a></li>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">上传优秀试卷</a></li>
+					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传书法作品</a></li>
+					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀教案</a></li>
+					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀课件</a></li>
+					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀试卷</a></li>
 					<li>
 				</ul>
 			</li>
 			<li>
 				<ul>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">提交教研成果</a></li>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">提交活动记录</a></li>
-					<li><a th:href="@{jump/upload}"  th:target="mainFrame">更新教育动态</a></li>
+					<li><a th:href="@{jump/uploadaAchievements}"  th:target="mainFrame">提交教研成果</a></li>
+					<li><a th:href="@{jump/uploadActivationRecord}"  th:target="mainFrame">提交活动记录</a></li>
+					<li><a th:href="@{jump/uploadEducationNews}"  th:target="mainFrame">更新教育动态</a></li>
 					<li>
 				</ul>
 			</li>
@@ -30,11 +29,10 @@
 				<ul>
 					<li><a th:href="@{/upload}" th:target="mainFrame">查看个人资料</a></li>
 					<li><a th:href="@{/upload}"  th:target="mainFrame">修改密码</a></li>
-					<li>
 				</ul>
 			</li>
 		</ul>
-		 <iframe name="mainFrame"   id="ifr">
+		 <iframe name="mainFrame"   id="ifr" width="700px;"  height="400px;" style="margin-left: 300px;margin-top: -300pz;">
 	</iframe>
 	</div>
 </body>
