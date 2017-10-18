@@ -1,5 +1,6 @@
 com\futher\school\entity\TypeExample.class
 com\futher\school\util\Upload.class
+com\futher\school\controller\manager\TypeController.class
 com\futher\school\entity\UserWithBLOBs.class
 com\futher\school\entity\User.class
 com\futher\school\entity\UserExample$GeneratedCriteria.class

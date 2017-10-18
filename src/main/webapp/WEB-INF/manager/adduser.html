@@ -4,11 +4,8 @@
 <head>
   <title>Home</title>
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
-  <script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
-  <script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
   <script type="text/javascript">
 	  function myfunction(){
-	  alert("sdsf")
 	  	var idCard = document.getElementById("usIdentityname").value;
 	  	if (idCard != "manager") {
 	  		document.getElementById("onmanager").style.display="";
@@ -47,10 +44,12 @@
 			<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
      			<div id="editor"  style="width:400px; height:400px;"></div>
+     			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+  				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
     			<script type="text/javascript">
 	        		var E = window.wangEditor
 	        		var editor = new E('editor')    		 
-		     		editor.config.uploadImgUrl = 'user/uploadImg'
+		     		editor.config.uploadImgUrl = '/school/user/uploadImg'
 		     		editor.config.uploadImgFileName = 'myFileName'
 	       		 	editor.create()
     			</script>
@@ -59,10 +58,10 @@
 				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br>
      			<div id="editor2"  style="width:400px; height:400px;"></div>
     			<script type="text/javascript">
-	        		var E = window.wangEditor
-	        		var editor2 = new E('editor2')    		 
-		     		editor.config.uploadImgUrl = 'user/uploadImg'
-		     		editor.config.uploadImgFileName = 'myFileName'
+	        		var w = window.wangEditor
+	        		var editor2 = new w('editor2')    		 
+		     		editor2.config.uploadImgUrl = '/school/user/uploadImg'
+		     		editor2.config.uploadImgFileName = 'myFileName'
 	       		 	editor2.create()
     			</script>
 			</div>
