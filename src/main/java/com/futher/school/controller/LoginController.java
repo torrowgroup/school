@@ -63,10 +63,10 @@ public class LoginController extends BaseController {
 	public String login(String usEmail, String usPassword,String identityCode, Model model) {
 		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		String pathurl = "index";
-		if(identityCode == null&& identityCode.equals("")){
+		/*if(identityCode == null&& identityCode.equals("")){
 			model.addAttribute("news", "验证码错误,请重新输入");
 		} else {
-			if (identityCode.equals(code)) {
+			if (identityCode.equals(code)) {*/
 				User user = userService.login(usEmail, usPassword);
 				if (user != null) {
 					String identityname = user.getUsIdentityname();
@@ -80,7 +80,7 @@ public class LoginController extends BaseController {
 					 else if (identityname.equals("teacher")) {
 						session.setAttribute("teacher", user);
 						session.setAttribute("teacher", user);
-						pathurl = "/WEB-INF/teacher/index";
+						pathurl = "teacher/index";
 					 }
 //					} else if (identityname.equals("teachergroup")) {
 //						session.setAttribute("teachergroup", user);
@@ -110,12 +110,13 @@ public class LoginController extends BaseController {
 ////					session.setAttribute("educationoffice", user);
 ////					pathurl = "/WEB-INF/";
 ////				}
-			} else {
+			/*} else {
 				model.addAttribute("news", "验证码错误,请重新输入");
-			}
-		}
+			}*/
+		
 		return pathurl;
 	}
+
 	@RequestMapping("/forget")
 	public String forget(){
 		return "forgotpassword";
