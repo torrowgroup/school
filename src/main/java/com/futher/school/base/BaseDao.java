@@ -1,14 +1,17 @@
 package com.futher.school.base;
 
+import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 public class BaseDao<T , PK extends Serializable> extends SqlSessionDaoSupport 
 implements  Serializable {
@@ -109,5 +112,13 @@ implements  Serializable {
 	    	return getSqlSession().update(
 	    			this.getNameSpace()+_UPDATEBYPRIMARYKEY, record);
 	    }
+	 // 上传图片
+		public String uploadPicture(MultipartFile picture,String path) throws Exception {
+			String fileName = picture.getOriginalFilename();
+			fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+			File uploadFile = new File(path, fileName);
+			picture.transferTo(uploadFile);
+			return fileName;
+		}
 
 }

@@ -10,19 +10,22 @@
 		<ul>
 			<li>
 				<ul>
-					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传书法作品</a></li>
-					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀教案</a></li>
-					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀课件</a></li>
-					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀试卷</a></li>
+					<li><a th:href="@{jump/uploadaAchievements}"  th:target="mainFrame">提交教学成果</a></li>
+					<li><a th:href="@{jump/uploadEducationNews}"  th:target="mainFrame">提交教学动态</a></li>
+					<li><a th:href="@{jump/uploadLiterature}"  th:target="mainFrame">提交文学作品</a></li>
+					<li>教师成长
+					<ul>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀试卷</a></li>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传作业</a></li>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传优秀教案</a></li>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传基本功联系</a></li>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传教学反思</a></li>
+						<li>	<a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传听课记录</a></li>
+					</ul>
 					<li>
-				</ul>
-			</li>
-			<li>
-				<ul>
-					<li><a th:href="@{jump/uploadaAchievements}"  th:target="mainFrame">提交教研成果</a></li>
-					<li><a th:href="@{jump/uploadActivationRecord}"  th:target="mainFrame">提交活动记录</a></li>
-					<li><a th:href="@{jump/uploadEducationNews}"  th:target="mainFrame">更新教育动态</a></li>
-					<li>
+					<ul>
+						<li>	<a th:href="@{teacher/showUpload}"  th:target="mainFrame">显示上传文件</a></li>
+					</ul>
 				</ul>
 			</li>
 			<li>
@@ -32,7 +35,7 @@
 				</ul>
 			</li>
 		</ul>
-		 <iframe name="mainFrame"   id="ifr" width="700px;"  height="400px;" style="margin-left: 300px;margin-top: -300pz;">
+		 <iframe name="mainFrame"   id="ifr" width="800px;"  height="600px;" style="margin-left: 300px;margin-top: -300pz;">
 	</iframe>
 	</div>
 </body>

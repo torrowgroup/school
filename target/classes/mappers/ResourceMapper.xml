@@ -301,4 +301,9 @@
       re_spare = #{reSpare,jdbcType=VARCHAR}
     where re_id = #{reId,jdbcType=INTEGER}
   </update>
+  <!--获得所有上传文件名-->
+  <select id="getUploadFileName" parameterType="com.futher.school.entity.Resource" resultMap="ResultMapWithBLOBs" >  
+   select * from tb_resource 
+  </select>
+  
 </mapper>

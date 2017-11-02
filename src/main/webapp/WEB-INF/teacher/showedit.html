@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p th:text="${msg}"></p>
+	<form th:action="@{}">
+		<table>
+			<tr>
+				<th>教学成果研究人</th>
+				<th>教学成果内容</th>
+				<th>提交时间</th>
+				<th>回复</th>
+			</tr>
+			<tr>
+				<td th:text = "${resource.re_publisher}">${resource.re_publisher}</td>
+				<td th:text = "${resource.re_content}">${resource.re_content}</td>
+				<td th:text  = "${resource.re_releaseDate}">${resource.re_releaseDate}</td>
+				<td><textarea rows="20px" cols="50px" name = "replyContent"></textarea></td>
+		</table>
+	</form>
+</body>
+</html>

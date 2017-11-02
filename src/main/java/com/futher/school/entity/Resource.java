@@ -13,7 +13,7 @@ public class Resource implements  Serializable{
 
     private String reTypename;//类别名称
 
-    private String reTitle;//标题(图片URl，链接名称，文件名等)
+    private String reTitle;//z标题(图片URl，链接名称，文件名等)
 
     private String reContent;//内容(富文本等)
 

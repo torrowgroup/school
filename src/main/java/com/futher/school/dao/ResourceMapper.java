@@ -27,4 +27,7 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+    //wqj用来获取所有resource
+    List<Resource> getUploadFileName();//获取所有上传文件名
+    
 }
