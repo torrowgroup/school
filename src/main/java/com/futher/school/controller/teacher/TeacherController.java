@@ -100,8 +100,8 @@ public class TeacherController extends BaseController {
 	@RequestMapping("/showUpload")
 	public String  showUpload(Model model) {
 		List<Resource> resourceList  = resourceService.getUploadFileName();
-		System.out.println(resourceList);
-		model.addAttribute("resource", resourceList);
+		System.out.println("下面是打印的内容"+resourceList);
+		model.addAttribute("resourceList", resourceList);
 		return "teacher/showupload";
 	}
 }

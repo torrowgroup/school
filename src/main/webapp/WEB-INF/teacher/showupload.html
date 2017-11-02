@@ -7,13 +7,13 @@
 </head>
 <body>
 	<table>
-		<tr>
+	<tr>
 			<th>文件名</th>
 			<th>操作</th>
 		</tr>
-		<tr>
-			<td><p>${fileName}</p></td>
-			<td><a  th:href="@{/teacher/downloadEdit}?fileName=${fileName}">下载</a></td>
+		<tr th:each="resource  : ${resourceList}">
+			<td th:text = "${resource.reTypename}">标题</td>
+			<td><a  th:href="@{/teacher/downloadEdit}">下载</a></td>
 		</tr>
 	</table>
 </body>
