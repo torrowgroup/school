@@ -2,6 +2,8 @@ package com.futher.school.dao;
 
 import com.futher.school.entity.Type;
 import com.futher.school.entity.TypeExample;
+
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,6 +31,10 @@ public interface TypeMapper {
     int updateByPrimaryKey(Type record);
     //得到添加用户类别的id
 	Type selectByCategoryname(@Param("usIdentityname") String usIdentityname);
-	//得到所有用户类别
+	//根据父类ID得到所有用户类别
 	List<Type> selectByTypid(@Param("tyPid")Integer tyPid);
+	//得到所有用户的类别
+	List<Type> selectAll();
+	//分页查询所有类别
+	List<Type> findByPage(HashMap<String, Object> map);
 }

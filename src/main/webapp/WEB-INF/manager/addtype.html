@@ -1,0 +1,18 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{../static/js/verifyemail.js}"></script>
+</head>
+<body>
+	<span th:text="${news}"></span>
+	<form th:action="@{/type/addType}" method="post">
+		tyPid:<input type="text" name="tyPid" id="tyPid"><br>
+		类别名称:<input type="text" name="tyCategoryname" id="tyCategoryname" ><span id="msg"></span><br>
+		<input type="submit" id="submit" value="提交"> 
+	</form>
+</body>
+</html>
