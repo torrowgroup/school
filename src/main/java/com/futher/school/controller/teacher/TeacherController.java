@@ -37,6 +37,15 @@ import com.futher.school.entity.User;
 @RequestMapping("/teacher")
 @Controller()
 public class TeacherController extends BaseController {
+	String downFileName ;
+	public String getDownFileName() {
+		return downFileName;
+	}
+
+	public void setDownFileName(String downFileName) {
+		this.downFileName = downFileName;
+	}
+
 	//文件上传
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String upload(MultipartFile file, HttpServletRequest request, Model model) throws IOException {
@@ -76,15 +85,13 @@ public class TeacherController extends BaseController {
 		return null;
 	}
 	//文件下载
-	@RequestMapping("/down")
-	public void down(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String fileName = request.getSession().getServletContext().getRealPath("uploading")+"/1.txt";
+	@RequestMapping("/download")
+	public void down(HttpServletRequest request, HttpServletResponse response,String downFileName) throws Exception {
+		String fileName = request.getSession().getServletContext().getRealPath("uploading")+"/"+downFileName;
 		// 获取输入流
 		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-		// 假如以中文名下载的话
-		String filename = "下载文件.txt";
 		// 转码，免得文件名中文乱码
-		filename = URLEncoder.encode(filename, "UTF-8");
+		String filename = URLEncoder.encode(downFileName, "UTF-8");
 		// 设置文件下载头
 		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
 		response.setContentType("multipart/form-data");
@@ -100,7 +107,6 @@ public class TeacherController extends BaseController {
 	@RequestMapping("/showUpload")
 	public String  showUpload(Model model) {
 		List<Resource> resourceList  = resourceService.getUploadFileName();
-		System.out.println("下面是打印的内容"+resourceList);
 		model.addAttribute("resourceList", resourceList);
 		return "teacher/showupload";
 	}
