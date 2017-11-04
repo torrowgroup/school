@@ -7,7 +7,7 @@
 </head>
 <body>
 	<p th:text="${msg}"></p>
-	<form th:action="@{teacher/reply}"  method="post">
+	<form th:action="@{teacher/reply(reId=${resourceList[0].reId})}"  method="post">
 		<table>
 			<tr>
 				<th>教学成果研究人</th>
@@ -18,8 +18,8 @@
 			<tr th:each="resource  : ${resourceList}">
 				<td th:text = "${resource.rePublisher}">${resource.re_publisher}</td>
 				<td th:text = "${resource.reContent}">${resource.re_content}</td>
-				<td th:text  = "${resource.reReleaseDate}">${resource.re_releaseDate}</td>
-				<td><textarea rows="20px" cols="50px" name = "replyContent"></textarea></td>
+				<td th:text  = "${resource.reReleasedate}">${resource.re_releaseDate}</td>
+				<td><a th :href ="@{teacher/replyEdit(rId=${resource.reId})}">留言</a></td>
 		</table>
 		<input type="submit">
 	</form>

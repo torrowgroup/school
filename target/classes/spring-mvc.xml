@@ -78,7 +78,7 @@
 
     <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine"/>
-        <property name="characterEncoding" value="UTF-8"/>
+        <property name="characterEncoding" value="UTF-8"/> 
     </bean>
       
 <!--       默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
