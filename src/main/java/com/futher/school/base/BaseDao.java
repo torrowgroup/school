@@ -52,22 +52,6 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 
-	// @SuppressWarnings("rawtypes")
-	// public static Class getSuperClassGenericType(Class clazz , int index){
-	//
-	// Type type = clazz.getGenericSuperclass();//获得父类
-	//
-	//
-	// if(!(type instanceof ParameterizedType)){
-	//
-	// return Object.class;
-	// }
-	//
-	// Type[] params = ((ParameterizedType)type).getActualTypeArguments();
-	//
-	// return (Class)params[index];
-	// }
-
 	// 得到***Mapper.xml的命名空间
 	public final String getNameSpace() {
 		// Class<?> clazz = getSuperClassGenericType(this.getClass() , 0);
@@ -191,4 +175,13 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 			  file.delete();//"删除单个文件"+name+"成功！"
 			   }//"删除单个文件"+name+"失败！"
 	}
+	 // 上传图片
+		public String uploadPicture(MultipartFile picture,String path) throws Exception {
+			String fileName = picture.getOriginalFilename();
+			fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+			File uploadFile = new File(path, fileName);
+			picture.transferTo(uploadFile);
+			return fileName;
+		}
+
 }

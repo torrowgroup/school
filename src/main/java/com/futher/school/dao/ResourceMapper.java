@@ -34,4 +34,7 @@ public interface ResourceMapper {
     List<Resource> selectByTypeId(@Param("reTypeid")Integer reTypeid);
 	//把符合条件的数据分页
 	List<Resource> findByPage(HashMap<String, Object> map);
+    //wqj用来获取所有resource
+    List<Resource> getUploadFileName();//获取所有上传文件名
+    
 }

@@ -1,6 +1,7 @@
 package com.futher.school.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,5 +32,8 @@ public interface ResourceService {
 	void deletResource(String reSpare, String truePath, HttpServletRequest request);
 	//修改资源
 	int updateResource(Resource resource);
-
+	//wqj用于存储用户上传文学作品
+	public int uploadeEdit(Resource resource);
+	//wqj 获取resource
+	public List<Resource> getUploadFileName();
 }

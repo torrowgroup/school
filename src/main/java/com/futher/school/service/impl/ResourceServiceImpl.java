@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,9 +24,25 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		implements ResourceService {
 
 	private static final long serialVersionUID = 1L;
-
-	@Resource
-	private ResourceMapper resourceMapper;
+	@Resource 
+	private ResourceMapper resourceMapper ;
+	/* (non-Javadoc)
+	 * @see com.futher.school.service.ResourceService#uploadeEdit(com.futher.school.entity.Resource)
+	 */
+	@Override
+	public int   uploadeEdit(com.futher.school.entity.Resource resource) {
+		return resourceMapper.insert(resource);
+		//上传文档
+		
+	}
+	/* (non-Javadoc)
+	 * @see com.futher.school.service.ResourceService#getUpload()
+	 */
+	@Override
+	public List<com.futher.school.entity.Resource> getUploadFileName() {
+		
+		return  resourceMapper.getUploadFileName();
+	}
 
 	@Override
 	public int addResource(com.futher.school.entity.Resource resource) {

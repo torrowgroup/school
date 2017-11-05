@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+</head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<ul>
+			<li>
+				<ul>
+					<li><a th:href="@{jump/uploadCalligraphy}"  th:target="mainFrame">上传量化积分评比结果</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		 <iframe name="mainFrame"   id="ifr" width="700px;"  height="400px;" style="margin-left: 300px;margin-top: -300pz;">
+	</iframe>
+	</div>
+</body>
+</html>
