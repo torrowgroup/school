@@ -6,6 +6,7 @@
     <result column="re_typeId" jdbcType="INTEGER" property="reTypeid" />
     <result column="re_typeName" jdbcType="VARCHAR" property="reTypename" />
     <result column="re_title" jdbcType="VARCHAR" property="reTitle" />
+    <result column="re_content" jdbcType="LONGVARCHAR" property="reContent" />
     <result column="re_publisher" jdbcType="VARCHAR" property="rePublisher" />
     <result column="re_releaseDate" jdbcType="TIMESTAMP" property="reReleasedate" />
     <result column="re_spare" jdbcType="VARCHAR" property="reSpare" />
@@ -115,6 +116,27 @@
     from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
   </select>
+  
+    <select id="selectByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typeId = #{reTypeid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_resource
+        <if test="reTypeid!=null">
+         	where re_typeId = #{reTypeid,jdbcType=INTEGER}
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+    </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
@@ -246,6 +268,7 @@
       re_typeId = #{record.reTypeid,jdbcType=INTEGER},
       re_typeName = #{record.reTypename,jdbcType=VARCHAR},
       re_title = #{record.reTitle,jdbcType=VARCHAR},
+      re_content = #{reContent,jdbcType=LONGVARCHAR},
       re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
       re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
       re_spare = #{record.reSpare,jdbcType=VARCHAR}
@@ -296,6 +319,7 @@
     set re_typeId = #{reTypeid,jdbcType=INTEGER},
       re_typeName = #{reTypename,jdbcType=VARCHAR},
       re_title = #{reTitle,jdbcType=VARCHAR},
+      re_content = #{reContent,jdbcType=LONGVARCHAR},
       re_publisher = #{rePublisher,jdbcType=VARCHAR},
       re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
       re_spare = #{reSpare,jdbcType=VARCHAR}

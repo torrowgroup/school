@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.futher.school.base.BaseDao;
 import com.futher.school.dao.TypeMapper;
 import com.futher.school.entity.Type;
-import com.futher.school.entity.TypeExample;
 import com.futher.school.service.TypeService;
 import com.futher.school.util.PageBean;
 @Service("typeService")
@@ -72,4 +71,20 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		return pageBean;
 	}
 
+	@Override
+	public int deletType(int tyId) {
+		return typeMapper.deleteByPrimaryKey(tyId);
+	}
+
+	@Override
+	public int updateType(Type type) {
+		return typeMapper.updateByPrimaryKey(type);
+	}
+
+	@Override
+	public Type selectTypeById(int tyId) {
+		return typeMapper.selectByPrimaryKey(tyId);
+	}
+
 }
+

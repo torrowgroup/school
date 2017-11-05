@@ -5,9 +5,9 @@
   <title>title</title>
 </head>
 <body>
-<span th:if="${usermessages.totalCount} == 0">还没有用户呢</span>
+<span th:if="${messages.totalCount} == 0">还没有用户呢</span>
 <p th:text="${news}"></p>
-<div th:if="${usermessages.totalCount} != 0">
+<div th:if="${messages.totalCount} != 0">
 	<table  cellspacing="0" border="1">
 		<caption>用户列表</caption>
 		<thead>
@@ -23,7 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="user,userStat:${usermessages.lists}">
+			<tr th:each="user,userStat:${messages.lists}">
 				<td th:text="${user.usId}"></td>
 				<td th:text="${user.usEmail}"></td>
 				<td th:text="${user.usPassword}"></td>
@@ -37,22 +37,27 @@
 	</table>
 	<table  border="0" cellspacing="0" cellpadding="0"  width="900px">
 		<tr>
-			<td th:if="${usermessages.totalPage} > 1">
-			   <span th:if="${usermessages.currPage} == 1">
-			   		<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
-			   		<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage+1})}">[下一页]</a>
+			<td th:if="${messages.totalPage} > 0">
+			   <span th:if="${messages.currPage} == 1">
+				   <span th:if="${messages.totalPage ==1}">
+							<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>					
+				   </span>
+				   <span th:if="${messages.totalPage > 1}">
+							<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
+			   				<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1})}">[下一页]</a>				
+				   </span>
 			   </span>
-			   <span th:if="${usermessages.currPage} > 1 ">
+			   <span th:if="${messages.currPage} > 1 ">
 					<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
-					<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage-1})}">[上一页]</a>
-					<span th:if="${usermessages.currPage != usermessages.totalPage}">
-						<a th:href="@{/user/selectUser?(currentPage=${usermessages.currPage+1})}">[下一页]</a>					
+					<a th:href="@{/user/selectUser?(currentPage=${messages.currPage-1})}">[上一页]</a>
+					<span th:if="${messages.currPage != messages.totalPage}">
+						<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1})}">[下一页]</a>					
 					</span>
-			   		<a th:href="@{/user/selectUser?(currentPage=${usermessages.totalPage})}">[尾页]</a>
+			   		<a th:href="@{/user/selectUser?(currentPage=${messages.totalPage})}">[尾页]</a>
 			   </span>
 			</td>
 		</tr>
-</table>
+</table>	
 </div>
 </body>
 </html>

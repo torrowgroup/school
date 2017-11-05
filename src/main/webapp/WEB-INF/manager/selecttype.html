@@ -5,6 +5,51 @@
   <title>title</title>
 </head>
 <body>
-
+	<span th:if="${messages.totalCount} == 0">还没有用户呢</span>
+	<p th:text="${news}"></p>
+	<div th:if="${messages.totalCount} > 0">
+		<table  cellspacing="0" border="1">
+			<caption>类别列表</caption>
+			<thead>
+				<tr>
+					<td>编号</td>
+					<td>主类别</td>
+					<td>类别名称</td>
+					<td>操作</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="type,typeStat:${messages.lists}">
+					<td th:text="${type.tyId}"></td>
+					<td th:text="${type.tyPid}"></td>
+					<td th:text="${type.tyCategoryname}"></td>
+					<td><a th:href="@{/type/toUpdateType?(tyId=${type.tyId})}">update</a>&nbsp;&nbsp;<a th:href="@{/type/deletType?(tyId=${type.tyId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	<table  border="0" cellspacing="0" cellpadding="0"  width="900px">
+		<tr>
+			<td th:if="${messages.totalPage} > 0">
+			   <span th:if="${messages.currPage} == 1">
+			   		<span th:if="${messages.totalPage} == 1">
+						<a th:href="@{/type/selectType?(currentPage=1)}">[首页]</a>					
+					</span>
+					<span th:if="${messages.totalPage} > 1">
+						<a th:href="@{/type/selectType?(currentPage=1)}">[首页]</a>
+			   			<a th:href="@{/type/selectType?(currentPage=${messages.currPage+1})}">[下一页]</a>				
+					</span>
+			   </span>
+			   <span th:if="${messages.currPage} > 1 ">
+					<a th:href="@{/type/selectType?(currentPage=1)}">[首页]</a>
+					<a th:href="@{/type/selectType?(currentPage=${messages.currPage-1})}">[上一页]</a>
+					<span th:if="${messages.currPage != messages.totalPage}">
+						<a th:href="@{/type/selectType?(currentPage=${messages.currPage+1})}">[下一页]</a>					
+					</span>
+			   		<a th:href="@{/type/selectType?(currentPage=${messages.totalPage})}">[尾页]</a>
+			   </span>
+			</td>
+		</tr>
+	</table>
+	</div>
 </body>
 </html>

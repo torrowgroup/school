@@ -1,16 +1,10 @@
 package com.futher.school.controller.manager;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,31 +98,10 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/uploadImg")
-	public void uploadImg(File myFileName) throws IOException {
-		// HttpServletRequest req2 = ServletActionContext.getRequest();
-		// HttpServletResponse res2 = ServletActionContext.getResponse();
-		String name = myFileName.getName();
-		// 提取文件拓展名
-		String fileNameExtension = name.substring(name.indexOf("."), name.length() - 1);
-		// 生成实际存储的真实文件名
-		String realName = UUID.randomUUID().toString() + fileNameExtension;
-		// 图片存放的真实路径
-		String realPath = ((HttpSession) response).getServletContext().getRealPath("/uploadImg/source") + "/"
-				+ realName;
-		// 将文件写入指定路径下
-		InputStream in = new FileInputStream(myFileName);
-		File uploadFile = new File(realPath);
-		OutputStream out = new FileOutputStream(uploadFile);
-		byte[] buffer = new byte[1024 * 1024];
-		int length;
-		while ((length = in.read(buffer)) > 0) {
-			out.write(buffer, 0, length);
-		}
-		in.close();
-		out.close();
-
-		// 返回图片的URL地址
-		response.getWriter().write(request.getContextPath() + "/uploadImg/source/" + realName);
+	@ResponseBody
+	public void upload(MultipartFile myFileName) throws IOException {
+		String realName = userService.uploadimage(myFileName,session);
+		response.getWriter().write(request.getContextPath() + "/static/uploadImg/source/" + realName);
 	}
 
 	@RequestMapping("verifyEmailName")
@@ -163,11 +136,9 @@ public class UserController extends BaseController {
 			if (file.isEmpty() == true) {
 				model.addAttribute("news", "请上传图片，添加失败");
 			} else {
-				uploadImage(user,file);
+				uploadImage(user, file);
 				Type type = typeService.getId(user.getUsIdentityname());
 				user.setUsIdentityid(type.getTyId());
-				List<User> userlist = userService.getAllUsers();
-
 				int judge = userService.addUser(user);
 				if (judge == 1) {
 					model.addAttribute("news", "添加成功");
@@ -182,18 +153,23 @@ public class UserController extends BaseController {
 	@RequestMapping("selectUser")
 	public String selectUser(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage,
 			Model model) {
-		model.addAttribute("usermessages", userService.findByPage(currentPage));// 回显分页数据
+		model.addAttribute("messages", userService.findByPage(currentPage));// 回显分页数据
 		return "manager/selectuser";
 	}
 
 	@RequestMapping("deletUser")
 	public String deletUser(int usId, Model model) {
 		User user = (User) session.getAttribute("manager");
-		if(user.getUsId().equals(usId)){
+		if (user.getUsId().equals(usId)) {
 			model.addAttribute("news", "不能删除自己");
 		} else {
 			int sign = userService.deletByUserId(usId);
-			model.addAttribute("news", "删除成功");
+			if (sign == 1) {
+				model.addAttribute("news", "删除成功");
+			} else {
+				model.addAttribute("news", "删除失败");
+			}
+
 		}
 		return selectUser(1, model);
 
@@ -211,7 +187,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("verifyUser")
 	@ResponseBody
-	public void verifyUser(int usId,String usEmail) throws IOException{
+	public void verifyUser(int usId, String usEmail) throws IOException {
 		response.setContentType("html/text");
 		PrintWriter out = response.getWriter();
 		String result = "true";
@@ -244,10 +220,9 @@ public class UserController extends BaseController {
 				User olduser = userService.selectByUserId(user.getUsId());
 				user.setUsImage(olduser.getUsImage());
 			} else {
-				uploadImage(user,file);
+				uploadImage(user, file);
 				Type type = typeService.getId(user.getUsIdentityname());
 				user.setUsIdentityid(type.getTyId());
-				List<User> userlist = userService.getAllUsers();
 				int judge = userService.addUser(user);
 				if (judge == 1) {
 					model.addAttribute("news", "添加成功");
@@ -258,28 +233,10 @@ public class UserController extends BaseController {
 		}
 		return selectUser(1, model);
 	}
-	public void uploadImage(User user, MultipartFile file){
-		String path = request.getSession().getServletContext().getRealPath("uploadImg");
-		File fileLocation = new File(path);
-		// 此处也可以在应用根目录手动建立目标上传目录
-		if (!fileLocation.exists()) {
-			boolean isCreated = fileLocation.mkdir();
-			if (!isCreated) {
-				// 目标上传目录创建失败,可做其他处理,例如抛出自定义异常等,一般应该不会出现这种情况。
-				return;
-			}
-		}
-		String fileName = file.getOriginalFilename();
+
+	public void uploadImage(User user, MultipartFile file) {
+		String path = "/static/uploadImg";
+		String fileName = userService.uploadResource(file, path,request);
 		user.setUsImage(fileName);
-		File targetFile = new File(path, fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
-		// 保存
-		try {
-			file.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

@@ -16,5 +16,11 @@ public interface TypeService {
 	List<Type> getAllTypes();
 	//分页查看所有类别
 	PageBean<Type> findByPage(int currentPage);
+	//根据ID删除类别
+	int deletType(int tyId);
+	//根据修改类别
+	int updateType(Type type);
+	//根据ID获得类别
+	Type selectTypeById(int tyId);
 
 }

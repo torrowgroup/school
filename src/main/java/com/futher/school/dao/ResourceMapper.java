@@ -2,6 +2,9 @@ package com.futher.school.dao;
 
 import com.futher.school.entity.Resource;
 import com.futher.school.entity.ResourceExample;
+import com.futher.school.entity.User;
+
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +30,8 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+    //根据类型id查询所有资源类符合的条数
+    List<Resource> selectByTypeId(@Param("reTypeid")Integer reTypeid);
+	//把符合条件的数据分页
+	List<Resource> findByPage(HashMap<String, Object> map);
 }

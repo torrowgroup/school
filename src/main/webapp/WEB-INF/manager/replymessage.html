@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
+  <script type="text/javascript">
+  	function modifyContent() {    	
+     	        var introduce = document.getElementById("meReplycontent");   
+     	        introduce.value = editor.$txt.html();
+   }
+  </script>
+</head>
+<body>
+	<span th:text="${message.meTitle}"></span>
+	<img alt="暂无照片" th:if="${message.meImage} != null" th:src="@{/static/uploadImg/messagefile/{image}(image=${message.meImage})}">
+	<div th:utext="${message.meContent}">
+	</div>
+	<form th:action="@{/message/replyMessage}" method="post" onsubmit="modifyContent()">
+		<input type="hidden" name="meId" th:value="${message.meId}">
+		回复内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
+				<textarea rows="5" cols="35" name="meReplycontent"  style="display:none;" id="meReplycontent"></textarea><br>
+     			<div id="editor" style="width:600px; height:400px;"></div>
+     			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+  				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
+    			<script type="text/javascript">
+	        		var E = window.wangEditor
+	        		var editor = new E('editor')    		 
+		     		editor.config.uploadImgUrl = '/school/message/uploadImg'
+		     		editor.config.uploadImgFileName = 'myFileName'
+	       		 	editor.create()
+    			</script>
+			</div><br>
+			<input type="submit" value="添加">
+	</form>
+</body>
+</html>

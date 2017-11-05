@@ -1,6 +1,12 @@
 package com.futher.school.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.futher.school.entity.User;
 import com.futher.school.util.PageBean;
@@ -27,4 +33,8 @@ public interface UserService {
 	public int deletByUserId(int usId);
 	//得到修改的用户信息
 	public User selectByUserId(int usId);
+	//上传文件
+	public String uploadResource(MultipartFile file, String path, HttpServletRequest request);
+	//富文本上传图片
+	public String uploadimage(MultipartFile myFileName, HttpSession session) throws IllegalStateException, IOException;
 }
