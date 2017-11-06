@@ -145,4 +145,10 @@ public class TeacherController extends BaseController {
 		}
 		model.addAttribute("msg");
 	}
+	//留言处理
+	@RequestMapping(value = "/leaveMessage")
+	public String leaveMessage() {
+		return null;
+		
+	}
 }
