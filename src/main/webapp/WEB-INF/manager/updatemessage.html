@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
+  <script type="text/javascript">
+	  	function modifyContent() {    	
+	     	 var introduce = document.getElementById("meContent");   	    
+	     	 introduce.value = editor.$txt.html();
+	     	  var replyintroduce = document.getElementById("meReplycontent");   
+     	        replyintroduce.value = replyeditor.$txt.html();
+	   }
+	   function sele(){  
+	       if(document.getElementById("cryptonym").checked==false) {  
+	  			 document.getElementById("meAnonymous").style.display="inline";   //显示不可用按钮  
+	        } else {  
+	  			 document.getElementById("meAnonymous").style.display="none";   //隐藏不可用按钮 
+	     	}  
+		}  
+  </script>
+</head>
+<body>
+<form th:action="@{/message/updateMessage}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+	<input type="hidden" name="meId" th:value="${message.meId}">
+	留言标题:<input type="text" name="meTitle" th:value="${message.meTitle}"/><br>
+	图片:<input type="file" name="file" id="file"><img alt="" src="">
+	留言内容:<div style="width:600px; height:400px;">
+				<textarea rows="5" cols="35" name="meContent"  style="display:none;" id="meContent"></textarea><br>
+     			<div id="editor"  style="width:600px; height:400px;" th:utext="${message.meContent}"></div>
+     			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+  				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
+    			<script type="text/javascript">
+	        		var E = window.wangEditor
+	        		var editor = new E('editor')    		 
+		     		editor.config.uploadImgUrl = '/school/message/uploadImg'
+		     		editor.config.uploadImgFileName = 'myFileName'
+	       		 	editor.create()
+    			</script>
+			</div>
+			<div style="width:600px; height:400px;">
+				<textarea rows="5" cols="35" name="meReplycontent"  style="display:none;" id="meReplycontent"></textarea><br>
+     			<div id="replyeditor" style="width:600px; height:400px;" th:utext="${message.meReplycontent}"></div>
+    			<script type="text/javascript">
+	        		var W = window.wangEditor
+	        		var replyeditor = new W('replyeditor')    		 
+		     		replyeditor.config.uploadImgUrl = '/school/message/uploadImg'
+		     		replyeditor.config.uploadImgFileName = 'myFileName'
+	       		 	replyeditor.create()
+    			</script>
+			</div>
+			<br><br><br><br><br><br><br><br><br><br>
+	<input type="submit" value="提交">
+	</form>
+</body>
+</html>

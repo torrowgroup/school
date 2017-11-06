@@ -19,4 +19,27 @@ $(function(){
 			});
 		}
 	});
+	
+	
+	$("#tyCategoryname").bind('input propertychange',function(){
+		var value = $(this).val();
+		var tyId = $("#tyId").val();
+		value = $.trim(value);
+		if(value != ""){
+			var url = "/school/type/verifyType";
+			var args = {"tyId":tyId,"tyCategoryname":value, "time":new Date()};
+			var msg=document.getElementById("msg");
+			$.post(url,args,function(date){
+				if (date == "true") {
+					  msg.innerHTML="<font color='green'>可修改为此类别名称</font>";
+					  document.getElementById("submit").disabled = false;
+				} else {
+					  msg.innerHTML="<font color='red'>不可修改为此类别名称，请重新输入</font>";
+					  document.getElementById("submit").disabled = true;
+				}
+			});
+		}
+	});
+	
+	
 })

@@ -1,12 +1,16 @@
 package com.futher.school.service.impl;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.futher.school.base.BaseDao;
 import com.futher.school.dao.UserMapper;
@@ -95,6 +99,16 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 	@Override
 	public User selectByUserId(int usId) {
 		return userMapper.selectByPrimaryKey(usId);
+	}
+
+	@Override
+	public String uploadResource(MultipartFile file, String path,HttpServletRequest request) {
+		return this.uploadFile(file, path, request);
+	}
+
+	@Override
+	public String uploadimage(MultipartFile myFileName,HttpSession session) throws IllegalStateException, IOException {
+		return this.upload(myFileName, session);
 	}
 
 }

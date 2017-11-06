@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+  	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+  	<script type="text/javascript" th:src="@{../static/js/updateuser.js}"></script>
+  	<script type="text/javascript">
+  		  function seclectValue(){
+	  		var verifyTyPid = '[[${typenews.tyPid}]]';
+			var tyPid = document.getElementById('pid');
+			for(var i = 0;i < tyPid.options.length; i++)
+			{
+			   var truetyPid = tyPid.options[i];
+			   if(verifyTyPid == truetyPid.value.trim())
+			   {
+			     truetyPid.selected=true;
+			   }
+			}
+		}
+  	</script>
+</head>
+<body  onload="seclectValue()">
+	<form th:action="@{/type/updateType}" method="post">
+		<input type="hidden" name="tyId" id="tyId" th:value="${typenews.tyId}">
+		tyPid:<select name="tyPid" id="pid">
+		 	<option th:value="1">用户</option>
+            <option th:value="2">学校概括</option>
+            <option th:value="3">校园动态</option>
+            <option th:value="4">教育教研</option>
+            <option th:value="5">校园文学</option>
+            <option th:value="6">资源下载</option>
+            <option th:value="7">链接</option>
+            <option th:value="8">通知</option>
+            <option th:value="9">校园风景</option>
+            <option th:value="10">招生招聘</option>
+        </select><br>
+		类别名称:<input type="text" name="tyCategoryname" id="tyCategoryname" th:value="${typenews.tyCategoryname}"><span id="msg"></span><br>
+		<input type="submit" id="submit" value="修改"> 
+	</form>
+</body>
+</html>

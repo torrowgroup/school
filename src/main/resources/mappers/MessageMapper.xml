@@ -4,10 +4,12 @@
   <resultMap id="BaseResultMap" type="com.futher.school.entity.Message">
     <id column="me_id" jdbcType="INTEGER" property="meId" />
     <result column="me_title" jdbcType="VARCHAR" property="meTitle" />
+    <result column="me_content" jdbcType="LONGVARCHAR" property="meContent" />
     <result column="me_image" jdbcType="VARCHAR" property="meImage" />
     <result column="me_anonymous" jdbcType="VARCHAR" property="meAnonymous" />
     <result column="me_releaseDate" jdbcType="TIMESTAMP" property="meReleasedate" />
     <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
+    <result column="me_replyContent" jdbcType="LONGVARCHAR" property="meReplycontent" />
     <result column="me_spare" jdbcType="VARCHAR" property="meSpare" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.MessageWithBLOBs">
@@ -73,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    me_id, me_title, me_image, me_anonymous, me_releaseDate, me_status, me_spare
+    me_id, me_title,me_content, me_image, me_anonymous, me_releaseDate, me_status, me_replyContent, me_spare
   </sql>
   <sql id="Blob_Column_List">
     me_content, me_replyContent
@@ -116,6 +118,28 @@
     from tb_message
     where me_id = #{meId,jdbcType=INTEGER}
   </select>
+  
+  
+  
+  <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_message
+    where me_status = #{meStatus,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_message
+        <if test="meStatus!=null">
+         	where me_status = #{meStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_message
     where me_id = #{meId,jdbcType=INTEGER}
@@ -126,14 +150,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.futher.school.entity.MessageWithBLOBs">
-    insert into tb_message (me_id, me_title, me_image, 
+  <insert id="insert" parameterType="com.futher.school.entity.Message">
+    insert into tb_message (me_id, me_title, me_content, me_image, 
       me_anonymous, me_releaseDate, me_status, 
-      me_spare, me_content, me_replyContent
+      me_spare, me_replyContent
       )
-    values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meImage,jdbcType=VARCHAR}, 
+    values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meImage,jdbcType=VARCHAR}, 
       #{meAnonymous,jdbcType=VARCHAR}, #{meReleasedate,jdbcType=TIMESTAMP}, #{meStatus,jdbcType=VARCHAR}, 
-      #{meSpare,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meReplycontent,jdbcType=LONGVARCHAR}
+      #{meSpare,jdbcType=VARCHAR}, #{meReplycontent,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.futher.school.entity.MessageWithBLOBs">
@@ -144,6 +168,9 @@
       </if>
       <if test="meTitle != null">
         me_title,
+      </if>
+       <if test="meContent != null">
+        me_content,
       </if>
       <if test="meImage != null">
         me_image,
@@ -160,9 +187,6 @@
       <if test="meSpare != null">
         me_spare,
       </if>
-      <if test="meContent != null">
-        me_content,
-      </if>
       <if test="meReplycontent != null">
         me_replyContent,
       </if>
@@ -173,6 +197,9 @@
       </if>
       <if test="meTitle != null">
         #{meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="meContent != null">
+        #{meContent,jdbcType=LONGVARCHAR},
       </if>
       <if test="meImage != null">
         #{meImage,jdbcType=VARCHAR},
@@ -188,9 +215,6 @@
       </if>
       <if test="meSpare != null">
         #{meSpare,jdbcType=VARCHAR},
-      </if>
-      <if test="meContent != null">
-        #{meContent,jdbcType=LONGVARCHAR},
       </if>
       <if test="meReplycontent != null">
         #{meReplycontent,jdbcType=LONGVARCHAR},
@@ -242,12 +266,12 @@
     update tb_message
     set me_id = #{record.meId,jdbcType=INTEGER},
       me_title = #{record.meTitle,jdbcType=VARCHAR},
+      me_content = #{record.meContent,jdbcType=LONGVARCHAR},
       me_image = #{record.meImage,jdbcType=VARCHAR},
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
       me_status = #{record.meStatus,jdbcType=VARCHAR},
       me_spare = #{record.meSpare,jdbcType=VARCHAR},
-      me_content = #{record.meContent,jdbcType=LONGVARCHAR},
       me_replyContent = #{record.meReplycontent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -257,6 +281,7 @@
     update tb_message
     set me_id = #{record.meId,jdbcType=INTEGER},
       me_title = #{record.meTitle,jdbcType=VARCHAR},
+      me_content = #{record.meContent,jdbcType=LONGVARCHAR},
       me_image = #{record.meImage,jdbcType=VARCHAR},
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
@@ -311,12 +336,28 @@
   <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.Message">
     update tb_message
     set me_title = #{meTitle,jdbcType=VARCHAR},
+      me_content = #{meContent,jdbcType=LONGVARCHAR},
       me_image = #{meImage,jdbcType=VARCHAR},
       me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
       me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
       me_status = #{meStatus,jdbcType=VARCHAR},
+      me_replyContent = #{meReplycontent,jdbcType=LONGVARCHAR},
       me_spare = #{meSpare,jdbcType=VARCHAR}
     where me_id = #{meId,jdbcType=INTEGER}
   </update>
   
+   <update id="updateMessage" parameterType="com.futher.school.entity.Message">
+    update tb_message
+    set me_title = #{meTitle,jdbcType=VARCHAR},
+      me_content = #{meContent,jdbcType=LONGVARCHAR},
+      me_image = #{meImage,jdbcType=VARCHAR},
+      me_replyContent = #{meReplycontent,jdbcType=LONGVARCHAR}
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
+   <update id="replyMessage" parameterType="Map">
+    update tb_message
+    set me_replyContent = #{meReplycontent,jdbcType=LONGVARCHAR},
+    me_status = #{meStatus,jdbcType=VARCHAR} 
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
 </mapper>
