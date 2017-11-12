@@ -2,6 +2,7 @@ package com.futher.school.controller.teacher;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,12 +85,14 @@ public class Jump extends BaseController {
 		System.out.println(resource+"获取到的resource");
 		User user = (User) session.getAttribute("teacher");
 		Date date  = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
 		String msg = null;
 		resource.setReTitle(request.getParameter("resource.reTitle"));
 		resource.setReTypename(request.getParameter("resource.reTypeName"));
 		resource.setReContent((String) request.getParameter("resource.reContent"));
 		resource.setRePublisher(user.getUsEmail()); 
-		resource.setReReleasedate(date);
+		resource.setReReleasedate(dateString);
 		int re = resourceService.uploadeEdit(resource);
 		System.out.println(resource);
 		if(re==1) { 

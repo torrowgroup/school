@@ -5,44 +5,22 @@
   <title>title</title>
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
   <script type="text/javascript">
-  function seclectValue(){
-   	  	var verifyType = '[[${resource.reTypename}]]';
-		var type = document.getElementById('reTypename');
-		for(var i = 0;i < type.options.length; i++)
-		{
-		   var trueType = type.options[i];
-		   if(verifyType == trueType.value.trim())
-		   {
-		     trueType.selected=true;
-		   }
-		}
-  	  }  
-  	function myfunction(){
-	  	var idCard = document.getElementById("reTypename").value;
-	  	if (idCard == "校园新闻") {
-	  		document.getElementById("file").style.display="";
-	  	} else if (idCard == "学生作品" || idCard == "教师作品" || idCard == "资源下载" || idCard == "校园风景"){
-	  	document.getElementById("file").style.display="";
-	  	document.getElementById("content").style.display="none";
-	  	} else {
-	  		document.getElementById("file").style.display="none";
-	  	}
-	  }
      function modifyContent() {    	
      	        var introduce = document.getElementById("reContent");   
      	        introduce.value = editor.$txt.html();
    }
   </script>
 </head>
-<body onload="myfunction();seclectValue()">
-	<form th:action="@{/resource/updateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+<body onload="seclectValue()">
+	<form th:action="@{/resource/UpdateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
 		<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
-		type:<select name="reTypename" id="reTypename" onclick="myfunction()">
-        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
-        </select><br> 
+		<input type="hidden" name="reTypeid" th:value="${typeid}">
+<!-- 		type:<select name="reTypename" id="reTypename" onclick="myfunction()"> -->
+<!--         	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option> -->
+<!--         </select><br>  -->
                     标题:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>
-                   上传图片:<input type="file" name="file" id="file" style="display:none;"><br>
-        <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br>
+                   上传图片:<input type="file" name="file" id="file"><br>
+        <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br>
                     内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
 				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
      			<div id="editor" style="width:600px; height:400px;" th:utext="${resource.reContent}"></div>

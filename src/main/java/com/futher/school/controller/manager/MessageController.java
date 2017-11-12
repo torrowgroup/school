@@ -42,7 +42,6 @@ public class MessageController extends BaseController{
 	
 	@RequestMapping("selectMessage")
 	public String selectMessage(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage,String meStatus, Model model) throws UnsupportedEncodingException{
-		meStatus = new String(meStatus.getBytes("iso-8859-1"),"utf-8");
 		model.addAttribute("meStatus", meStatus);
 		model.addAttribute("messages", messageService.findByPage(currentPage, meStatus));// 回显分页数据
 		return "manager/selectmessage";
@@ -64,7 +63,6 @@ public class MessageController extends BaseController{
 			model.addAttribute("news", "回复失败");
 		}
 		String meStatus = "未回复";
-		 meStatus = new String(meStatus.getBytes("utf-8"),"iso-8859-1");
 		return selectMessage(1, meStatus, model);
 	}
 	
@@ -76,7 +74,6 @@ public class MessageController extends BaseController{
 	}
 	@RequestMapping("updateMessage")
 	public String updateMessage(Message message, MultipartFile file, Model model) throws UnsupportedEncodingException{
-		System.out.println(message+"95656+55+62+952659669+626826563986526568596268596");
 		Message replymessage = messageService.selectById(message.getMeId());
 		if (!file.isEmpty()) {
 			String truePath = "static/uploadImg/messagefile";

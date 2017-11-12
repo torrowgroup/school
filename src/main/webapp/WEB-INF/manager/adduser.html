@@ -5,7 +5,7 @@
   <title>Home</title>
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
   <script type="text/javascript">
-	  function myfunction(){
+	  function selectIdCard(){
 	  	var idCard = document.getElementById("usIdentityname").value;
 	  	if (idCard != "manager") {
 	  		document.getElementById("onmanager").style.display="";
@@ -24,7 +24,7 @@
 <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
 <script type="text/javascript" th:src="@{../static/js/verifyemailname.js}"></script> 
 </head>
-<body  onload="myfunction()">
+<body  onload="selectIdCard()">
 	<p th:text="${news}"></p>
 	<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
 		username:<input type="text" name="usEmail" id="usEmail"><span id="msg"></span><br>
@@ -34,13 +34,12 @@
 		 	<option th:value="男">男</option>
             <option th:value="女">女</option>
         </select><br>
-        idcard:<select name="usIdentityname" id="usIdentityname" onclick="myfunction()">
+        idcard:<select name="usIdentityname" id="usIdentityname" onclick="selectIdCard()">
         	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
-        </select>
-		telephone:<input type="text" name="usTel"><br>
-<!-- 		<input type="hidden" name="usIdentityname" th:value="${identity}"> -->
+        </select><br>
+		telephone:<input type="text" name="usTel">
+		<input type="file" name="file" id="file">
 		<div id="onmanager" style="display:none;" >
-			<input type="file" name="file" id="file">
 			<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
      			<div id="editor"  style="width:400px; height:400px;"></div>

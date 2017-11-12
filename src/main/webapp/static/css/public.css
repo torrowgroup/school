@@ -1,0 +1,221 @@
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+    a:hover{
+        text-decoration: none;
+        color: #000;
+        cursor: pointer;
+    }
+    a:visited{
+        text-decoration: none;
+        color: #000;
+    }
+    .center{
+        width:1200px;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+
+
+    /*  头部 */
+header{
+    width: 100%;
+    height:130px;
+    margin: 0 auto;
+    position: relative;
+    background-color:#641E5D;
+    min-width: 1000px;
+}
+    .header{
+        width: 1000px;
+        padding: 0;
+        position: relative;
+        margin: 0 auto;
+        background-color:#641E5D;
+        border-radius: 5px;
+    }
+        .logo{
+            width: 50%;
+        }
+            .logo img{
+                width: 80%;
+                height: 100px;
+            }
+        .headerRight{
+            position: absolute;
+            right:0;
+            top:28px;
+            color: #dadada;
+            
+        }
+            .headerRight p{
+                font-size: 12px;
+                line-height: 20px;
+                text-align: right;
+            }
+
+/*  底部 */
+footer{
+width: 100%;
+min-width: 1000px;
+background-color: rgb(100, 30, 93);
+margin:0 auto;
+margin-top: 10px;
+}
+.row{
+    width: 1000px;
+    min-width: 1000px;
+
+}
+.footerBox{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top:20px;
+    /*padding-bottom: 20px;*/
+}
+    .footerBox1{
+        margin-bottom: 20px;
+        width: 250px;
+        float: left;
+    }
+        .footerBox1>img{
+            width: 100%;
+            margin-top: 30px;
+        }
+        .footerBox1>h3{
+            font-size: 14px;
+            color:white;
+            line-height: 20px;
+        }
+        .footerBox1>p{
+            color: #afbbce;
+            font-size: 14px;
+            line-height: 20px;
+        }
+            .footerBox1>p>a{
+                color: #afbbce;
+                text-decoration: none;
+            }
+            .footerBox1>h3>a{
+                font-size: 14px;
+                color:white;
+                line-height: 20px;
+            }
+/*导航  部分  */
+    nav{
+        width: 1200px;
+        height: 50px;
+        margin: 0 auto;
+        font-size: 0px;
+        /* overflow: hidden; */
+    }
+        .nav-li{
+            width: 11.1%;
+            height: 100%;
+            line-height: 49px;
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;  
+            vertical-align:top;
+            position: relative;
+        }
+        .color_nav{
+            background-color: #FFA200;
+            color: #fff;
+        }  
+        .nav-li:hover a{
+            background-color: #FFA200;
+            color: #fff;
+            border-bottom: 2px solid #fff;
+        }
+            .nav-li>a{
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            .chances{
+                z-index: 1000;
+                position: absolute;
+                width: 100%;
+                height: 0px;
+                transition: height 0.5s;
+                overflow: hidden;
+            }
+            .nav-li:hover .chances{
+                height: 300px;
+            }
+            .chances a{
+                width: 100%;
+                height: 50px;
+                display: block;
+                background-color: #FFA200;
+                border-bottom: 1px solid #fff;
+                color: #fff;
+            }
+
+
+
+/*   分页   中的各个部分  */
+.p-img{
+    width:100%;
+    min-width: 1200px;
+    height:300px;
+    margin: 0 auto;
+    background-size: 100% 100%;
+}
+  /*   所有的内容   */
+  .content-info{
+    width: 100%;
+    overflow: auto;
+    zoom: 1;
+}
+.main{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 10px;
+    overflow: auto;
+    zoom: 1;
+}
+    .info-left{
+        float: left;
+        width: 200px;
+        position: relative;
+        border-left: 2px solid #641E5D;
+    }
+    .info-left h3{
+        width: 100%;
+        height:60px;
+        margin: 0;
+        line-height: 60px;
+        padding: 0 30px;
+    }
+    .info-left dt{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 30px;
+        margin-left:-2px;
+        font-size: 18px;
+        font-weight: 400;
+        border-left: 2px solid #641E5D;
+    }
+    .dt2{
+        background-color: #0ff;
+        border-left: 2px solid #ff0;
+    }
+    .info-left dt:hover{
+        background-color: #0ff;
+        border-left: 2px solid #ff0;
+    }
+    .info-right{
+        width: 1000px;
+        padding: 10px 30px;
+        float: right;
+    }

@@ -115,5 +115,9 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 	public int updateResource(com.futher.school.entity.Resource resource) {
 		return this.updateEntity(resource);
 	}
+	@Override
+	public List<com.futher.school.entity.Resource> selectByPid(int Pid, int number) {
+		return resourceMapper.selectByPid(Pid, number);
+	}
 
 }

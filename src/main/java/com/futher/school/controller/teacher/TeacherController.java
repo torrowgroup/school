@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -70,9 +71,11 @@ public class TeacherController extends BaseController {
 		msg = "文件上传成功";
 		Resource resource  = new Resource();
 		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
 		resource.setRePublisher(user.getUsName());
 		resource.setReTypename(fileName);
-		resource.setReReleasedate(date);
+		resource.setReReleasedate(dateString);
 		int boo = resourceService.uploadeEdit(resource);
 		if(boo == 1) {
 			System.out.println("上传成功");
@@ -130,12 +133,14 @@ public class TeacherController extends BaseController {
 		System.out.println(resource+"获取到的resource");
 		User user = (User) session.getAttribute("teacher");
 		Date date  = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
 		String msg = null;
 		resource.setReTitle(request.getParameter("resource.reTitle"));
 		resource.setReTypename(request.getParameter("resource.reTypeName"));
 		resource.setReContent((String) request.getParameter("resource.reContent"));
 		resource.setRePublisher(user.getUsEmail()); 
-		resource.setReReleasedate(date);
+		resource.setReReleasedate(dateString);
 		int re = resourceService.uploadeEdit(resource);
 		System.out.println(resource);
 		if(re==1) { 

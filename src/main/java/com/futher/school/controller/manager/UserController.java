@@ -123,16 +123,6 @@ public class UserController extends BaseController {
 	@RequestMapping("/addUser")
 	public String addUser(User user, MultipartFile file, Model model) {
 		model.addAttribute("identity", user.getUsIdentityname());
-		if (user.getUsIdentityname().equals("manager")) {
-			Type type = typeService.getId(user.getUsIdentityname());
-			user.setUsIdentityid(type.getTyId());
-			int judge = userService.addUser(user);
-			if (judge == 1) {
-				model.addAttribute("news", "添加成功");
-			} else {
-				model.addAttribute("news", "添加失败");
-			}
-		} else {
 			if (file.isEmpty() == true) {
 				model.addAttribute("news", "请上传图片，添加失败");
 			} else {
@@ -146,7 +136,6 @@ public class UserController extends BaseController {
 					model.addAttribute("news", "添加失败");
 				}
 			}
-		}
 		return toaddUser(1, model);
 	}
 

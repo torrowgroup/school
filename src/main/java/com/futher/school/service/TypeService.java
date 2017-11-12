@@ -22,5 +22,10 @@ public interface TypeService {
 	int updateType(Type type);
 	//根据ID获得类别
 	Type selectTypeById(int tyId);
+//	//根据父ID得到同一类的类别
+//	Type selectTypeByPid(int tyPid);
+	
+	
+//	Type getTypeById(Integer reTypeid);
 
 }

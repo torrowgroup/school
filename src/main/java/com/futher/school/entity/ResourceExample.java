@@ -1,7 +1,6 @@
 package com.futher.school.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ResourceExample {
@@ -162,6 +161,66 @@ public class ResourceExample {
 
         public Criteria andReIdNotBetween(Integer value1, Integer value2) {
             addCriterion("re_id not between", value1, value2, "reId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidIsNull() {
+            addCriterion("re_typepid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidIsNotNull() {
+            addCriterion("re_typepid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidEqualTo(Integer value) {
+            addCriterion("re_typepid =", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidNotEqualTo(Integer value) {
+            addCriterion("re_typepid <>", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidGreaterThan(Integer value) {
+            addCriterion("re_typepid >", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("re_typepid >=", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidLessThan(Integer value) {
+            addCriterion("re_typepid <", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidLessThanOrEqualTo(Integer value) {
+            addCriterion("re_typepid <=", value, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidIn(List<Integer> values) {
+            addCriterion("re_typepid in", values, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidNotIn(List<Integer> values) {
+            addCriterion("re_typepid not in", values, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidBetween(Integer value1, Integer value2) {
+            addCriterion("re_typepid between", value1, value2, "reTypepid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReTypepidNotBetween(Integer value1, Integer value2) {
+            addCriterion("re_typepid not between", value1, value2, "reTypepid");
             return (Criteria) this;
         }
 
@@ -365,76 +424,6 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andReContentIsNull() {
-            addCriterion("re_content is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentIsNotNull() {
-            addCriterion("re_content is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentEqualTo(String value) {
-            addCriterion("re_content =", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentNotEqualTo(String value) {
-            addCriterion("re_content <>", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentGreaterThan(String value) {
-            addCriterion("re_content >", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentGreaterThanOrEqualTo(String value) {
-            addCriterion("re_content >=", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentLessThan(String value) {
-            addCriterion("re_content <", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentLessThanOrEqualTo(String value) {
-            addCriterion("re_content <=", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentLike(String value) {
-            addCriterion("re_content like", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentNotLike(String value) {
-            addCriterion("re_content not like", value, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentIn(List<String> values) {
-            addCriterion("re_content in", values, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentNotIn(List<String> values) {
-            addCriterion("re_content not in", values, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentBetween(String value1, String value2) {
-            addCriterion("re_content between", value1, value2, "reContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andReContentNotBetween(String value1, String value2) {
-            addCriterion("re_content not between", value1, value2, "reContent");
-            return (Criteria) this;
-        }
-
         public Criteria andRePublisherIsNull() {
             addCriterion("re_publisher is null");
             return (Criteria) this;
@@ -515,52 +504,62 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateEqualTo(Date value) {
+        public Criteria andReReleasedateEqualTo(String value) {
             addCriterion("re_releaseDate =", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateNotEqualTo(Date value) {
+        public Criteria andReReleasedateNotEqualTo(String value) {
             addCriterion("re_releaseDate <>", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateGreaterThan(Date value) {
+        public Criteria andReReleasedateGreaterThan(String value) {
             addCriterion("re_releaseDate >", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateGreaterThanOrEqualTo(Date value) {
+        public Criteria andReReleasedateGreaterThanOrEqualTo(String value) {
             addCriterion("re_releaseDate >=", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateLessThan(Date value) {
+        public Criteria andReReleasedateLessThan(String value) {
             addCriterion("re_releaseDate <", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateLessThanOrEqualTo(Date value) {
+        public Criteria andReReleasedateLessThanOrEqualTo(String value) {
             addCriterion("re_releaseDate <=", value, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateIn(List<Date> values) {
+        public Criteria andReReleasedateLike(String value) {
+            addCriterion("re_releaseDate like", value, "reReleasedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReReleasedateNotLike(String value) {
+            addCriterion("re_releaseDate not like", value, "reReleasedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReReleasedateIn(List<String> values) {
             addCriterion("re_releaseDate in", values, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateNotIn(List<Date> values) {
+        public Criteria andReReleasedateNotIn(List<String> values) {
             addCriterion("re_releaseDate not in", values, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateBetween(Date value1, Date value2) {
+        public Criteria andReReleasedateBetween(String value1, String value2) {
             addCriterion("re_releaseDate between", value1, value2, "reReleasedate");
             return (Criteria) this;
         }
 
-        public Criteria andReReleasedateNotBetween(Date value1, Date value2) {
+        public Criteria andReReleasedateNotBetween(String value1, String value2) {
             addCriterion("re_releaseDate not between", value1, value2, "reReleasedate");
             return (Criteria) this;
         }

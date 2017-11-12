@@ -86,5 +86,10 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		return typeMapper.selectByPrimaryKey(tyId);
 	}
 
+//	@Override
+//	public Type selectTypeByPid(int tyPid) {
+//		return null;
+//	}
+
 }
 

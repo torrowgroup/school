@@ -36,4 +36,6 @@ public interface ResourceService {
 	public int uploadeEdit(Resource resource);
 	//wqj 获取resource
 	public List<Resource> getUploadFileName();
+	
+	List<Resource> selectByPid(int Pid, int number);
 }

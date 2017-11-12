@@ -3,12 +3,13 @@
 <mapper namespace="com.futher.school.dao.ResourceMapper">
   <resultMap id="BaseResultMap" type="com.futher.school.entity.Resource">
     <id column="re_id" jdbcType="INTEGER" property="reId" />
+    <result column="re_typepid" jdbcType="INTEGER" property="reTypepid" />
     <result column="re_typeId" jdbcType="INTEGER" property="reTypeid" />
     <result column="re_typeName" jdbcType="VARCHAR" property="reTypename" />
     <result column="re_title" jdbcType="VARCHAR" property="reTitle" />
     <result column="re_content" jdbcType="LONGVARCHAR" property="reContent" />
     <result column="re_publisher" jdbcType="VARCHAR" property="rePublisher" />
-    <result column="re_releaseDate" jdbcType="TIMESTAMP" property="reReleasedate" />
+    <result column="re_releaseDate" jdbcType="VARCHAR" property="reReleasedate" />
     <result column="re_spare" jdbcType="VARCHAR" property="reSpare" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.Resource">
@@ -73,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    re_id, re_typeId, re_typeName, re_title, re_publisher, re_releaseDate, re_spare
+    re_id, re_typepid, re_typeId, re_typeName, re_title, re_content, re_publisher, re_releaseDate, 
+    re_spare
   </sql>
   <sql id="Blob_Column_List">
     re_content
@@ -116,27 +118,6 @@
     from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
   </select>
-  
-    <select id="selectByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from tb_resource
-    where re_typeId = #{reTypeid,jdbcType=INTEGER}
-  </select>
-  
-  <!-- 根据分页数据start 和size查询数据 -->
-    <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from tb_resource
-        <if test="reTypeid!=null">
-         	where re_typeId = #{reTypeid,jdbcType=INTEGER}
-        </if>
-        <if test="start!=null and size!=null">
-           limit #{start},#{size}
-        </if>
-    </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
@@ -148,18 +129,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.futher.school.entity.Resource">
-    insert into tb_resource (re_id, re_typeId, re_typeName, 
-      re_title, re_publisher, re_releaseDate, 
-      re_spare, re_content)
-    values (#{reId,jdbcType=INTEGER}, #{reTypeid,jdbcType=INTEGER}, #{reTypename,jdbcType=VARCHAR}, 
-      #{reTitle,jdbcType=VARCHAR}, #{rePublisher,jdbcType=VARCHAR}, #{reReleasedate,jdbcType=TIMESTAMP}, 
-      #{reSpare,jdbcType=VARCHAR}, #{reContent,jdbcType=LONGVARCHAR})
+    insert into tb_resource (re_id, re_typepid, re_typeId, 
+      re_typeName, re_title, re_publisher, 
+      re_releaseDate, re_spare, re_content
+      )
+    values (#{reId,jdbcType=INTEGER}, #{reTypepid,jdbcType=INTEGER}, #{reTypeid,jdbcType=INTEGER}, 
+      #{reTypename,jdbcType=VARCHAR}, #{reTitle,jdbcType=VARCHAR}, #{rePublisher,jdbcType=VARCHAR}, 
+      #{reReleasedate,jdbcType=VARCHAR}, #{reSpare,jdbcType=VARCHAR}, #{reContent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.futher.school.entity.Resource">
     insert into tb_resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="reId != null">
         re_id,
+      </if>
+      <if test="reTypepid != null">
+        re_typepid,
       </if>
       <if test="reTypeid != null">
         re_typeId,
@@ -187,6 +173,9 @@
       <if test="reId != null">
         #{reId,jdbcType=INTEGER},
       </if>
+      <if test="reTypepid != null">
+        #{reTypepid,jdbcType=INTEGER},
+      </if>
       <if test="reTypeid != null">
         #{reTypeid,jdbcType=INTEGER},
       </if>
@@ -200,7 +189,7 @@
         #{rePublisher,jdbcType=VARCHAR},
       </if>
       <if test="reReleasedate != null">
-        #{reReleasedate,jdbcType=TIMESTAMP},
+        #{reReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="reSpare != null">
         #{reSpare,jdbcType=VARCHAR},
@@ -222,6 +211,9 @@
       <if test="record.reId != null">
         re_id = #{record.reId,jdbcType=INTEGER},
       </if>
+      <if test="record.reTypepid != null">
+        re_typepid = #{record.reTypepid,jdbcType=INTEGER},
+      </if>
       <if test="record.reTypeid != null">
         re_typeId = #{record.reTypeid,jdbcType=INTEGER},
       </if>
@@ -235,7 +227,7 @@
         re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
       </if>
       <if test="record.reReleasedate != null">
-        re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
+        re_releaseDate = #{record.reReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="record.reSpare != null">
         re_spare = #{record.reSpare,jdbcType=VARCHAR},
@@ -251,11 +243,12 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update tb_resource
     set re_id = #{record.reId,jdbcType=INTEGER},
+      re_typepid = #{record.reTypepid,jdbcType=INTEGER},
       re_typeId = #{record.reTypeid,jdbcType=INTEGER},
       re_typeName = #{record.reTypename,jdbcType=VARCHAR},
       re_title = #{record.reTitle,jdbcType=VARCHAR},
       re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
-      re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
+      re_releaseDate = #{record.reReleasedate,jdbcType=VARCHAR},
       re_spare = #{record.reSpare,jdbcType=VARCHAR},
       re_content = #{record.reContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -265,12 +258,12 @@
   <update id="updateByExample" parameterType="map">
     update tb_resource
     set re_id = #{record.reId,jdbcType=INTEGER},
+      re_typepid = #{record.reTypepid,jdbcType=INTEGER},
       re_typeId = #{record.reTypeid,jdbcType=INTEGER},
       re_typeName = #{record.reTypename,jdbcType=VARCHAR},
       re_title = #{record.reTitle,jdbcType=VARCHAR},
-      re_content = #{reContent,jdbcType=LONGVARCHAR},
       re_publisher = #{record.rePublisher,jdbcType=VARCHAR},
-      re_releaseDate = #{record.reReleasedate,jdbcType=TIMESTAMP},
+      re_releaseDate = #{record.reReleasedate,jdbcType=VARCHAR},
       re_spare = #{record.reSpare,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -279,6 +272,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.futher.school.entity.Resource">
     update tb_resource
     <set>
+      <if test="reTypepid != null">
+        re_typepid = #{reTypepid,jdbcType=INTEGER},
+      </if>
       <if test="reTypeid != null">
         re_typeId = #{reTypeid,jdbcType=INTEGER},
       </if>
@@ -292,7 +288,7 @@
         re_publisher = #{rePublisher,jdbcType=VARCHAR},
       </if>
       <if test="reReleasedate != null">
-        re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
+        re_releaseDate = #{reReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="reSpare != null">
         re_spare = #{reSpare,jdbcType=VARCHAR},
@@ -305,29 +301,77 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.futher.school.entity.Resource">
     update tb_resource
-    set re_typeId = #{reTypeid,jdbcType=INTEGER},
+    set re_typepid = #{reTypepid,jdbcType=INTEGER},
+      re_typeId = #{reTypeid,jdbcType=INTEGER},
       re_typeName = #{reTypename,jdbcType=VARCHAR},
       re_title = #{reTitle,jdbcType=VARCHAR},
       re_publisher = #{rePublisher,jdbcType=VARCHAR},
-      re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
+      re_releaseDate = #{reReleasedate,jdbcType=VARCHAR},
       re_spare = #{reSpare,jdbcType=VARCHAR},
       re_content = #{reContent,jdbcType=LONGVARCHAR}
     where re_id = #{reId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.futher.school.entity.Resource">
     update tb_resource
-    set re_typeId = #{reTypeid,jdbcType=INTEGER},
-      re_typeName = #{reTypename,jdbcType=VARCHAR},
-      re_title = #{reTitle,jdbcType=VARCHAR},
-      re_content = #{reContent,jdbcType=LONGVARCHAR},
-      re_publisher = #{rePublisher,jdbcType=VARCHAR},
-      re_releaseDate = #{reReleasedate,jdbcType=TIMESTAMP},
-      re_spare = #{reSpare,jdbcType=VARCHAR}
+     <set>
+      <if test="reTypepid != null">
+        re_typepid = #{reTypepid,jdbcType=INTEGER},
+      </if>
+      <if test="reTypeid != null">
+        re_typeId = #{reTypeid,jdbcType=INTEGER},
+      </if>
+      <if test="reTypename != null">
+        re_typeName = #{reTypename,jdbcType=VARCHAR},
+      </if>
+      <if test="reTitle != null">
+        re_title = #{reTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="reContent != null">
+        re_content = #{reContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rePublisher != null">
+        re_publisher = #{rePublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="reReleasedate != null">
+        re_releaseDate = #{reReleasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="reSpare != null">
+        re_spare = #{reSpare,jdbcType=VARCHAR},
+      </if>
+    </set>
     where re_id = #{reId,jdbcType=INTEGER}
   </update>
-  <!--获得所有上传文件名-->
+  
+   <select id="selectByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typepid = #{reTypeid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_resource
+        <if test="reTypeid!=null">
+         	where re_typepid = #{reTypeid,jdbcType=INTEGER}
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+    </select>
+    
+     <!--获得所有上传文件名-->
   <select id="getUploadFileName" parameterType="com.futher.school.entity.Resource" resultMap="ResultMapWithBLOBs" >  
    select * from tb_resource 
   </select>
   
+   <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typepid = #{pid,jdbcType=INTEGER}
+    ORDER BY RAND() LIMIT #{number};
+  </select>
 </mapper>

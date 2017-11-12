@@ -1,0 +1,16 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+</head>
+<body>
+	<span th:text="${news}"></span>
+	<form th:action="@{/resource/addSchoolView}" method="post" enctype="multipart/form-data">
+         <input type="hidden" name="reTypeid" th:value="${typeid}">         
+                   标题:<input type="text" name="reTitle"><br>
+                   上传图片:<input type="file" name="file" id="file"><br>
+			<input type="submit" value="添加">
+	</form>
+</body>
+</html>
