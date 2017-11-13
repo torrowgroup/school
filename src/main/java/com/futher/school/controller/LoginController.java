@@ -79,18 +79,17 @@ public class LoginController extends BaseController {
 					 
 					 else if (identityname.equals("teacher")) {
 						session.setAttribute("teacher", user);
-						session.setAttribute("teacher", user);
 						pathurl = "teacher/index";
-					 }
-//					} else if (identityname.equals("teachergroup")) {
-//						session.setAttribute("teachergroup", user);
-//						pathurl = "/WEB-INF/";
-//					} else if (identityname.equals("educationoffice")){
-//						session.setAttribute("educationoffice", user);
-//						pathurl = "/WEB-INF/";
-//					}
-				} else {
+					 }else if (identityname.equals("teachergroup")) {
+							session.setAttribute("teachergroup", user);
+							pathurl = "teachergroup/index";
+				
+					} else if (identityname.equals("educationoffice")){
+					session.setAttribute("educationoffice", user);
+					pathurl = "educationoffice/index";
+					} else {
 					model.addAttribute("news", "用户名或密码错误,请重新输入");
+				}
 				}
 //		/*if (identityCode.equals(code)) {*/
 //			User user = userService.login(usEmail, usPassword);

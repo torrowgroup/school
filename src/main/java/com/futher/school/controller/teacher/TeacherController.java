@@ -38,8 +38,9 @@ import com.futher.school.entity.User;
 @RequestMapping("/teacher")
 @Controller()
 public class TeacherController extends BaseController {
-	String downFileName ;
+	
 	String uri;
+
 	public String getUri() {
 		return uri;
 	}
@@ -48,61 +49,61 @@ public class TeacherController extends BaseController {
 		this.uri = uri;
 	}
 
-	public String getDownFileName() {
-		return downFileName;
-	}
-
 	
-
-	//文件上传
+	// 文件上传
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String upload(MultipartFile file, HttpServletRequest request, Model model) throws IOException {
-		User user = (User) session.getAttribute("teacher");
-		String path = request.getSession().getServletContext().getRealPath("uploading");
-		String fileName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('\\') + 1, file.getOriginalFilename().length());
 		String msg;
-		File dir = new File(path, fileName);
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		// MultipartFile自带的解析方法
-		file.transferTo(dir);
-		msg = "文件上传成功";
-		Resource resource  = new Resource();
-		Date date = new Date();
-		resource.setRePublisher(user.getUsName());
-		resource.setReTypename(fileName);
-		resource.setReReleasedate(date);
-		int boo = resourceService.uploadeEdit(resource);
-		if(boo == 1) {
-			System.out.println("上传成功");
-		}else {
-			System.out.println("error , 未知错误");
+		if (file == null) {
+			msg = "上传失败，上传文件为";
+		} else {
+			User user = (User) session.getAttribute("teacher");
+			String path = request.getSession().getServletContext().getRealPath("uploading");
+			String fileName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('\\') + 1,
+					file.getOriginalFilename().length());
+
+			File dir = new File(path, fileName);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			// MultipartFile自带的解析方法
+			file.transferTo(dir);
+			msg = "文件上传成功";
+			Resource resource = new Resource();
+			Date date = new Date();
+			resource.setRePublisher(user.getUsName());
+			resource.setReTypename(fileName);
+			resource.setReReleasedate(date);
+			int boo = resourceService.uploadeEdit(resource);
+			if (boo == 1) {
+				System.out.println("上传成功");
+			} else {
+				System.out.println("error , 未知错误");
+			}
 		}
 		model.addAttribute("msg", msg);
-		
+
 		return "teacher/upload";
 	}
 
-	/*@RequestMapping(value = "/uploadEdit", method = RequestMethod.POST)
-	public String uploadEdit(Model model, HttpServletRequest request) {
-		System.out.println("asdrganjkasb;helgaslbghjkasbd;lasndfjkbnjlk");
-		String edit = (String) request.getSession().getServletContext().getAttribute("edit");
-		System.out.println("agfuiweakuilfjbiwasujebhyu");
-		System.out.println(edit);
-		return null;
-	}*/
+	/*
+	 * @RequestMapping(value = "/uploadEdit", method = RequestMethod.POST) public
+	 * String uploadEdit(Model model, HttpServletRequest request) {
+	 * System.out.println("asdrganjkasb;helgaslbghjkasbd;lasndfjkbnjlk"); String
+	 * edit = (String)
+	 * request.getSession().getServletContext().getAttribute("edit");
+	 * System.out.println("agfuiweakuilfjbiwasujebhyu"); System.out.println(edit);
+	 * return null; }
+	 */
 	@SuppressWarnings("deprecation")
-	//文件下载
+	// 文件下载
 	@RequestMapping("/download")
-	public void down(HttpServletRequest request, HttpServletResponse response,String downFileName) throws Exception {
-		String fileName = request.getSession().getServletContext().getRealPath("uploading")+"/"+downFileName;
+	public void down(@RequestParam(defaultValue="1",required=true) int reId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Resource resource = resourceService.selectById(reId);
+		String downFileName = resource.getReTypename();
+		String fileName = request.getSession().getServletContext().getRealPath("uploading") + "/" + downFileName;
 		// 获取输入流d
-		 downFileName = java.net.URLDecoder.decode(downFileName,"UTF-8");
-		 System.out.println("更改后的filename"+downFileName);
-		System.out.println(downFileName+"前台传过来的文件名"+"打印"+"第一次打印");
 		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-		System.out.println(downFileName+"前台传过来的文件名"+"打印");
 		// 转码，免得文件名中文乱码
 		String filename = URLEncoder.encode(downFileName, "UTF-8");
 		// 设置文件下载头
@@ -116,39 +117,37 @@ public class TeacherController extends BaseController {
 		}
 		out.close();
 	}
-	//获取所有上传所有资源详细
+
+	// 获取所有上传所有资源详细
 	@RequestMapping("/showUpload")
-	public String  showUpload(Model model,String uri) {
-		List<Resource> resourceList  = resourceService.getUploadFileName();
+	public String showUpload(Model model, String uri) {
+		List<Resource> resourceList = resourceService.getUploadFileName();
 		model.addAttribute("resourceList", resourceList);
 		System.out.println(resourceList);
-		System.out.println("获取到的uri"+uri);
-		return "teacher"+"/"+uri;
+		System.out.println("获取到的uri" + uri);
+		return "teacher" + "/" + uri;
 	}
-	@RequestMapping(value="/uploadEdit",method = RequestMethod.POST)
-	public void uploadEdit(Model model,HttpServletRequest request ,Resource resource ) {
-		System.out.println(resource+"获取到的resource");
+
+	@RequestMapping(value = "/uploadEdit", method = RequestMethod.POST)
+	public String  uploadEdit(Resource resource,Model model) {
 		User user = (User) session.getAttribute("teacher");
-		Date date  = new Date();
 		String msg = null;
-		resource.setReTitle(request.getParameter("resource.reTitle"));
-		resource.setReTypename(request.getParameter("resource.reTypeName"));
-		resource.setReContent((String) request.getParameter("resource.reContent"));
-		resource.setRePublisher(user.getUsEmail()); 
-		resource.setReReleasedate(date);
+		resource.setRePublisher(user.getUsEmail());
+		resource.setReReleasedate(new Date());
 		int re = resourceService.uploadeEdit(resource);
-		System.out.println(resource);
-		if(re==1) { 
+		if (re == 1) {
 			msg = "提交成功";
-		}else {
+		} else {
 			msg = "未知原因，上传失败";
 		}
 		model.addAttribute("msg");
+		return "teacher/edit";
 	}
-	//留言处理
+
+	// 留言处理
 	@RequestMapping(value = "/leaveMessage")
 	public String leaveMessage() {
 		return null;
-		
+
 	}
 }

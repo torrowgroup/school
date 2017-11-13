@@ -15,7 +15,7 @@ import com.futher.school.base.BaseController;
 
 @RequestMapping("/message")
 @Controller()
-public class MessageController  extends BaseController{
+public class MessagesController  extends BaseController{
 
 	@RequestMapping(value="/saveMeassage")
 	public String saveMeaasge() {
