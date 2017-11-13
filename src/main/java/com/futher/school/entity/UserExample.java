@@ -454,62 +454,52 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidEqualTo(String value) {
+        public Criteria andUsIdentityidEqualTo(Integer value) {
             addCriterion("us_identityId =", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidNotEqualTo(String value) {
+        public Criteria andUsIdentityidNotEqualTo(Integer value) {
             addCriterion("us_identityId <>", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidGreaterThan(String value) {
+        public Criteria andUsIdentityidGreaterThan(Integer value) {
             addCriterion("us_identityId >", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidGreaterThanOrEqualTo(String value) {
+        public Criteria andUsIdentityidGreaterThanOrEqualTo(Integer value) {
             addCriterion("us_identityId >=", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidLessThan(String value) {
+        public Criteria andUsIdentityidLessThan(Integer value) {
             addCriterion("us_identityId <", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidLessThanOrEqualTo(String value) {
+        public Criteria andUsIdentityidLessThanOrEqualTo(Integer value) {
             addCriterion("us_identityId <=", value, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidLike(String value) {
-            addCriterion("us_identityId like", value, "usIdentityid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIdentityidNotLike(String value) {
-            addCriterion("us_identityId not like", value, "usIdentityid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIdentityidIn(List<String> values) {
+        public Criteria andUsIdentityidIn(List<Integer> values) {
             addCriterion("us_identityId in", values, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidNotIn(List<String> values) {
+        public Criteria andUsIdentityidNotIn(List<Integer> values) {
             addCriterion("us_identityId not in", values, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidBetween(String value1, String value2) {
+        public Criteria andUsIdentityidBetween(Integer value1, Integer value2) {
             addCriterion("us_identityId between", value1, value2, "usIdentityid");
             return (Criteria) this;
         }
 
-        public Criteria andUsIdentityidNotBetween(String value1, String value2) {
+        public Criteria andUsIdentityidNotBetween(Integer value1, Integer value2) {
             addCriterion("us_identityId not between", value1, value2, "usIdentityid");
             return (Criteria) this;
         }
@@ -721,146 +711,6 @@ public class UserExample {
 
         public Criteria andUsImageNotBetween(String value1, String value2) {
             addCriterion("us_image not between", value1, value2, "usImage");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceIsNull() {
-            addCriterion("us_introduce is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceIsNotNull() {
-            addCriterion("us_introduce is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceEqualTo(String value) {
-            addCriterion("us_introduce =", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceNotEqualTo(String value) {
-            addCriterion("us_introduce <>", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceGreaterThan(String value) {
-            addCriterion("us_introduce >", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceGreaterThanOrEqualTo(String value) {
-            addCriterion("us_introduce >=", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceLessThan(String value) {
-            addCriterion("us_introduce <", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceLessThanOrEqualTo(String value) {
-            addCriterion("us_introduce <=", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceLike(String value) {
-            addCriterion("us_introduce like", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceNotLike(String value) {
-            addCriterion("us_introduce not like", value, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceIn(List<String> values) {
-            addCriterion("us_introduce in", values, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceNotIn(List<String> values) {
-            addCriterion("us_introduce not in", values, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceBetween(String value1, String value2) {
-            addCriterion("us_introduce between", value1, value2, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsIntroduceNotBetween(String value1, String value2) {
-            addCriterion("us_introduce not between", value1, value2, "usIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsIsNull() {
-            addCriterion("us_teachingResults is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsIsNotNull() {
-            addCriterion("us_teachingResults is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsEqualTo(String value) {
-            addCriterion("us_teachingResults =", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsNotEqualTo(String value) {
-            addCriterion("us_teachingResults <>", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsGreaterThan(String value) {
-            addCriterion("us_teachingResults >", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsGreaterThanOrEqualTo(String value) {
-            addCriterion("us_teachingResults >=", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsLessThan(String value) {
-            addCriterion("us_teachingResults <", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsLessThanOrEqualTo(String value) {
-            addCriterion("us_teachingResults <=", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsLike(String value) {
-            addCriterion("us_teachingResults like", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsNotLike(String value) {
-            addCriterion("us_teachingResults not like", value, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsIn(List<String> values) {
-            addCriterion("us_teachingResults in", values, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsNotIn(List<String> values) {
-            addCriterion("us_teachingResults not in", values, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsBetween(String value1, String value2) {
-            addCriterion("us_teachingResults between", value1, value2, "usTeachingresults");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsTeachingresultsNotBetween(String value1, String value2) {
-            addCriterion("us_teachingResults not between", value1, value2, "usTeachingresults");
             return (Criteria) this;
         }
 

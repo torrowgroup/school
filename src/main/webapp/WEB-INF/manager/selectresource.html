@@ -25,8 +25,8 @@
 				<td>标题</td>
 				<td>发布人</td>
 				<td>发布时间</td>
-				<td th:if="${reTypeid} != 9">发布内容</td>
-				<td th:if="${reTypeid} == 9">图片</td>
+				<td>发布内容</td>
+				<td>图片</td>
 				<td>操作</td>
 			</tr>
 		</thead>
@@ -37,8 +37,8 @@
 				<td th:text="${resource.reTitle}"></td>
 				<td th:text="${resource.rePublisher}"></td>
 				<td th:text="${resource.reReleasedate}"></td>
-				<td th:if="${reTypeid} != 9"><button th:if="${resource.reTypeid} != 5 and ${resource.reTypeid} != 6" th:id="${resource.reId}" onclick="opennews(this)" >预览</button> <a th:if="${resource.reTypeid} == 5 or ${resource.reTypeid} == 6" th:href="@{/resource/downloadResource?(reId=${resource.reId})}">下载</a></td>
-				<td th:if="${resource.reTypeid} == 9"><img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td>
+				<td><button th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td>
+<!-- 				<td><img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td> -->
 				<td><a th:href="@{/resource/toUpdateResource?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</tbody>

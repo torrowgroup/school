@@ -9,6 +9,8 @@ public class Resource implements  Serializable{
 
 	private Integer reId;//资源编号
 
+	private Integer reTypepid;//fu类别编号
+	
     private Integer reTypeid;//类别编号
 
     private String reTypename;//类别名称
@@ -19,7 +21,7 @@ public class Resource implements  Serializable{
 
     private String rePublisher;//发布人
 
-    private Date reReleasedate;//发布日期
+    private String reReleasedate;//发布日期
 
     private String reSpare;//备用
 
@@ -27,8 +29,11 @@ public class Resource implements  Serializable{
 
     }
 
-	public Resource(Integer reTypeid, String reTypename, String reTitle, String reContent,
-			String rePublisher, Date reReleasedate, String reSpare) {
+	public Resource(Integer reId, Integer reTypepid, Integer reTypeid, String reTypename, String reTitle,
+			String reContent, String rePublisher, String reReleasedate, String reSpare) {
+		super();
+		this.reId = reId;
+		this.reTypepid = reTypepid;
 		this.reTypeid = reTypeid;
 		this.reTypename = reTypename;
 		this.reTitle = reTitle;
@@ -49,8 +54,16 @@ public class Resource implements  Serializable{
     public Integer getReTypeid() {
         return reTypeid;
     }
+    
+    public Integer getReTypepid() {
+		return reTypepid;
+	}
 
-    public void setReTypeid(Integer reTypeid) {
+	public void setReTypepid(Integer reTypepid) {
+		this.reTypepid = reTypepid;
+	}
+
+	public void setReTypeid(Integer reTypeid) {
         this.reTypeid = reTypeid;
     }
 
@@ -86,12 +99,12 @@ public class Resource implements  Serializable{
         this.rePublisher = rePublisher;
     }
 
-    public Date getReReleasedate() {
+    public String getReReleasedate() {
         return reReleasedate;
     }
 
-    public void setReReleasedate(Date reReleasedate) {
-        this.reReleasedate = reReleasedate;
+    public void setReReleasedate(String date) {
+        this.reReleasedate = date;
     }
 
     public String getReSpare() {
@@ -104,9 +117,9 @@ public class Resource implements  Serializable{
 
 	@Override
 	public String toString() {
-		return "Resource [reId=" + reId + ", reTypeid=" + reTypeid + ", reTypename=" + reTypename + ", reTitle="
-				+ reTitle + ", reContent=" + reContent + ", rePublisher=" + rePublisher + ", reReleasedate="
-				+ reReleasedate + ", reSpare=" + reSpare + "]";
+		return "Resource [reId=" + reId + ", reTypepid=" + reTypepid + ", reTypeid=" + reTypeid + ", reTypename="
+				+ reTypename + ", reTitle=" + reTitle + ", reContent=" + reContent + ", rePublisher=" + rePublisher
+				+ ", reReleasedate=" + reReleasedate + ", reSpare=" + reSpare + "]";
 	}
-    
+
 }

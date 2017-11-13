@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+</head>
+<body>
+	<span th:if="${messages.totalCount} == 0">还没有任何资源呢</span>
+<p th:text="${news}"></p>
+<div th:if="${messages.totalCount} != 0">
+	<table  cellspacing="0" border="1">
+		<caption>资源列表</caption>
+		<thead>
+			<tr>
+				<td>编号</td>
+				<td>类别</td>
+				<td>标题</td>
+				<td>发布人</td>
+				<td>发布时间</td>
+				<td>图片</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="resource,resourceStat:${messages.lists}">
+				<td th:text="${resource.reId}"></td>
+				<td th:text="${resource.reTypename}"></td>
+				<td th:text="${resource.reTitle}"></td>
+				<td th:text="${resource.rePublisher}"></td>
+				<td th:text="${resource.reReleasedate}"></td>
+				<td><img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td>
+				<td><a th:href="@{/resource/toUpdateSchoolView?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<table border="0" cellspacing="0" cellpadding="0"  width="900px">
+		<tr>
+			<td th:if="${messages.totalPage} > 0">
+			   <span th:if="${messages.currPage} == 1">
+				   <span th:if="${messages.totalPage ==1}">
+							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>					
+				   </span>
+				   <span th:if="${messages.totalPage > 1}">
+							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>
+			   				<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>				
+				   </span>
+			   </span>
+			   <span th:if="${messages.currPage} > 1 ">
+					<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>
+					<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid})}">[上一页]</a>
+					<span th:if="${messages.currPage != messages.totalPage}">
+						<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>					
+					</span>
+			   		<a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid})}">[尾页]</a>
+			   </span>
+			</td>
+		</tr>
+</table>
+</div>
+</body>
+</html>

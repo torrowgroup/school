@@ -18,6 +18,7 @@
 				<td>名字</td>
 				<td>性别</td>
 				<td>电话</td>
+				<td>照片<td>
 				<td>身份</td>
 				<td>操作</td>
 			</tr>
@@ -30,6 +31,7 @@
 				<td th:text="${user.usName}"></td>
 				<td th:text="${user.usSex}"></td>
 				<td th:text="${user.usTel}"></td>
+				<td><img alt="暂无照片" th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="60px;" height="60px;" /></td>
 				<td th:text="${user.usIdentityname}"></td>
 				<td><a th:href="@{/user/toUpdateUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>

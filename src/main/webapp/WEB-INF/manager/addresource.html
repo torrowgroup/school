@@ -5,31 +5,18 @@
   <title>title</title>
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
   <script type="text/javascript">
-  	function myfunction(){
-	  	var idCard = document.getElementById("reTypename").value;
-	  	if (idCard == "校园新闻") {
-	  		document.getElementById("file").style.display="";
-	  	} else if (idCard == "学生作品" || idCard == "教师作品" || idCard == "资源下载" || idCard == "校园风景"){
-	  	document.getElementById("file").style.display="";
-	  	document.getElementById("content").style.display="none";
-	  	} else {
-	  		document.getElementById("file").style.display="none";
-	  	}
-	  }
      function modifyContent() {    	
      	        var introduce = document.getElementById("reContent");   	    
      	        introduce.value = editor.$txt.html();
    }
   </script>
 </head>
-<body onload="myfunction()">
+<body>
 	<span th:text="${news}"></span>
 	<form th:action="@{/resource/addResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
-		type:<select name="reTypename" id="reTypename" onclick="myfunction()">
-        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
-        </select><br> 
+		<input type="hidden" name="reTypeid" th:value="${typeid}">
         	标题:<input type="text" name="reTitle"><br>
-                   上传图片:<input type="file" name="file" id="file" style="display:none;"><br>
+                   上传图片:<input type="file" name="file" id="file"><br>
                     内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
 				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
      			<div id="editor" style="width:600px; height:400px;"></div>

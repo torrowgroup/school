@@ -36,8 +36,6 @@ public interface ResourceService {
 	public int uploadeEdit(Resource resource);
 	//wqj 获取resource
 	public List<Resource> getUploadFileName();
-	/**
-	 * @return
-	 */
-	//wqj 用于获取全部教学教研
+
+	List<Resource> selectByPid(int Pid, int number);
 }

@@ -2,6 +2,7 @@ package com.futher.school.controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,17 +90,26 @@ public class Jump extends BaseController {
 		return "teacher/edit";
 	}
 
-	@RequestMapping(value = "/uploadEdit", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/uploadEdit", method = RequestMethod.POST)
 	public void uploadEdit(Model model, HttpServletRequest request, Resource resource) {
 		System.out.println(resource + "获取到的resource");
 		User user = (User) session.getAttribute("teacher");
-		Date date = new Date();
+
+		Date date  = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
+
 		String msg = null;
 		resource.setReTitle(request.getParameter("resource.reTitle"));
 		resource.setReTypename(request.getParameter("resource.reTypeName"));
 		resource.setReContent((String) request.getParameter("resource.reContent"));
+<<<<<<< HEAD:src/main/java/com/futher/school/controller/Jump.java
 		resource.setRePublisher(user.getUsEmail());
 		resource.setReReleasedate(date);
+=======
+		resource.setRePublisher(user.getUsEmail()); 
+		resource.setReReleasedate(dateString);
+>>>>>>> 81c741df4ad48eaae3a6d332d6c1a8e0badc9e0e:src/main/java/com/futher/school/controller/teacher/Jump.java
 		int re = resourceService.uploadeEdit(resource);
 		System.out.println(resource);
 		if (re == 1) {
@@ -109,7 +119,7 @@ public class Jump extends BaseController {
 		}
 		model.addAttribute("msg");
 	}
-
+*/
 	@RequestMapping(value = "/showTeacherResearch")
 	public String showTeacherResourch(String resourceId,Model model) {
 		model.addAttribute("resourceId", resourceId);

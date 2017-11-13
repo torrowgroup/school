@@ -235,76 +235,6 @@ public class MessageExample {
             return (Criteria) this;
         }
 
-        public Criteria andMeContentIsNull() {
-            addCriterion("me_content is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentIsNotNull() {
-            addCriterion("me_content is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentEqualTo(String value) {
-            addCriterion("me_content =", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentNotEqualTo(String value) {
-            addCriterion("me_content <>", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentGreaterThan(String value) {
-            addCriterion("me_content >", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentGreaterThanOrEqualTo(String value) {
-            addCriterion("me_content >=", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentLessThan(String value) {
-            addCriterion("me_content <", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentLessThanOrEqualTo(String value) {
-            addCriterion("me_content <=", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentLike(String value) {
-            addCriterion("me_content like", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentNotLike(String value) {
-            addCriterion("me_content not like", value, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentIn(List<String> values) {
-            addCriterion("me_content in", values, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentNotIn(List<String> values) {
-            addCriterion("me_content not in", values, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentBetween(String value1, String value2) {
-            addCriterion("me_content between", value1, value2, "meContent");
-            return (Criteria) this;
-        }
-
-        public Criteria andMeContentNotBetween(String value1, String value2) {
-            addCriterion("me_content not between", value1, value2, "meContent");
-            return (Criteria) this;
-        }
-
         public Criteria andMeImageIsNull() {
             addCriterion("me_image is null");
             return (Criteria) this;
@@ -575,73 +505,73 @@ public class MessageExample {
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentIsNull() {
-            addCriterion("me_replyContent is null");
+        public Criteria andMeSpareIsNull() {
+            addCriterion("me_spare is null");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentIsNotNull() {
-            addCriterion("me_replyContent is not null");
+        public Criteria andMeSpareIsNotNull() {
+            addCriterion("me_spare is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentEqualTo(String value) {
-            addCriterion("me_replyContent =", value, "meReplycontent");
+        public Criteria andMeSpareEqualTo(String value) {
+            addCriterion("me_spare =", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentNotEqualTo(String value) {
-            addCriterion("me_replyContent <>", value, "meReplycontent");
+        public Criteria andMeSpareNotEqualTo(String value) {
+            addCriterion("me_spare <>", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentGreaterThan(String value) {
-            addCriterion("me_replyContent >", value, "meReplycontent");
+        public Criteria andMeSpareGreaterThan(String value) {
+            addCriterion("me_spare >", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentGreaterThanOrEqualTo(String value) {
-            addCriterion("me_replyContent >=", value, "meReplycontent");
+        public Criteria andMeSpareGreaterThanOrEqualTo(String value) {
+            addCriterion("me_spare >=", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentLessThan(String value) {
-            addCriterion("me_replyContent <", value, "meReplycontent");
+        public Criteria andMeSpareLessThan(String value) {
+            addCriterion("me_spare <", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentLessThanOrEqualTo(String value) {
-            addCriterion("me_replyContent <=", value, "meReplycontent");
+        public Criteria andMeSpareLessThanOrEqualTo(String value) {
+            addCriterion("me_spare <=", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentLike(String value) {
-            addCriterion("me_replyContent like", value, "meReplycontent");
+        public Criteria andMeSpareLike(String value) {
+            addCriterion("me_spare like", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentNotLike(String value) {
-            addCriterion("me_replyContent not like", value, "meReplycontent");
+        public Criteria andMeSpareNotLike(String value) {
+            addCriterion("me_spare not like", value, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentIn(List<String> values) {
-            addCriterion("me_replyContent in", values, "meReplycontent");
+        public Criteria andMeSpareIn(List<String> values) {
+            addCriterion("me_spare in", values, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentNotIn(List<String> values) {
-            addCriterion("me_replyContent not in", values, "meReplycontent");
+        public Criteria andMeSpareNotIn(List<String> values) {
+            addCriterion("me_spare not in", values, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentBetween(String value1, String value2) {
-            addCriterion("me_replyContent between", value1, value2, "meReplycontent");
+        public Criteria andMeSpareBetween(String value1, String value2) {
+            addCriterion("me_spare between", value1, value2, "meSpare");
             return (Criteria) this;
         }
 
-        public Criteria andMeReplycontentNotBetween(String value1, String value2) {
-            addCriterion("me_replyContent not between", value1, value2, "meReplycontent");
+        public Criteria andMeSpareNotBetween(String value1, String value2) {
+            addCriterion("me_spare not between", value1, value2, "meSpare");
             return (Criteria) this;
         }
     }

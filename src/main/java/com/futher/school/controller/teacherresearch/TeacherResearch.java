@@ -1,5 +1,6 @@
 package com.futher.school.controller.teacherresearch;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -36,9 +37,11 @@ public class TeacherResearch extends BaseController {
 	public String saveTeacherResearch( Model model,@RequestParam(value = "reTypeid",required=true)int reTypeid,Resource resource) {
 		User user = (User) session.getAttribute("teachergroup");
 		String meg = null;
+		Date dateStr = new Date();
+		String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(dateStr);
 		resource.setReTypeid(reTypeid);
 		resource.setRePublisher(user.getUsEmail());
-		resource.setReReleasedate(new Date());
+		resource.setReReleasedate(date);
 		int boo = resourceService.addResource(resource);
 		if(boo==1) {
 			meg="上传成功";

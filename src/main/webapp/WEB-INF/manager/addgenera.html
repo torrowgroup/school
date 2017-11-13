@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
+  <script type="text/javascript">
+  	 function modifyContent() {    	
+     	        var introduce = document.getElementById("reContent");   	    
+     	        introduce.value = editor.$txt.html();
+   }
+  </script>
+</head>
+<body>
+	<body onload="myfunction()">
+	<span th:text="${news}"></span>
+	<form th:action="@{/resource/addGeneraLization}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+		type:<select name="reTypeid" id="reTypeid">
+        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyId}" th:text="${type.tyCategoryname}"></option>
+        </select><br> 
+        	标题:<input type="text" name="reTitle"><br>
+                    内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
+				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
+     			<div id="editor" style="width:600px; height:400px;"></div>
+     			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+  				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
+    			<script type="text/javascript">
+	        		var E = window.wangEditor
+	        		var editor = new E('editor')    		 
+		     		editor.config.uploadImgUrl = '/school/resource/uploadImg'
+		     		editor.config.uploadImgFileName = 'myFileName'
+	       		 	editor.create()
+    			</script>
+			</div><br>
+			<input type="submit" value="添加">
+	</form>
+</body>
+</body>
+</html>

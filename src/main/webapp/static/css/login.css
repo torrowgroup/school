@@ -1,0 +1,101 @@
+    /*整体布局开始*/
+html,body{
+    background-color: rgb(98, 72, 138);
+    height:100%;
+    overflow: hidden;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+    /*下方登录块*/
+    .login {
+        width:500px;
+        height:500px;
+        background-color: #eee;
+        box-shadow: 5px 5px 5px #444;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    /*头部*/
+        .title{
+            width:100%;
+            height:80px;
+            text-align: center;
+            font-size: 26px;
+            line-height: 80px;
+            color: #dadada;
+            background-color:rgb(90, 70, 100);
+            letter-spacing: 5px;
+        }
+    /* 登录 输入 */
+        .ucontainer{
+            width:100%;
+        }
+            .container-div{
+                width:100%;
+                height:40px;
+                position: relative;
+                text-align: center;
+                margin-top: 40px;
+            }
+            .container-div input{
+                width:80%;
+                height:42px;
+                padding: 0 20px;
+                font-size: 16px;
+            }
+            .container-div span{
+                width:40px;
+                height:40px;
+                text-align: center;
+                line-height: 40px;
+                font-size: 24px;
+                position: absolute;
+                background-color: #ddd;
+                right:10%;
+                color: rgb(90, 70, 100);
+            }
+            .up{
+            }
+            .down{
+            }
+    /* 验证码部分*/
+        .inspeat{
+            width:70%;
+            height:50px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+            .ins-1{
+                width:25%;
+                height:50px;
+                border: 1px #5bc0de solid;
+                margin-left: 50px;
+            }
+            .ins-2{
+                width:45%;
+                height:40px;
+                padding:0 20px;
+            }
+    /*登录按钮  忘记密码部分*/
+        .last{
+            width: 80%;
+            height: 50px;
+            margin:0 auto;
+            position: relative;
+            top:30px;
+        }
+            .dl{
+                width:40%;
+                height:50px;
+                background-color: #2e6da4;
+                border: 0;
+                color: #fff;
+                font-size: 16px;
+                letter-spacing:5px;
+                border-radius: 5px;
+                outline:none;
+            }
+            .wjmm{
+                margin-left: 20%;
+            }

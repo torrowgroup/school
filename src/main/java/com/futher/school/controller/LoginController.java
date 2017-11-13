@@ -3,6 +3,7 @@ package com.futher.school.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.futher.school.base.BaseController;
+import com.futher.school.entity.Resource;
 import com.futher.school.entity.User;
 import com.futher.school.util.Email;
 import com.google.code.kaptcha.Constants;
@@ -72,6 +74,8 @@ public class LoginController extends BaseController {
 					String identityname = user.getUsIdentityname();
 					if (identityname.equals("manager")) {
 						session.setAttribute("manager", user);
+						model.addAttribute("noStatus", "未回复");
+						model.addAttribute("yesStatus", "已回复");
 						pathurl = "/manager/homepage";
 					} else if (identityname.equals("officialemail")) {
 						model.addAttribute("news", "此用户不用作登录");
@@ -217,5 +221,15 @@ public class LoginController extends BaseController {
 	@RequestMapping("startschool")
 	public String startSchool(){
 		return "index";
+	}
+	@RequestMapping("enterschool")
+	public String enterSchool(Model model){
+		List<Resource> schoolviewlist = resourceService.selectByPid(9,4);
+		List<Resource> informlist = resourceService.selectByPid(8,5);
+		List<Resource> newslist = resourceService.selectByPid(4,4);
+		model.addAttribute("schoolviewlist", schoolviewlist);
+		model.addAttribute("informlist", informlist);
+		model.addAttribute("newslist", newslist);
+		return "schoolindex";
 	}
 }

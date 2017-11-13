@@ -1,17 +1,12 @@
 package com.futher.school.dao;
 
 import com.futher.school.entity.Resource;
-import com.futher.school.entity.ResourceExample;
-import com.futher.school.entity.User;
 
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ResourceMapper {
-    long countByExample(ResourceExample example);
-
-    int deleteByExample(ResourceExample example);
 
     int deleteByPrimaryKey(Integer reId);
 
@@ -19,13 +14,7 @@ public interface ResourceMapper {
 
     int insertSelective(Resource record);
 
-    List<Resource> selectByExample(ResourceExample example);
-
     Resource selectByPrimaryKey(Integer reId);
-
-    int updateByExampleSelective(@Param("record") Resource record, @Param("example") ResourceExample example);
-
-    int updateByExample(@Param("record") Resource record, @Param("example") ResourceExample example);
 
     int updateByPrimaryKeySelective(Resource record);
 
@@ -36,5 +25,7 @@ public interface ResourceMapper {
 	List<Resource> findByPage(HashMap<String, Object> map);
     //wqj用来获取所有resource
     List<Resource> getUploadFileName();//获取所有上传文件名
+    //主页的滚动图片
+	List<com.futher.school.entity.Resource> selectByPid(@Param("pid")int pid, @Param("number")int number);
     
 }

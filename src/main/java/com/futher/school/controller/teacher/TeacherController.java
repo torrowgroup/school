@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -54,6 +55,7 @@ public class TeacherController extends BaseController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String upload(MultipartFile file, HttpServletRequest request, Model model) throws IOException {
 		String msg;
+
 		if (file == null) {
 			msg = "上传失败，上传文件为";
 		} else {
@@ -70,7 +72,8 @@ public class TeacherController extends BaseController {
 			file.transferTo(dir);
 			msg = "文件上传成功";
 			Resource resource = new Resource();
-			Date date = new Date();
+			Date dateStr = new Date();
+			String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(dateStr);
 			resource.setRePublisher(user.getUsName());
 			resource.setReTypename(fileName);
 			resource.setReReleasedate(date);
@@ -80,6 +83,7 @@ public class TeacherController extends BaseController {
 			} else {
 				System.out.println("error , 未知错误");
 			}
+
 		}
 		model.addAttribute("msg", msg);
 
@@ -131,9 +135,16 @@ public class TeacherController extends BaseController {
 	@RequestMapping(value = "/uploadEdit", method = RequestMethod.POST)
 	public String  uploadEdit(Resource resource,Model model) {
 		User user = (User) session.getAttribute("teacher");
+
+		Date date  = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
 		String msg = null;
-		resource.setRePublisher(user.getUsEmail());
-		resource.setReReleasedate(new Date());
+		resource.setReTitle(request.getParameter("resource.reTitle"));
+		resource.setReTypename(request.getParameter("resource.reTypeName"));
+		resource.setReContent((String) request.getParameter("resource.reContent"));
+		resource.setRePublisher(user.getUsEmail()); 
+		resource.setReReleasedate(dateString);
 		int re = resourceService.uploadeEdit(resource);
 		if (re == 1) {
 			msg = "提交成功";
