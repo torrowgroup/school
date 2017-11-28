@@ -28,9 +28,12 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toAddResource")
 	public String toAddResource(int tyPid, Model model) {
 		List<Type> typelist = typeService.selectTypeName(tyPid);
-		for (int i = 0; i < typelist.size(); i++) {
-			System.out.println();
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			for (int i = 0; i < typelist.size(); i++) {
+				model.addAttribute("typeid", typelist.get(i).getTyId());
+			}
 		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/addresource";
@@ -43,10 +46,15 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toaddGeneraLization")
 	public String toaddGeneraLization(int tyPid, Model model) {
 		List<Type> typelist = typeService.selectTypeName(tyPid);
-		model.addAttribute("typelist", typelist);
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			model.addAttribute("typelist", typelist);
+		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/addgenera";
 	}
+
 	/**
 	 * @param tyPid
 	 * @param model
@@ -55,10 +63,15 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toaddUploadFile")
 	public String toaddUploadFile(int tyPid, Model model) {
 		List<Type> typelist = typeService.selectTypeName(tyPid);
-		model.addAttribute("typelist", typelist);
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			model.addAttribute("typelist", typelist);
+		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/adduploadfile";
 	}
+
 	/**
 	 * @param tyPid
 	 * @param model
@@ -67,12 +80,34 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toaddLink")
 	public String toaddLink(int tyPid, Model model) {
 		List<Type> typelist = typeService.selectTypeName(tyPid);
-		for (int i = 0; i < typelist.size(); i++) {
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			for (int i = 0; i < typelist.size(); i++) {
+				model.addAttribute("typeid", typelist.get(i).getTyId());
+			}
 		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/addlink";
 	}
+
+	/**
+	 * @param tyPid
+	 * @param model
+	 * @return 转发到添加时间的页面
+	 */
+	@RequestMapping("toaddAllTime")
+	public String toaddAllTime(int tyPid, Model model) {
+		List<Type> typelist = typeService.selectTypeName(tyPid);
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			model.addAttribute("typelist", typelist);
+		}
+		session.setAttribute("tyPid", tyPid);
+		return "/manager/addalltime";
+	}
+
 	/**
 	 * @param tyPid
 	 * @param model
@@ -81,12 +116,94 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toaddSchoolView")
 	public String toaddSchoolView(int tyPid, Model model) {
 		List<Type> typelist = typeService.selectTypeName(tyPid);
-		for (int i = 0; i < typelist.size(); i++) {
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			for (int i = 0; i < typelist.size(); i++) {
+				model.addAttribute("typeid", typelist.get(i).getTyId());
+			}
 		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/addschoolview";
 	}
+
+	/**
+	 * @param tyPid
+	 * @param model
+	 * @return 转发到添加校园信息界面
+	 */
+	@RequestMapping("toaddSchoolNews")
+	public String toaddSchoolNews(int tyPid, Model model) {
+		List<Type> typelist = typeService.selectTypeName(tyPid);
+		if (typelist.isEmpty()) {
+			model.addAttribute("news", "未添加类型,请添加类型");
+		} else {
+			for (int i = 0; i < typelist.size(); i++) {
+				model.addAttribute("typeid", typelist.get(i).getTyId());
+			}
+		}
+		// for (int i = 0; i < typelist.size(); i++) {
+		// model.addAttribute("typeid", typelist.get(i).getTyId());
+		// }
+		session.setAttribute("tyPid", tyPid);
+		return "/manager/addschoolnews";
+	}
+
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 添加学校信息
+	 */
+	@RequestMapping("addSchoolNews")
+	public String addSchoolNews(Resource resource, Model model) {
+		int tyPid = (int) session.getAttribute("tyPid");
+		Type type = typeService.selectTypeById(resource.getReTypeid());
+		if (type == null) {
+			model.addAttribute("news", "添加失败,没有添加的类型");
+		} else {
+			resource.setReTypepid(type.getTyPid());
+			resource.setReTypename(type.getTyCategoryname());
+			int judge = 0;
+			Resource oldResource = resourceService.selectByTypeid(resource.getReTypeid());
+			if (oldResource == null) {
+				judge = resourceService.addResource(resource);
+			}
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败,已添加，请重新选择");
+			}
+		}
+		return toaddSchoolNews(tyPid, model);
+	}
+
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 添加时间
+	 */
+	@RequestMapping("addAllTime")
+	public String addAllTime(Resource resource, Model model) {
+		int tyPid = (int) session.getAttribute("tyPid");
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			int judge = 0;
+			Resource oldResource = resourceService.selectByTypeid(resource.getReTypeid());
+			if (oldResource == null) {
+				judge = resourceService.addResource(resource);
+			}
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败,已添加，请重新选择");
+			}
+		} else {
+			model.addAttribute("news", "添加失败,没有添加的类型");
+		}
+		return toaddAllTime(tyPid, model);
+
+	}
+
 	/**
 	 * @param resource
 	 * @param file
@@ -96,23 +213,28 @@ public class ResourceController extends BaseController {
 	@RequestMapping("addSchoolView")
 	public String addSchoolView(Resource resource, MultipartFile file, Model model) {
 		int tyPid = (int) session.getAttribute("tyPid");
-		setAddResource(resource);
-		if (file.isEmpty()) {
-			model.addAttribute("news", "请上传校园风景图");
-			return toaddSchoolView(tyPid, model);
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			if (file.isEmpty()) {
+				model.addAttribute("news", "请上传校园风景图");
+				return toaddSchoolView(tyPid, model);
+			} else {
+				String truePath = "static/uploadImg/schoolview";
+				String fileName = uploadOpus(file, truePath);
+				resource.setReSpare(fileName);
+			}
+			int judge = resourceService.addResource(resource);
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败");
+			}
 		} else {
-			String truePath = "static/uploadImg/schoolview";
-			String fileName = uploadOpus(file, truePath);
-			resource.setReSpare(fileName);
-		}
-		int judge = resourceService.addResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
-		} else {
-			model.addAttribute("news", "添加失败");
+			model.addAttribute("news", "添加失败,没有添加的类型");
 		}
 		return toaddSchoolView(tyPid, model);
 	}
+
 	/**
 	 * @param resource
 	 * @param model
@@ -120,17 +242,21 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping("addLink")
 	public String addLink(Resource resource, Model model) {
-		resource.setReTypename("校园新闻");
 		int tyPid = (int) session.getAttribute("tyPid");
-		setAddResource(resource);
-		int judge = resourceService.addResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			int judge = resourceService.addResource(resource);
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败");
+			}
 		} else {
-			model.addAttribute("news", "添加失败");
+			model.addAttribute("news", "添加失败,没有添加的类型");
 		}
 		return toaddLink(tyPid, model);
 	}
+
 	/**
 	 * @param resource
 	 * @param file
@@ -140,40 +266,44 @@ public class ResourceController extends BaseController {
 	@RequestMapping("addUploadFile")
 	public String addUploadFile(Resource resource, MultipartFile file, Model model) {
 		int tyPid = (int) session.getAttribute("tyPid");
-		setAddResource(resource);
-		if (tyPid == 5) {
-			if (file.isEmpty()) {
-				model.addAttribute("news", "请上传作品");
-				return toaddUploadFile(tyPid, model);
-			} else {
-				String truePath = "static/uploadImg/schoolopus";
-				String fileName = uploadOpus(file, truePath);
-				resource.setReContent(fileName);
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			if (tyPid == 5) {
+				if (file.isEmpty()) {
+					model.addAttribute("news", "请上传作品");
+					return toaddUploadFile(tyPid, model);
+				} else {
+					String truePath = "static/uploadImg/schoolopus";
+					String fileName = uploadOpus(file, truePath);
+					resource.setReContent(fileName);
+				}
+			} else if (tyPid == 6) {
+				if (file.isEmpty()) {
+					model.addAttribute("news", "请上传资源下载文件");
+					return toaddUploadFile(tyPid, model);
+				} else {
+					String truePath = "static/uploadImg/schoolresource";
+					String fileName = uploadOpus(file, truePath);
+					resource.setReContent(fileName);
+				}
+			} else if (tyPid == 9) {
+				if (file.isEmpty()) {
+					model.addAttribute("news", "请上传校园风景照片");
+					return toaddUploadFile(tyPid, model);
+				} else {
+					String truePath = "static/uploadImg/schoolview";
+					String fileName = uploadOpus(file, truePath);
+					resource.setReSpare(fileName);
+				}
 			}
-		} else if (tyPid == 6) {
-			if (file.isEmpty()) {
-				model.addAttribute("news", "请上传资源下载文件");
-				return toaddUploadFile(tyPid, model);
+			int judge = resourceService.addResource(resource);
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
 			} else {
-				String truePath = "static/uploadImg/schoolresource";
-				String fileName = uploadOpus(file, truePath);
-				resource.setReContent(fileName);
+				model.addAttribute("news", "添加失败");
 			}
-		} else if (tyPid == 9) {
-			if (file.isEmpty()) {
-				model.addAttribute("news", "请上传校园风景照片");
-				return toaddUploadFile(tyPid, model);
-			} else {
-				String truePath = "static/uploadImg/schoolview";
-				String fileName = uploadOpus(file, truePath);
-				resource.setReSpare(fileName);
-			}
-		}
-		int judge = resourceService.addResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
 		} else {
-			model.addAttribute("news", "添加失败");
+			model.addAttribute("news", "添加失败,没有添加的类型");
 		}
 		return toaddUploadFile(tyPid, model);
 	}
@@ -186,18 +316,29 @@ public class ResourceController extends BaseController {
 	@RequestMapping("addGeneraLization")
 	public String addGeneraLization(Resource resource, Model model) {
 		int tyPid = (int) session.getAttribute("tyPid");
-		setAddResource(resource);
-		int judge = resourceService.addResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
+		int judge = 0;
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			if (resource.getReTypepid() == 2) {
+				Resource oldResource = resourceService.selectByTypeid(resource.getReTypeid());
+				if (oldResource == null) {
+					judge = resourceService.addResource(resource);
+				}
+			} else {
+				judge = resourceService.addResource(resource);
+			}
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "已添加,请重新选择");
+			}
 		} else {
-			model.addAttribute("news", "添加失败");
+			model.addAttribute("news", "添加失败,没有添加的类型");
 		}
 		return toaddGeneraLization(tyPid, model);
 	}
 
 	/**
-	 * 
 	 * @param resource
 	 * @param file
 	 * @param model
@@ -206,55 +347,78 @@ public class ResourceController extends BaseController {
 	@RequestMapping("/addResource")
 	public String addResource(Resource resource, MultipartFile file, Model model) {
 		int tyPid = (int) session.getAttribute("tyPid");
-		setAddResource(resource);
-		if (file.isEmpty()) {
-			model.addAttribute("news", "请上传新闻图片");
-			return toAddResource(tyPid, model);
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			if (file.isEmpty()) {
+				model.addAttribute("news", "请上传新闻图片");
+				return toAddResource(tyPid, model);
+			} else {
+				String truePath = "static/uploadImg/uploadnew";
+				String fileName = uploadOpus(file, truePath);
+				resource.setReSpare(fileName);
+			}
+			int judge = resourceService.addResource(resource);
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败");
+			}
 		} else {
-			String truePath = "static/uploadImg/uploadnew";
-			String fileName = uploadOpus(file, truePath);
-			resource.setReSpare(fileName);
-		}
-		int judge = resourceService.addResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
-		} else {
-			model.addAttribute("news", "添加失败");
+			model.addAttribute("news", "添加失败,没有添加的类型");
 		}
 		return toAddResource(tyPid, model);
 	}
 
+	/**
+	 * @param currentPage
+	 * @param reTypid
+	 * @param model
+	 * @return 分页查看资源类的数据
+	 */
 	@RequestMapping("/selectResource")
 	public String selectResource(
-			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int reTypid,
+			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int reTypeid,
 			Model model) {
-		
-		model.addAttribute("reTypeid", reTypid);
-		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypid));// 回显分页数据
-		if (reTypid == 12) {
+		model.addAttribute("reTypeid", reTypeid);
+		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid));// 回显分页数据
+		if (reTypeid == 12) {
 			return "manager/selectresource";
-		} else if (reTypid == 5 || reTypid == 6) {
+		} else if (reTypeid == 5 || reTypeid == 6) {
 			return "manager/selectuploadfile";
-		} else if (reTypid == 7) {
+		} else if (reTypeid == 7) {
 			return "manager/selectlink";
-		} else if (reTypid == 9) {
+		} else if (reTypeid == 9) {
 			return "manager/selectschoolview";
+		} else if (reTypeid == 11) {
+			return "manager/selectalltime";
+		} else if (reTypeid == 13) {
+			return "manager/selectschoolnews";
 		}
 		return "manager/selectgeneralization";
 	}
-	
+
+	/**
+	 * @param reId
+	 * @param model
+	 * @return 删除资源类数据
+	 */
 	@RequestMapping("deletResource")
-	public String deletResource(int reId, Model model) {
+	public String deletResource(int reId,int reTypepid, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		int judge = resourceService.deletResource(reId);
-		if (judge == 1) {
-			model.addAttribute("news", "删除成功");
+		if (resource == null) {
+			model.addAttribute("news", "因不可知操作,此数据已删除");
 		} else {
-			model.addAttribute("news", "删除失败");
+			int judge = resourceService.deletResource(reId);
+			if (judge == 1) {
+				model.addAttribute("news", "删除成功");
+			} else {
+				model.addAttribute("news", "删除失败");
+			}
 		}
-		return selectResource(1, resource.getReTypeid(), model);
+		return selectResource(1, reTypepid, model);
 
 	}
+
 	/**
 	 * @param reId
 	 * @param model
@@ -263,11 +427,19 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toUpdateResource")
 	public String toUpdateResource(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
-		for (int i = 0; i < typelist.size(); i++) {
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				for (int i = 0; i < typelist.size(); i++) {
+					model.addAttribute("typeid", typelist.get(i).getTyId());
+				}
+			}
 		}
-		session.setAttribute("tyPid", resource.getReTypeid());
+		// session.setAttribute("tyPid", resource.getReTypeid());
 		model.addAttribute("resource", resource);
 		return "/manager/updateresource";
 	}
@@ -280,26 +452,44 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toUpdateGeneraLization")
 	public String toUpdateGeneraLization(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
-		model.addAttribute("typelist", typelist);
-		session.setAttribute("tyPid", resource.getReTypeid());
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				model.addAttribute("typelist", typelist);
+			}
+		}
 		model.addAttribute("resource", resource);
-		return "/manager/updategeneralization";
+		// session.setAttribute("tyPid", resource.getReTypeid());
+		return "manager/updategeneralization";
 	}
+
 	/**
 	 * @param tyPid
 	 * @param model
-	 * @return 转发到添加文件的界面
+	 * @return 转发到修改文件的界面
 	 */
 	@RequestMapping("toUpdateUploadFile")
 	public String toUpdateUploadFile(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
-		model.addAttribute("typelist", typelist);
-		session.setAttribute("tyPid", resource.getReTypeid());
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				model.addAttribute("typelist", typelist);
+			}
+		}
 		model.addAttribute("resource", resource);
+		// session.setAttribute("tyPid", resource.getReTypeid());
 		return "/manager/updateuploadfile";
 	}
+
 	/**
 	 * @param reId
 	 * @param model
@@ -308,14 +498,23 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toUpdateLink")
 	public String toUpdateLink(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
-		for (int i = 0; i < typelist.size(); i++) {
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				for (int i = 0; i < typelist.size(); i++) {
+					model.addAttribute("typeid", typelist.get(i).getTyId());
+				}
+			}
 		}
-		session.setAttribute("tyPid", resource.getReTypeid());
 		model.addAttribute("resource", resource);
+		// session.setAttribute("tyPid", resource.getReTypeid());
 		return "/manager/updatelink";
 	}
+
 	/**
 	 * @param reId
 	 * @param model
@@ -324,187 +523,341 @@ public class ResourceController extends BaseController {
 	@RequestMapping("toUpdateSchoolView")
 	public String toUpdateSchoolView(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
-		for (int i = 0; i < typelist.size(); i++) {
-			model.addAttribute("typeid", typelist.get(i).getTyId());
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				for (int i = 0; i < typelist.size(); i++) {
+					model.addAttribute("typeid", typelist.get(i).getTyId());
+				}
+			}
 		}
 		model.addAttribute("resource", resource);
-		session.setAttribute("tyPid", resource.getReTypeid());
+		// session.setAttribute("tyPid", resource.getReTypeid());
 		return "/manager/updateschoolview";
 	}
-	
 
-	@RequestMapping("UpdateResource")
-	public String UpdateResource(Resource resource, MultipartFile file, Model model) {
-		System.out.println(resource+"14515666666666666666666666666666666666666666666666666666666666666666666666666");
-		Resource oldResource = resourceService.selectById(resource.getReId());
-		setAddResource(resource);
-		if (file.isEmpty()) {
-//			model.addAttribute("news", "请上传新闻图片");
-//			return toUpdateResource(resource.getReId(), model);
-			resource.setReSpare(oldResource.getReSpare());
+	/**
+	 * @param reId
+	 * @param model
+	 * @return 转发到修改时间类
+	 */
+	@RequestMapping("toUpdateAllTime")
+	public String toUpdateAllTime(int reId, Model model) {
+		Resource resource = resourceService.selectById(reId);
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
 		} else {
-			String truePath = "static/uploadImg/uploadnew";
-			String fileName = uploadOpus(file, truePath);
-			resourceService.deletResource(oldResource.getReSpare(), truePath, request);
-			resource.setReSpare(fileName);
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				model.addAttribute("typelist", typelist);
+			}
 		}
-		int judge = resourceService.updateResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
+		model.addAttribute("resource", resource);
+		// session.setAttribute("tyPid", resource.getReTypeid());
+		return "/manager/updatealltime";
+	}
+
+	/**
+	 * @param reId
+	 * @param model
+	 * @return 转发到修改学校信息的界面
+	 */
+	@RequestMapping("toUpdateSchoolNews")
+	public String toUpdateSchoolNews(int reId, Model model) {
+		Resource resource = resourceService.selectById(reId);
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
 		} else {
-			model.addAttribute("news", "修改失败");
+			List<Type> typelist = typeService.selectTypeName(resource.getReTypepid());
+			if (typelist.isEmpty()) {
+				model.addAttribute("news", "未添加类型,请添加类型");
+			} else {
+				for (int i = 0; i < typelist.size(); i++) {
+					model.addAttribute("typeid", typelist.get(i).getTyId());
+				}
+			}
+		}
+		model.addAttribute("resource", resource);
+		// session.setAttribute("tyPid", resource.getReTypeid());
+		return "/manager/updateschoolnews";
+
+	}
+
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 修改学校信息
+	 */
+	@RequestMapping("updateSchoolNews")
+	public String updateSchoolNews(Resource resource, Model model) {
+		Type type = typeService.selectTypeById(resource.getReTypeid());
+		if (type == null) {
+			model.addAttribute("news", "该资源类型已删除");
+		} else {
+			resource.setReTypepid(type.getTyPid());
+			resource.setReTypename(type.getTyCategoryname());
+			int judge = resourceService.updateResource(resource);
+			if (judge == 1) {
+				model.addAttribute("news", "修改成功");
+			} else {
+				model.addAttribute("news", "修改失败");
+			}
 		}
 		return selectResource(1, resource.getReTypepid(), model);
 	}
 
-	@RequestMapping("UpdateGeneraLization")
-	public String UpdateGeneraLization(Resource resource, Model model) {
-//		Resource oldResource = resourceService.selectById(resource.getReId());
-		setAddResource(resource);
-		int judge = resourceService.updateResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 修改时间
+	 */
+	@RequestMapping("updateAllTime")
+	public String updateAllTime(Resource resource, Model model) {
+		int judge = 0;
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				if (oldResource.getReTypeid() == resource.getReTypeid()) {
+					judge = resourceService.updateResource(resource);
+				} else {
+					Resource otherResource = resourceService.selectByTypeid(resource.getReTypeid());
+					if (otherResource == null) {
+						judge = resourceService.updateResource(resource);
+					}
+				}
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "修改失败,已添加，请重新选择");
+				}
+			}
 		} else {
-			model.addAttribute("news", "修改失败");
+			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
 		return selectResource(1, resource.getReTypepid(), model);
 	}
-	
-	@RequestMapping("UpdateUploadFile")
-	public String UpdateUploadFile(Resource resource, MultipartFile file, Model model) {
-		Resource oldResource = resourceService.selectById(resource.getReId());
-		setAddResource(resource);
-		if (file.isEmpty()) {
-			resource.setReSpare(oldResource.getReSpare());
+
+	/**
+	 * @param resource
+	 * @param file
+	 * @param model
+	 * @return 修改校园新闻
+	 */
+	@RequestMapping("updateResource")
+	public String updateResource(Resource resource, MultipartFile file, Model model) {
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				if (file.isEmpty()) {
+					resource.setReSpare(oldResource.getReSpare());
+				} else {
+					String truePath = "static/uploadImg/uploadnew";
+					String fileName = uploadOpus(file, truePath);
+					resourceService.deletResource(oldResource.getReSpare(), truePath, request);
+					resource.setReSpare(fileName);
+				}
+				int judge = resourceService.updateResource(resource);
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "修改失败");
+				}
+			}
 		} else {
-			String truePath = "";
-			if (oldResource.getReTypepid() == 5) {
-					truePath = "static/uploadImg/schoolopus";
-					String fileName = uploadOpus(file, truePath);
-					resource.setReContent(fileName);
-			} else if (oldResource.getReTypepid() == 6) {
-					truePath = "static/uploadImg/schoolresource";
-					String fileName = uploadOpus(file, truePath);
-					resource.setReContent(fileName);
-			} else if (oldResource.getReTypepid() == 9) {
-					truePath = "static/uploadImg/schoolview";
+			model.addAttribute("", "修改失败,该修改的类型不存在");
+		}
+		return selectResource(1, resource.getReTypepid(), model);
+	}
+
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 修改校园概括类
+	 */
+	@RequestMapping("updateGeneraLization")
+	public String updateGeneraLization(Resource resource, Model model) {
+		int judge = 0;
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				if (resource.getReTypepid() == 2) {
+					if (oldResource.getReTypeid() == resource.getReTypeid()) {
+						judge = resourceService.updateResource(resource);
+					} else {
+						Resource otherResource = resourceService.selectByTypeid(resource.getReTypeid());
+						if (otherResource == null) {
+							judge = resourceService.updateResource(resource);
+						}
+					}
+				} else {
+					judge = resourceService.updateResource(resource);
+				}
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "已添加,请重新选择");
+				}
+			}
+		} else {
+			model.addAttribute("", "修改失败,该修改的类型不存在");
+		}
+		return selectResource(1, resource.getReTypepid(), model);
+	}
+
+	/**
+	 * @param resource
+	 * @param file
+	 * @param model
+	 * @return 修改校园文学 ，资源下载
+	 */
+	@RequestMapping("updateUploadFile")
+	public String updateUploadFile(Resource resource, MultipartFile file, Model model) {
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				if (file.isEmpty()) {
+					resource.setReSpare(oldResource.getReSpare());
+				} else {
+					String truePath = "";
+					if (oldResource.getReTypepid() == 5) {
+						truePath = "static/uploadImg/schoolopus";
+						String fileName = uploadOpus(file, truePath);
+						resource.setReContent(fileName);
+					} else if (oldResource.getReTypepid() == 6) {
+						truePath = "static/uploadImg/schoolresource";
+						String fileName = uploadOpus(file, truePath);
+						resource.setReContent(fileName);
+					} else if (oldResource.getReTypepid() == 9) {
+						truePath = "static/uploadImg/schoolview";
+						String fileName = uploadOpus(file, truePath);
+						resource.setReSpare(fileName);
+					}
+					if (!(truePath.equals(""))) {
+						resourceService.deletResource(oldResource.getReContent(), truePath, request);
+					}
+				}
+				int judge = resourceService.updateResource(resource);
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "修改失败");
+				}
+			}
+		} else {
+			model.addAttribute("", "修改失败,该修改的类型不存在");
+		}
+		return selectResource(1, resource.getReTypepid(), model);
+	}
+
+	/**
+	 * @param resource
+	 * @param model
+	 * @return 修改链接
+	 */
+	@RequestMapping("updateLink")
+	public String updateLink(Resource resource, Model model) {
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				int judge = resourceService.updateResource(resource);
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "修改失败");
+				}
+			}
+		} else {
+			model.addAttribute("", "修改失败,该修改的类型不存在");
+		}
+		return selectResource(1, resource.getReTypepid(), model);
+	}
+
+	/**
+	 * @param resource
+	 * @param file
+	 * @param model
+	 * @return 修改校园风景
+	 */
+	@RequestMapping("updateSchoolView")
+	public String updateSchoolView(Resource resource, MultipartFile file, Model model) {
+		boolean sign = setAddResource(resource, model);
+		if (sign == true) {
+			Resource oldResource = resourceService.selectById(resource.getReId());
+			if (oldResource == null) {
+				model.addAttribute("news", "该资源已删除");
+			} else {
+				if (file.isEmpty()) {
+					resource.setReSpare(oldResource.getReSpare());
+				} else {
+					String truePath = "static/uploadImg/schoolview";
 					String fileName = uploadOpus(file, truePath);
 					resource.setReSpare(fileName);
+					resourceService.deletResource(oldResource.getReSpare(), truePath, request);
+				}
+				int judge = resourceService.updateResource(resource);
+				if (judge == 1) {
+					model.addAttribute("news", "修改成功");
+				} else {
+					model.addAttribute("news", "修改失败");
+				}
 			}
-			if (!(truePath.equals(""))) {
-				resourceService.deletResource(oldResource.getReContent(), truePath, request);
-			}
-		}
-		int judge = resourceService.updateResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
 		} else {
-			model.addAttribute("news", "修改失败");
-		}
-		return selectResource(1, resource.getReTypepid(), model);
-	}
-	
-	@RequestMapping("UpdateLink")
-	public String UpdateLink(Resource resource, Model model) {
-		setAddResource(resource);
-		int judge = resourceService.updateResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
-		} else {
-			model.addAttribute("news", "修改失败");
-		}
-		return selectResource(1, resource.getReTypepid(), model);
-	}
-	
-	@RequestMapping("UpdateSchoolView")
-	public String UpdateSchoolView(Resource resource, MultipartFile file, Model model) {
-		Resource oldResource = resourceService.selectById(resource.getReId());
-		setAddResource(resource);
-		if (file.isEmpty()) {
-			resource.setReSpare(oldResource.getReSpare());
-		} else {
-			String truePath = "static/uploadImg/schoolview";
-			String fileName = uploadOpus(file, truePath);
-			resource.setReSpare(fileName);
-			resourceService.deletResource(oldResource.getReSpare(), truePath, request);
-		}
-		int judge = resourceService.updateResource(resource);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
-		} else {
-			model.addAttribute("news", "修改失败");
+			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
 		return selectResource(1, resource.getReTypepid(), model);
 	}
 
-//	@RequestMapping("updateResource")
-//	public String updateResource(Resource resource, MultipartFile file, Model model) {
-//		int tyPid = (int) session.getAttribute("tyPid");
-//		Resource oldResource = resourceService.selectById(resource.getReId());
-//		setAddResource(resource);
-//		if (resource.getReTypename().equals("校园新闻")) {
-//			if (file.isEmpty()) {
-//				resource.setReSpare(oldResource.getReSpare());
-//			} else {
-//				String truePath = "static/uploadImg/uploadnew";
-//				String fileName = uploadOpus(file, truePath);
-//				resourceService.deletResource(oldResource.getReSpare(), truePath, request);
-//				resource.setReSpare(fileName);
-//			}
-//		}
-//		if (tyPid == 5) {
-//			if (file.isEmpty()) {
-//				resource.setReContent(oldResource.getReContent());
-//			} else {
-//				String truePath = "static/uploadImg/schoolopus";
-//				String fileName = uploadOpus(file, truePath);
-//				resourceService.deletResource(oldResource.getReContent(), truePath, request);
-//				resource.setReContent(fileName);
-//			}
-//		} else if (tyPid == 6) {
-//			if (file.isEmpty()) {
-//				resource.setReContent(oldResource.getReContent());
-//			} else {
-//				String truePath = "static/uploadImg/schoolresource";
-//				String fileName = uploadOpus(file, truePath);
-//				resourceService.deletResource(oldResource.getReContent(), truePath, request);
-//				resource.setReContent(fileName);
-//			}
-//		} else if (tyPid == 9) {
-//			if (file.isEmpty()) {
-//				resource.setReSpare(oldResource.getReSpare());
-//			} else {
-//				String truePath = "static/uploadImg/schoolview";
-//				String fileName = uploadOpus(file, truePath);
-//				resourceService.deletResource(oldResource.getReSpare(), truePath, request);
-//				resource.setReSpare(fileName);
-//			}
-//		}
-//		int judge = resourceService.updateResource(resource);
-//		if (judge == 1) {
-//			model.addAttribute("news", "修改成功");
-//		} else {
-//			model.addAttribute("news", "修改失败");
-//		}
-//		return selectResource(1, resource.getReTypeid(), model);
-//	}
-
+	/**
+	 * @param reId
+	 * @throws IOException
+	 *             下载校园文学 ，资源下载
+	 */
 	@RequestMapping("downloadResource")
 	@ResponseBody
 	public void downloadResource(int reId) throws IOException {
+		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		Resource resource = resourceService.selectById(reId);
-		String realPath = "";
-		if (resource.getReTypepid() == 5) {
-			realPath = "static/uploadImg/schoolopus";
-			resourceService.downloadResource(resource, realPath, response, request);
-		} else if (resource.getReTypepid() == 6) {
-			realPath = "static/uploadImg/schoolresource";
-			resourceService.downloadResource(resource, realPath, response, request);
+		if (resource == null) {
+			response.getWriter().write("文件不存在");
+		} else {
+			String realPath = "";
+			if (resource.getReTypepid() == 5) {
+				realPath = "static/uploadImg/schoolopus";
+				resourceService.downloadResource(resource, realPath, response, request);
+			} else if (resource.getReTypepid() == 6) {
+				realPath = "static/uploadImg/schoolresource";
+				resourceService.downloadResource(resource, realPath, response, request);
+			}
 		}
 	}
 
+	/**
+	 * @param myFileName
+	 * @throws IOException
+	 *             富文本上传图片
+	 */
 	@RequestMapping(value = "/uploadImg")
 	@ResponseBody
 	public void upload(MultipartFile myFileName) throws IOException {
@@ -512,27 +865,50 @@ public class ResourceController extends BaseController {
 		response.getWriter().write(request.getContextPath() + "/static/uploadImg/source/" + realName);
 	}
 
+	/**
+	 * @param reId
+	 * @param model
+	 * @return 预览富文本添加内容
+	 */
 	@RequestMapping("previewContent")
 	public String previewContent(int reId, Model model) {
 		Resource resource = resourceService.selectById(reId);
-		model.addAttribute("resource", resource);
+		if (resource == null) {
+			model.addAttribute("news", "该资源已被删除");
+		} else {
+			model.addAttribute("resource", resource);
+		}
 		return "manager/previewcontent";
 	}
 
+	/**
+	 * @param file
+	 * @param truePath
+	 * @return 上传文件
+	 */
 	public String uploadOpus(MultipartFile file, String truePath) {
 		String fileName = resourceService.uploadResource(file, truePath, request);
 		return fileName;
 	}
 
-	public void setAddResource(Resource resource) {
+	/**
+	 * @param resource
+	 *            用于给添加，修改的资源添加，修改：类型 发布时间 发布人
+	 */
+	public boolean setAddResource(Resource resource, Model model) {
 		Type type = typeService.selectTypeById(resource.getReTypeid());
-		resource.setReTypepid(type.getTyPid());
-		resource.setReTypename(type.getTyCategoryname());
-		User user = (User) session.getAttribute("manager");
-		resource.setRePublisher(user.getUsName());
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = formatter.format(currentTime);
-		resource.setReReleasedate(dateString);
+		if (type == null) {
+			return false;
+		} else {
+			resource.setReTypepid(type.getTyPid());
+			resource.setReTypename(type.getTyCategoryname());
+			User user = (User) session.getAttribute("manager");
+			resource.setRePublisher(user.getUsName());
+			Date currentTime = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = formatter.format(currentTime);
+			resource.setReReleasedate(dateString);
+		}
+		return true;
 	}
 }

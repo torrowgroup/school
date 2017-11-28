@@ -1,18 +1,22 @@
 package com.futher.school.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.futher.school.base.BaseDao;
 import com.futher.school.dao.TypeMapper;
 import com.futher.school.entity.Type;
 import com.futher.school.service.TypeService;
 import com.futher.school.util.PageBean;
+
+import sun.tools.tree.ArrayAccessExpression;
 @Service("typeService")
 public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeService{
 
@@ -84,6 +88,39 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 	@Override
 	public Type selectTypeById(int tyId) {
 		return typeMapper.selectByPrimaryKey(tyId);
+	}
+
+	@Override
+	public void getType(Model model) {
+		List<Type> typeList = typeMapper.selectAll();
+		List<Type> general =new ArrayList<Type>();
+		List<Type> dynamic =new ArrayList<Type>();
+		List<Type> educate =new ArrayList<Type>();
+		List<Type> literature =new ArrayList<Type>();
+		if (!(typeList.isEmpty())) {
+			for (int i =0; i < typeList.size(); i++) {
+				if (typeList.get(i).getTyPid() == 2) {
+					general.add(typeList.get(i));
+					model.addAttribute("oneGeneral", general.get(0));
+				} else if (typeList.get(i).getTyPid() == 3 || typeList.get(i).getTyPid() == 12|| typeList.get(i).getTyPid() == 8) {
+					dynamic.add(typeList.get(i));
+					model.addAttribute("oneDynamic", dynamic.get(0));
+				} else if (typeList.get(i).getTyPid() == 4) {
+					educate.add(typeList.get(i));
+					model.addAttribute("oneEducate", educate.get(0));
+				} else if (typeList.get(i).getTyPid() == 5) {
+					literature.add(typeList.get(i));
+					model.addAttribute("oneLiterature", literature.get(0));
+				}  else if (typeList.get(i).getTyPid() == 6) {
+					model.addAttribute("downloadType", typeList.get(i));
+				}
+			}
+		}
+		model.addAttribute("typeList", typeList);
+		model.addAttribute("general", general);
+		model.addAttribute("dynamic", dynamic);
+		model.addAttribute("educate", educate);
+		model.addAttribute("literature", literature);
 	}
 
 //	@Override

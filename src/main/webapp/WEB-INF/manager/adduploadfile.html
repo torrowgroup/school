@@ -6,7 +6,7 @@
 </head>
 <body>
 	<span th:text="${news}"></span>
-	<form th:action="@{/resource/addUploadFile}" method="post" enctype="multipart/form-data">
+	<form th:if="${typelist} != null" th:action="@{/resource/addUploadFile}" method="post" enctype="multipart/form-data">
 		type:<select name="reTypeid" id="reTypeid">
         	<option th:each="type,typeStat:${typelist}" th:value="${type.tyId}" th:text="${type.tyCategoryname}"></option>
         </select><br> 

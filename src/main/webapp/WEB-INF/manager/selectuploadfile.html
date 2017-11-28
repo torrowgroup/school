@@ -31,7 +31,7 @@
 				<td th:text="${resource.rePublisher}"></td>
 				<td th:text="${resource.reReleasedate}"></td>
 				<td><a th:href="@{/resource/downloadResource?(reId=${resource.reId})}">下载</a></td>
-				<td><a th:href="@{/resource/toUpdateUploadFile?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+				<td><a th:href="@{/resource/toUpdateUploadFile?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -6,7 +6,8 @@
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-	<form th:action="@{/resource/UpdateSchoolView}" method="post" enctype="multipart/form-data">
+	<span th:text="${news}"></span>
+	<form th:if="${typeid} != null and ${resource} != null" th:action="@{/resource/updateSchoolView}" method="post" enctype="multipart/form-data">
           	<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
          <input type="hidden" name="reTypeid" th:value="${typeid}">
            <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br>         

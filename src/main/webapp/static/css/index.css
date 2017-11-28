@@ -7,7 +7,7 @@
     margin-top: 5px; 
     line-height: 50px;
     font-size: 0;
-    border-bottom: 1px solid #641E5D;
+    border-bottom: 1px solid #18C4C4;
     min-width: 1000px;
 }
     .tongzhi span{
@@ -65,27 +65,28 @@
             opacity: 0.5;
     }
     .chance{
-            background-color: darkmagenta;
+            background-color: #18C4C4;
             opacity: 0.8;
     }
 
     .show span{
         width: 100px;
-        height:100%;
+        height:100px;
         opacity: 0.2;
         display: block;
         position: absolute;
+        top: 40%;
     }
     .show span:hover{
         opacity:1; 
     }
         .spanleft{
-            left: 0px;
+            left: 10%;
             background-image: url(../images/slider-prev.png);
             background-size: 100% 100%;
         }
         .spanright{
-            right:0px;
+            right:10%;
             background-image: url(../images/slider-next.png);
             background-size: 100% 100%;
         }
@@ -106,7 +107,7 @@ main{
         height: 40px;
         line-height: 40px;
         margin: 0;
-        color: #641E5D;
+        color: #18C4C4;
         padding-left: 40px;
         vertical-align: top;
         margin-bottom: 10px;
@@ -150,7 +151,7 @@ main{
         .time-new h3{
             height: 50px;
             line-height: 50px;
-            border-bottom: 2px solid #641E5D;
+            border-bottom: 2px solid #18C4C4;
         }
         .new-every{
             display: block;
@@ -169,11 +170,11 @@ main{
             width: 60%;
         }
         .lea:hover{
-            color: #641E5D;
+            color: #18C4C4;
         }
         .new-every>span{
             float: right;
-            color: #E08E00;
+            color: #FFCC00;
         }
     .learn{
         width: 35%;
@@ -183,7 +184,7 @@ main{
         .title-tongzhi{
             width: 100%;
             height: 50px;
-            background-color: #E08E00;
+            background-color: #FFCC00;
         }
         .title-tongzhi h3{
             height: 50px;
@@ -194,7 +195,7 @@ main{
             width: 100%;
         }
         .infor:hover{
-            color: #E08E00;
+            color: #FFCC00;
         }
 /*  老师轮播循环部分*/
 .teacher{
@@ -208,11 +209,11 @@ main{
         margin: 0;
         line-height: 40px;
         
-        color: #641E5D;
+        color: #18C4C4;
         letter-spacing: 10px;
      }
         .title-teach span{
-            color: #FFA200;
+            color: #FFCC00;
             transition: all 0.5;
             transform-origin:50% 50%;
         }
@@ -236,7 +237,7 @@ main{
                 display: inline-block;
                 vertical-align: top;
                 width: 200px;
-                height: 100%;
+                height: 200px;
                 position: relative;
             }
             .loop2 a:hover .t-infor{
@@ -256,54 +257,11 @@ main{
                     color: #fff;
                     text-align: center;
                 }
+    .bb{
+    	margin-right:5px;
+    }
 /*   超链接部分*/
 
 
 
 /* 脚部*/
-footer{
-    width: 100%;
-    min-width: 1000px;
-    background-color: rgb(100, 30, 93);
-    margin:0 auto;
-    margin-top: 10px;
-}
-    .row{
-        width: 1000px;
-        min-width: 1000px;
-
-    }
-    .footerBox{
-        width: 1000px;
-        margin: 0 auto;
-        padding-top:20px;
-        /*padding-bottom: 20px;*/
-    }
-        .footerBox1{
-            margin-bottom: 20px;
-            width: 250px;
-            float: left;
-        }
-            .footerBox1>img{
-               width: 100%;
-               margin-top: 30px;
-            }
-            .footerBox1>h3{
-                font-size: 14px;
-                color:white;
-                line-height: 20px;
-            }
-            .footerBox1>p{
-                color: #afbbce;
-                font-size: 14px;
-                line-height: 20px;
-            }
-                .footerBox1>p>a{
-                    color: #afbbce;
-                    text-decoration: none;
-                }
-                .footerBox1>h3>a{
-                    font-size: 14px;
-                    color:white;
-                    line-height: 20px;
-                }

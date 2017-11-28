@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200 initial-s
+    cale=0.3">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--     <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
+<!--     <link rel="stylesheet" href="./css/public.css"> -->
+<!--     <link rel="stylesheet" href="./css/index.css"> -->
+    <link rel="stylesheet" type="text/css" th:href="@{./static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{./static/css/public.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{./static/css/index.css}">
+    <title>郑州某中学</title>
+</head>
+<body th:if="${typeList} != null">
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="./static/images/logo.png" alt="">
+            </div>
+            <div class="headerRight">
+                <p>距离中招<span id="timecuten">200</span>天</p>
+                <p>距离期中/期末100天</p>
+                <p class="hidden-xs">今天2017年10月20号</p>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li class="nav-li color_nav"><a href="/school/index">首页</a></li>
+            <li class="nav-li" th:if="${general} != null and ${oneGeneral} != null">
+                    <a href="/general/checkGeneral" th:href="@{/general/checkGeneral?(tyId=${oneGeneral.tyId})}">学校概况</a>
+                    <div class="chances">
+                        <a th:each="type,typeStat:${general}" th:href="@{/general/checkGeneral?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
+<!--                         <a href="">领导机构</a> -->
+<!--                         <a href="">建校历史</a> -->
+<!--                         <a href="">学校荣誉</a> -->
+<!--                         <a href="">教学成果</a> -->
+<!--                         <a href="">校园风光</a> -->
+                    </div>
+            </li>
+            <li class="nav-li" th:if="${dynamic} != null and ${oneDynamic} != null">
+                    <a href="" th:href="@{/dynamic/checkDynamic?(tyId=${oneDynamic.tyId})}">校园新闻</a>
+                    <div class="chances">
+                     <a href=""th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
+<!--                         <a href="">校园新闻</a> -->
+<!--                         <a href="">教育动态</a> -->
+<!--                         <a href="">德育专题</a> -->
+<!--                         <a href="">学生管理</a> -->
+<!--                         <a href="">学校发展</a> -->
+<!--                         <a href="">教师成长</a> -->
+                    </div>
+            </li>
+            <li class="nav-li" th:if="${educate} != null and ${oneEducate} != null">
+                    <a href="" th:href="@{/educate/checkEducate?(tyId=${oneEducate.tyId})}">教育教研</a>
+                    <div class="chances">
+                    <a href="" th:each="type,typeStat:${educate}" th:href="@{/educate/checkEducate?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
+<!--                         <a>语文教研</a> -->
+<!--                         <a>数学教研</a> -->
+<!--                         <a>外语教研</a> -->
+<!--                         <a>理化生教研</a> -->
+<!--                         <a>政史地教研</a> -->
+<!--                         <a>体音美教研</a> -->
+                    </div>
+            </li>    
+            <li class="nav-li" th:if="${literature} != null and ${oneLiterature} != null">
+                    <a href="" th:href="@{/literature/checkLiterature?(tyId=${oneLiterature.tyId})}">校园文学</a>
+                    <div class="chances">
+                     <a href=""th:each="type,typeStat:${literature}" th:href="@{/literature/checkLiterature?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
+<!--                         <a>学生园地</a> -->
+<!--                         <a>教师园地</a> -->
+                    </div>
+            </li>   
+            <li class="nav-li" th:if="${general} != null">
+                    <a href="">教师风采</a>
+                    <div class="chances">
+                        <a>教师介绍</a>
+                        <a>教师成果</a>
+                    </div>
+            </li>  
+            <li class="nav-li">
+                    <a href="">校园博客</a>
+                    <div class="chances">
+                      
+                    </div>
+            </li>  
+            <li class="nav-li">
+                    <a href="">校园论坛</a>
+                    <div class="chances">
+                       
+                    </div>
+            </li>  
+            <li class="nav-li" th:if="${downloadType} != null">
+                    <a href="" th:href="@{/download/checkDownload?(tyId=${downloadType.tyId})}">资源下载</a>
+                    <div class="chances">
+                      
+                    </div>
+            </li>        
+        </ul>
+    </nav>
+    <section class="show" id="loop">
+    <img th:each="resource,resourceStat:${schoolviewlist}" th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" alt="">
+<!--             <img src="./images/slide-1.jpg" alt=""> -->
+<!--             <img src="./images/slide-2.jpg" alt=""> -->
+<!--             <img src="./images/slide-3.jpg" alt=""> -->
+<!--             <img src="./images/slide-1.jpg" alt=""> -->
+            <ul id="loop_ul">
+                <li class="chance"></li>
+                <li class="old"></li>
+                <li class="old"></li>
+                <li class="old"></li>
+            </ul>
+            <span id="spanleft" class="spanleft"></span>
+            <span id="spanright" class="spanright"></span>
+    </section>
+    <section class="tongzhi">
+        <div class="center">
+            <span class="glyphicon glyphicon-bullhorn">
+
+            </span>
+            <div id="letter" class="letter">
+                <ul id="ul1" class="ul_p">
+                <li th:each="resource,resourceStat:${informlist}"><a href="#" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}" th:text="${resource.reTitle}"></a></li>
+<!--                     <li><a href="#">我是贺新安我造了 第一条通知</a></li> -->
+<!--                     <li><a href="#">我是张三我造了 第二条通知</a></li> -->
+<!--                     <li><a href="#">我是李四我造了 第三条通知俺收到了；看；考虑；1</a></li> -->
+<!--                     <li><a href="#">我事耿五我造了 第五条通知奥斯卡的；1；发神经了看到</a></li> -->
+<!--                     <li><a href="#">我是嘛溜我造了 第六条通知你知道这是文身决定是否考虑看</a></li> -->
+                </ul>
+                <ul id="ul2" class="ul_p"></ul>
+            </div>
+        </div>
+    </section>
+    <main>
+        <section class="news public-title">
+                <h3><i class="glyphicon glyphicon-list-alt"></i>热点新闻 <span>Campus News<span></h3>
+                  <a href="#" th:each="resource,resourceStat:${newslist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
+                        <div class="new-hot">
+                                <img th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" alt="">
+                                <p th:text="${resource.reTitle}"></p>
+                        </div>
+                </a>
+<!--                 <a href="#"> -->
+<!--                         <div class="new-hot"> -->
+<!--                                 <img src="./images/page1-img4.jpg" alt=""> -->
+<!--                                 <p>这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述</p> -->
+<!--                             </div> -->
+<!--                 </a> -->
+<!--                 <a href="#"> -->
+<!--                         <div class="new-hot"> -->
+<!--                                 <img src="./images/page1-img4.jpg" alt=""> -->
+<!--                                 <p>这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述</p> -->
+<!--                             </div> -->
+<!--                 </a> -->
+<!--                 <a href="#"> -->
+<!--                         <div class="new-hot"> -->
+<!--                                 <img src="./images/page1-img4.jpg" alt=""> -->
+<!--                                 <p>这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述</p> -->
+<!--                             </div> -->
+<!--                 </a> -->
+<!--                 <a href="#"> -->
+<!--                         <div class="new-hot"> -->
+<!--                                 <img src="./images/page1-img4.jpg" alt=""> -->
+<!--                                 <p>这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述这是新闻的简述</p> -->
+<!--                             </div> -->
+<!--                 </a> -->
+        </section>
+        <section class="newlearn ">
+            <div class="time-new public-title">
+                <h3><i class="glyphicon glyphicon-tasks"></i>教育成果 <span>Education And Research</span></h3>
+                <a class="new-every" href="" th:each="resource,resourceStat:${educatelist}" th:href="@{/educate/readEducate?(reId=${resource.reId})}">
+                    <span class="time" th:text="${resource.reReleasedate}">2017-12-23 </span>
+                    <p class="" th:text="${resource.reTitle}">
+                        <span>&nbsp&nbsp</span>
+                        就恢复快速度很快会2k
+                    </p>
+                </a>
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一个新闻和计划会疯狂很快就恢复快速度很快会2k -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23</span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一个新闻和计划就恢复快速度很快会2k -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一个新闻和计划就看看书看到就会疯狂很快就恢复快速度很快会2k -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一个新闻快就恢复快速度很快会2k -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一个新就会疯狂很快就恢复快速度很快会2k -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个教学成果的描述，太多字了我去，累死老子了 -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个教学成果的描述 -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个新闻这是一 -->
+<!--                         </p> -->
+<!--                 </a> -->
+<!--                 <a class="new-every" href=""> -->
+<!--                         <span class="time">2017-12-23 </span> -->
+<!--                         <p class="lea"> -->
+<!--                             <span>>&nbsp&nbsp</span> -->
+<!--                             这是一个教学成果的一个说法 -->
+<!--                         </p> -->
+<!--                 </a> -->
+               
+            </div>
+            <div class="learn">
+                <div class="title-tongzhi public-title">
+                        <h3><i class="glyphicon glyphicon-bullhorn"></i>新闻与通知<span>New and Infor</span></h3>
+                        <a class="new-every" href="" th:each="resource,resourceStat:${informlist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
+                                <p class="infor" th:text="${resource.reTitle}">
+                                    <span>>&nbsp&nbsp</span>
+                                    这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了；
+                                </p>
+                        </a>
+                        <a class="new-every" href="" th:each="resource,resourceStat:${newslist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
+                                <p class="infor" th:text="${resource.reTitle}">
+                                    <span>>&nbsp&nbsp</span>
+                                    这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了；
+                                </p>
+                        </a>
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+<!--                         <a class="new-every" href=""> -->
+<!--                                 <p class="infor"> -->
+<!--                                     <span>>&nbsp&nbsp</span> -->
+<!--                                     这是一个通知或者新闻的一个说法，在长一点要不然顶不出去这下应该可以顶出去了； -->
+<!--                                 </p> -->
+<!--                         </a> -->
+                </div>
+            </div>
+        </section>
+        <section class="teacher">
+                <h3 class="title-teach">
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    教师风采
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                </h3>
+                <div id="aa" class="loop2">
+                        <div id="bb" class="contain1">
+                       <!--   <a href="">
+                                <img th:src="@{/static/uploadImg/{image}(image=${User.usImage})}" alt="暂无照片">
+                                <p class="t-infor" th:text="${User.usName}">我是贺新安</p>
+                            </a> -->
+                            <a href="" th:each="user,userStat:${teacherList}" style="margin-right:5px;">
+                                <img th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="200px"  height="200px" alt="暂无照片">
+                                <p class="t-infor" th:text="${user.usName}">我是贺新安</p>
+                            </a>
+<!--                            <a href=""> -->
+<!--                                 <img src="./static/images/page2-img9.jpg" alt=""> -->
+<!--                                 <p class="t-infor">我是贺新</p> -->
+<!--                             </a> -->
+<!--                             <a href=""> -->
+<!--                                 <img src="./static/images/page2-img9.jpg" alt=""> -->
+<!--                                 <p class="t-infor">我是贺新</p> -->
+<!--                             </a> -->
+<!--                             <a href=""> -->
+<!--                                 <img src="./static/images/page2-img9.jpg" alt=""> -->
+<!--                                 <p class="t-infor">我是贺新</p> -->
+<!--                             </a> -->
+<!--                             <a href=""> -->
+<!--                                 <img src="./static/images/page2-img9.jpg" alt=""> -->
+<!--                                 <p class="t-infor">我是贺新</p> -->
+<!--                             </a> -->
+                        <div id="cc" class="contain2">
+                        </div>
+                </div>
+                <div class="study">
+
+                </div>
+        </section>
+        <section class="a">
+              
+        </section>
+    </main>
+    <footer>
+            <div class="container footerBox">
+                            <div class="row">
+                                <div class="footerBox1 hidden-xs"><img src="./static/images/bottomlogo.png" alt=""></div>
+                                <div class="footerBox1" th:if="${schoolNews} != null">
+                                    <h3>联系我们:</h3>
+                                    <p>电话：<span th:text="${schoolNews.reTitle}"></span></p>
+                                    <p>邮箱：<span th:text="${schoolNews.reContent}"></span></p>
+                                    <p>地址：<span th:text="${schoolNews.rePublisher}"></span></p>
+                                </div>
+                                <div class="footerBox1" th:if="${linkList} != null">
+                                    <h3>友情链接:</h3>
+                                    <p th:each="resource,resourceStat:${linkList}"><a target="_blank" th:href="${resource.reContent}" th:text="${resource.reTitle}">郑州市外国语中学</a><br></p>
+<!--                                     <p><a href="">郑州一中</a></p> -->
+<!--                                     <p><a href="">郑州大学附属中学</a></p> -->
+<!--                                     <p><a href="">港区教育单位</a></p> -->
+                                </div>
+                                <div class="footerBox1">
+                                    <h3><a th:href="@{/common/toAddMessage}">留言板进入留言</a></h3>
+                                    <p>&nbsp;</p>
+                                    <p>版权所有@郑州二二一中学</p>
+                                    <p>备案信息：<a href="">豫ICP备1111111号</a></p>
+                                </div>
+                            </div>
+                </div>
+    </footer>
+    <div class="end">
+            <div class="end-cneter">
+            </div>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{./static/js/index.js}"></script>
+<script type="text/javascript" th:src="@{./static/js/loop.js}"></script>
+<script type="text/javascript" th:src="@{./static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{./static/js/counttime.js}"></script>
+<script th:if="${typeList} != null">
+var obj1 = {
+    container_id:'loop',      //  必要参数
+    ul_id:'loop_ul',          //  次要 默认  为空
+    span_left_id:'spanleft',  // 次要 默认  为空
+    span_right_id:'spanright',// 次要 默认  为空
+    li_one_class:'old',       // 次要 默认  为空
+    li_chance_class:'chance'  // 次要 默认  为空
+}
+Carousel_opcity(obj1);
+var obj2 = {
+    w_id:'aa',   //必要参数 
+    c_id:'bb',    //必要参数
+    c_copy_id:'cc' //必要参数
+}
+loop(obj2);
+var obj3 = {
+    w_id:'letter',   //必要参数 
+    c_id:'ul1',    //必要参数
+    c_copy_id:'ul2' //必要参数
+}
+loop(obj3);
+</script>
+<script type="text/javascript" th:if="${examTime} != null and ${typeList} != null">
+	var examTime = '[[${examTime.reContent}]]';
+	var spantime =days(examTime);
+	 $('#timecuten').html(spantime);
+</script>
+</html>

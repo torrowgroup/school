@@ -3,26 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
-  	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-  	<script type="text/javascript" th:src="@{../static/js/updateuser.js}"></script>
-  	<script type="text/javascript">
-  		  function seclectValue(){
-	  		var verifyTyPid = '[[${typenews.tyPid}]]';
-			var tyPid = document.getElementById('pid');
-			for(var i = 0;i < tyPid.options.length; i++)
-			{
-			   var truetyPid = tyPid.options[i];
-			   if(verifyTyPid == truetyPid.value.trim())
-			   {
-			     truetyPid.selected=true;
-			   }
-			}
-		}
-  	</script>
 </head>
-<body  onload="seclectValue()">
-	<form th:action="@{/type/updateType}" method="post">
+<body>
+<span th:text="${news}"></span>
+	<form th:if="${typenews} != null" th:action="@{/type/updateType}" method="post">
 		<input type="hidden" name="tyId" id="tyId" th:value="${typenews.tyId}">
 		tyPid:<select name="tyPid" id="pid">
 		 	<option th:value="1">用户</option>
@@ -35,9 +19,30 @@
             <option th:value="8">通知</option>
             <option th:value="9">校园风景</option>
             <option th:value="10">招生招聘</option>
+            <option th:value="11">时间</option>
+            <option th:value="12">校园新闻</option>
+            <option th:value="13">学校信息</option>
         </select><br>
 		类别名称:<input type="text" name="tyCategoryname" id="tyCategoryname" th:value="${typenews.tyCategoryname}"><span id="msg"></span><br>
 		<input type="submit" id="submit" value="修改"> 
 	</form>
 </body>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+  	<script type="text/javascript" th:src="@{../static/js/updateuser.js}"></script>
+  	<script type="text/javascript" th:if="${typenews} != null">
+  		window.onload=function(){
+	  		var verifyTyPid = '[[${typenews.tyPid}]]';
+			var tyPid = document.getElementById('pid');
+			for(var i = 0;i < tyPid.options.length; i++)
+			{
+			   var truetyPid = tyPid.options[i];
+			   if(verifyTyPid == truetyPid.value.trim())
+			   {
+			     truetyPid.selected=true;
+			   }
+			}
+		}
+  	</script>
+  	</script>
 </html>

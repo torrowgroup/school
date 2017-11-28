@@ -1,0 +1,17 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+</head>
+<body>
+	<form th:action="@{/user/updateOfficialUser}" method="post">
+		<input type="hidden" name="usIdentityname" th:value="${officialemail}">
+		<input type="hidden" id="usId" name="usId" th:value="${usernews.usId}">
+		官方邮箱:<input type="text" name="usEmail" id="usEmail" th:value="${usernews.usEmail}">
+		邮箱授权码:<input type="text" name="usPassword" th:value="${usernews.usPassword}"><br>
+		smtp服务器地址:<input type="text" name="usName" th:value="${usernews.usName}"><br>
+		<input type="submit" id="submit" value="添加">
+	</form>
+</body>
+</html>

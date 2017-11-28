@@ -3,14 +3,40 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/main.css}">
+<!--    <link href="css/bootstrap.css" rel="stylesheet"> -->
+<!--       <link  href="css/main.css" rel="stylesheet" type="text/css"> -->
+      <style type="text/css">
+         .inside{
+           width:400px;    
+           height:300px;
+           position: relative;
+           margin:0 auto;
+           top:10em;
+         }
+      </style>
 </head>
 <body>
-	<span th:text="${news}"></span>
-	<form th:action="@{/resource/addLink}" method="post" enctype="multipart/form-data">
-       <input type="hidden" name="reTypeid" th:value="${typeid}">             
-                    链接名字:<input type="text" name="reTitle"><br>
-                    链接:<input type="text" name="reContent"><br>
-			<input type="submit" value="添加">
-	</form>
+	 <div class="middle">
+       <div class="inside">
+       <span th:text="${news}"></span>
+     <form th:if="${typeid} != null" th:action="@{/resource/addLink}" method="post" enctype="multipart/form-data" action="">
+	     <input type="hidden" name="reTypeid" th:value="${typeid}">
+	     <p><span>链接名字:</span><input type="text" name="reTitle"></p>
+	     <p><span>链接:</span><input type="text" name="reContent"></p>
+	     <p style="position:relative;left:35%;">
+	     <input type="submit" class="btn btn-primary" value="添加信息">
+<!-- 	     <button type="button"  class="btn btn-primary">  添加信息</button></p> -->
+     </form>
+      </div><!--inside-->
+     </div>
+<!-- 	<span th:text="${news}"></span> -->
+<!-- 	<form th:if="${typeid} != null" th:action="@{/resource/addLink}" method="post" enctype="multipart/form-data"> -->
+<!--        <input type="hidden" name="reTypeid" th:value="${typeid}">              -->
+<!--                     链接名字:<input type="text" name="reTitle"><br> -->
+<!--                     链接:<input type="text" name="reContent"><br> -->
+<!-- 			<input type="submit" value="添加"> -->
+<!-- 	</form> -->
 </body>
 </html>

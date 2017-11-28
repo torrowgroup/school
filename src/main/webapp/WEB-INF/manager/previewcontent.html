@@ -6,9 +6,13 @@
 </head>
 <body>
 	<center>
-		<p1 th:if="${resource.reTitle} != null" th:text="${resource.reTitle}"></p1><br>
-		<span th:text="${resource.rePublisher}"></span><span th:text="${resource.reReleasedate}"></span>
-		<div id="one"  th:utext="${resource.reContent}"></div>
+		<span th:text="${news}"></span>
+		<div th:if="${resource} != null">
+			<p1 th:if="${resource.reTitle} != null" th:text="${resource.reTitle}"></p1><br>
+			<span th:text="${resource.rePublisher}"></span><span th:text="${resource.reReleasedate}"></span>
+			<div id="one"  th:utext="${resource.reContent}"></div>
+		</div>
+		
 	</center>
 </body>
 </html>

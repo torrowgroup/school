@@ -2,6 +2,8 @@ package com.futher.school.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.futher.school.entity.Type;
 import com.futher.school.util.PageBean;
 
@@ -24,6 +26,8 @@ public interface TypeService {
 	Type selectTypeById(int tyId);
 //	//根据父ID得到同一类的类别
 //	Type selectTypeByPid(int tyPid);
+	//得到所有的类型
+	void getType(Model model);
 	
 	
 //	Type getTypeById(Integer reTypeid);

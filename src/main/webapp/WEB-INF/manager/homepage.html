@@ -9,7 +9,9 @@
 	<details>
 		<summary>用户信息管理</summary>
         <a th:href="@{user/toaddUser?tyPid=1}">添加用户</a><br>
-        <a th:href="@{user/selectUser}">用户管理</a><br>          
+        <a th:href="@{user/selectUser}">用户管理</a><br>
+         <a th:href="@{user/toaddOfficialUser?tyPid=1}">添加官方邮箱</a><br>
+        <a th:href="@{user/selectOfficialUser?identity=officialemail}">官方邮箱管理</a><br>          
     </details>
     <details>
 		<summary>类别信息管理</summary>
@@ -17,34 +19,43 @@
         <a th:href="@{type/selectType}">类别管理</a><br>          
     </details>
     <details>
-		<summary>资源信息管理</summary>
-        <a th:href="@{resource/toaddGeneraLization?tyPid=2}">添加校园信息</a><br>
+		<summary>校园信息管理</summary>
+		<a th:href="@{resource/toaddGeneraLization?tyPid=2}">添加校园概括</a><br>
         <a th:href="@{resource/toaddGeneraLization?tyPid=3}">添加校园动态</a><br>
         <a th:href="@{resource/toaddGeneraLization?tyPid=4}">添加教育教研</a><br>
         <a th:href="@{resource/toaddGeneraLization?tyPid=8}">添加校园通知</a><br>
+        <a th:href="@{resource/toaddSchoolNews?tyPid=13}">添加学校信息</a><br>
+    	<a th:href="@{resource/selectResource?reTypeid=2}">查看校园概括</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=3}">查看校园动态</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=4}">查看教育教研</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=8}">查看校园通知</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=13}">查看学校信息</a><br>
+    </details>
+    <details>
+		<summary>时间与链接管理</summary>
+	  <a th:href="@{resource/toaddAllTime?tyPid=11}">添加时间</a><br>
+	  <a th:href="@{resource/toaddLink?tyPid=7}">添加校园链接</a><br>
+	  <a th:href="@{resource/selectResource?reTypeid=11}">查看时间</a><br>
+	  <a th:href="@{resource/selectResource?reTypeid=7}">查看校园链接</a><br>
+    </details>
+    <details>
+		<summary>文件信息管理</summary>
         <a th:href="@{resource/toAddResource?tyPid=12}">添加校园新闻</a><br>
         <a th:href="@{resource/toaddUploadFile?tyPid=5}">添加校园作品</a><br>
         <a th:href="@{resource/toaddUploadFile?tyPid=6}">添加校园资源</a><br>
-        <a th:href="@{resource/toaddLink?tyPid=7}">添加校园链接</a><br>
         <a th:href="@{resource/toaddSchoolView?tyPid=9}">添加校园风景</a><br>
-        <a th:href="@{resource/selectResource?reTypid=2}">查看校园信息</a><br>
-        <a th:href="@{resource/selectResource?reTypid=3}">查看校园动态</a><br>
-        <a th:href="@{resource/selectResource?reTypid=12}">查看校园新闻</a><br>
-        <a th:href="@{resource/selectResource?reTypid=4}">查看教育教研</a><br>
-        <a th:href="@{resource/selectResource?reTypid=5}">查看校园作品</a><br>
-        <a th:href="@{resource/selectResource?reTypid=6}">查看校园资源</a><br>
-        <a th:href="@{resource/selectResource?reTypid=7}">查看校园链接</a><br>
-        <a th:href="@{resource/selectResource?reTypid=8}">查看校园通知</a><br>
-        <a th:href="@{resource/selectResource?reTypid=9}">查看校园风景</a><br>           
+        <a th:href="@{resource/selectResource?reTypeid=12}">查看校园新闻</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=5}">查看校园作品</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=6}">查看校园资源</a><br>
+        <a th:href="@{resource/selectResource?reTypeid=9}">查看校园风景</a><br>
     </details>
     <details>
 		<summary>留言管理</summary>
 		<a th:href="@{message/toAddMessage}">添加留言</a><br>
-		<a th:href="@{message/selectMessage?(meStatus=${noStatus})}">未回复留言</a><br>
-		<a th:href="@{message/selectMessage?(meStatus=${yesStatus})}">已回复留言</a><br>
+		<a th:href="@{message/selectMessage?replace=0}">未回复留言</a><br>
+		<a th:href="@{message/selectMessage?replace=1}">已回复留言</a><br>
     </details>
 </div>
-SELECT * FROM tb_resource ORDER BY re_id DESC LIMIT 10;
 	<details>
 		<summary>个人中心</summary>
        <a th:href="@{user/getMyMessage}">修改个人资料</a>

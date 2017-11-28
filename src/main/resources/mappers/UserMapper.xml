@@ -398,4 +398,13 @@
            limit #{start},#{size}
         </if>
     </select>
+    
+    <select id="selectByPid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+    where us_identityName = #{name}
+    ORDER BY RAND() LIMIT #{number};
+  </select>
+    
 </mapper>

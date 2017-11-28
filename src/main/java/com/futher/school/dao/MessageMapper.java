@@ -12,11 +12,11 @@ public interface MessageMapper {
 
     int insert(Message record);
 
-    int insertSelective(Message record);
+//    int insertSelective(Message record);
 
     Message selectByPrimaryKey(Integer meId);
 
-    int updateByPrimaryKeySelective(Message record);
+//    int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
     //取分页数据

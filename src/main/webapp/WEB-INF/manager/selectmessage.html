@@ -50,20 +50,20 @@
 			<td th:if="${messages.totalPage} > 0">
 			   <span th:if="${messages.currPage} == 1">
 				   <span th:if="${messages.totalPage ==1}">
-							<a th:href="@{/message/selectMessage?(currentPage=1,meStatus=${meStatus})}">[首页]</a>					
+							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>					
 				   </span>
 				   <span th:if="${messages.totalPage > 1}">
-							<a th:href="@{/message/selectMessage?(currentPage=1,meStatus=${meStatus})}">[首页]</a>
-			   				<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},meStatus=${meStatus})}">[下一页]</a>				
+							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>
+			   				<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>				
 				   </span>
 			   </span>
 			   <span th:if="${messages.currPage} > 1 ">
-					<a th:href="@{/message/selectMessage?(currentPage=1,meStatus=${meStatus})}">[首页]</a>
-					<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage-1},meStatus=${meStatus})}">[上一页]</a>
+					<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>
+					<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage-1},replace=${replace})}">[上一页]</a>
 					<span th:if="${messages.currPage != messages.totalPage}">
-						<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},meStatus=${meStatus})}">[下一页]</a>					
+						<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>					
 					</span>
-			   		<a th:href="@{/message/selectMessage?(currentPage=${messages.totalPage},meStatus=${meStatus})}">[尾页]</a>
+			   		<a th:href="@{/message/selectMessage?(currentPage=${messages.totalPage},replace=${replace})}">[尾页]</a>
 			   </span>
 			</td>
 		</tr>

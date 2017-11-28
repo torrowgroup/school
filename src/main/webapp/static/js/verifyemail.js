@@ -1,5 +1,5 @@
 $(function(){
-	$("#usEmail").change(function(){
+	$("#usEmail").bind('input propertychange',function(){
 		var value = $(this).val();
 		value = $.trim(value);
 		if(value != ""){

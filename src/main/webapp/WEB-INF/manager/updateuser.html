@@ -7,31 +7,8 @@
   <script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   <script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
    <script type="text/javascript" th:src="@{../static/js/updateuser.js}"></script>
-  <script type="text/javascript">
-   	  function seclectValue(){
-   	  	var verifysex = '[[${usernews.usSex}]]';
-   	  	var usIdentityname = '[[${usernews.usIdentityname}]]'
-		var sex = document.getElementById('sex');
-		var tyCategoryname = document.getElementById('usIdentityname'); 
-		for(var i = 0;i < sex.options.length; i++)
-		{
-		   var trueSex = sex.options[i];
-		   if(verifysex == trueSex.value.trim())
-		   {
-		     trueSex.selected=true;
-		   }
-		}
-		for(var i = 0;i < tyCategoryname.options.length; i++)
-		{
-		   var trueCategoryname = tyCategoryname.options[i];
-		   if(usIdentityname == trueCategoryname.value.trim())
-		   {
-		     trueCategoryname.selected=true;
-		      myfunction()
-		   }
-		}
-  	  }  
-	function myfunction(){
+  <script type="text/javascript" th:if="${usernews} != null and ${typelist} != null">  
+	window.onload=function(){
 	  	var idCard = document.getElementById("usIdentityname").value;
 	  	if (idCard != "manager") {
 	  		document.getElementById("onmanager").style.display="";
@@ -40,7 +17,7 @@
 	  	}
 	  }
 	  
-     function modifyContent() {    	
+    window.onload=function(){    	
      	        var introduce = document.getElementById("introduce");   	    
      	        introduce.value = editor.$txt.html();
      	          var teachingresults = document.getElementById("teachingresults");   	    
@@ -49,25 +26,24 @@
 </script>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-<!-- <script type="text/javascript" th:src="@{../static/js/verifyemailname.js}"></script>  -->
 </head>
-<body onload="myfunction();seclectValue()">
-		<p th:text="${news}"></p>
-	<form th:action="@{/user/updateUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
+<body>
+	<span th:text="${news}"></span>
+	<form th:if="${usernews} != null and ${typelist} != null" th:action="@{/user/updateUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
 		<input type="hidden" id="usId" name="usId" th:value="${usernews.usId}">
 		username:<input type="text" name="usEmail" id="usEmail" th:value="${usernews.usEmail}"><span id="msg"></span><br>
 		password:<input type="text" name="usPassword" th:value="${usernews.usPassword}"><br>
 		name:<input type="text" name="usName" th:value="${usernews.usName}"><br>
 		sex:<select name="usSex" id="sex">
-		 	<option th:value="男" th:text="男">男</option>
-            <option th:value="女" th:text="女">女</option>
+		 	<option th:switch="${usernews.usSex}" th:case="'男'" th:value="男" th:text="男">男</option>
+            <option th:switch="${usernews.usSex}" th:case="'女'" th:value="女" th:text="女">女</option>
         </select><br>
         idcard:<select name="usIdentityname" id="usIdentityname" onclick="myfunction()" >
-        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
+        	<option th:each="type,typeStat:${typelist}" th:switch="${usernews.usIdentityname}" th:case="${type.tyCategoryname}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
         </select>
 		telephone:<input type="text" name="usTel" th:value="${usernews.usTel}"><br>
+		图片:<input type="file" name="file" id="file">
 		<div id="onmanager" style="display:none;" >
-			<input type="file" name="file" id="file">
 			<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
      			<div id="editor"  style="width:400px; height:400px;" th:text="${usernews.usIntroduce}"></div>

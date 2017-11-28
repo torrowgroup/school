@@ -38,8 +38,8 @@
 				<td th:text="${resource.rePublisher}"></td>
 				<td th:text="${resource.reReleasedate}"></td>
 				<td><button th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td>
-<!-- 				<td><img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td> -->
-				<td><a th:href="@{/resource/toUpdateResource?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+				<td><img alt="暂无照片" th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td>
+				<td><a th:href="@{/resource/toUpdateResource?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

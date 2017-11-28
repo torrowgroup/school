@@ -12,6 +12,8 @@
   </script>
 </head>
 <body>
+<span th:text="${news}"></span>
+<div th:if="${message} != null">
 	<span th:text="${message.meTitle}"></span>
 	<img alt="暂无照片" th:if="${message.meImage} != null" th:src="@{/static/uploadImg/messagefile/{image}(image=${message.meImage})}">
 	<div th:utext="${message.meContent}">
@@ -33,5 +35,6 @@
 			</div><br>
 			<input type="submit" value="添加">
 	</form>
+</div>
 </body>
 </html>
