@@ -7,43 +7,18 @@
 </head>
 <body>
 	<p th:text="${msg}"></p>
-	<form th:action="@{/teacher/uploadEdit}" method="post"
-		enctype="multipart/form-data" th:object="${resource}">
-		<div>
-			<h1>教学成果</h1>
-			<table border="1">
-				<tr>
-					<th>资源编号</th>
-					<th>资源名称</th>
-					<th>标题</th>
-				</tr>
-				<tr>
-					<td><select>
-							<option value="1" name="reTypeid">教学成果</option>
-							<option value="2" name="reTypeid">教育动态</option>
-							<option value="3" name="reTypeid">文化作品</option>
-					</select></td>
-					<td><select>
-							<option value="1" name="reTypeName">教学成果</option>
-							<option value="2" name="reTypeName">教育动态</option>
-							<option value="3" name="reTypeName">文化作品</option>
-					</select></td>
-					<td><input type="text" name="reTitle"
-						style="border: none; outline: none"></td>
-				</tr>
-				<tr>
-					<th colspan="4">内容</th>
-				</-tr>
-				<tr>
-					<td colspan="4"><div id="div1"></div> <textarea
+	<div id="ed">
+		<form th:action="@{/teacherResearch/saveTeacherResearch?reTypeid=4}"
+			method="post" th:object="${resource}">
+			<p th :text="${title}">教研</p>
+			教研题目:<input type="text" name="reTitle"><br> 教研内容：
+			<td colspan="4"><div id="div1"></div> <textarea
 						style="display: none" name="reContent" id="edit"></textarea>
 					</td>
-				</tr>
-				<button onclick="editor.txt.clear()">清空</button>
-			</table>
+			<button onclick="editor.txt.clear()">清空</button>
+			<input onclick="sub()" type="submit">
+		</form>
 		</div>
-		<input onclick="sub()" type="submit">
-	</form>
 	<script th:src="@{/static/fonts/wangEditor.min.js}"></script>
 	<script type="text/javascript">
 		var E = window.wangEditor

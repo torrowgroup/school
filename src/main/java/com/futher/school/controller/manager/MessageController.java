@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.Message;
 
-@RequestMapping("/message")
+@RequestMapping("/messages")
 @Controller
 public class MessageController extends BaseController {
 	@RequestMapping("toAddMessage")

@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-</head>
+<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -33,11 +33,23 @@
 						</ul>
 					<li>教师园地
 						<ul>
-							<li><a th:href="@{teacher/showUpload(uri=showedit)}"th:target="mainFrame">显示上传教学反思</a></li>
-							<li><a th:href="@{teacher/showUpload(uri=showedit)}" th:target="mainFrame">显示教学成果</a></li>
-							<li><a th:href="@{teacher/showUpload(uri=showedit)}" th:target="mainFrame">显示教学动态</a></li>
-							<li><a th:href="@{teacher/showUpload(uri=showupload)}" th:target="mainFrame">显示上传文件</a></li>
+							<li><a th:href="@{teacher/showUpload(uri=showedit)}"
+								th:target="mainFrame">显示上传教学反思</a></li>
+							<li><a th:href="@{teacher/showUpload(uri=showedit)}"
+								th:target="mainFrame">显示教学成果</a></li>
+							<li><a th:href="@{teacher/showUpload(uri=showedit)}"
+								th:target="mainFrame">显示教学动态</a></li>
+							<li><a th:href="@{teacher/showUpload(uri=showupload)}"
+								th:target="mainFrame">显示上传文件</a></li>
 						</ul>
+					</li>
+					<li>留言板块
+						<ul>
+							<li><a th:href="@{message/saveMessage}" th:target="mainFrame">我要留言</a></li>
+							<li><a th:href="@{message/replyMessage}" th:target="mainFrame">回复留言</a></li>
+							<li><a th:href="@{message/showMessage}" th:target="mainFrame">显示已回复的留言</a></li>
+						</ul>
+
 					</li>
 				</ul>
 			</li>

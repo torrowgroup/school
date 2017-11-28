@@ -13,7 +13,7 @@
 		</tr>
 		<tr th:each="resource  : ${resourceList}">
 			<td th:text = "${resource.reTypename}">标题</td>
-			<td><a  th:href="@{/teacher/download(downFileName=${resource.reTypename})}">下载</a></td>
+			<td><a  th:href="@{/teacher/download(reId=${resource.reId})}">下载</a></td>
 		</tr>
 	</table>
 </body>

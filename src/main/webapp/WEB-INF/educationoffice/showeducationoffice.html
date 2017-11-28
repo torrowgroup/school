@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="showupload">
+		<ul th:each="resource,resourceStat:${messages.lists}">
+			<li><span><a th:href=@{showResearchById?(reId=${resource.reId})}><p
+							th:text="${resource.reTitle}"></a></span></li>
+		</ul>
+	</div>
+	<table>
+		<tr>
+			<td>
+			 <span th:if ="${messages.currPage != 1}">
+           <a th:href="@{/educationoffice/showIntegral?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>&nbsp;&nbsp;
+           <a th:href="@{/educationoffice/showIntegral?(currentPage=${messages.currPage-1},reTypeid=${reTypeid})}">[上一页]</a>&nbsp;&nbsp;
+	</span>	
+	<span th:if="${messages.currPage == 1}">
+		[首页][上一页]
+	</span>
+	<span th:each="i:${#numbers.sequence(1,messages.totalPage)}">
+			<a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/educationoffice/showIntegral?(currentPage=${i},reTypeid=${reTypeid})}"th:text="${i}">#</a>
+	</span>
+    <span th:if ="${messages.currPage < messages.totalPage}">
+           <a th:href="@{/educationoffice/showIntegral?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>&nbsp;&nbsp;
+	</span>
+	<span th:if="${messages.currPage >= messages.totalPage}">
+		[下一页]
+	</span>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
