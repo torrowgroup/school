@@ -19,6 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
- <jsp:forward page="/startschool"></jsp:forward>
+ <jsp:forward page="/index"></jsp:forward>
   </body>
 </html>

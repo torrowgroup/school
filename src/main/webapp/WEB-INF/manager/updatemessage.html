@@ -21,10 +21,11 @@
   </script>
 </head>
 <body>
-<form th:action="@{/message/updateMessage}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+	<span th:text="${news}"></span>
+<form th:if="${message} != null" th:action="@{/message/updateMessage}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
 	<input type="hidden" name="meId" th:value="${message.meId}">
 	留言标题:<input type="text" name="meTitle" th:value="${message.meTitle}"/><br>
-	图片:<input type="file" name="file" id="file"><img alt="" src="">
+	图片:<input type="file" name="file" id="file"><img alt="暂无照片" th:src="@{/static/uploadImg/messagefile/{image}(image=${message.meImage})}" width="60px;" height="60px;"><br>
 	留言内容:<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="meContent"  style="display:none;" id="meContent"></textarea><br>
      			<div id="editor"  style="width:600px; height:400px;" th:utext="${message.meContent}"></div>

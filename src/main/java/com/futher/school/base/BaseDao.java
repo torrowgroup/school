@@ -106,7 +106,10 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 
 		return getSqlSession().update(this.getNameSpace() + _UPDATEBYPRIMARYKEY, record);
 	}
-
+	
+	/**
+	 * @return 富文本上传图片
+	 */
 	public String upload(MultipartFile myFileName, HttpSession session) throws IllegalStateException, IOException {
 		String realName = "";
 		if (myFileName != null) {
@@ -120,7 +123,9 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 		}
 		return realName;
 	}
-
+	/**
+	 * @return 上传文件
+	 */
 	public String uploadFile(MultipartFile file, String truePath, HttpServletRequest request) {
 		String realName = "";
 		String path = request.getSession().getServletContext().getRealPath(truePath);
@@ -148,7 +153,9 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 		}
 		return realName;
 	}
-
+	/**
+	 * 下载文件
+	 */
 	public void downloadFile(String filename, String realPath, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
 		response.setCharacterEncoding("UTF-8");
@@ -166,6 +173,9 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 		IOUtils.copy(new FileInputStream(file), response.getOutputStream());
 	}
 
+	/**
+	 * 删除文件
+	 */
 	public void deletFile(String reSpare, String truePath, HttpServletRequest request) {
 		  //文件路径
 		String realPath = request.getSession().getServletContext().getRealPath(truePath)+"/"+reSpare;
@@ -175,7 +185,10 @@ public class BaseDao<T, PK extends Serializable> extends SqlSessionDaoSupport im
 			  file.delete();//"删除单个文件"+name+"成功！"
 			   }//"删除单个文件"+name+"失败！"
 	}
-	 // 上传图片
+	
+	/**
+	 * @return  上传图片
+	 */
 		public String uploadPicture(MultipartFile picture,String path) throws Exception {
 			String fileName = picture.getOriginalFilename();
 			fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题

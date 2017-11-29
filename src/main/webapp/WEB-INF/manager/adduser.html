@@ -26,7 +26,7 @@
 </head>
 <body  onload="selectIdCard()">
 	<p th:text="${news}"></p>
-	<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
+	<form th:if="${typelist} != null" th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
 		username:<input type="text" name="usEmail" id="usEmail"><span id="msg"></span><br>
 		password:<input type="text" name="usPassword"><br>
 		name:<input type="text" name="usName"><br>
@@ -42,7 +42,7 @@
 		<div id="onmanager" style="display:none;" >
 			<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
-     			<div id="editor"  style="width:400px; height:400px;"></div>
+     			<div id="editor"  style="width:100%; height:400px;"></div>
      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
     			<script type="text/javascript">
@@ -55,7 +55,7 @@
 			</div>
 			<div style="width:600px; height:400px;margin-top:-400px;margin-right:200px; float:right;">
 				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br>
-     			<div id="editor2"  style="width:400px; height:400px;"></div>
+     			<div id="editor2"  style="width:100%; height:400px;"></div>
     			<script type="text/javascript">
 	        		var w = window.wangEditor
 	        		var editor2 = new w('editor2')    		 

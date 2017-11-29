@@ -9,7 +9,7 @@
 </head>
 <body>
 	<span th:text="${news}"></span>
-	<form th:action="@{/user/updateMyNews}" method="post">
+	<form th:if="${user} != null" th:action="@{/user/updateMyNews}" method="post">
 	<input type="hidden" name="usId" th:value="${user.usId}">
 	username:<input type="text" name="usEmail" id="usEmail" th:value="${user.usEmail}"><span id="msg"></span><br>
 	password:<input type="text" name="usPassword" th:value="${user.usPassword}"><br>

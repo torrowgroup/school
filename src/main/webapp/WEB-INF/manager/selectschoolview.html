@@ -31,7 +31,7 @@
 				<td th:text="${resource.rePublisher}"></td>
 				<td th:text="${resource.reReleasedate}"></td>
 				<td><img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" width="60px;" height="60px;" /></td>
-				<td><a th:href="@{/resource/toUpdateSchoolView?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+				<td><a th:href="@{/resource/toUpdateSchoolView?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

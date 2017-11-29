@@ -5,7 +5,8 @@
   <title>title</title>
 </head>
 <body>
-	<form th:action="@{/resource/UpdateLink}" method="post" enctype="multipart/form-data">
+	<span th:text="${news}"></span>
+	<form th:if="${typeid} != null and ${resource} != null" th:action="@{/resource/updateLink}" method="post" enctype="multipart/form-data">
        	<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
        <input type="hidden" name="reTypeid" th:value="${typeid}">             
                     链接名字:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>

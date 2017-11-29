@@ -11,11 +11,11 @@ public interface UserMapper {
 
     int insert(User record);
 
-    int insertSelective(User record);
+//    int insertSelective(User record);
 
     User selectByPrimaryKey(Integer usId);
 
-    int updateByPrimaryKeySelective(User record);
+//    int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
     //用于登录，马黎明
@@ -26,6 +26,8 @@ public interface UserMapper {
 	User selectByIdentity(@Param("identityname")String identityname);
 	//查询所有用户
 	List<User> selectAll();
-
+	//分页查询
 	List<User> findByPage(HashMap<String, Object> map);
+	//根据pid查找教师
+	List<User> selectByPid(@Param("number")int number, @Param("name")String name);
 }

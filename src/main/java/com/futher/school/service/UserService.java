@@ -37,4 +37,6 @@ public interface UserService {
 	public String uploadResource(MultipartFile file, String path, HttpServletRequest request);
 	//富文本上传图片
 	public String uploadimage(MultipartFile myFileName, HttpSession session) throws IllegalStateException, IOException;
+	//根据类型父id查找教师
+	public List<User> selectByPid(int number);
 }

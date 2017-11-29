@@ -35,6 +35,7 @@ import com.futher.school.entity.User;
 @RequestMapping(value="/educationoffice")
 public class EducationOfficeController  extends BaseController{
 	@RequestMapping(value="/uploadIntegral")
+
 	public String uploadIntegral(MultipartFile file, HttpServletRequest request, Model model,Resource resource,
 			@RequestParam(defaultValue = "1") int typeId ) throws IOException {
 		String msg;
@@ -65,6 +66,7 @@ public class EducationOfficeController  extends BaseController{
 			} else {
 			msg = "error , 未知错误";
 			}
+
 
 		}
 		model.addAttribute("msg", msg);

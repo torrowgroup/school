@@ -6,7 +6,7 @@
 </head>
 <body>
 	<span th:text="${news}"></span>
-	<form th:action="@{/resource/addSchoolView}" method="post" enctype="multipart/form-data">
+	<form th:if="${typeid} != null" th:action="@{/resource/addSchoolView}" method="post" enctype="multipart/form-data">
          <input type="hidden" name="reTypeid" th:value="${typeid}">         
                    标题:<input type="text" name="reTitle"><br>
                    上传图片:<input type="file" name="file" id="file"><br>

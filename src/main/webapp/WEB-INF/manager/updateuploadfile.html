@@ -4,18 +4,18 @@
 <head>
   <title>title</title>
    <script type="text/javascript">
-  function seclectValue(){
-   	  	var verifyType = '[[${resource.reTypeid}]]';
-		var type = document.getElementById('reTypeid');
-		for(var i = 0;i < type.options.length; i++)
-		{
-		   var trueType = type.options[i];
-		   if(verifyType == trueType.value.trim())
-		   {
-		     trueType.selected=true;
-		   }
-		}
-  	  }  
+//   function seclectValue(){
+//    	  	var verifyType = '[[${resource.reTypeid}]]';
+// 		var type = document.getElementById('reTypeid');
+// 		for(var i = 0;i < type.options.length; i++)
+// 		{
+// 		   var trueType = type.options[i];
+// 		   if(verifyType == trueType.value.trim())
+// 		   {
+// 		     trueType.selected=true;
+// 		   }
+// 		}
+//   	  }  
   	
      function modifyContent() {    	
      	        var introduce = document.getElementById("reContent");   
@@ -23,11 +23,12 @@
    }
   </script>
 </head>
-<body onload="seclectValue()" >
-	<form th:action="@{/resource/UpdateUploadFile}" method="post" enctype="multipart/form-data">
+<body>
+	<span th:text="${news}"></span>
+	<form th:if="${typelist} != null and ${resource} != null" th:action="@{/resource/updateUploadFile}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
 		type:<select name="reTypeid" id="reTypeid">
-        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyId}" th:text="${type.tyCategoryname}"></option>
+        	<option th:each="type,typeStat:${typelist}" th:switch="${type.tyId}" th:case="${resource.reTypeid}" th:value="${type.tyId}" th:text="${type.tyCategoryname}"></option>
         </select><br> 
                    标题:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>
                    上传文件:<input type="file" name="file" id="file"><br>

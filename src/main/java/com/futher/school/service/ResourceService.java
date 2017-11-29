@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.futher.school.entity.Resource;
+import com.futher.school.entity.Type;
 import com.futher.school.entity.User;
 import com.futher.school.util.PageBean;
 
@@ -36,6 +38,14 @@ public interface ResourceService {
 	public int uploadeEdit(Resource resource);
 	//wqj 获取resource
 	public List<Resource> getUploadFileName();
-
+	//首页用
 	List<Resource> selectByPid(int Pid, int number);
+	//根据类型id查找
+	Resource selectByTypeid(Integer reTypeid);
+	//首页用，获取全部资源
+	void getAllResource(List<Type> typeList, Model model);
+	//学校的官方页面用，得到所有链接
+	void getLinkAndTime(List<Type> typeList, Model model);
+	//通过类型id查找资源
+	PageBean<Resource> findByTypeId(int currentPage, int tyId);
 }

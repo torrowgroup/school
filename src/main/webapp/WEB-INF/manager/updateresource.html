@@ -12,18 +12,16 @@
   </script>
 </head>
 <body onload="seclectValue()">
-	<form th:action="@{/resource/UpdateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+	<span th:text="${news}"></span>
+	<form th:if="${resource} != null and ${typeid} != null" th:action="@{/resource/updateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
 		<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
 		<input type="hidden" name="reTypeid" th:value="${typeid}">
-<!-- 		type:<select name="reTypename" id="reTypename" onclick="myfunction()"> -->
-<!--         	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option> -->
-<!--         </select><br>  -->
                     标题:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>
                    上传图片:<input type="file" name="file" id="file"><br>
         <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br>
                     内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
 				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
-     			<div id="editor" style="width:600px; height:400px;" th:utext="${resource.reContent}"></div>
+     			<div id="editor" style="width:100%; height:400px;" th:utext="${resource.reContent}"></div>
      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
     			<script type="text/javascript">

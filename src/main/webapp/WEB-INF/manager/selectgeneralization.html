@@ -37,7 +37,7 @@
 				<td th:text="${resource.rePublisher}"></td>
 				<td th:text="${resource.reReleasedate}"></td>
 				<td ><button th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td>
-				<td><a th:href="@{/resource/toUpdateGeneraLization?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+				<td><a th:href="@{/resource/toUpdateGeneraLization?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

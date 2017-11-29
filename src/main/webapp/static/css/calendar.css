@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 .dt { position: absolute; background-color: #fff; top: 80px; left: 0; z-index: 100; transition: all 0.3s ease; opacity: 0.5; max-height: 0px; max-width: 0px; overflow: hidden; border-radius: 50%; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15); }
+//.dt { position: absolute; background-color: #fff; top: 50px; left: 0; z-index: 100; transition: all 0.3s ease; opacity: 0.5; max-height: 0px; max-width: 0px; overflow: hidden; border-radius: 50%; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15); }
+
 
 .dt.show { overflow: inherit; max-width: 600px; max-height: 520px; opacity: 1; display: block; border-radius: 0; }
 

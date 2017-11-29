@@ -1,0 +1,18 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+</head>
+<body>
+	<span th:text="${news}"></span>
+	<form th:if="${typeid} != null and ${resource} != null" th:action="@{/resource/updateSchoolNews}" method="post" enctype="multipart/form-data">
+       <input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
+       <input type="hidden" name="reTypeid" th:value="${typeid}">             
+                  学校电话:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>
+                  学校邮箱:<input type="text" name="reContent" th:value="${resource.reContent}"><br>
+                  学校地址:<input type="text" name="rePublisher" th:value="${resource.rePublisher}"><br>
+			<input type="submit" value="修改">
+	</form>
+</body>
+</html>

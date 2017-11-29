@@ -12,11 +12,11 @@ public interface TypeMapper {
 
     int insert(Type record);
 
-    int insertSelective(Type record);
+//    int insertSelective(Type record);
 
     Type selectByPrimaryKey(Integer tyId);
 
-    int updateByPrimaryKeySelective(Type record);
+//    int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
     //得到添加用户类别的id

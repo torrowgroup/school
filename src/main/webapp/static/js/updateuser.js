@@ -1,5 +1,5 @@
 $(function(){
-	$("#usEmail").change(function(){
+	$("#usEmail").bind('input propertychange',function(){
 		var usId = $("#usId").val();
 		var value = $(this).val();
 		value = $.trim(value);

@@ -40,7 +40,7 @@ public class TypeController extends BaseController {
 
 	@RequestMapping("/addType")
 	public String addType(Type type, Model model) {
-		if (type.getTyPid() == 7 || type.getTyPid() == 9 || type.getTyPid() == 12) {
+		if (type.getTyPid() == 7 || type.getTyPid() == 9 || type.getTyPid() == 12|| type.getTyPid() == 13) {
 			int count = typeService.selectTypeName(type.getTyPid()).size();
 			if (count >= 1) {
 				model.addAttribute("news", "已添加过了，不可在添加");
@@ -51,6 +51,13 @@ public class TypeController extends BaseController {
 				} else {
 					model.addAttribute("news", "添加失败");
 				}
+			}
+		} else {
+			int judge = typeService.addType(type);
+			if (judge == 1) {
+				model.addAttribute("news", "添加成功");
+			} else {
+				model.addAttribute("news", "添加失败");
 			}
 		}
 		return "manager/addtype";
@@ -65,11 +72,16 @@ public class TypeController extends BaseController {
 
 	@RequestMapping("/deletType")
 	public String deletType(int tyId, Model model) {
-		int judge = typeService.deletType(tyId);
-		if (judge == 1) {
-			model.addAttribute("news", "删除成功");
+		Type type = typeService.selectTypeById(tyId);
+		if (type == null) {
+			model.addAttribute("news", "该数据已删除");
 		} else {
-			model.addAttribute("news", "删除失败");
+			int judge = typeService.deletType(tyId);
+			if (judge == 1) {
+				model.addAttribute("news", "删除成功");
+			} else {
+				model.addAttribute("news", "删除失败");
+			}
 		}
 		return selectType(1, model);
 	}
@@ -77,18 +89,33 @@ public class TypeController extends BaseController {
 	@RequestMapping("/toUpdateType")
 	public String toUpdateType(int tyId, Model model) {
 		Type type = typeService.selectTypeById(tyId);
+		if (type == null) {
+			model.addAttribute("news", "该类型已删除");
+		}
 		model.addAttribute("typenews", type);
 		return "manager/updatetype";
-
 	}
 
 	@RequestMapping("/updateType")
 	public String updateType(Type type, Model model) {
-		int judge = typeService.updateType(type);
-		if (judge == 1) {
-			model.addAttribute("news", "修改成功");
+		int judge = 0;
+		Type oldType = typeService.selectTypeById(type.getTyId());
+		if (oldType == null) {
+			model.addAttribute("news", "该修改类型已删除");
 		} else {
-			model.addAttribute("news", "修改失败");
+			if (oldType.getTyCategoryname().equals(type.getTyCategoryname()) && oldType.getTyPid() == type.getTyPid()) {
+				judge = typeService.updateType(type);
+			} else {
+				Type otherType = typeService.getId(type.getTyCategoryname());
+				if (otherType == null) {
+					judge = typeService.updateType(type);
+				}
+			} 
+			if (judge == 1) {
+				model.addAttribute("news", "修改成功");
+			} else {
+				model.addAttribute("news", "修改失败,已有此类型");
+			}
 		}
 		return selectType(1, model);
 	}
@@ -100,15 +127,19 @@ public class TypeController extends BaseController {
 		PrintWriter out = response.getWriter();
 		String result = "true";
 		Type type = typeService.selectTypeById(tyId);
-		if (tyCategoryname.equals(type.getTyCategoryname())) {
-			result = "true";
-		} else {
-			List<Type> typelist = typeService.getAllTypes();
-			for (int i = 0; i < typelist.size(); i++) {
-				if (tyCategoryname.equals(typelist.get(i).getTyCategoryname())) {
-					result = "false";
+		if (!(type == null)) {
+			if (tyCategoryname.equals(type.getTyCategoryname())) {
+				result = "true";
+			} else {
+				List<Type> typelist = typeService.getAllTypes();
+				for (int i = 0; i < typelist.size(); i++) {
+					if (tyCategoryname.equals(typelist.get(i).getTyCategoryname())) {
+						result = "false";
+					}
 				}
 			}
+		} else {
+			result = "false";
 		}
 		out.print(result);
 		out.close();

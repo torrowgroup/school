@@ -346,9 +346,15 @@
     select
     <include refid="Base_Column_List" />
     from tb_resource
-    where re_typepid = #{reTypeid,jdbcType=INTEGER}
+    where re_typeId = #{reTypeid,jdbcType=INTEGER}
   </select>
   
+  <select id="selectByTypePid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typepid = #{reTypePid,jdbcType=INTEGER}
+  </select>
   <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
         select
@@ -374,4 +380,30 @@
     where re_typepid = #{pid,jdbcType=INTEGER}
     ORDER BY RAND() LIMIT #{number};
   </select>
+  <select id="selectByid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typeId = #{reTypeid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectImmediateNews" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typepid = #{pid,jdbcType=INTEGER}
+    ORDER BY re_id DESC LIMIT #{number};
+  </select>
+   <!-- 根据分页数据start 和size查询数据  首页用-->
+    <select id="findByTypeId" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_resource
+        <if test="reTypeid!=null">
+         	where re_typeId = #{reTypeid,jdbcType=INTEGER}
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+    </select>
 </mapper>

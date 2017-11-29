@@ -111,4 +111,10 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 		return this.upload(myFileName, session);
 	}
 
+	@Override
+	public List<User> selectByPid(int number) {
+		String name = "teacher";
+		return userMapper.selectByPid(number, name);
+	}
+
 }

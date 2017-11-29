@@ -20,12 +20,12 @@
 </head>
 <body>
 	<p th:text="${news}"></p>
-	<form th:action="@{/message/addMessage}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+	<form th:action="@{/common/addMessage}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
 	留言标题:<input type="text" name="meTitle" /><br>
 	图片:<input type="file" name="file" id="file">
-	留言内容:<div style="width:600px; height:200px;">
+	留言内容:<div style="width:600px; height:400px;">
 				<textarea rows="5" cols="35" name="meContent"  style="display:none;" id="meContent"></textarea><br>
-     			<div id="editor"  style="width:400px; height:200px;"></div>
+     			<div id="editor"  style="width:400px; height:400px;"></div>
      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
     			<script type="text/javascript">
