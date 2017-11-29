@@ -6,15 +6,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
-	<tr>
-			<th>文件名</th>
-			<th>操作</th>
-		</tr>
-		<tr th:each="resource  : ${resourceList}">
-			<td th:text = "${resource.reTypename}">标题</td>
-			<td><a  th:href="@{/teacher/download(reId=${resource.reId})}">下载</a></td>
-		</tr>
-	</table>
+	<div>
+		<table>
+			<tr>
+				<th>文件名</th>
+				<th colspan="2">操作</th>
+			</tr>
+			<tr th:each="resource,resourceStat:${resourceList.lists}">
+				<td th:text="${resource.reContent}">标题</td>
+				<td><a th:href="@{/teacher/download(reId=${resource.reId})}">下载</a></td>
+				<td><a
+					th:href="@{/teacher/deleteResource(reId=${resource.reId},reTypeid=${resource.reTypeid})}">删除</a></td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<table border="0" cellspacing="0" cellpadding="0" width="900px">
+			<tr>
+				<td th:if="${resourceList.totalPage} > 0"><span
+					th:if="${resourceList.currPage} == 1"> <span
+						th:if="${resourceList.totalPage ==1}"> <a
+							th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
+					</span> <span th:if="${resourceList.totalPage > 1}"> <a
+							th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
+							<a
+							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showupload)}">[下一页]</a>
+					</span>
+				</span> <span th:if="${resourceList.currPage} > 1 "> <a
+						th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=11,currentPage=1)}">[首页]</a>
+						<a
+						th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage-1},reTypeid=${reTypeid},uri=showupload)}">[上一页]</a>
+						<span th:if="${resourceList.currPage != resourceList.totalPage}">
+							<a
+							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showupload)}">[下一页]</a>
+					</span> <a
+						th:href="@{/teacher/showUpload?(currentPage=${resourceList.totalPage},reTypeid=${reTypeid},uri=showupload)}">[尾页]</a>
+				</span></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

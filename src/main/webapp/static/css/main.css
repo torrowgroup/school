@@ -1,0 +1,44 @@
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	min-width: 900px;
+	height: 100%;
+	max-height: 100%;
+	background-image: url("./../images/content.png")
+}
+
+.middle {
+	width: 80%;
+	height: 100%;
+	position: relative;
+	margin: 0 auto;
+	font-size: 1.2em;
+	font-family: Tahoma;
+}
+/*输入框样式*/
+.middle span {
+	display: inline-block;
+	line-height: 1.5em;
+	position: relative;
+	width: 4.5em;
+	text-align: right;
+	/* border:2px solid black;*/
+}
+
+.middle input, select {
+	/*   border:2px solid black;*/
+	left: 0.5em;
+	line-height: 1.6em;
+	position: relative;
+	/*用于修改输入框长度*/
+	width: auto;
+}
+
+form p:nth-last-child(1) {
+	height: 100px;
+	position: relative;
+	left: 1.7em;
+	top: 1em;
+}

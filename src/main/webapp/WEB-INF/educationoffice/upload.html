@@ -3,9 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
-<h1>请上传本期的量化积分</h1>
-<td class="text" th:text="${msg}" ></td>
+<h1><td class="text" th:text="${msg}" ></td></h1> 
 	<form  th:action="@{/educationoffice/uploadIntegral?(TypeId=4)}" method="post"  enctype="multipart/form-data">
+		文件名:<input type=“text” name="reTitle">
+		所属类型:<input type ="text" name="reTypepid" th:value ="${reTypepid}"  readonly="readonly">
 		选择文件:<input type="file" name="file" width="120px"> <input
 			type="submit" value="上传">
 	</form>

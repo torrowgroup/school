@@ -72,6 +72,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		pageBean.setPageSize(pageSize);
 		// 封装总记录数
 		int totalCount = resourceMapper.selectByTypeId(reTypeid).size();
+		System.out.println(totalCount+"sssssssssssssssssssssssssssssssssssssssssssssssssssfffffffffffffffffffffffffffffffffffffffffffff");
 		pageBean.setTotalCount(totalCount);
 
 		// 封装总页数
