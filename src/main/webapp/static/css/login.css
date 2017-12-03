@@ -25,7 +25,7 @@ body{
 	background:url(../images/login_select.jpg) no-repeat 85px 5px;
 	/*border:2px solid lightgreen;*/
 }
-/*µÇÂ¼Ò³×ó²àÎÄ×ÖÑùÊ½*/
+/*ï¿½ï¿½Â¼Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .login_title .top-word{
 	height: 44px;
 	width: 260px;
@@ -45,15 +45,6 @@ body{
 	top: 217px;
 	left: 71px;;
 }
-.select{
-	float:right;
-	margin-right:28px;
-	_margin-right:15px;
-	cursor:pointer;
-	width:80px;
-	height:20px;
-	margin-top:11px;
-}
 .login_form ul{
 	list-style-type:none;
 	width:80px;
@@ -69,10 +60,6 @@ body{
 	line-height:18px;
 	text-align:center;
 }
-.eid_value{
-	text-align:center;
-	margin-top:3px;
-}
 .login_info_title{
 	line-height:40px;
 	float:left;
@@ -86,7 +73,29 @@ body{
 	display:inline;
 }
 .field{
+	width:400px;
+	height:40px;
 	margin:10px;
+	/*border:2px solid blue;*/
+}
+label.password{
+	position: relative;
+	float:left;
+	left:180px;
+	top:-35px;
+	height:20px;
+	margin:5px 10px;
+	color:gray;
+	text-decoration: underline;
+	/*border:2px solid red;*/
+}
+.tips{
+	width:150px;
+	height:32px;
+	float:right;
+	color:gray;
+	position: relative;
+	top:5px;
 }
 .field label{
 	float:left;
@@ -94,36 +103,44 @@ body{
 }
 .field input.text{
 	border:1px solid #c5c5c5;
-	padding:6px;
+	padding: 6px;
 	background:url(../images/field_text_bg.jpg) repeat-x left center;
+	border-radius:6px;
 }
 .field .button{
-	background:url(../images/login_button.jpg) no-repeat left center;
+	
 	border:none;
 	width:94px;
 	height:28px;
 	cursor:pointer;
 }
-.yzm{
-	color:#4e9f06;
-	font-size:16px;
-	font-style:normal;
-	font-weight:bold;
-	font-family:Arial;
-	padding-left:10px;
-	
+/*ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ê½*/
+.proof{
+	border:1px solid gray;
+	overflow: hidden;
+	width: 79px;
+	height:29px;
+	float: right;
+	position: relative;
+	left: -130px;
+}
+.yzm input{
+	width:100px;
+	border:2px solid;
 }
 .login_form a{
 	text-decoration: none;
 }
-
-
-input[type="button" ]{
-  display: block;
-	width:110px;
-	height:29px;
+/*ï¿½ï¿½Â¼ï¿½ï¿½Å¥ï¿½ï¿½Ê½*/
+.button{
+	display: block;
+	width: 130px;
+	height:35px;
+	position: relative;
 	background-color: #4A8FC4;
 	color:white;
 	border-radius:5px;
 	border-color:transparent;
+	left:60px;
 }
+

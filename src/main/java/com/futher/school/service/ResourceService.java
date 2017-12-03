@@ -23,7 +23,7 @@ public interface ResourceService {
 	//富文本上传
 	String uploadImage(MultipartFile myFileName,HttpSession session) throws IllegalStateException, IOException;
 	//分页显示资源
-	PageBean<Resource> findByPage(int currentPage, int reTypeid);
+	PageBean<Resource> findByPage(int currentPage, int reTypeid, String inquiry);
 	//根据ID查找资源
 	Resource selectById(Integer reId);
 	//根据ID删除资源

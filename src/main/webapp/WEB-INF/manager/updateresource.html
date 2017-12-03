@@ -4,6 +4,10 @@
 <head>
   <title>title</title>
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/genera.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/user.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
   <script type="text/javascript">
      function modifyContent() {    	
      	        var introduce = document.getElementById("reContent");   
@@ -11,17 +15,32 @@
    }
   </script>
 </head>
-<body onload="seclectValue()">
-	<span th:text="${news}"></span>
-	<form th:if="${resource} != null and ${typeid} != null" th:action="@{/resource/updateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
-		<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
+<body>
+<div class="middle">
+    <div class="inside">
+    <p th:text="${news}"></p>
+      <form class="form-horizontal" role="form" th:if="${resource} != null and ${typeid} != null" th:action="@{/resource/updateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
+       	<input type="hidden" name="reId" id="reId" th:value="${resource.reId}">
 		<input type="hidden" name="reTypeid" th:value="${typeid}">
-                    标题:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br>
-                   上传图片:<input type="file" name="file" id="file"><br>
-        <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br>
-                    内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
-				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
-     			<div id="editor" style="width:100%; height:400px;" th:utext="${resource.reContent}"></div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">标题</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入标题" name="reTitle" th:value="${resource.reTitle}">
+          </div>
+        </div>
+        <div class="form-group paper">
+          <a href="javascript:" class="file">选择文件
+            <input type="file" name="file" id="file">
+          </a>
+        </div>
+         <div class="form-group">
+          <div class="editor">
+             <div class="form-group">
+              <label  class="col-sm-3 control-label">内容</label>
+             </div>
+        	   <textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br>
+     			<div id="editor"  style="width:100%; height:400px;" th:utext="${resource.reContent}"></div>
      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
     			<script type="text/javascript">
@@ -31,8 +50,39 @@
 		     		editor.config.uploadImgFileName = 'myFileName'
 	       		 	editor.create()
     			</script>
-			</div><br>
-			<input type="submit" value="添加">
-	</form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <input class="btn btn-info" value="修改信息" type="submit" id="submit" >
+          </div>
+        </div>
+      </form>
+    </div><!--inside-->
+  </div><!--middle-->
+
+
+<!-- 	<span th:text="${news}"></span> -->
+<!-- 	<form th:if="${resource} != null and ${typeid} != null" th:action="@{/resource/updateResource}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data"> -->
+<!-- 		<input type="hidden" name="reId" id="reId" th:value="${resource.reId}"> -->
+<!-- 		<input type="hidden" name="reTypeid" th:value="${typeid}"> -->
+<!--                     标题:<input type="text" name="reTitle" th:value="${resource.reTitle}"><br> -->
+<!--                    上传图片:<input type="file" name="file" id="file"><br> -->
+<!--         <img alt="暂无图片" th:if="${resource.reSpare} != null" th:src="@{/static/uploadImg/uploadnew/{image}(image=${resource.reSpare})}" width="100px" height="100px" /><br> -->
+<!--                     内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content"> -->
+<!-- 				<textarea rows="5" cols="35" name="reContent"  style="display:none;" id="reContent"></textarea><br> -->
+<!--      			<div id="editor" style="width:100%; height:400px;" th:utext="${resource.reContent}"></div> -->
+<!--      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script> -->
+<!--   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script> -->
+<!--     			<script type="text/javascript"> -->
+<!-- 	        		var E = window.wangEditor -->
+<!-- 	        		var editor = new E('editor')    		  -->
+<!-- 		     		editor.config.uploadImgUrl = '/school/resource/uploadImg' -->
+<!-- 		     		editor.config.uploadImgFileName = 'myFileName' -->
+<!-- 	       		 	editor.create() -->
+<!--     			</script> -->
+<!-- 			</div><br> -->
+<!-- 			<input type="submit" value="添加"> -->
+<!-- 	</form> -->
 </body>
 </html>

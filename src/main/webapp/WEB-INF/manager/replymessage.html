@@ -15,10 +15,9 @@
 <span th:text="${news}"></span>
 <div th:if="${message} != null">
 	<span th:text="${message.meTitle}"></span>
-	<img alt="暂无照片" th:if="${message.meImage} != null" th:src="@{/static/uploadImg/messagefile/{image}(image=${message.meImage})}">
 	<div th:utext="${message.meContent}">
 	</div>
-	<form th:action="@{/message/replyMessage}" method="post" onsubmit="modifyContent()">
+	<form th:action="@{/messages/replyMessage}" method="post" onsubmit="modifyContent()">
 		<input type="hidden" name="meId" th:value="${message.meId}">
 		回复内容:<div style="width:600px; height:500px; margin-top: 100px;" id="content">
 				<textarea rows="5" cols="35" name="meReplycontent"  style="display:none;" id="meReplycontent"></textarea><br>

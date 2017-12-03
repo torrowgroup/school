@@ -3,63 +3,137 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/font-awesome.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/tableall.css}">
 </head>
 <body>
+<div class="middle">
+    <div class="inside">
+      <form th:action="@{/user/selectUser}" method="post">
+        <div class="search bar">
+            <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
+            <button type="submit"></button>
+        </div>
+      </form>
 <span th:if="${messages.totalCount} == 0">还没有用户呢</span>
 <p th:text="${news}"></p>
-<div th:if="${messages.totalCount} != 0">
-	<table  cellspacing="0" border="1">
-		<caption>用户列表</caption>
-		<thead>
-			<tr>
-				<td>编号</td>
-				<td>账户</td>
-				<td>密码</td>
-				<td>名字</td>
-				<td>性别</td>
-				<td>电话</td>
-				<td>照片<td>
-				<td>身份</td>
-				<td>操作</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="user,userStat:${messages.lists}">
-				<td th:text="${user.usId}"></td>
-				<td th:text="${user.usEmail}"></td>
-				<td th:text="${user.usPassword}"></td>
-				<td th:text="${user.usName}"></td>
-				<td th:text="${user.usSex}"></td>
-				<td th:text="${user.usTel}"></td>
-				<td><img alt="暂无照片" th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="60px;" height="60px;" /></td>
-				<td th:text="${user.usIdentityname}"></td>
-				<td><a th:href="@{/user/toUpdateUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<table  border="0" cellspacing="0" cellpadding="0"  width="900px">
-		<tr>
-			<td th:if="${messages.totalPage} > 0">
-			   <span th:if="${messages.currPage} == 1">
-				   <span th:if="${messages.totalPage ==1}">
-							<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>					
-				   </span>
-				   <span th:if="${messages.totalPage > 1}">
-							<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
-			   				<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1})}">[下一页]</a>				
-				   </span>
-			   </span>
-			   <span th:if="${messages.currPage} > 1 ">
-					<a th:href="@{/user/selectUser?(currentPage=1)}">[首页]</a>
-					<a th:href="@{/user/selectUser?(currentPage=${messages.currPage-1})}">[上一页]</a>
-					<span th:if="${messages.currPage != messages.totalPage}">
-						<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1})}">[下一页]</a>					
-					</span>
-			   		<a th:href="@{/user/selectUser?(currentPage=${messages.totalPage})}">[尾页]</a>
-			   </span>
-			</td>
-		</tr>
-</table>	
-</div>
+   <table class="table table-bordered table-hover" th:if="${messages.totalCount} != 0">
+    <caption class="title">用户列表</caption>
+    <thead>
+      <tr class="success">
+        <th>编号</th>
+		<th>账户</th>
+		<th>密码</th>
+		<th>名字</th>
+		<th>性别</th>
+		<th>电话</th>
+		<th>照片</th>
+		<th>身份</th>
+		<th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="user,userStat:${messages.lists}">
+        <td th:text="${user.usId}">1</td>
+        <td th:text="${user.usEmail}">smile</td>
+        <td th:text="${user.usPassword}">123456</td>
+        <td th:text="${user.usName}">张三</td>
+        <td th:text="${user.usSex}">男</td>
+        <td th:text="${user.usTel}">18738397757</td>
+        <td ><img alt="暂无照片" th:src="@{/static/uploadImg/{image}(image=${user.usImage})}"style="width:80px;height:80px;" /></td>
+        <td th:text="${user.usIdentityname}">管理员</td>
+        <td class="operation"><a th:href="@{/user/toUpdateUser?(usId=${user.usId})}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')" style="color:#E11E05;"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="fenye" th:if="${messages.totalPage} > 0">
+    <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
+      <li><a th:href="@{/user/selectUser?(currentPage=1,inquiry=${inquiry})}">首页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/user/selectUser?(currentPage=${i},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+        <li><a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1},inquiry=${inquiry})}">下一页</a></li>
+    </ul>
+     <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
+      <li><a th:href="@{/user/selectUser?(currentPage=1,inquiry=${inquiry})}">首页</a></li>
+      <li><a th:href="@{/user/selectUser?(currentPage=${messages.currPage-1},inquiry=${inquiry})}">上一页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/user/selectUser?(currentPage=${i},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+      <li th:if="${messages.currPage != messages.totalPage}"><a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1},inquiry=${inquiry})}">下一页</a></li>
+      <li><a th:href="@{/user/selectUser?(currentPage=${messages.totalPage},inquiry=${inquiry})}">尾页</a></li>
+    </ul>
+  </div>
+  </div><!--inside-->
+</div><!--middle-->
+<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+<!-- 		<table  border="0" cellspacing="0" cellpadding="0"  width="900px"> -->
+<!-- 			<tr> -->
+<!-- 				<td th:if="${messages.totalPage} > 0"> -->
+<!-- 				   <span th:if="${messages.currPage} == 1"> -->
+<!-- 					   <span th:if="${messages.totalPage > 1}"> -->
+<!-- 								<a th:href="@{/user/selectUser?(currentPage=1,inquiry=${inquiry})}">[首页]</a> -->
+<!-- 				   				<span th:each="i:${#numbers.sequence(1,messages.totalPage)}"> -->
+<!-- 									<a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/user/selectUser?(currentPage=${i},inquiry=${inquiry})}"th:text="${i}">#</a> -->
+<!-- 								</span> -->
+<!-- 								<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1},inquiry=${inquiry})}">[下一页]</a>				 -->
+<!-- 					   </span> -->
+<!-- 				   </span> -->
+<!-- 				   <span th:if="${messages.currPage} > 1 "> -->
+<!-- 						<a th:href="@{/user/selectUser?(currentPage=1,inquiry=${inquiry})}">[首页]</a> -->
+<!-- 						<a th:href="@{/user/selectUser?(currentPage=${messages.currPage-1},inquiry=${inquiry})}">[上一页]</a> -->
+<!-- 						<span th:each="i:${#numbers.sequence(1,messages.totalPage)}"> -->
+<!-- 							<a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/user/selectUser?(currentPage=${i},inquiry=${inquiry})}"th:text="${i}">#</a> -->
+<!-- 						</span> -->
+<!-- 						<span th:if="${messages.currPage != messages.totalPage}"> -->
+<!-- 							<a th:href="@{/user/selectUser?(currentPage=${messages.currPage+1},inquiry=${inquiry})}">[下一页]</a>					 -->
+<!-- 						</span> -->
+<!-- 				   		<a th:href="@{/user/selectUser?(currentPage=${messages.totalPage},inquiry=${inquiry})}">[尾页]</a> -->
+<!-- 				   </span> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 	</table> -->
+
+
+
+
+
+
+
+
+<!-- <form th:action="@{/user/selectUser}" method="post"> -->
+<!-- 	<input type="text" name="inquiry" placeholder="请输入"> -->
+<!-- 	<input type="submit" value="查询"> -->
+<!-- </form> -->
+<!-- <span th:if="${messages.totalCount} == 0">还没有用户呢</span> -->
+<!-- <p th:text="${news}"></p> -->
+<!-- <div th:if="${messages.totalCount} != 0"> -->
+<!-- 	<table  cellspacing="0" border="1"> -->
+<!-- 		<caption>用户列表</caption> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<td>编号</td> -->
+<!-- 				<td>账户</td> -->
+<!-- 				<td>密码</td> -->
+<!-- 				<td>名字</td> -->
+<!-- 				<td>性别</td> -->
+<!-- 				<td>电话</td> -->
+<!-- 				<td>照片</td> -->
+<!-- 				<td>身份</td> -->
+<!-- 				<td>操作</td> -->
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+<!-- 		<tbody> -->
+<!-- 			<tr th:each="user,userStat:${messages.lists}"> -->
+<!-- 				<td th:text="${user.usId}"></td> -->
+<!-- 				<td th:text="${user.usEmail}"></td> -->
+<!-- 				<td th:text="${user.usPassword}"></td> -->
+<!-- 				<td th:text="${user.usName}"></td> -->
+<!-- 				<td th:text="${user.usSex}"></td> -->
+<!-- 				<td th:text="${user.usTel}"></td> -->
+<!-- 				<td><img alt="暂无照片" th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="60px;" height="60px;" /></td> -->
+<!-- 				<td th:text="${user.usIdentityname}"></td> -->
+<!-- 				<td><a th:href="@{/user/toUpdateUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td> -->
+<!-- 			</tr> -->
+<!-- 		</tbody> -->
+<!-- 	</table> -->
+<!-- </div> -->
 </body>
 </html>

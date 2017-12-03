@@ -21,6 +21,8 @@ public class DynamicController extends CommonController{
 	@RequestMapping("/checkDynamic")
 	public String checkDynamic(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int tyId, Model model) {
 		model.addAttribute("tyId", tyId);
+		Type type = typeService.selectTypeById(tyId);
+		model.addAttribute("type", type);
 		model.addAttribute("messages", resourceService.findByTypeId(currentPage, tyId));// 回显分页数据
 		getLinkAndTime(model);
 		return "schoolpage/dynamic";

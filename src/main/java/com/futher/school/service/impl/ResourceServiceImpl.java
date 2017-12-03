@@ -38,7 +38,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 	 */
 	@Override
 	public int uploadeEdit(com.futher.school.entity.Resource resource) {
-		return resourceMapper.insert(resource);
+		return this.insertEntity(resource);
 		// 上传文档
 
 	}
@@ -56,7 +56,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 
 	@Override
 	public int addResource(com.futher.school.entity.Resource resource) {
-		return resourceMapper.insert(resource);
+		return this.insertEntity(resource);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 	}
 
 	@Override
-	public PageBean<com.futher.school.entity.Resource> findByPage(int currentPage, int reTypeid) {
+	public PageBean<com.futher.school.entity.Resource> findByPage(int currentPage, int reTypeid, String inquiry) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		PageBean<com.futher.school.entity.Resource> pageBean = new PageBean<com.futher.school.entity.Resource>();
 
@@ -81,7 +81,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		int pageSize = 6;
 		pageBean.setPageSize(pageSize);
 		// 封装总记录数
-		int totalCount = resourceMapper.selectByTypePid(reTypeid).size();
+		int totalCount = resourceMapper.selectByTypePid(reTypeid, inquiry).size();
 		pageBean.setTotalCount(totalCount);
 
 		// 封装总页数
@@ -92,6 +92,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageBean.getPageSize());
 		map.put("reTypeid", reTypeid);
+		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<com.futher.school.entity.Resource> lists = resourceMapper.findByPage(map);
 		pageBean.setLists(lists);

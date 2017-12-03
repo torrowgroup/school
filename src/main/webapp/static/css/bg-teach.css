@@ -6,7 +6,7 @@
     position: relative;
     width: 220px;
     height: 220px;
-    float: left;
+   display: inline-block;
     padding: 10px;
 }
 .bg-img1 img{

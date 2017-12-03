@@ -1,0 +1,42 @@
+body,html{
+    height:100%;
+}
+body{
+    font-family:Tahoma;
+    min-width:900px;
+    height:100%;
+    max-height:100%;
+    /*background-image: url("./../images/content.png");*/
+    background-color: #F1F1F1;
+}
+.inside{
+    width:80%;
+    height:100%;
+    position: relative;
+    margin:0 auto;
+    top:8em;
+    /*   border:2px solid red;*/
+}
+.inside form{
+    width:320px;
+    height:100px;
+    position: relative;
+    margin:0 auto;
+    /*   border:2px solid red;  */
+}
+.upload_button{
+    position:relative;
+    top:1.5em;
+
+}
+.upload_button .btn{
+    padding:6px 66px;!important;
+}
+.upload{
+    width: 600px;
+    height:335px;
+    position: relative;
+    margin:0 auto;
+    /*top:2em;*/
+    /*border: 2px solid lightgreen;*/
+}

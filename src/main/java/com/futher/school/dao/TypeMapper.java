@@ -8,24 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 public interface TypeMapper {
 
-    int deleteByPrimaryKey(Integer tyId);
-
-    int insert(Type record);
-
-//    int insertSelective(Type record);
-
-    Type selectByPrimaryKey(Integer tyId);
-
-//    int updateByPrimaryKeySelective(Type record);
-
-    int updateByPrimaryKey(Type record);
     //得到添加用户类别的id
 	Type selectByCategoryname(@Param("usIdentityname") String usIdentityname);
 	//根据父类ID得到所有用户类别
 	List<Type> selectByTypid(@Param("tyPid")Integer tyPid);
-	//得到所有用户的类别
-	List<Type> selectAll();
 	//分页查询所有类别
 	List<Type> findByPage(HashMap<String, Object> map);
+	//根据搜索内容来获取符合条件的数据条数
+	List<Type> selectByInquiry(@Param("inquiry")String inquiry);
 
 }

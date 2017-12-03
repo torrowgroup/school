@@ -1,8 +1,8 @@
 .img{
-    background-image: url('../images/scho-info.jpg');
+    background-image: url('../images/schoolimages/scho-info.jpg');
 }
 .news{
-    width: 100%;
+    width: 80%;
     height: 50px;
     line-height: 50px;
     vertical-align: top;
@@ -10,15 +10,20 @@
 }
 .news span{
     display: inline-block;
-    width: 50px;
     height: 100%;
     vertical-align: top;
 }
+.above{
+    width: 50px;
+}
+.back{
+    width: 100px;
+}
 .news a{
     display: inline-block;
-    width: 80%;
+    width: 70%;
     height: 100%;
 }
 .news a:hover{
-    color: orange;
+    color:#EF3D3D;
 }

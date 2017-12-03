@@ -2,23 +2,101 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Home</title>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-<script type="text/javascript" th:src="@{../static/js/verifyemail.js}"></script>
+  	<title>Home</title>
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/formpost.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/user.css}">
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{../static/js/verifyemail.js}"></script>
 </head>
 <body>
-	<span th:text="${news}"></span>
-	<form th:if="${user} != null" th:action="@{/user/updateMyNews}" method="post">
-	<input type="hidden" name="usId" th:value="${user.usId}">
-	username:<input type="text" name="usEmail" id="usEmail" th:value="${user.usEmail}"><span id="msg"></span><br>
-	password:<input type="text" name="usPassword" th:value="${user.usPassword}"><br>
-	name:<input type="text" name="usName" th:value="${user.usName}"><br>
-	sex:<input type="text" name="usSex" th:value="${user.usSex}"><br>
-	tellphone:<input type="text" name="usTel" th:value="${user.usTel}"><br>
-	<input type="hidden" name="usIdentityid" th:value="${user.usIdentityid}">
-	<input type="hidden" name="usIdentityname" th:value="${user.usIdentityname}">
-	<input type="submit" id="submit" value="修改" >
-	</form>
+<div class="middle">
+    <div class="inside">
+    <p th:text="${news}"></p>
+      <form class="form-horizontal" role="form" th:if="${user} != null" th:action="@{/user/updateMyNews}" method="post">
+        <input type="hidden" name="usId" th:value="${user.usId}">
+        <input type="hidden" name="usIdentityid" th:value="${user.usIdentityid}">
+		<input type="hidden" name="usIdentityname" th:value="${user.usIdentityname}">
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">用户名</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control"
+                   placeholder="请输入邮箱账号" name="usEmail" id="usEmail" th:value="${user.usEmail}"><span id="msg"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">性别</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="usSex">
+             <option th:value="男" th:selected="${user.usSex =='男'}">男</option>
+             <option th:value="女" th:selected="${user.usSex =='女'}">女</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">密码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入密码" name="usPassword" th:value="${user.usPassword}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入姓名" name="usName" th:value="${user.usName}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">电话</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入手机号" name="usTel" th:value="${user.usTel}">
+          </div>
+        </div>
+        
+        <div class="form-group paper">
+        <label  class="col-sm-2 control-label">个人照片</label>
+          <a href="javascript:" class="file">选择文件
+            <input type="file" name="file" id="file">
+          </a>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <input class="btn btn-info" value="修改信息" type="submit" id="submit"  >
+          </div>
+        </div>
+      </form>
+    </div><!--inside-->
+  </div><!--middle-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<span th:text="${news}"></span> -->
+<!-- 	<form th:if="${user} != null" th:action="@{/user/updateMyNews}" method="post"> -->
+<!-- 	<input type="hidden" name="usId" th:value="${user.usId}"> -->
+<!-- 	username:<input type="text" name="usEmail" id="usEmail" th:value="${user.usEmail}"><span id="msg"></span><br> -->
+<!-- 	password:<input type="text" name="usPassword" th:value="${user.usPassword}"><br> -->
+<!-- 	name:<input type="text" name="usName" th:value="${user.usName}"><br> -->
+<!-- 	sex:<input type="text" name="usSex" th:value="${user.usSex}"><br> -->
+<!-- 	tellphone:<input type="text" name="usTel" th:value="${user.usTel}"><br> -->
+<!-- 	<input type="hidden" name="usIdentityid" th:value="${user.usIdentityid}"> -->
+<!-- 	<input type="hidden" name="usIdentityname" th:value="${user.usIdentityname}"> -->
+<!-- 	<input type="submit" id="submit" value="修改" > -->
+<!-- 	</form> -->
 </body>
 </html>

@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,32 +48,43 @@ public class LoginController extends BaseController {
 	public String login(String usEmail, String usPassword, String identityCode, Model model) {
 		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		String pathurl = "index";
-				User user = userService.login(usEmail, usPassword);
-				if (user != null) {
-					String identityname = user.getUsIdentityname();
-					if (identityname.equals("manager")) {
-						session.setAttribute("manager", user);
-						model.addAttribute("noStatus", "未回复");
-						model.addAttribute("yesStatus", "已回复");
-						pathurl = "/manager/homepage";
-					} else if (identityname.equals("officialemail")) {
-						model.addAttribute("news", "此用户不用作登录");
-					}
-					 
-					 else if (identityname.equals("teacher")) {
-						session.setAttribute("teacher", user);
-						pathurl = "teacher/index";
-					 }else if (identityname.equals("teachergroup")) {
-							session.setAttribute("teachergroup", user);
-							pathurl = "teachergroup/index";
-				
-					} else if (identityname.equals("educationoffice")){
-					session.setAttribute("educationoffice", user);
-					pathurl = "educationoffice/index";
-					} else {
-					model.addAttribute("news", "用户名或密码错误,请重新输入");
-				}
-				}
+		User user = userService.login(usEmail, usPassword);
+		System.out.println(user);
+		if (user != null) {
+//			if ("remember".equals(isLogin)) {
+//				// 创建两个Cookie对象
+//				Cookie nameCookie = new Cookie("usEmail", usEmail);
+//				// 设置Cookie的有效期为3天
+//				nameCookie.setMaxAge(60 * 60 * 24 * 3);
+//				Cookie pwdCookie = new Cookie("usPassword", usPassword);
+//				pwdCookie.setMaxAge(60 * 60 * 24 * 3);
+//				response.addCookie(nameCookie);
+//				response.addCookie(pwdCookie);
+//			}
+			String identityname = user.getUsIdentityname();
+			if (identityname.equals("manager")) {
+				session.setAttribute("manager", user);
+				model.addAttribute("noStatus", "未回复");
+				model.addAttribute("yesStatus", "已回复");
+				pathurl = "/manager/homepage";
+			} else if (identityname.equals("officialemail")) {
+				model.addAttribute("news", "此用户不用作登录");
+			}
+
+			else if (identityname.equals("teacher")) {
+				session.setAttribute("teacher", user);
+				pathurl = "teacher/index";
+			} else if (identityname.equals("teachergroup")) {
+				session.setAttribute("teachergroup", user);
+				pathurl = "teachergroup/index";
+
+			} else if (identityname.equals("educationoffice")) {
+				session.setAttribute("educationoffice", user);
+				pathurl = "educationoffice/index";
+			} else {
+				model.addAttribute("news", "用户名或密码错误,请重新输入");
+			}
+		}
 		return pathurl;
 	}
 
@@ -103,7 +116,7 @@ public class LoginController extends BaseController {
 					Email.sendMail(officialemail, password, host, "验证码", email, "找回密码", mailcontent);
 				} catch (Exception e) {
 					model.addAttribute("news", "你输入的邮箱不存在");
-					
+
 				}
 				session.setAttribute("code", code);
 				model.addAttribute("time", 0);
@@ -164,11 +177,24 @@ public class LoginController extends BaseController {
 			session.removeAttribute("user");
 			model.addAttribute("news", "密码修改成功");
 		}
-		return startSchool();
+		return startSchool(model);
 	}
 
 	@RequestMapping("adminschool")
-	public String startSchool() {
+	public String startSchool(Model model) {
+//		String usEmail = "";
+//		String usPassword = "";
+//		// 获取当前站点的所有Cookie
+//		Cookie[] cookies = request.getCookies();
+//		for (int i = 0; i < cookies.length; i++) {// 对cookies中的数据进行遍历，找到用户名、密码的数据
+//			if ("usEmail".equals(cookies[i].getName())) {
+//				usEmail = cookies[i].getValue();
+//			} else if ("usPassword".equals(cookies[i].getName())) {
+//				usPassword = cookies[i].getValue();
+//			}
+//		}
+//		model.addAttribute("usEmail", usEmail);
+//		model.addAttribute("usPassword", usPassword);
 		return "index";
 	}
 
@@ -176,9 +202,9 @@ public class LoginController extends BaseController {
 	public String enterSchool(Model model) {
 		List<Type> typeList = typeService.getAllTypes();
 		if (typeList == null) {
-			 model.addAttribute("typeList", typeList);
+			model.addAttribute("typeList", typeList);
 		} else {
-			resourceService.getAllResource(typeList,model);
+			resourceService.getAllResource(typeList, model);
 			List<User> teacherList = userService.selectByPid(5);
 			typeService.getType(model);
 			model.addAttribute("teacherList", teacherList);

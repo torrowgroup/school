@@ -4,10 +4,12 @@
   <resultMap id="BaseResultMap" type="com.futher.school.entity.Message">
     <id column="me_id" jdbcType="INTEGER" property="meId" />
     <result column="me_title" jdbcType="VARCHAR" property="meTitle" />
+    <result column="me_content" jdbcType="LONGVARCHAR" property="meContent" />
     <result column="me_image" jdbcType="VARCHAR" property="meImage" />
     <result column="me_anonymous" jdbcType="VARCHAR" property="meAnonymous" />
     <result column="me_releaseDate" jdbcType="TIMESTAMP" property="meReleasedate" />
     <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
+    <result column="me_replyContent" jdbcType="LONGVARCHAR" property="meReplycontent" />
     <result column="me_spare" jdbcType="VARCHAR" property="meSpare" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.MessageWithBLOBs">
@@ -73,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    me_id, me_title, me_image, me_anonymous, me_releaseDate, me_status, me_spare
+    me_id, me_title, me_content, me_image, me_anonymous, me_releaseDate, me_status, me_replyContent, me_spare
   </sql>
   <sql id="Blob_Column_List">
     me_content, me_replyContent

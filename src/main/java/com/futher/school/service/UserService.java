@@ -28,7 +28,7 @@ public interface UserService {
 	//用于登录验证
 	public User loginTest(String usEmail);
 	//查询所有用户，并分页
-	public PageBean<User> findByPage(int currentPage);
+	public PageBean<User> findByPage(int currentPage, String inquiry);
 	//删除用户
 	public int deletByUserId(int usId);
 	//得到修改的用户信息

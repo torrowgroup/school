@@ -349,11 +349,14 @@
     where re_typeId = #{reTypeid,jdbcType=INTEGER}
   </select>
   
-  <select id="selectByTypePid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByTypePid" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_resource
     where re_typepid = #{reTypePid,jdbcType=INTEGER}
+     <if test="inquiry != null">
+       and concat (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
+     </if>
   </select>
   <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
@@ -362,6 +365,9 @@
         from tb_resource
         <if test="reTypeid!=null">
          	where re_typepid = #{reTypeid,jdbcType=INTEGER}
+        </if>
+        <if test="inquiry != null">
+           and concat (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
         </if>
         <if test="start!=null and size!=null">
            limit #{start},#{size}

@@ -43,17 +43,20 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 
 	@Override
 	public int updatePassword(User user) {
-		return userMapper.updateByPrimaryKey(user);
+		return this.updateEntity(user);
+//		return userMapper.updateByPrimaryKey(user);
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return userMapper.selectAll();
+		return this.selectAllEntity();
+//		return userMapper.selectAll();
 	}
 
 	@Override
 	public int addUser(User user) {
-		return userMapper.insert(user);
+		return this.insertEntity(user);
+//		return userMapper.insert(user);
 	}
 
 	@Override
@@ -62,7 +65,7 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 	}
 
 	@Override
-	public PageBean<User> findByPage(int currentPage) {
+	public PageBean<User> findByPage(int currentPage, String inquiry) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		PageBean<User> pageBean = new PageBean<User>();
 
@@ -74,7 +77,7 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 		pageBean.setPageSize(pageSize);
 
 		// 封装总记录数
-		int totalCount = userMapper.selectAll().size();
+		int totalCount = userMapper.selectByInquiry(inquiry).size();
 		pageBean.setTotalCount(totalCount);
 
 		// 封装总页数
@@ -84,6 +87,7 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageBean.getPageSize());
+		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<User> lists = userMapper.findByPage(map);
 		pageBean.setLists(lists);
@@ -93,12 +97,14 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 
 	@Override
 	public int deletByUserId(int usId) {
-		return userMapper.deleteByPrimaryKey(usId);
+		return this.deleteEntity(usId);
+//		return userMapper.deleteByPrimaryKey(usId);
 	}
 
 	@Override
 	public User selectByUserId(int usId) {
-		return userMapper.selectByPrimaryKey(usId);
+		return this.selectOneEntity(usId);
+//		return userMapper.selectByPrimaryKey(usId);
 	}
 
 	@Override

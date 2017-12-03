@@ -3,7 +3,6 @@ $(function(){
 		var usId = $("#usId").val();
 		var value = $(this).val();
 		value = $.trim(value);
-		alert(value)
 		if(value != ""){
 			var url = "/school/user/verifyUser";
 			var args = {"usId":usId,"usEmail":value, "time":new Date()};

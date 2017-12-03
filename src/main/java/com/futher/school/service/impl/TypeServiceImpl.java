@@ -37,16 +37,16 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 
 	@Override
 	public int addType(Type type) {
-		return typeMapper.insert(type);
+		return this.insertEntity(type);
 	}
 
 	@Override
 	public List<Type> getAllTypes() {
-		return typeMapper.selectAll();
+		return this.selectAllEntity();
 	}
 
 	@Override
-	public PageBean<Type> findByPage(int currentPage) {
+	public PageBean<Type> findByPage(int currentPage, String inquiry) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		PageBean<Type> pageBean = new PageBean<Type>();
 
@@ -58,7 +58,7 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		pageBean.setPageSize(pageSize);
 
 		// 封装总记录数
-		int totalCount = typeMapper.selectAll().size();
+		int totalCount = typeMapper.selectByInquiry(inquiry).size();
 		pageBean.setTotalCount(totalCount);
 
 		// 封装总页数
@@ -68,6 +68,7 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageBean.getPageSize());
+		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<Type> lists = typeMapper.findByPage(map);
 		pageBean.setLists(lists);
@@ -77,22 +78,22 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 
 	@Override
 	public int deletType(int tyId) {
-		return typeMapper.deleteByPrimaryKey(tyId);
+		return this.deleteEntity(tyId);
 	}
 
 	@Override
 	public int updateType(Type type) {
-		return typeMapper.updateByPrimaryKey(type);
+		return this.updateEntity(type);
 	}
 
 	@Override
 	public Type selectTypeById(int tyId) {
-		return typeMapper.selectByPrimaryKey(tyId);
+		return this.selectOneEntity(tyId);
 	}
 
 	@Override
 	public void getType(Model model) {
-		List<Type> typeList = typeMapper.selectAll();
+		List<Type> typeList = this.selectAllEntity();
 		List<Type> general =new ArrayList<Type>();
 		List<Type> dynamic =new ArrayList<Type>();
 		List<Type> educate =new ArrayList<Type>();

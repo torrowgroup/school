@@ -52,10 +52,10 @@ public class EducationOfficeController  extends BaseController{
 	@RequestMapping(value = "/showIntegral")
 	public String showTeacherResearch(
 			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int reTypeid,
-			Model model) {
+			String inquiry, Model model) {
 		model.addAttribute("reTypeid", reTypeid);
-		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid));// 回显分页数据
-		System.out.println("messages"+resourceService.findByPage(currentPage, reTypeid));
+		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid, inquiry));// 回显分页数据
+		System.out.println("messages"+resourceService.findByPage(currentPage, reTypeid, inquiry));
 		return "educationoffice/showeducationoffice";
 	}
 

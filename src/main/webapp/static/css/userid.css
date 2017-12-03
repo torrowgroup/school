@@ -1,0 +1,43 @@
+.upload{
+    width:300px;
+    height:280px;
+    position: relative;
+}
+.inside{
+    width: 700px;
+    height: 400px;
+    /*  border: 2px solid lightgreen; */
+    font-family: Microsoft YaHei;
+    font-size: 1.3em;
+    position: relative;
+    top:10em;
+    margin: 0 auto;
+}
+.inside span{
+    display: inline-block;
+    line-height:1.5em;
+    position: relative;
+    width:4.5em;
+    text-align:right;
+    /* border:2px solid black;*/
+}
+.inside input,select{
+    /*   border:2px solid black;*/
+    position: relative;
+    left:0.5em;
+    line-height: 1.6em;
+}
+.left{
+    width: 300px;
+    height: 400px;
+    float:left;
+}
+.right{
+    width:300px;
+    height: 400px;
+    float:right;
+    /*  border: 2px solid lightgreen; */
+    position: relative;
+    top:-1em;
+    left:-2em;
+}

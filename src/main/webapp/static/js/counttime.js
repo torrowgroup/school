@@ -51,6 +51,9 @@ function days(string0){
         }
         return days;
     }
-    console.log(day);
-    return day;
+    var obj = {
+        time:"今天"+myyear+"年"+mymonth+"月"+myday+"日",
+        days:day
+    }
+    return  obj;
 }

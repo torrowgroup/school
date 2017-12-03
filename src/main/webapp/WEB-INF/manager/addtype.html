@@ -3,30 +3,76 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
-	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-	<script type="text/javascript" th:src="@{../static/js/verifyemail.js}"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/formpost.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/iconfont1.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/fileUpload.css}">
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{../static/js/verifyemail.js}"></script>
 </head>
 <body>
-	<span th:text="${news}"></span>
-	<form th:action="@{/type/addType}" method="post">
-		tyPid:<select name="tyPid">
-		 	<option th:value="1">用户</option>
-            <option th:value="2">学校概括</option>
-            <option th:value="3">校园动态</option>
-            <option th:value="4">教育教研</option>
-            <option th:value="5">校园文学</option>
-            <option th:value="6">资源下载</option>
-            <option th:value="7">链接</option>
-            <option th:value="8">通知</option>
-            <option th:value="9">校园风景</option>
-            <option th:value="10">招生招聘</option>
-            <option th:value="11">时间</option>
-            <option th:value="12">校园新闻</option>
-            <option th:value="13">学校信息</option>
-        </select><br>
-		类别名称:<input type="text" name="tyCategoryname" id="tyCategoryname" ><span id="msg"></span><br>
-		<input type="submit" id="submit" value="提交"> 
-	</form>
+<div class="middle">
+    <div class="inside">
+    <span th:text="${news}"></span>
+        <form class="form-horizontal" role="form" th:action="@{/type/addType}" method="post">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="tyPid">
+                        <option th:value="1">用户</option>
+			            <option th:value="2">学校概括</option>
+			            <option th:value="3">校园动态</option>
+			            <option th:value="4">教育教研</option>
+			            <option th:value="5">校园文学</option>
+			            <option th:value="6">资源下载</option>
+			            <option th:value="7">链接</option>
+			            <option th:value="8">通知</option>
+			            <option th:value="9">校园风景</option>
+			            <option th:value="10">招生招聘</option>
+			            <option th:value="11">时间</option>
+			            <option th:value="12">校园新闻</option>
+			            <option th:value="13">学校信息</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">类别名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入类别名" name="tyCategoryname" id="tyCategoryname">
+                           <span id="msg"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="submit" id="submit"class="btn btn-info" value="添加信息">
+                </div>
+            </div>
+        </form>
+    </div><!--inside-->
+</div><!--middle-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<span th:text="${news}"></span> -->
+<!-- 	<form th:action="@{/type/addType}" method="post"> -->
+<!-- 		tyPid:<select name="tyPid"> -->
+<!--         </select><br> -->
+<!-- 		类别名称:<input type="text" name="tyCategoryname" id="tyCategoryname" ><span id="msg"></span><br> -->
+<!-- 		<input type="submit" id="submit" value="提交">  -->
+<!-- 	</form> -->
 </body>
 </html>

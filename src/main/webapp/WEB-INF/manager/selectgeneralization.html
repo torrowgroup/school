@@ -3,67 +3,147 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
-   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-   <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-   <script type="text/javascript">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/font-awesome.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/tableall.css}">
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+  <script type="text/javascript">
 	  function opennews(obj) {
 	    var id = $(obj).attr("id");
  		window.open("previewContent?reId="+id,"newwindow",'height=800,width=600,top=100,left=450,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no')  
 	    }
-   </script>
+  </script>
 </head>
 <body>
-	<span th:if="${messages.totalCount} == 0">还没有任何资源呢</span>
+<div class="middle">
+    <div class="inside">
+      <form th:action="@{/resource/selectResource}" method="post">
+        <div class="search bar">
+        	<input type="hidden" name="reTypeid" th:value="${reTypeid}">
+            <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
+            <button type="submit"></button>
+        </div>
+      </form>
+<span th:if="${messages.totalCount} == 0">还没有学校概括信息呢</span>
 <p th:text="${news}"></p>
-<div th:if="${messages.totalCount} != 0">
-	<table  cellspacing="0" border="1">
-		<caption>资源列表</caption>
-		<thead>
-			<tr>
-				<td>编号</td>
-				<td>类别</td>
-				<td>标题</td>
-				<td>发布人</td>
-				<td>发布时间</td>
-				<td >发布内容</td>
-				<td>操作</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="resource,resourceStat:${messages.lists}">
-				<td th:text="${resource.reId}"></td>
-				<td th:text="${resource.reTypename}"></td>
-				<td th:text="${resource.reTitle}"></td>
-				<td th:text="${resource.rePublisher}"></td>
-				<td th:text="${resource.reReleasedate}"></td>
-				<td ><button th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td>
-				<td><a th:href="@{/resource/toUpdateGeneraLization?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<table border="0" cellspacing="0" cellpadding="0"  width="900px">
-		<tr>
-			<td th:if="${messages.totalPage} > 0">
-			   <span th:if="${messages.currPage} == 1">
-				   <span th:if="${messages.totalPage ==1}">
-							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>					
-				   </span>
-				   <span th:if="${messages.totalPage > 1}">
-							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>
-			   				<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>				
-				   </span>
-			   </span>
-			   <span th:if="${messages.currPage} > 1 ">
-					<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>
-					<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid})}">[上一页]</a>
-					<span th:if="${messages.currPage != messages.totalPage}">
-						<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>					
-					</span>
-			   		<a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid})}">[尾页]</a>
-			   </span>
-			</td>
-		</tr>
-</table>
-</div>
+   <table class="table table-bordered table-hover" th:if="${messages.totalCount} != 0">
+    <caption class="title">学校概括信息列表</caption>
+    <thead>
+      <tr class="success">
+       	<th>编号</th>
+		<th>类别</th>
+		<th>标题</th>
+		<th>发布人</th>
+		<th>发布时间</th>
+		<th>发布内容</th>
+		<th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="resource,resourceStat:${messages.lists}">
+        <td th:text="${resource.reId}"></td>
+		<td th:text="${resource.reTypename}"></td>
+		<td th:text="${resource.reTitle}"></td>
+		<td th:text="${resource.rePublisher}"></td>
+		<td th:text="${resource.reReleasedate}"></td>
+		<td ><button class="btn btn-primary" th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td>
+        <td class="operation"><a th:href="@{/resource/toUpdateGeneraLization?(reId=${resource.reId})}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')" style="color:#E11E05;"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="fenye" th:if="${messages.totalPage} > 0">
+    <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
+      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid},inquiry=${inquiry})}">首页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+        <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid},inquiry=${inquiry})}">下一页</a></li>
+    </ul>
+     <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
+      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid},inquiry=${inquiry})}">首页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid},inquiry=${inquiry})}">上一页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+      <li th:if="${messages.currPage != messages.totalPage}"><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid},inquiry=${inquiry})}">下一页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid},inquiry=${inquiry})}">尾页</a></li>
+    </ul>
+  </div>
+  </div><!--inside-->
+</div><!--middle-->
+
+<!-- 	<table border="0" cellspacing="0" cellpadding="0"  width="900px"> -->
+<!-- 		<tr> -->
+<!-- 			<td th:if="${messages.totalPage} > 0"> -->
+<!-- 			   <span th:if="${messages.currPage} == 1"> -->
+<!-- 				   <span th:if="${messages.totalPage ==1}"> -->
+<!-- 							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a>					 -->
+<!-- 				   </span> -->
+<!-- 				   <span th:if="${messages.totalPage > 1}"> -->
+<!-- 							<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a> -->
+<!-- 			   				<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>				 -->
+<!-- 				   </span> -->
+<!-- 			   </span> -->
+<!-- 			   <span th:if="${messages.currPage} > 1 "> -->
+<!-- 					<a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">[首页]</a> -->
+<!-- 					<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid})}">[上一页]</a> -->
+<!-- 					<span th:if="${messages.currPage != messages.totalPage}"> -->
+<!-- 						<a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>					 -->
+<!-- 					</span> -->
+<!-- 			   		<a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid})}">[尾页]</a> -->
+<!-- 			   </span> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- </table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<span th:if="${messages.totalCount} == 0">还没有任何资源呢</span> -->
+<!-- <p th:text="${news}"></p> -->
+<!-- <div th:if="${messages.totalCount} != 0"> -->
+<!-- 	<table  cellspacing="0" border="1"> -->
+<!-- 		<caption>资源列表</caption> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<td>编号</td> -->
+<!-- 				<td>类别</td> -->
+<!-- 				<td>标题</td> -->
+<!-- 				<td>发布人</td> -->
+<!-- 				<td>发布时间</td> -->
+<!-- 				<td >发布内容</td> -->
+<!-- 				<td>操作</td> -->
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+<!-- 		<tbody> -->
+<!-- 			<tr th:each="resource,resourceStat:${messages.lists}"> -->
+<!-- 				<td th:text="${resource.reId}"></td> -->
+<!-- 				<td th:text="${resource.reTypename}"></td> -->
+<!-- 				<td th:text="${resource.reTitle}"></td> -->
+<!-- 				<td th:text="${resource.rePublisher}"></td> -->
+<!-- 				<td th:text="${resource.reReleasedate}"></td> -->
+<!-- 				<td ><button th:id="${resource.reId}" onclick="opennews(this)" >预览</button></td> -->
+<!-- 				<td><a th:href="@{/resource/toUpdateGeneraLization?(reId=${resource.reId})}">update</a>&nbsp;&nbsp;<a th:href="@{/resource/deletResource?(reId=${resource.reId},reTypepid=${resource.reTypepid})}" onclick="return confirm('确定要删除吗')">Delete</a></td> -->
+<!-- 			</tr> -->
+<!-- 		</tbody> -->
+<!-- 	</table> -->
+<!-- </div> -->
 </body>
 </html>

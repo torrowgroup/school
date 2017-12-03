@@ -17,28 +17,6 @@ import com.futher.school.entity.Message;
 @RequestMapping("/messages")
 @Controller
 public class MessageController extends BaseController {
-	@RequestMapping("toAddMessage")
-	public String toAddMessage() {
-		return "manager/addmessage";
-	}
-
-	@RequestMapping("addMessage")
-	public String addMessage(Message message, MultipartFile file, Model model) {
-		message.setMeReleasedate(new Date());
-		message.setMeStatus("未回复");
-		if (!file.isEmpty()) {
-			String truePath = "static/uploadImg/messagefile";
-			String fileName = uploadMessageFile(file, truePath);
-			message.setMeImage(fileName);
-		}
-		int judge = messageService.addMessage(message);
-		if (judge == 1) {
-			model.addAttribute("news", "添加成功");
-		} else {
-			model.addAttribute("news", "添加失败");
-		}
-		return toAddMessage();
-	}
 
 	@RequestMapping("selectMessage")
 	public String selectMessage(
@@ -101,13 +79,13 @@ public class MessageController extends BaseController {
 		if (replymessage == null) {
 			model.addAttribute("news", "该留言已被删除");
 		} else {
-			if (!file.isEmpty()) {
-				String truePath = "static/uploadImg/messagefile";
-				String fileName = uploadMessageFile(file, truePath);
-				message.setMeImage(fileName);
-			} else {
-				message.setMeImage(replymessage.getMeImage());
-			}
+//			if (!file.isEmpty()) {
+//				String truePath = "static/uploadImg/messagefile";
+//				String fileName = uploadMessageFile(file, truePath);
+//				message.setMeImage(fileName);
+//			} else {
+//				message.setMeImage(replymessage.getMeImage());
+//			}
 			int judge = messageService.updateMessage(message);
 			if (judge == 1) {
 				model.addAttribute("news", "修改成功");
@@ -161,8 +139,8 @@ public class MessageController extends BaseController {
 		response.getWriter().write(request.getContextPath() + "/static/uploadImg/source/" + realName);
 	}
 
-	public String uploadMessageFile(MultipartFile file, String truePath) {
-		String fileName = messageService.uploadResource(file, truePath, request);
-		return fileName;
-	}
+//	public String uploadMessageFile(MultipartFile file, String truePath) {
+//		String fileName = messageService.uploadResource(file, truePath, request);
+//		return fileName;
+//	}
 }
