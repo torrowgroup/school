@@ -45,6 +45,10 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 	public int updatePassword(User user) {
 		return userMapper.updateByPrimaryKey(user);
 	}
+	@Override
+	public int updatePassword(int usId, String password) {
+		return userMapper.updatePassword(usId, password);
+	}
 
 	@Override
 	public List<User> getAllUsers() {

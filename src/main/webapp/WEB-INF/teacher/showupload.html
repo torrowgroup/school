@@ -2,41 +2,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>已上传的文件</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/details.css}">
 </head>
 <body>
-	<div>
-		<table>
-			<tr>
-				<th>文件名</th>
-				<th colspan="2">操作</th>
-			</tr>
-			<tr th:each="resource,resourceStat:${resourceList.lists}">
-				<td th:text="${resource.reContent}">标题</td>
+	<div class="middle">
+       <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th style="text-align: center;">文件名</th>
+                <th style="text-align: center;">发布人</th>
+                <th style="text-align: center;">发布时间</th>
+				<th colspan="2" style="text-align: center;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resource,resourceStat:${resourceList.lists}">
+            <td th:text="${resource.reTitle}"></td>
+			<td th:text="${resource.rePublisher}"></td>
+			<td th:text="${resource.reReleasedate}"></td>
 				<td><a th:href="@{/teacher/download(reId=${resource.reId})}">下载</a></td>
-				<td><a
-					th:href="@{/teacher/deleteResource(reId=${resource.reId},reTypeid=${resource.reTypeid})}">删除</a></td>
-			</tr>
-		</table>
-	</div>
-	<div>
+				<td><a th:href="@{/teacher/deleteResource(reId=${resource.reId},reTypeid=${resource.reTypeid},uri=showupload)}">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
 		<table border="0" cellspacing="0" cellpadding="0" width="900px">
 			<tr>
-				<td th:if="${resourceList.totalPage} > 0"><span
-					th:if="${resourceList.currPage} == 1"> <span
-						th:if="${resourceList.totalPage ==1}"> <a
-							th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
-					</span> <span th:if="${resourceList.totalPage > 1}"> <a
-							th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
-							<a
+				<td th:if="${resourceList.totalPage} > 0">
+				<span th:if="${resourceList.currPage} == 1"> <span
+						th:if="${resourceList.totalPage > 1}"> <a
+							th:href="@{/teacher/showUpload?(currentPage=1),reTypeid=${reTypeid},uri=showupload}">[首页]</a>
+							<span th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
+								<a
+								th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}"
+								th:href="@{/teacher/showUpload?(currentPage=${i},reTypeid=${reTypeid},uri=showupload)}"
+								th:text="${i}">#</a>
+						</span> <a
 							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showupload)}">[下一页]</a>
 					</span>
 				</span> <span th:if="${resourceList.currPage} > 1 "> <a
-						th:href="@{/teacher/showUpload?(uri=showupload,reTypeid=11,currentPage=1)}">[首页]</a>
-						<a
+						th:href="@{/teacher/showUpload?(currentPage=1)}">[首页]</a> <a
 						th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage-1},reTypeid=${reTypeid},uri=showupload)}">[上一页]</a>
-						<span th:if="${resourceList.currPage != resourceList.totalPage}">
+						<span th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
+							<a
+							th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}"
+							th:href="@{/teacher/showUpload?(currentPage=${i},reTypeid=${reTypeid},uri=showupload)}"
+							th:text="${i}">#</a>
+					</span> <span th:if="${resourceList.currPage != resourceList.totalPage}">
 							<a
 							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showupload)}">[下一页]</a>
 					</span> <a
@@ -45,5 +60,20 @@
 			</tr>
 		</table>
 	</div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:inline="javascript">
+		window.onload = function() {
+			var num = [[${resourceList.totalCount}]];
+			n = parseInt(num)
+			/* alert(n); */
+			if (n != 0) {
+				 document.getElementsByClassName('middle')[0].style.display = 'block'; 
+			} else {
+				 document.getElementsByClassName('middle')[0].style.display = 'none'; 
+					 alert("无数据") 
+			}
+		}
+	</script>
 </body>
 </html>

@@ -7,10 +7,7 @@ $.fn.extend({
             alert('参数错误!');
             return;
         }
-        var uploadId = $(this).attr("id");
-        if(uploadId==null||uploadId==""){
-            alert("要设定一个id!");
-        }
+       
         $.each(uploadTools.getInitOption(uploadId), function (key, value) {
             if (opt[key] == null) {
                 opt[key] = value;
@@ -154,7 +151,8 @@ var uploadTools = {
         var btsStr = "";
         btsStr += "<div class='uploadBts'>";
         btsStr += "<div>";
-        btsStr += "<div class='selectFileBt'>选择文件</div>";
+        btsStr += "<input class='selectFileBt' ></div>";
+       /* btsStr += "<div class='selectFileBt'>选择文件</div>";*/
         btsStr += "</div>";
         //上传按钮
         if(!opt.isHiddenUploadBt){

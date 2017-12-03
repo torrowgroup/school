@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>å¢åŠ èµ„æº</title>
+<title>Ôö¼Ó×ÊÔ´</title>
 <link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
 <link th:href="@{/static/css/update.css}" rel="stylesheet"
 	type="text/css">
@@ -11,62 +11,65 @@
 	type="text/css" />
 <link th:href="@{/static/css/fileUpload.css}" rel="stylesheet"
 	type="text/css">
-<link th:href="@{/static/css/formpost.css}" rel="stylesheet"
-	type="text/css">
 <script th:src="@{/static/js/jquery-1.11.0.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/fileUpload.js}"></script>
+
 </head>
 <body>
 	<div class="middle">
 		<p>
 			<span><td th:text="${msg}"></td></span>
 		</p>
-		<form th:action="@{/educationoffice/uploadIntegral?(TypeId=4)}"
+
+		<form th:action="@{/teacher/upload?(typeId=${reTypeid})}"
 			method="post" enctype="multipart/form-data" th:object="${resource}"
 			name="myform">
 			<div class="form-group">
-				<!-- æ–‡ä»¶åç§° -->
-				<label class="form-label">æ–‡ä»¶åç§°</label>
+				<!-- ÎÄ¼şÃû³Æ -->
+				<label class="form-label">ÎÄ¼şÃû³Æ</label>
 				<div class="form-input">
 					<input type="text" name="reTitle" class="oinput" required>
 				</div>
+
 			</div>
 			<div class="form-group">
-				<!-- æ–‡ä»¶ç±»å‹ -->
-				<label class="form-label">æ‰€å±ç±»å‹</label>
+				<!-- ÎÄ¼şÀàĞÍ -->
+				<label class="form-label">ËùÊôÀàĞÍ</label>
 				<div class="form-input">
 					<input type="text" name="reTypepid" th:value="${reTypepid}"
 						readonly="readonly" class="oinput">
 				</div>
 			</div>
-			<!-- æ–‡ä»¶åç§° -->
-			<!-- <div class="form-group up">
-				ä¸Šä¼ æ–‡ä»¶éƒ¨åˆ†
-				<div id="fileUploadContent" class="fileUploadContent"></div>
-				<button type="submit" onclick="testUpload()"
-					class="btn btn-primary tijiao">ä¸Šä¼ æ–‡ä»¶</button>
-			</div> -->
-			<div class="form-group paper">
-				<label class="col-sm-2 control-label">æ–‡ä»¶/ä½œå“</label> <a
-					href="javascript:" class="file">é€‰æ‹©æ–‡ä»¶ <input type="file"
-					name="file" id="file">
-				</a>
+			<!-- ÎÄ¼şÃû³Æ -->
+		<div class="form-group">
+			<input type="button" value="ÇëÑ¡ÔñÎÄ¼ş"
+				onclick="document.myform.picpath.click()" class="form-label"> <input
+				type="file" name="file" id="picpath" style="display: none;"
+				onChange="document.myform.path.value=this.value">
+			<div class="form-input">
+				<input name="path" readonly  class="oinput" >
+				<input type="submit" value="ÉÏ´«"  class="form-label">
 			</div>
+		</div>
 		</form>
+		
 	</div>
+	<!-- middle   -->
+
+
 	<script type="text/javascript">
 		$("#fileUploadContent").initUpload(
 				{
-					"uploadUrl" : "#",//ä¸Šä¼ æ–‡ä»¶ä¿¡æ¯åœ°å€
-					//"size":350,//æ–‡ä»¶å¤§å°é™åˆ¶ï¼Œå•ä½kb,é»˜è®¤ä¸é™åˆ¶
-					//"maxFileNumber":3,//æ–‡ä»¶ä¸ªæ•°é™åˆ¶ï¼Œä¸ºæ•´æ•°
-					//"filelSavePath":"",//æ–‡ä»¶ä¸Šä¼ åœ°å€ï¼Œåå°è®¾ç½®çš„æ ¹ç›®å½•
-					"beforeUpload" : beforeUploadFun,//åœ¨ä¸Šä¼ å‰æ‰§è¡Œçš„å‡½æ•°
-					//"onUpload":onUploadFunï¼Œ//åœ¨ä¸Šä¼ åæ‰§è¡Œçš„å‡½æ•°
-					//autoCommit:true,//æ–‡ä»¶æ˜¯å¦è‡ªåŠ¨ä¸Šä¼ 
+					"uploadUrl" : "#",//ÉÏ´«ÎÄ¼şĞÅÏ¢µØÖ·
+					//"size":350,//ÎÄ¼ş´óĞ¡ÏŞÖÆ£¬µ¥Î»kb,Ä¬ÈÏ²»ÏŞÖÆ
+					//"maxFileNumber":3,//ÎÄ¼ş¸öÊıÏŞÖÆ£¬ÎªÕûÊı
+					//"filelSavePath":"",//ÎÄ¼şÉÏ´«µØÖ·£¬ºóÌ¨ÉèÖÃµÄ¸ùÄ¿Â¼
+					"beforeUpload" : beforeUploadFun,//ÔÚÉÏ´«Ç°Ö´ĞĞµÄº¯Êı
+					//"onUpload":onUploadFun£¬//ÔÚÉÏ´«ºóÖ´ĞĞµÄº¯Êı
+					//autoCommit:true,//ÎÄ¼şÊÇ·ñ×Ô¶¯ÉÏ´«
 					"fileType" : [ 'png', 'jpg', 'docx', 'doc', 'PNG', 'txt',
 							'pdf', 'JPG', 'excel', 'xlsx' ]
-				//æ–‡ä»¶ç±»å‹é™åˆ¶ï¼Œé»˜è®¤ä¸é™åˆ¶ï¼Œæ³¨æ„å†™çš„æ˜¯æ–‡ä»¶åç¼€
+				//ÎÄ¼şÀàĞÍÏŞÖÆ£¬Ä¬ÈÏ²»ÏŞÖÆ£¬×¢ÒâĞ´µÄÊÇÎÄ¼şºó×º
 				});
 		function beforeUploadFun(opt) {
 			opt.otherData = [ {
@@ -76,17 +79,18 @@
 		}
 		function onUploadFun(opt, data) {
 			alert(data);
-			uploadTools.uploadError(opt);//æ˜¾ç¤ºä¸Šä¼ é”™è¯¯
-			uploadTools.uploadSuccess(opt);//æ˜¾ç¤ºä¸Šä¼ æˆåŠŸ
+			uploadTools.uploadError(opt);//ÏÔÊ¾ÉÏ´«´íÎó
+			uploadTools.uploadSuccess(opt);//ÏÔÊ¾ÉÏ´«³É¹¦
 		}
 		function testUpload() {
 			if (document.myform.name.value == "") {
-				alert("æ–‡ä»¶åä¸èƒ½ä¸ºç©º!");
+				alert("ÎÄ¼şÃû²»ÄÜÎª¿Õ!");
 				document.myform.name.focus();
 				return false;
 			}
 			var opt = uploadTools.getOpt("fileUploadContent");
 			uploadEvent.uploadFileEvent(opt);
+
 		}
 	</script>
 </body>

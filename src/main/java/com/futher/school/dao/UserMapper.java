@@ -30,4 +30,8 @@ public interface UserMapper {
 	List<User> findByPage(HashMap<String, Object> map);
 	//根据pid查找教师
 	List<User> selectByPid(@Param("number")int number, @Param("name")String name);
+	//修改密码
+	int updatePassword(@Param("usId") int usId,@Param("usPassword") String usPassword);
+
+	
 }

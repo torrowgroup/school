@@ -1,11 +1,14 @@
+/* body{
+	width:1000px;
+} */
 .middle{
 	width: 800px;
 	/*background: #f1f1f1;*/
 	margin:0 auto;
-	margin-left: 140px;
+	margin-left: 140px; 
 	margin-top: 60px;
+	display:none;
 }
-
 table{
 	margin:20px auto;
 	width: 100%;
@@ -14,5 +17,8 @@ table{
 }
 table th{
 	background: #f1f1f1;
+}
+.modal-content{
+	margin-left:-140px;
 }
  

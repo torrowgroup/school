@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,17 +34,16 @@ import com.futher.school.util.PageBean;
 public class TeacherController extends BaseController {
 	// 文件上传
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(MultipartFile file, HttpServletRequest request, Model model,Resource resource,
-			@RequestParam(defaultValue = "1") int typeId ) throws IOException {
+	public String upload(MultipartFile file, HttpServletRequest request, Model model, Resource resource,
+			@RequestParam(defaultValue = "1") int typeId,int reTypepid) throws IOException {
 		String msg;
-		if (file == null) {
+		if (file.isEmpty()) {
 			msg = "上传失败，上传文件为空";
 		} else {
 			User user = (User) session.getAttribute("teacher");
 			String path = request.getSession().getServletContext().getRealPath("uploading");
 			String fileName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('\\') + 1,
 					file.getOriginalFilename().length());
-
 			File dir = new File(path, fileName);
 			if (!dir.exists()) {
 				dir.mkdirs();
@@ -57,16 +57,18 @@ public class TeacherController extends BaseController {
 			resource.setRePublisher(user.getUsName());
 			resource.setReContent(fileName);
 			resource.setReReleasedate(date);
+			resource.setReTypepid(reTypepid);
 			int boo = resourceService.uploadeEdit(resource);
 			if (boo == 1) {
 				msg="上传成功";
 			} else {
 			msg = "error , 未知错误";
 			}
-
 		}
+		model.addAttribute("reTypepid", reTypepid);
+		model.addAttribute("typeId", typeId);
 		model.addAttribute("msg", msg);
-
+		
 		return "teacher/upload";
 	}
 
@@ -127,20 +129,14 @@ public class TeacherController extends BaseController {
 		} else {
 			msg = "网络错误，上传失败";
 		}
+		model.addAttribute("reTypeid", reTypeid);
+		model.addAttribute("reTypepid", typePid);
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
-
-	// 留言处理
-	@RequestMapping(value = "/leaveMessage")
-	public String leaveMessage() {
-		return null;
-
-	}
-
 	// 删除资源
 	@RequestMapping(value = "/deleteResource")
-	public String deleteResource(int reId, Model model, int reTypeid,
+	public String deleteResource(int reId, Model model, int reTypeid, String uri,
 			@RequestParam(defaultValue = "1", required = false) int currentPage) {
 		String msg;
 		Resource resource = resourceService.selectById(reId);
@@ -152,13 +148,38 @@ public class TeacherController extends BaseController {
 		}
 		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypeid));
 		model.addAttribute("reTypeid", reTypeid);
-		return "teacher/showupload";
+		return "teacher" + "/" + uri;
 	}
-
+	@RequestMapping(value="/showAllResource")
+	public String showAllResource() {
+		return "teacher/showallresource";
+		
+	}
 	@RequestMapping(value = "checkUser")
-	public String checkUser(Model model) {
+	public String checkUser(Model model, String uri) {
 		User user = (User) session.getAttribute("teacher");
+		if(user!=null) {
 		model.addAttribute("user", user);
-		return "teacher/checkuser";
+		}else {
+			uri="login";
+		}
+		return "teacher" + "/" + uri;
+	}
+	@RequestMapping(value = "updatePassword")
+	public String updatePassword( String uri , Model model,User user) {
+		String msg;
+		if(user!=null) {
+		int bo = userService.updatePassword(user);
+		if(bo==1) {
+			msg="密码修改成果，请重新登陆";
+		}else {
+			msg="未知错误 ，密码修改失败";
+		}
+		model.addAttribute("msg", msg);
+		}else {
+			msg="对不起，此用户不存在";
+		}
+		return "login";
+
 	}
 }

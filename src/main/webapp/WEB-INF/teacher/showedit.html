@@ -2,70 +2,91 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title></title>
+<title>已提交的内容</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/bootstrap.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/details.css}">
 </head>
 <body>
+ <form  method="post">
+        <div class="search bar">
+            <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
+            <button type="submit"></button>
+        </div>
+      </form>
 	<div class="middle">
 		<p th:text="${msg}"></p>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th>资源名称</th>
-					<th>发布人</th>
-					<th>发布时间</th>
-					<th>查看详细</th>
-
+					<th style="text-align: center;">资源名称</th>
+					<th style="text-align: center;">发布人</th>
+					<th style="text-align: center;">发布时间</th>
+					<th colspan="2" style="text-align: center;">操作</th>
 				</tr>
 			</thead>
 			<tbody>
+				<!-- -->
 				<tr th:each="resource,resourceStat:${resourceList.lists}">
 					<td th:text="${resource.reTitle}"></td>
 					<td th:text="${resource.rePublisher}"></td>
 					<td th:text="${resource.reReleasedate}"></td>
+					<td><a th:href="@{/teacher/showEditById?(reId=${resource.reId})}" ><p>查看</p></a></td>
 					<td><a
-						th:href="@{/teacher/showEditById?(reId=${resource.reId})}"
-						data-toggle="modal" data-target="#myModal"><p
-								th:text="${resource.reTitle}"></p></a></td>
+						th:href="@{/teacher/deleteResource?(reId=${resource.reId},reTypeid=${reTypeid},uri=showedit)}"><p>删除</p></a></td>
 				</tr>
 			</tbody>
 		</table>
-	 
-<!-- 	<div style="background-color: red; width: 200px;height: 200px; float: right;"  > -->
+
+		<!-- 	<div style="background-color: red; width: 200px;height: 200px; float: right;"  > -->
 		<table border="0" cellspacing="0" cellpadding="0" width="900px">
-		<span th:text="${resourceList.totalPage}"></span>
 			<tr>
-				<td th:if="${resourceList.totalPage} > 0">
-				<span th:if="${resourceList.currPage} == 1"> <span
+				<td th:if="${resourceList.totalPage} > 0"><span
+					th:if="${resourceList.currPage} == 1"> <span
 						th:if="${resourceList.totalPage > 1}"> <a
-							th:href="@{/teacher/showUpload?(currentPage=1),reTypeid=${reTypeid},uri=showUpload}">[首页]</a>
+							th:href="@{/teacher/showUpload?(currentPage=1,reTypeid=${reTypeid},uri=showedit)}">[首页]</a>
 							<span th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
 								<a
 								th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}"
-								th:href="@{/teacher/showUpload?(currentPage=${i},uri=showUpload)}"
+								th:href="@{/teacher/showUpload?(currentPage=${i},reTypeid=${reTypeid},uri=showedit)}"
 								th:text="${i}">#</a>
 						</span> <a
-							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},uri=showUpload)}">[下一页]</a>
+							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showedit)}">[下一页]</a>
 					</span>
 				</span> <span th:if="${resourceList.currPage} > 1 "> <a
-						th:href="@{/teacher/showUpload?(currentPage=1)}">[首页]</a> <a
-						th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage-1},uri=showUpload)}">[上一页]</a>
+						th:href="@{/teacher/showUpload?(currentPage=1,reTypeid=${reTypeid},uri=showedit)}">[首页]</a>
+						<a
+						th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage-1},reTypeid=${reTypeid},uri=showedit)}">[上一页]</a>
 						<span th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
 							<a
 							th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}"
-							th:href="@{/teacher/showUpload?(currentPage=${i},uri=showUpload)}"
+							th:href="@{/teacher/showUpload?(currentPage=${i},reTypeid=${reTypeid},uri=showedit)}"
 							th:text="${i}">#</a>
 					</span> <span th:if="${resourceList.currPage != resourceList.totalPage}">
 							<a
-							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1})}">[下一页]</a>
+							th:href="@{/teacher/showUpload?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid},uri=showedit)}">[下一页]</a>
 					</span> <a
-						th:href="@{/teacher/showUpload?(currentPage=${resourceList.totalPage})}">[尾页]</a>
+						th:href="@{/teacher/showUpload?(currentPage=${resourceList.totalPage},reTypeid=${reTypeid},uri=showedit)}">[尾页]</a>
 				</span></td>
 			</tr>
 		</table>
-		</div>
+	</div>
+
+	<script th:src="@{/static/js/jquery.min.js}"></script>
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:inline="javascript">
+		window.onload = function() {
+			var num = [[${resourceList.totalCount}]];
+			n = parseInt(num)
+			/* alert(n); */
+			if (n != 0) {
+				 document.getElementsByClassName('middle')[0].style.display = 'block'; 
+			} else {
+				 document.getElementsByClassName('middle')[0].style.display = 'none'; 
+				 alert("无数据") 
+			}
+		}
+	</script>
 </body>
 </html>
