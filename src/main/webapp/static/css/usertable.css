@@ -1,0 +1,46 @@
+body{
+    font-family: Tahoma,'microsoft yahei',Arial,sans-serif;
+}
+.middle{
+    width:100%;
+    position: absolute;
+    margin:0 auto;
+}
+.title{
+    text-align: center;
+    font-size: 1.3em;
+    color:black;
+}
+.inside{
+    width:800px;
+    height:100%;
+    position: relative;
+    top:3em;
+    margin:0 auto;
+}
+table .operation img{
+    width:20px;
+    height:20px;
+    font-size: 1.01em;
+}
+table .operation a{
+    text-decoration:none;
+    position: relative;
+    top:0.15em;
+}
+.fenye{
+    margin:0 auto;
+    width:300px;
+    height:40px;
+    /*     border:2px solid red;*/
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td{
+	vertical-align: middle;!important;
+    text-align: center;
+    vertical-align: middle;
+}

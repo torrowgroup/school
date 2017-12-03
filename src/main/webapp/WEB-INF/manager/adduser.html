@@ -1,71 +1,182 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Home</title>
-  <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
-  <script type="text/javascript">
-	  function selectIdCard(){
-	  	var idCard = document.getElementById("usIdentityname").value;
-	  	if (idCard != "manager") {
-	  		document.getElementById("onmanager").style.display="";
-	  	} else {
-	  		document.getElementById("onmanager").style.display="none";
-	  	}
-	  }
-     function modifyContent() {    	
-     	        var introduce = document.getElementById("introduce");   	    
-     	        introduce.value = editor.$txt.html();
-     	          var teachingresults = document.getElementById("teachingresults");   	    
-     	        teachingresults.value = editor2.$txt.html();
-   }
-  </script>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-<script type="text/javascript" th:src="@{../static/js/verifyemailname.js}"></script> 
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{../static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{../static/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{../static/css/formpost.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{../static/css/user.css}">
+<script type="text/javascript">
+	function modifyContent() {
+		var introduce = document.getElementById("introduce");
+		introduce.value = editor.$txt.html();
+		var teachingresults = document.getElementById("teachingresults");
+		teachingresults.value = editor2.$txt.html();
+	}
+</script>
+<!-- <script type="text/javascript" -->
+<!-- 	src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script> -->
+<script type="text/javascript"
+	th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{../static/js/verifyemailname.js}"></script>
 </head>
-<body  onload="selectIdCard()">
-	<p th:text="${news}"></p>
-	<form th:if="${typelist} != null" th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
-		username:<input type="text" name="usEmail" id="usEmail"><span id="msg"></span><br>
-		password:<input type="text" name="usPassword"><br>
-		name:<input type="text" name="usName"><br>
-		sex:<select name="usSex">
-		 	<option th:value="男">男</option>
-            <option th:value="女">女</option>
-        </select><br>
-        idcard:<select name="usIdentityname" id="usIdentityname" onclick="selectIdCard()">
-        	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
-        </select><br>
-		telephone:<input type="text" name="usTel">
-		<input type="file" name="file" id="file">
-		<div id="onmanager" style="display:none;" >
-			<div style="width:600px; height:400px;">
-				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
-     			<div id="editor"  style="width:100%; height:400px;"></div>
-     			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
-  				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
-    			<script type="text/javascript">
-	        		var E = window.wangEditor
-	        		var editor = new E('editor')    		 
-		     		editor.config.uploadImgUrl = '/school/user/uploadImg'
-		     		editor.config.uploadImgFileName = 'myFileName'
-	       		 	editor.create()
-    			</script>
-			</div>
-			<div style="width:600px; height:400px;margin-top:-400px;margin-right:200px; float:right;">
-				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br>
-     			<div id="editor2"  style="width:100%; height:400px;"></div>
-    			<script type="text/javascript">
-	        		var w = window.wangEditor
-	        		var editor2 = new w('editor2')    		 
-		     		editor2.config.uploadImgUrl = '/school/user/uploadImg'
-		     		editor2.config.uploadImgFileName = 'myFileName'
-	       		 	editor2.create()
-    			</script>
-			</div>
+<body>
+	<div class="middle">
+		<div class="inside">
+			<p th:text="${news}"></p>
+			<form class="form-horizontal" role="form" th:if="${typelist} != null"
+				th:action="@{/user/addUser}" method="post"
+				enctype="multipart/form-data" onsubmit="modifyContent()">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">用户名</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" placeholder="请输入邮箱账号"
+							name="usEmail" id="usEmail"><span id="msg"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">性别</label>
+					<div class="col-sm-10">
+						<select class="form-control" name="usSex">
+							<option th:value="男">男</option>
+							<option th:value="女">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">密码</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="请输入密码"
+							name="usPassword">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">姓名</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="请输入姓名"
+							name="usName">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">身份</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="choose" name="usIdentityname">
+							<option th:each="type,typeStat:${typelist}"
+								th:value="${type.tyCategoryname}"
+								th:text="${type.tyCategoryname}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">电话</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="请输入手机号"
+							name="usTel">
+					</div>
+				</div>
+
+				<div class="form-group paper">
+					<label class="col-sm-2 control-label">照片</label> <a
+						href="javascript:" class="file">选择文件 <input type="file"
+						name="file" id="file">
+					</a>
+				</div>
+				<div class="form-group">
+					<div class="editor">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">教师简介：</label>
+						</div>
+						<textarea rows="5" cols="35" name="usIntroduce"
+							style="display:none;" id="introduce"></textarea>
+						<br>
+						<div id="editor" style="width:100%; height:150px;"></div>
+						<script type="text/javascript"
+							th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+						<script type="text/javascript"
+							th:src="@{../static/dist/js/wangEditor.min.js}"></script>
+						<script type="text/javascript">
+							var E = window.wangEditor
+							var editor = new E('editor')
+							editor.config.uploadImgUrl = '/school/user/uploadImg'
+							editor.config.uploadImgFileName = 'myFileName'
+							editor.create()
+						</script>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10">
+						<input class="btn btn-info" value="添加信息" type="submit" id="submit"
+							disabled="disabled">
+					</div>
+				</div>
+			</form>
 		</div>
-		<input type="submit" id="submit" value="添加" disabled="disabled" style="margin-top: 150px;">
-	</form>
+		<!--inside-->
+	</div>
+	<!--middle-->
+
+
+
+
+
+
+
+
+	<!-- 	<p th:text="${news}"></p> -->
+	<!-- 	<form th:if="${typelist} != null" th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()"> -->
+	<!-- 		username:<input type="text" name="usEmail" id="usEmail"><span id="msg"></span><br> -->
+	<!-- 		password:<input type="text" name="usPassword"><br> -->
+	<!-- 		name:<input type="text" name="usName"><br> -->
+	<!-- 		sex:<select name="usSex"> -->
+	<!--         </select><br> -->
+	<!--         idcard:<select name="usIdentityname" id="usIdentityname" onclick="selectIdCard()"> -->
+	<!--         	<option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option> -->
+	<!--         </select><br> -->
+	<!-- 		telephone:<input type="text" name="usTel"> -->
+	<!-- 		<input type="file" name="file" id="file"> -->
+	<!-- 		<div id="onmanager" style="display:none;" > -->
+	<!-- 			<div style="width:600px; height:400px;"> -->
+	<!-- 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br> -->
+	<!--      			<div id="editor"  style="width:100%; height:400px;"></div> -->
+	<!--      			<script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script> -->
+	<!--   				<script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script> -->
+	<!--     			<script type="text/javascript"> -->
+	<!-- // 	        		var E = window.wangEditor -->
+	<!-- // 	        		var editor = new E('editor')    		  -->
+	<!-- // 		     		editor.config.uploadImgUrl = '/school/user/uploadImg' -->
+	<!-- // 		     		editor.config.uploadImgFileName = 'myFileName' -->
+	<!-- // 	       		 	editor.create() -->
+	<!--     			</script> -->
+	<!-- 			</div> -->
+	<!-- 			<div style="width:600px; height:400px;margin-top:-400px;margin-right:200px; float:right;"> -->
+	<!-- 				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br> -->
+	<!--      			<div id="editor2"  style="width:100%; height:400px;"></div> -->
+	<!--     			<script type="text/javascript"> -->
+	<!-- // 	        		var w = window.wangEditor -->
+	<!-- // 	        		var editor2 = new w('editor2')    		  -->
+	<!-- // 		     		editor2.config.uploadImgUrl = '/school/user/uploadImg' -->
+	<!-- // 		     		editor2.config.uploadImgFileName = 'myFileName' -->
+	<!-- // 	       		 	editor2.create() -->
+	<!--     			</script> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 		<input type="submit" id="submit" value="添加" disabled="disabled" style="margin-top: 150px;"> -->
+	<!-- 	</form> -->
 </body>
+<script type="text/javascript">
+	$('#choose').change(function(data) {
+		var value = $(this).val()
+		if (value === 'manager') {
+			$('.editor').slideUp()
+		} else {
+			$('.editor').slideDown()
+		}
+	})
+</script>
 </html>

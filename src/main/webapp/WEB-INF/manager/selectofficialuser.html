@@ -3,34 +3,79 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/font-awesome.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/typetable.css}">
 </head>
 <body>
-	<span th:if="${user} == null">还没有用户呢</span>
+<div class="middle">
+    <div class="inside">
+<span th:if="${user} == null">还没有官方邮箱呢</span>
 <p th:text="${news}"></p>
-<div th:if="${user} != null">
-	<table  cellspacing="0" border="1">
-		<caption>用户列表</caption>
-		<thead>
-			<tr>
-				<td>编号</td>
-				<td>账户</td>
-				<td>密码</td>
-				<td>服务器地址</td>
-				<td>类别</td>
-				<td>操作</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td th:text="${user.usId}"></td>
-				<td th:text="${user.usEmail}"></td>
-				<td th:text="${user.usPassword}"></td>
-				<td th:text="${user.usName}"></td>
-				<td th:text="${user.usIdentityname}"></td>
-				<td><a th:href="@{/user/toUpdateOfficialUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
+   <table class="table table-bordered table-hover" th:if="${user} != null">
+    <caption class="title">官方邮箱列表</caption>
+    <thead>
+      <tr class="success">
+       	<th>编号</th>
+		<th>账户</th>
+		<th>密码</th>
+		<th>服务器地址</th>
+		<th>类别</th>
+		<th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td th:text="${user.usId}"></td>
+		<td th:text="${user.usEmail}"></td>
+		<td th:text="${user.usPassword}"></td>
+		<td th:text="${user.usName}"></td>
+		<td th:text="${user.usIdentityname}"></td>
+        <td class="operation"><a th:href="@{/user/toUpdateOfficialUser?(usId=${user.usId})}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')" style="color:#E11E05;"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+ </div><!--inside-->
+</div><!--middle-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<span th:if="${user} == null">还没有用户呢</span> -->
+<!-- <p th:text="${news}"></p> -->
+<!-- <div th:if="${user} != null"> -->
+<!-- 	<table  cellspacing="0" border="1"> -->
+<!-- 		<caption>用户列表</caption> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<td>编号</td> -->
+<!-- 				<td>账户</td> -->
+<!-- 				<td>密码</td> -->
+<!-- 				<td>服务器地址</td> -->
+<!-- 				<td>类别</td> -->
+<!-- 				<td>操作</td> -->
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+<!-- 		<tbody> -->
+<!-- 			<tr> -->
+<!-- 				<td th:text="${user.usId}"></td> -->
+<!-- 				<td th:text="${user.usEmail}"></td> -->
+<!-- 				<td th:text="${user.usPassword}"></td> -->
+<!-- 				<td th:text="${user.usName}"></td> -->
+<!-- 				<td th:text="${user.usIdentityname}"></td> -->
+<!-- 				<td><a th:href="@{/user/toUpdateOfficialUser?(usId=${user.usId})}">update</a>&nbsp;&nbsp;<a th:href="@{/user/deletUser?(usId=${user.usId})}" onclick="return confirm('确定要删除吗')">Delete</a></td> -->
+<!-- 			</tr> -->
+<!-- 		</tbody> -->
+<!-- 	</table> -->
+<!-- 	</div> -->
 </body>
 </html>

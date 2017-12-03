@@ -5,7 +5,6 @@
     }
     a{
         text-decoration: none;
-        color: #000;
     }
     a:hover{
         text-decoration: none;
@@ -30,12 +29,12 @@ header{
     height:130px;
     margin: 0 auto;
     position: relative;
-    background-image:url(../images/bgm.png);
-    background-size: 100%;
+    background-image: url(../images/schoolimages/head.jpg);
+   
     min-width: 1000px;
 }
     .header{
-        width: 1000px;
+        width: 1100px;
         padding: 0;
         position: relative;
         margin: 0 auto;
@@ -55,7 +54,6 @@ header{
             right:0;
             top:28px;
             color: #000;
-            
         }
             .headerRight p{
                 line-height: 20px;
@@ -66,56 +64,54 @@ header{
 footer{
 width: 100%;
 min-width: 1000px;
-background-color: #18C4C4;
+background-color:#282828;
 margin:0 auto;
 margin-top: 10px;
+border-top: 2px solid #883C92;
 }
-.row{
-    width: 1000px;
-    min-width: 1000px;
-
-}
-.footerBox{
-    width: 1000px;
-    margin: 0 auto;
-    padding-top:20px;
-    /*padding-bottom: 20px;*/
-}
-    .footerBox1{
-        margin-bottom: 20px;
-        width: 250px;
-        float: left;
-    }
-        .footerBox1>img{
-            width: 100%;
-            margin-top: 30px;
-        }
-        .footerBox1>h3{
-            font-size: 14px;
-            color:#000;
-            line-height: 20px;
-        }
-        .footerBox1>p{
-            color: #000;
-            font-size: 14px;
-            line-height: 20px;
-        }
-            .footerBox1>p>a{
-                color: #000;
-                text-decoration: none;
-            }
-            .footerBox1>h3>a{
-                font-size: 14px;
-                color:#000;
-                line-height: 20px;
-            }
-/*导航  部分  */
-    nav{
-        width: 1200px;
-        height: 50px;
+    .f-center{
+        width: 1000px;
+        height: 270px;
         margin: 0 auto;
         font-size: 0px;
-        /* overflow: hidden; */
+    }
+        .f-center>div{
+            width: 25%;
+            height: 100%;
+            display: inline-block;
+            font-size: 12px;
+            vertical-align: top;
+            padding: 40px 0px;
+            color: #fff;
+        }
+        .f-center>div img{
+            width: 80%;
+            margin-top: 20%;
+        }
+        .f-center>div>p{
+            font-size: 14px;
+            font-weight: 500px;
+            /* color: #000; */
+        }
+        .f-center>div>h3{
+            font-size: 16px;
+            /* color: #000; */
+        }
+        .f-center>div a{
+            color: #fff;
+        }
+/*导航  部分  */
+    nav{
+        width: 100%;
+        height: 50px;
+        background-color: #883C92;
+        z-index: 10000;
+        transition: all 0.5s;
+    }
+    nav ul{
+        width: 1200px;
+        margin: 0 auto;
+        font-size: 0px;
     }
         .nav-li{
             width: 11.1%;
@@ -127,20 +123,23 @@ margin-top: 10px;
             vertical-align:top;
             position: relative;
         }
-        .color_nav{
-            background-color: #FFCC00;
+        .nav-li>a{
+            display: block;
+            width: 100%;
+            height: 100%;
             color: #fff;
-        }  
-        .nav-li:hover a{
-            background-color: #FFCC00;
-            color: #fff;
-            border-bottom: 2px solid #fff;
         }
-            .nav-li>a{
-                display: block;
-                width: 100%;
-                height: 100%;
-            }
+        .color_nav>a{
+            background-color: #fff;
+            color: #883C92;
+            border-bottom: 1px solid #fff;
+        }
+        .nav-li:hover a{
+            background-color: #fff;
+            color: #883C92;
+            border-bottom: 1px solid #fff;
+
+        }
             .chances{
                 z-index: 1000;
                 position: absolute;
@@ -156,9 +155,9 @@ margin-top: 10px;
                 width: 100%;
                 height: 50px;
                 display: block;
-                background-color: #FFA200;
+                background-color: #fff;
                 border-bottom: 1px solid #fff;
-                color: #fff;
+                color: #883C92;
             }
 
 
@@ -188,42 +187,89 @@ margin-top: 10px;
         float: left;
         width: 200px;
         position: relative;
-        border-left: 2px solid #641E5D;
+        border-left: 2px solid #883C92;
     }
-    .info-left h3{
-        width: 100%;
-        height:60px;
-        margin: 0;
-        line-height: 60px;
-        padding: 0 30px;
-    }
-    .info-left dt{
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        padding: 0 30px;
-        margin-left:-2px;
-        font-size: 18px;
-        font-weight: 400;
-        border-left: 2px solid #641E5D;
-    }
-    .dt2{
-        background-color: #0ff;
-        border-left: 2px solid #ff0;
-    }
-    .info-left dt:hover{
-        background-color: #0ff;
-        border-left: 2px solid #ff0;
-    }
+        .info-left h3{
+            width: 100%;
+            height:60px;
+            margin: 0;
+            line-height: 60px;
+            padding: 0 30px;
+        }
+        .info-left dt{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 30px;
+            margin-left:-2px;
+            font-size: 18px;
+            font-weight: 400;
+            border-left: 2px solid #883C92;
+        }
+        .dt2{
+            background-color: #883C92;
+            border-left: 2px solid #666;
+            color:#fff;
+        }
+        .dt2 a{
+            color:#fff;
+        }
+        .info-left dt:hover{
+            background-color: #883C92;
+            border-left: 2px solid #666;
+            color: #fff;
+        }
+        .info-left dt:hover a{
+            color: #fff;
+        }
     .info-right{
         width: 1000px;
         padding: 10px 30px;
         float: right;
+        position: relative;
+        min-height: 550px;
     }
-
-
-
-    /* 图片  点击出现 蒙版框的效果*/
+        .info-right .top{
+            margin-bottom: 40px;
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #883C92;
+        }
+        .info-right .top .left{
+            display: inline-block;
+            vertical-align: bottom;            
+            width: 20px;
+            height: 50px;
+            background-color: #883C92;
+            font-size: 22px;
+            color: #fff;
+        }
+        .info-right .top .left-1{
+            width: 300px;
+            height: 50px;
+            vertical-align: bottom;
+            display: inline-block;
+            line-height: 50px;
+            text-align: center;
+            letter-spacing: 5px;
+            font-size: 20px;
+        }
+        .info-right .bottom{
+            margin-top: 20px;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .info-right .bottom a{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: #20a0f0;
+            vertical-align: center;
+            line-height: 40px;
+        }
+    /* 图片  点击出现  蒙版框的效果*/
     .end{
         position: fixed;
         width: 100%;
@@ -240,7 +286,7 @@ margin-top: 10px;
         height: 500px;
         background-color: #dadada;
         border-radius: 4px;
-        border:1px solid #dadada;
+        border:1px solid #863939;
     }
     .end-cneter img{
         padding: 10px 10px;

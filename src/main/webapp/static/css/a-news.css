@@ -1,0 +1,29 @@
+.img{
+    background-image: url('../images/schoolimages/scho-info.jpg');
+}
+.news{
+    width: 80%;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: top;
+    overflow: hidden;
+}
+.news span{
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+}
+.above{
+    width: 50px;
+}
+.back{
+    width: 100px;
+}
+.news a{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+}
+.news a:hover{
+    color:#EF3D3D;
+}

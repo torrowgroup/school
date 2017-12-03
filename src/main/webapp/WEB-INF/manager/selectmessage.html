@@ -3,71 +3,133 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/font-awesome.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/tableall.css}">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
-   <script type="text/javascript">
+   	<script type="text/javascript">
 	  function opennews(obj) {
 	    var id = $(obj).attr("id");
  		window.open("previewMessage?meId="+id,"newwindow",'height=800,width=600,top=100,left=450,toolbar=no,menubar=no,scrollbars=yes, resizable=no,location=no, status=no')  
 	    }
-  </script>
+  	</script>
 </head>
 <body>
-	<span th:if="${messages.totalCount} == 0">还没有任何资源呢</span>
-	<p th:text="${news}"></p>
-	<div th:if="${messages.totalCount} != 0">
-		<table  cellspacing="0" border="1">
-			<caption>留言列表</caption>
-			<thead>
-				<tr>
-					<td>编号</td>
-					<td>标题</td>
-					<td>留言内容</td>
-					<td>名字</td>
-					<td>日期</td>
-					<td>回复状态</td>
-					<td th:if="${meStatus == '已回复'}">回复内容</td>
-					<td th:if="${meStatus == '未回复'}">操作</td>
-					<td>操作</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="message,messageStat:${messages.lists}">
-					<td th:text="${message.meId}"></td>
-					<td th:text="${message.meTitle}"></td>
-					<td><button th:id="${message.meId}" onclick="opennews(this)" >预览</button></td>
-					<td th:text="${message.meAnonymous}"></td>
-					<td th:text="${message.meReleasedate}"></td>
-					<td th:text="${message.meStatus}"></td>
-					<td th:if="${message.meStatus == '已回复'}"><button th:id="${message.meId}" onclick="opennews(this)" >预览</button></td>
-					<td th:if="${message.meStatus == '未回复'}"><a th:href="@{/message/toreplyMessage?(meId=${message.meId})}">回复</a></td>
-					<td><a th:href="@{/message/toUpdateMessage?(meId=${message.meId})}">update</a>&nbsp;&nbsp;<a th:href="@{/message/deletMessage?(meId=${message.meId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table border="0" cellspacing="0" cellpadding="0"  width="900px">
-		<tr>
-			<td th:if="${messages.totalPage} > 0">
-			   <span th:if="${messages.currPage} == 1">
-				   <span th:if="${messages.totalPage ==1}">
-							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>					
-				   </span>
-				   <span th:if="${messages.totalPage > 1}">
-							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>
-			   				<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>				
-				   </span>
-			   </span>
-			   <span th:if="${messages.currPage} > 1 ">
-					<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>
-					<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage-1},replace=${replace})}">[上一页]</a>
-					<span th:if="${messages.currPage != messages.totalPage}">
-						<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>					
-					</span>
-			   		<a th:href="@{/message/selectMessage?(currentPage=${messages.totalPage},replace=${replace})}">[尾页]</a>
-			   </span>
-			</td>
-		</tr>
-</table>
-	</div>
+<div class="middle">
+    <div class="inside">
+     <form th:action="@{/message/selectMessage}" method="post">
+        <div class="search bar">
+            <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
+            <button type="submit"></button>
+        </div>
+      </form>
+<span th:if="${messages.totalCount} == 0">还没有任何留言呢</span>
+<p th:text="${news}"></p>
+   <table class="table table-bordered table-hover" th:if="${messages.totalCount} != 0">
+    <caption class="title">留言列表</caption>
+    <thead>
+      <tr class="success">
+        <th>编号</th>
+		<th>标题</th>
+		<th>留言内容</th>
+		<th>名字</th>
+		<th>日期</th>
+		<th>回复状态</th>
+		<th th:if="${meStatus == '已回复'}">回复内容</th>
+		<th th:if="${meStatus == '未回复'}">操作</th>
+		<th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="message,messageStat:${messages.lists}">
+        <td th:text="${message.meId}"></td>
+		<td th:text="${message.meTitle}"></td>
+		<td><button class="btn btn-primary" th:id="${message.meId}" onclick="opennews(this)" >预览</button></td>
+		<td th:text="${message.meAnonymous}"></td>
+		<td th:text="${message.meReleasedate}"></td>
+		<td th:text="${message.meStatus}"></td>
+		<td th:if="${message.meStatus == '已回复'}"><button class="btn btn-primary" th:id="${message.meId}" onclick="opennews(this)" >预览</button></td>
+		<td th:if="${message.meStatus == '未回复'}"><a th:href="@{/messages/toreplyMessage?(meId=${message.meId})}">回复</a></td>
+        <td class="operation"><a th:href="@{/messages/toUpdateMessage?(meId=${message.meId})}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<a th:href="@{/messages/deletMessage?(meId=${message.meId})}" onclick="return confirm('确定要删除吗')" style="color:#E11E05;"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="fenye" th:if="${messages.totalPage} > 0">
+    <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
+      <li><a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">首页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/message/selectMessage?(currentPage=${i},replace=${replace})}"th:text="${i}">#</a></li>
+        <li><a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">下一页</a></li>
+    </ul>
+     <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
+      <li><a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">首页</a></li>
+      <li><a th:href="@{/message/selectMessage?(currentPage=${messages.currPage-1},replace=${replace})}">上一页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/message/selectMessage?(currentPage=${i},replace=${replace})}"th:text="${i}">#</a></li>
+      <li th:if="${messages.currPage != messages.totalPage}"><a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">下一页</a></li>
+      <li><a th:href="@{/message/selectMessage?(currentPage=${messages.totalPage},replace=${replace})}">尾页</a></li>
+    </ul>
+  </div>
+ </div><!--inside-->
+</div><!--middle-->
+
+<!-- <table border="0" cellspacing="0" cellpadding="0"  width="900px"> -->
+<!-- 		<tr> -->
+<!-- 			<td th:if="${messages.totalPage} > 0"> -->
+<!-- 			   <span th:if="${messages.currPage} == 1"> -->
+<!-- 				   <span th:if="${messages.totalPage ==1}"> -->
+<!-- 							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a>					 -->
+<!-- 				   </span> -->
+<!-- 				   <span th:if="${messages.totalPage > 1}"> -->
+<!-- 							<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a> -->
+<!-- 			   				<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>				 -->
+<!-- 				   </span> -->
+<!-- 			   </span> -->
+<!-- 			   <span th:if="${messages.currPage} > 1 "> -->
+<!-- 					<a th:href="@{/message/selectMessage?(currentPage=1,replace=${replace})}">[首页]</a> -->
+<!-- 					<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage-1},replace=${replace})}">[上一页]</a> -->
+<!-- 					<span th:if="${messages.currPage != messages.totalPage}"> -->
+<!-- 						<a th:href="@{/message/selectMessage?(currentPage=${messages.currPage+1},replace=${replace})}">[下一页]</a>					 -->
+<!-- 					</span> -->
+<!-- 			   		<a th:href="@{/message/selectMessage?(currentPage=${messages.totalPage},replace=${replace})}">[尾页]</a> -->
+<!-- 			   </span> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- </table> -->
+
+<!-- 	<span th:if="${messages.totalCount} == 0">还没有任何资源呢</span> -->
+<!-- 	<p th:text="${news}"></p> -->
+<!-- 	<div th:if="${messages.totalCount} != 0"> -->
+<!-- 		<table  cellspacing="0" border="1"> -->
+<!-- 			<caption>留言列表</caption> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<td>编号</td> -->
+<!-- 					<td>标题</td> -->
+<!-- 					<td>留言内容</td> -->
+<!-- 					<td>名字</td> -->
+<!-- 					<td>日期</td> -->
+<!-- 					<td>回复状态</td> -->
+<!-- 					<td th:if="${meStatus == '已回复'}">回复内容</td> -->
+<!-- 					<td th:if="${meStatus == '未回复'}">操作</td> -->
+<!-- 					<td>操作</td> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 				<tr th:each="message,messageStat:${messages.lists}"> -->
+<!-- 					<td th:text="${message.meId}"></td> -->
+<!-- 					<td th:text="${message.meTitle}"></td> -->
+<!-- 					<td><button th:id="${message.meId}" onclick="opennews(this)" >预览</button></td> -->
+<!-- 					<td th:text="${message.meAnonymous}"></td> -->
+<!-- 					<td th:text="${message.meReleasedate}"></td> -->
+<!-- 					<td th:text="${message.meStatus}"></td> -->
+<!-- 					<td th:if="${message.meStatus == '已回复'}"><button th:id="${message.meId}" onclick="opennews(this)" >预览</button></td> -->
+<!-- 					<td th:if="${message.meStatus == '未回复'}"><a th:href="@{/messages/toreplyMessage?(meId=${message.meId})}">回复</a></td> -->
+<!-- 					<td><a th:href="@{/messages/toUpdateMessage?(meId=${message.meId})}">update</a>&nbsp;&nbsp;<a th:href="@{/messages/deletMessage?(meId=${message.meId})}" onclick="return confirm('确定要删除吗')">Delete</a></td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+		
+		
+<!-- 	</div> -->
 </body>
 </html>

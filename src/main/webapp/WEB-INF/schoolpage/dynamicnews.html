@@ -7,154 +7,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{../static/css/public.css}">
-<!--     <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
-<!--     <link rel="stylesheet" href="./css/public.css"> -->
     <link rel="stylesheet" th:href="@{../static/css/scho-info.css}">
     <title>郑州某中学-校园概括</title>
 </head>
 <body th:if="${typeList} != null">
-    <header>
-        <div class="header">
-            <div class="logo">
-                <img src="../static/images/logo.png" alt="">
-            </div>
-            <div class="headerRight">
-                <p>距离中招<span id="timecuten">200</span>天</p>
-                <p>距离期中/期末100天</p>
-                <p class="hidden-xs">今天2017年10月20号</p>
-            </div>
-        </div>
-    </header>
-    <!-- 头部已结束 -->
-    <!-- 导航开始 -->
-    <nav>
-        <ul>
-            <li class="nav-li"><a href="/school/index">首页</a></li>
-            <li class="nav-li color_nav" th:if="${general} != null and ${oneGeneral} != null">
-                    <a href="" th:href="@{/general/checkGeneral?(tyId=${oneGeneral.tyId})}">学校概况</a>
-                    <div class="chances">
-                    <a href="" th:each="type,typeStat:${general}" th:href="@{/general/checkGeneral?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
-<!--                         <a href="">学校简介</a> -->
-<!--                         <a href="">领导机构</a> -->
-<!--                         <a href="">建校历史</a> -->
-<!--                         <a href="">学校荣誉</a> -->
-<!--                         <a href="">教学成果</a> -->
-<!--                         <a href="">校园风光</a> -->
-                    </div>
-            </li>
-            <li class="nav-li" th:if="${dynamic} != null and ${oneDynamic} != null">
-                    <a href="" th:href="@{/dynamic/checkDynamic?(tyId=${oneDynamic.tyId})}">校园新闻</a>
-                    <div class="chances">
-                    <a href=""th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
-<!--                         <a href="">校园新闻</a> -->
-<!--                         <a href="">教育动态</a> -->
-<!--                         <a href="">德育专题</a> -->
-<!--                         <a href="">学生管理</a> -->
-<!--                         <a href="">学校发展</a> -->
-<!--                         <a href="">教师成长</a> -->
-                    </div>
-            </li>
-            <li class="nav-li" th:if="${educate} != null and ${oneEducate} != null">
-                    <a href="" th:href="@{/educate/checkEducate?(tyId=${oneEducate.tyId})}">教育教研</a>
-                    <div class="chances">
-                    <a href=""th:each="type,typeStat:${educate}" th:href="@{/educate/checkEducate?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
-<!--                         <a>语文教研</a> -->
-<!--                         <a>数学教研</a> -->
-<!--                         <a>外语教研</a> -->
-<!--                         <a>理化生教研</a> -->
-<!--                         <a>政史地教研</a> -->
-<!--                         <a>体音美教研</a> -->
-                    </div>
-            </li>    
-            <li class="nav-li" th:if="${literature} != null and ${oneLiterature} != null">
-                    <a href="" th:href="@{/literature/checkLiterature?(tyId=${oneLiterature.tyId})}">校园文学</a>
-                    <div class="chances">
-                    <a href=""th:each="type,typeStat:${literature}" th:href="@{/literature/checkLiterature?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">学校简介</a>
-<!--                         <a>学生园地</a> -->
-<!--                         <a>教师园地</a> -->
-                    </div>
-            </li>   
-            <li class="nav-li">
-                    <a href="">教师风采</a>
-                    <div class="chances">
-                        <a>教师介绍</a>
-                        <a>教师成果</a>
-                    </div>
-            </li>  
-            <li class="nav-li">
-                    <a href="">校园博客</a>
-                    <div class="chances">
-                      
-                    </div>
-            </li>  
-            <li class="nav-li">
-                    <a href="">校园论坛</a>
-                    <div class="chances">
-                       
-                    </div>
-            </li>  
-            <li class="nav-li" th:if="${downloadType} != null">
-                    <a href="" th:href="@{/download/checkDownload?(tyId=${downloadType.tyId})}">资源下载</a>
-                    <div class="chances">
-                      
-                    </div>
-            </li>        
-        </ul>
-    </nav>
-    <!-- 身体部分开始 -->
-    <section class="p-img img">
-        
-    </section>
+    <div th:include="schoolpage/common :: header"></div>
+          </section>
     <section class="main">
         <section class="content-info">
             <div class="info-left">
                 <h3>校园新闻</h3>
-                <dl>
-                    <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
-<!--                     <a href='#'><dt>教育动态</dt></a> -->
-<!--                     <a href='#'><dt>德育专题</dt></a> -->
-<!--                     <a href='#'><dt>学生管理</dt></a> -->
-<!--                     <a href='#'><dt>学校发展</dt></a> -->
-<!--                     <a href='#'><dt>教师成长</dt></a> -->
+                <dl id="cc">
+                <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
+
                 </dl>
             </div>
-            <div class="info-right" th:if="${dynamicDetails} != null"  th:utext="${dynamicDetails.reContent}" >
-                    
+            <div class="info-right" th:if="${dynamicDetails} != null" >
+                    <section class="top">
+                            <section class="left"></section>
+                            <section class="left-1" id="content_2" th:text="${dynamicDetails.reTypename}">校园风光</section>
+                </section>
+              	<section th:utext="${dynamicDetails.reContent}">
+              	</section>
             </div>
         </section>
 
     </section>
-    <!-- 底部开始 -->
-    <footer>
-        <div class="container footerBox">
-                        <div class="row">
-                            <div class="footerBox1 hidden-xs"><img src="./images/bottomlogo.png" alt=""></div>
-                            <div class="footerBox1" th:if="${schoolNews} != null">
-                                <h3>联系我们:</h3>
-                                 <p>电话：<span th:text="${schoolNews.reTitle}"></span></p>
-                                 <p>邮箱：<span th:text="${schoolNews.reContent}"></span></p>
-                                 <p>地址：<span th:text="${schoolNews.rePublisher}"></span></p>
-                            </div>
-                            <div class="footerBox1" th:if="${linkList} != null">
-                                <h3>友情链接:</h3>
-                                 <p><a target="_blank" th:href="${resource.reContent}" th:each="resource,resourceStat:${linkList}" th:text="${resource.reTitle}">郑州市外国语中学</a></p>
-<!--                                 <p><a href="">郑州市外国语中学</a></p> -->
-<!--                                 <p><a href="">郑州一中</a></p> -->
-<!--                                 <p><a href="">郑州大学附属中学</a></p> -->
-<!--                                 <p><a href="">港区教育单位</a></p> -->
-                            </div>
-                            <div class="footerBox1">
-                                <h3><a href="" th:href="@{/common/toAddMessage}">留言板进入留言</a></h3>
-                                <p>&nbsp;</p>
-                                <p>版权所有@郑州二二一中学</p>
-                                <p>备案信息：<a href="">豫ICP备1111111号</a></p>
-                            </div>
-                        </div>
-            </div>
-</footer>
+    
+<!--     身体部分开始 -->
+<!--     <section class="p-img img"> -->
+        
+<!--     </section> -->
+<!--     <section class="main"> -->
+<!--         <section class="content-info"> -->
+<!--             <div class="info-left"> -->
+<!--                 <h3>校园新闻</h3> -->
+<!--                 <dl> -->
+<!--                     <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a> -->
+<!--                 </dl> -->
+<!--             </div> -->
+<!--             <div class="info-right" th:if="${dynamicDetails} != null"  th:utext="${dynamicDetails.reContent}" > -->
+                    
+<!--             </div> -->
+<!--         </section> -->
+
+<!--     </section> -->
+    <div th:include="schoolpage/common :: footer"></div>
 </body>
 <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
 <script type="text/javascript" th:src="@{../static/js/counttime.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/xidinghe.js}"></script>
+<script type="text/javascript">
+ function chanceStyle(id_1,id_2,class_chan){
+    var dts= $(id_1);
+    for( var i = 0; i < dts.length; i++ ) {
+        dts[i].className =" ";
+        if(dts[i].innerText==$(id_2).text()){
+            dts[i].className = class_chan;
+        }
+    }
+    }   
+    chanceStyle('#cc dt','#content_2','dt2');
+ xiding("#nav-1");
+</script>
 <script type="text/javascript" th:if="${typeList} != null and ${examTime} != null">
 	var examTime = '[[${examTime.reContent}]]';
 	var spantime =days(examTime);

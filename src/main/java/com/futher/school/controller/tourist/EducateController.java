@@ -21,6 +21,8 @@ public class EducateController extends CommonController{
 	@RequestMapping("/checkEducate")
 	public String checkEducate (@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int tyId, Model model) {
 		getLinkAndTime(model);
+		Type type = typeService.selectTypeById(tyId);
+		model.addAttribute("type", type);
 		model.addAttribute("messages", resourceService.findByTypeId(currentPage, tyId));// 回显分页数据
 		return "schoolpage/educate";
 	}

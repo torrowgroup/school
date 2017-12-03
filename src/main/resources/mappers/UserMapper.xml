@@ -11,6 +11,8 @@
     <result column="us_identityName" jdbcType="VARCHAR" property="usIdentityname" />
     <result column="us_tel" jdbcType="VARCHAR" property="usTel" />
     <result column="us_image" jdbcType="VARCHAR" property="usImage" />
+    <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
+    <result column="us_teachingResults" jdbcType="LONGVARCHAR" property="usTeachingresults" />
     <result column="us_spare" jdbcType="VARCHAR" property="usSpare" />
       <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
     <result column="us_teachingResults" jdbcType="LONGVARCHAR" property="usTeachingresults" />
@@ -385,22 +387,49 @@
   </select>
    
   <select id="selectByEmail" parameterType="java.lang.String"  resultMap="BaseResultMap">
-  	select * from tb_user where us_email = #{usEmail}
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+  	 from tb_user where us_email = #{usEmail}
   </select>
   	
   <select id="selectByIdentity" parameterType="java.lang.String"  resultMap="BaseResultMap">
-  	select * from tb_user where us_identityName = #{identityname}
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+  	 from tb_user where us_identityName = #{identityname}
   </select>
   
-   <select id="selectAll" resultMap="BaseResultMap">
-  	select * from tb_user
+   <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+  	 from tb_user
   </select>
   
+  <select id="selectByInquiry" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+  	 from tb_user
+  	 	<if test="inquiry != null">
+  	 	where concat (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
+     	</if>
+  </select>
    <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
+    	,
+    	<include refid="Blob_Column_List" />
         from tb_user
+        <if test="inquiry != null">
+        where concat (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
+        </if>
         <if test="start!=null and size!=null">
            limit #{start},#{size}
         </if>
@@ -408,7 +437,9 @@
     
     <select id="selectByPid" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+   <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from tb_user
     where us_identityName = #{name}
     ORDER BY RAND() LIMIT #{number};

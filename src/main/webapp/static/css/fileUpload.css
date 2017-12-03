@@ -45,6 +45,7 @@
 .fileUploadContent .fileItem .progress>.progress_inner{
     background-color: #0099FF;
     width: 0%;
+ /*    <!--width:0;--> */
     height: 10px;
     border-radius: 10px;
 }
@@ -84,7 +85,11 @@
 }
 .fileUploadContent .uploadBts>div .selectFileBt{
     border: none;
+<<<<<<< HEAD
     background-color: #0099FF;
+=======
+    background-color: #4C91D1;
+>>>>>>> ca3dbdd4fa1c5f3be5e05ffdffd4b5cc1c1d13b8
     color: #FFFFFF;
     padding: 10px;
     font-size: 15px;
@@ -127,6 +132,7 @@
     -moz-transition-timing-function: linear;
     -webkit-transition-timing-function: linear;
     -o-transition-timing-function: linear;
+<<<<<<< HEAD
 }
    .obtn{
      width:80px;
@@ -156,3 +162,6 @@
    .upd:hover{
     background: #2D689F
    }
+=======
+}
+>>>>>>> ca3dbdd4fa1c5f3be5e05ffdffd4b5cc1c1d13b8

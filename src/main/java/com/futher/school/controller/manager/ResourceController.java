@@ -378,9 +378,11 @@ public class ResourceController extends BaseController {
 	@RequestMapping("/selectResource")
 	public String selectResource(
 			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int reTypeid,
-			Model model) {
+			String inquiry, Model model) {
+		model.addAttribute("inquiry", inquiry);
+		session.setAttribute("inquiry", inquiry);
 		model.addAttribute("reTypeid", reTypeid);
-		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid));// 回显分页数据
+		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid,inquiry));// 回显分页数据
 		if (reTypeid == 12) {
 			return "manager/selectresource";
 		} else if (reTypeid == 5 || reTypeid == 6) {
@@ -415,7 +417,8 @@ public class ResourceController extends BaseController {
 				model.addAttribute("news", "删除失败");
 			}
 		}
-		return selectResource(1, reTypepid, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, reTypepid, inquiry, model);
 
 	}
 
@@ -609,7 +612,8 @@ public class ResourceController extends BaseController {
 				model.addAttribute("news", "修改失败");
 			}
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -643,7 +647,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -678,7 +683,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -716,7 +722,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -764,7 +771,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -790,7 +798,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**
@@ -811,9 +820,9 @@ public class ResourceController extends BaseController {
 					resource.setReSpare(oldResource.getReSpare());
 				} else {
 					String truePath = "static/uploadImg/schoolview";
+					resourceService.deletResource(oldResource.getReSpare(), truePath, request);
 					String fileName = uploadOpus(file, truePath);
 					resource.setReSpare(fileName);
-					resourceService.deletResource(oldResource.getReSpare(), truePath, request);
 				}
 				int judge = resourceService.updateResource(resource);
 				if (judge == 1) {
@@ -825,7 +834,8 @@ public class ResourceController extends BaseController {
 		} else {
 			model.addAttribute("", "修改失败,该修改的类型不存在");
 		}
-		return selectResource(1, resource.getReTypepid(), model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectResource(1, resource.getReTypepid(), inquiry, model);
 	}
 
 	/**

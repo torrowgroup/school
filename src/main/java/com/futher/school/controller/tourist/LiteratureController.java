@@ -24,6 +24,8 @@ public class LiteratureController extends CommonController{
 	@RequestMapping("/checkLiterature")
 	public String checkLiterature(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int tyId, Model model) {
 		getLinkAndTime(model);
+		Type type = typeService.selectTypeById(tyId);
+		model.addAttribute("type", type);
 		model.addAttribute("messages", resourceService.findByTypeId(currentPage, tyId));// 回显分页数据
 		return "schoolpage/literature";
 	}

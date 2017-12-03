@@ -3,15 +3,64 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/formpost.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/iconfont1.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/fileUpload.css}">
 </head>
 <body>
-	<p th:text="${news}"></p>
-	<form th:if="${officialemail} != null" th:action="@{/user/addOfficialUser}" method="post">
-		<input type="hidden" name="usIdentityname" th:value="${officialemail}">
-		官方邮箱:<input type="text" name="usEmail" id="usEmail">
-		邮箱授权码:<input type="text" name="usPassword"><br>
-		smtp服务器地址:<input type="text" name="usName"><br>
-		<input type="submit" id="submit" value="添加">
-	</form>
+<div class="middle">
+    <div class="inside">
+    <span th:text="${news}"></span>
+        <form class="form-horizontal" role="form" th:if="${officialemail} != null" th:action="@{/user/addOfficialUser}" method="post">
+           <input type="hidden" name="usIdentityname" th:value="${officialemail}">
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">官方邮箱</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入官方邮箱" name="usEmail">
+                </div>
+            </div>
+             <div class="form-group">
+                <label  class="col-sm-2 control-label">邮箱授权码</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入邮箱授权码" name="usPassword">
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">smtp服务器地址</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入smtp服务器地址" name="usName">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="submit" id="submit"class="btn btn-info" value="添加信息">
+                </div>
+            </div>
+        </form>
+    </div><!--inside-->
+</div><!--middle-->
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<p th:text="${news}"></p> -->
+<!-- 	<form th:if="${officialemail} != null" th:action="@{/user/addOfficialUser}" method="post"> -->
+<!-- 		<input type="hidden" name="usIdentityname" th:value="${officialemail}"> -->
+<!-- 		官方邮箱:<input type="text" name="usEmail" id="usEmail"> -->
+<!-- 		邮箱授权码:<input type="text" name="usPassword"><br> -->
+<!-- 		smtp服务器地址:<input type="text" name="usName"><br> -->
+<!-- 		<input type="submit" id="submit" value="添加"> -->
+<!-- 	</form> -->
 </body>
 </html>

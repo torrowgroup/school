@@ -41,7 +41,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateMyNews")
 	public String updateMyNews(@ModelAttribute("form") User user, Model model) {
 		User usernews = (User) session.getAttribute("manager");
-		if (usernews == null) {
+		if (usernews != null) {
 			if (user.getUsEmail().equals(usernews.getUsEmail())) {
 				int judge = userService.updatePassword(user);
 				if (judge == 1) {
@@ -131,15 +131,15 @@ public class UserController extends BaseController {
 		if (list.isEmpty()) {
 			model.addAttribute("news", "请添加用户类型");
 		} else {
+			int sign = 0; 
 			for (int i = 0; i < list.size(); i++) {
-				int sign = 0; 
 				if (list.get(i).getTyCategoryname().equals("officialemail")) {
 					model.addAttribute("officialemail", list.get(i).getTyCategoryname());
 					sign = 1;
 				}
-				if (sign == 0) {
-					model.addAttribute("news", "请添加官方邮箱类型");
-				}
+			}
+			if (sign == 0) {
+				model.addAttribute("news", "请添加官方邮箱类型");
 			}
 //			model.addAttribute("typelist", list);
 		}
@@ -181,8 +181,10 @@ public class UserController extends BaseController {
 
 	@RequestMapping("selectUser")
 	public String selectUser(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage,
-			Model model) {
-		model.addAttribute("messages", userService.findByPage(currentPage));// 回显分页数据
+			String inquiry, Model model) {
+		model.addAttribute("inquiry", inquiry);
+		session.setAttribute("inquiry", inquiry);
+		model.addAttribute("messages", userService.findByPage(currentPage, inquiry));// 回显分页数据
 		return "manager/selectuser";
 	}
 
@@ -204,7 +206,8 @@ public class UserController extends BaseController {
 				}
 			}
 		}
-		return selectUser(1, model);
+	String inquiry = (String) session.getAttribute("inquiry");
+		return selectUser(1, inquiry, model);
 
 	}
 
@@ -283,17 +286,18 @@ public class UserController extends BaseController {
 					user.setUsImage(olduser.getUsImage());
 				} else {
 					uploadImage(user, file);
-					user.setUsIdentityid(type.getTyId());
-					int judge = userService.updatePassword(user);
-					if (judge == 1) {
-						model.addAttribute("news", "添加成功");
-					} else {
-						model.addAttribute("news", "添加失败");
-					}
+				}
+				user.setUsIdentityid(type.getTyId());
+				int judge = userService.updatePassword(user);
+				if (judge == 1) {
+					model.addAttribute("news", "添加成功");
+				} else {
+					model.addAttribute("news", "添加失败");
 				}
 			}
 		}
-		return selectUser(1, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectUser(1, inquiry, model);
 	}
 
 	@RequestMapping(value = "/uploadImg")

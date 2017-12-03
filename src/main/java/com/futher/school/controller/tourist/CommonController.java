@@ -37,14 +37,9 @@ public class CommonController extends BaseController{
 	 * @return 添加留言
 	 */
 	@RequestMapping("addMessage")
-	public String addMessage(Message message, MultipartFile file, Model model) {
+	public String addMessage(Message message, Model model) {
 		message.setMeReleasedate(new Date());
 		message.setMeStatus("未回复");
-		if (!file.isEmpty()) {
-			String truePath = "static/uploadImg/messagefile";
-			String fileName = uploadMessageFile(file, truePath);
-			message.setMeImage(fileName);
-		}
 		int judge = messageService.addMessage(message);
 		if (judge == 1) {
 			model.addAttribute("news", "添加成功");

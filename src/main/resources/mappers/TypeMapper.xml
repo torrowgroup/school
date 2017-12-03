@@ -208,19 +208,32 @@
     where ty_pid = #{tyPid}
   </select>
   
-    <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_type
   </select>
   
-     <!-- 根据分页数据start 和size查询数据 -->
+   <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from tb_type
+        <if test="inquiry != null">
+        where concat (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
+     	</if> 
         <if test="start!=null and size!=null">
            limit #{start},#{size}
         </if>
     </select>
+    
+  <select id="selectByInquiry" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_type
+     <if test="inquiry != null">
+        where concat (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
+     </if> 
+  </select>
+    
 </mapper>

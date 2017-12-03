@@ -56,11 +56,11 @@ public class TeacherResearch extends BaseController {
 	@RequestMapping(value = "/showTeacherResearch")
 	public String showTeacherResearch(
 			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int reTypeid,
-			Model model) {
+			String inquiry, Model model) {
 		System.out.println(reTypeid+"从前台获取到的reTypeId");
 		model.addAttribute("reTypeid", reTypeid);
-		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid));// 回显分页数据
-		System.out.println("messages"+resourceService.findByPage(currentPage, reTypeid));
+		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid, inquiry));// 回显分页数据
+		System.out.println("messages"+resourceService.findByPage(currentPage, reTypeid, inquiry));
 		return "teachergroup/showallresource";
 	}
 	@RequestMapping(value = "/showResearchById")

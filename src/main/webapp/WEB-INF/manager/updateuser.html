@@ -3,20 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/formpost.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{../static/css/user.css}">
   <link rel="stylesheet" type="text/css" th:href="@{../static/dist/css/wangEditor.min.css}">
   <script type="text/javascript" th:src="@{../static/dist/js/lib/jquery-1.10.2.min.js}"></script>
   <script type="text/javascript" th:src="@{../static/dist/js/wangEditor.min.js}"></script>
    <script type="text/javascript" th:src="@{../static/js/updateuser.js}"></script>
   <script type="text/javascript" th:if="${usernews} != null and ${typelist} != null">  
-	window.onload=function(){
-	  	var idCard = document.getElementById("usIdentityname").value;
-	  	if (idCard != "manager") {
-	  		document.getElementById("onmanager").style.display="";
-	  	} else {
-	  		document.getElementById("onmanager").style.display="none";
-	  	}
-	  }
-	  
     window.onload=function(){    	
      	        var introduce = document.getElementById("introduce");   	    
      	        introduce.value = editor.$txt.html();
@@ -24,50 +18,158 @@
      	        teachingresults.value = editor2.$txt.html();
    }
 </script>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
 </head>
 <body>
-	<span th:text="${news}"></span>
-	<form th:if="${usernews} != null and ${typelist} != null" th:action="@{/user/updateUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
-		<input type="hidden" id="usId" name="usId" th:value="${usernews.usId}">
-		username:<input type="text" name="usEmail" id="usEmail" th:value="${usernews.usEmail}"><span id="msg"></span><br>
-		password:<input type="text" name="usPassword" th:value="${usernews.usPassword}"><br>
-		name:<input type="text" name="usName" th:value="${usernews.usName}"><br>
-		sex:<select name="usSex" id="sex">
-		 	<option th:switch="${usernews.usSex}" th:case="'男'" th:value="男" th:text="男">男</option>
-            <option th:switch="${usernews.usSex}" th:case="'女'" th:value="女" th:text="女">女</option>
-        </select><br>
-        idcard:<select name="usIdentityname" id="usIdentityname" onclick="myfunction()" >
-        	<option th:each="type,typeStat:${typelist}" th:switch="${usernews.usIdentityname}" th:case="${type.tyCategoryname}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option>
-        </select>
-		telephone:<input type="text" name="usTel" th:value="${usernews.usTel}"><br>
-		图片:<input type="file" name="file" id="file">
-		<div id="onmanager" style="display:none;" >
-			<div style="width:600px; height:400px;">
-				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
-     			<div id="editor"  style="width:400px; height:400px;" th:text="${usernews.usIntroduce}"></div>
+<div class="middle">
+    <div class="inside">
+    <p th:text="${news}"></p>
+      <form class="form-horizontal" role="form" th:if="${usernews} != null and ${typelist} != null" th:action="@{/user/updateUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
+        <input type="hidden" id="usId" name="usId" th:value="${usernews.usId}">
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">用户名</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control"
+                   placeholder="请输入邮箱账号" name="usEmail" id="usEmail" th:value="${usernews.usEmail}"><span id="msg"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">性别</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="usSex">
+             <option th:value="男" th:selected="${usernews.usSex=='男'}">男</option>
+             <option th:value="女" th:selected="${usernews.usSex=='女'}">女</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">密码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入密码" name="usPassword" th:value="${usernews.usPassword}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入姓名" name="usName" th:value="${usernews.usName}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">身份</label>
+          <div class="col-sm-10">
+<!--           <input type="hidden" value="123" id="chose"> -->
+            <select class="form-control" id="choose" name="usIdentityname">
+             <option th:each="type,typeStat:${typelist}" th:value="${type.tyCategoryname}" th:selected="${usernews.usIdentityname} == ${type.tyCategoryname}"  th:text="${type.tyCategoryname}"></option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">电话</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   placeholder="请输入手机号" name="usTel" th:value="${usernews.usTel}">
+          </div>
+        </div>
+        
+        <div class="form-group paper">
+        <label  class="col-sm-2 control-label">照片</label>
+          <a href="javascript:" class="file">选择文件
+            <input type="file" name="file" id="file">
+          </a>
+        </div>
+         <div class="form-group">
+          <div class="editor">
+             <div class="form-group">
+              <label  class="col-sm-3 control-label">教师简介：</label>
+             </div>
+        	   <textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
+     			<div id="editor"  style="width:100%; height:150px;" th:utext="${usernews.usIntroduce}"></div>
     			<script type="text/javascript">
 	        		var E = window.wangEditor
 	        		var editor = new E('editor')    		 
-		     		editor.config.uploadImgUrl = 'user/uploadImg'
+		     		editor.config.uploadImgUrl = '/school/user/uploadImg'
 		     		editor.config.uploadImgFileName = 'myFileName'
 	       		 	editor.create()
     			</script>
-			</div>
-			<div style="width:600px; height:400px;margin-top:-400px;margin-right:200px; float:right;">
-				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br>
-     			<div id="editor2"  style="width:400px; height:400px;" th:text="${usernews.usTeachingresults}"></div>
-    			<script type="text/javascript">
-	        		var E = window.wangEditor
-	        		var editor2 = new E('editor2')    		 
-		     		editor.config.uploadImgUrl = 'user/uploadImg'
-		     		editor.config.uploadImgFileName = 'myFileName'
-	       		 	editor2.create()
-    			</script>
-			</div>
-		</div>
-		<input type="submit" id="submit" value="修改" style="margin-top: 300px;">
-	</form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <input class="btn btn-info" value="修改信息" type="submit" id="submit">
+          </div>
+        </div>
+      </form>
+    </div><!--inside-->
+  </div><!--middle-->
+
+
+
+
+
+
+
+
+
+
+<!-- 	<span th:text="${news}"></span> -->
+<!-- 	<form th:if="${usernews} != null and ${typelist} != null" th:action="@{/user/updateUser}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()"> -->
+<!-- 		<input type="hidden" id="usId" name="usId" th:value="${usernews.usId}"> -->
+<!-- 		username:<input type="text" name="usEmail" id="usEmail" th:value="${usernews.usEmail}"><span id="msg"></span><br> -->
+<!-- 		password:<input type="text" name="usPassword" th:value="${usernews.usPassword}"><br> -->
+<!-- 		name:<input type="text" name="usName" th:value="${usernews.usName}"><br> -->
+<!-- 		sex:<select name="usSex" id="sex" > -->
+<!--         </select><br> -->
+<!--         idcard:<select name="usIdentityname" id="usIdentityname" onclick="myfunction()" th:switch="${usernews.usIdentityname}"> -->
+<!--         	<option th:each="type,typeStat:${typelist}" th:case="${type.tyCategoryname}" th:value="${type.tyCategoryname}" th:text="${type.tyCategoryname}"></option> -->
+<!--         </select> -->
+<!-- 		telephone:<input type="text" name="usTel" th:value="${usernews.usTel}"><br> -->
+<!-- 		图片:<input type="file" name="file" id="file"> -->
+<!-- 		<div id="onmanager" style="display:none;" > -->
+<!-- 			<div style="width:600px; height:400px;"> -->
+<!-- 				<textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br> -->
+<!--      			<div id="editor"  style="width:400px; height:400px;" th:text="${usernews.usIntroduce}"></div> -->
+<!--     			<script type="text/javascript"> -->
+<!-- // 	        		var E = window.wangEditor -->
+<!-- // 	        		var editor = new E('editor')    		  -->
+<!-- // 		     		editor.config.uploadImgUrl = 'user/uploadImg' -->
+<!-- // 		     		editor.config.uploadImgFileName = 'myFileName' -->
+<!-- // 	       		 	editor.create() -->
+<!--     			</script> -->
+<!-- 			</div> -->
+<!-- 			<div style="width:600px; height:400px;margin-top:-400px;margin-right:200px; float:right;"> -->
+<!-- 				<textarea rows="5" cols="35" name="usTeachingresults"  style="display:none;" id="teachingresults"></textarea><br> -->
+<!--      			<div id="editor2"  style="width:400px; height:400px;" th:text="${usernews.usTeachingresults}"></div> -->
+<!--     			<script type="text/javascript"> -->
+<!-- // 	        		var E = window.wangEditor -->
+<!-- // 	        		var editor2 = new E('editor2')    		  -->
+<!-- // 		     		editor.config.uploadImgUrl = 'user/uploadImg' -->
+<!-- // 		     		editor.config.uploadImgFileName = 'myFileName' -->
+<!-- // 	       		 	editor2.create() -->
+<!--     			</script> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<input type="submit" id="submit" value="修改" style="margin-top: 300px;"> -->
+<!-- 	</form> -->
 </body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript">
+      $(function(){  
+        var value = $('#choose').val()
+        if(value == 'manager'){
+            $('.editor').slideUp()
+        } else {
+            $('.editor').slideDown()
+        }
+      });
+     $('#choose').change(function(data){
+        var value = $(this).val()
+        if(value == 'manager'){
+            $('.editor').slideUp()
+        } else {
+            $('.editor').slideDown()
+        }
+    })  
+  </script>
 </html>

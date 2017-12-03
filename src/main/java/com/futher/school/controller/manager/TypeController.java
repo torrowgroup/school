@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.Type;
 
+import net.sf.json.JSONArray;
+
 @RequestMapping("/type")
 @Controller()
 public class TypeController extends BaseController {
@@ -65,8 +67,10 @@ public class TypeController extends BaseController {
 
 	@RequestMapping("/selectType")
 	public String selectType(@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage,
-			Model model) {
-		model.addAttribute("messages", typeService.findByPage(currentPage));// 回显分页数据
+			String inquiry,	Model model) {
+		model.addAttribute("inquiry", inquiry);
+		session.setAttribute("inquiry", inquiry);
+		model.addAttribute("messages", typeService.findByPage(currentPage, inquiry));// 回显分页数据
 		return "manager/selecttype";
 	}
 
@@ -83,7 +87,8 @@ public class TypeController extends BaseController {
 				model.addAttribute("news", "删除失败");
 			}
 		}
-		return selectType(1, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectType(1, inquiry, model);
 	}
 
 	@RequestMapping("/toUpdateType")
@@ -117,7 +122,8 @@ public class TypeController extends BaseController {
 				model.addAttribute("news", "修改失败,已有此类型");
 			}
 		}
-		return selectType(1, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectType(1, inquiry, model);
 	}
 
 	@RequestMapping("/verifyType")
