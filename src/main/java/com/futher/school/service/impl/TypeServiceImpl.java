@@ -97,6 +97,7 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		List<Type> dynamic =new ArrayList<Type>();
 		List<Type> educate =new ArrayList<Type>();
 		List<Type> literature =new ArrayList<Type>();
+		List<Type> teacherGrow =new ArrayList<Type>();
 		if (!(typeList.isEmpty())) {
 			for (int i =0; i < typeList.size(); i++) {
 				if (typeList.get(i).getTyPid() == 2) {
@@ -105,15 +106,20 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 				} else if (typeList.get(i).getTyPid() == 3 || typeList.get(i).getTyPid() == 12|| typeList.get(i).getTyPid() == 8) {
 					dynamic.add(typeList.get(i));
 					model.addAttribute("oneDynamic", dynamic.get(0));
+					//wqj加 教研教学 勿删！！！
 				} else if (typeList.get(i).getTyPid() == 4) {
 					educate.add(typeList.get(i));
 					model.addAttribute("oneEducate", educate.get(0));
+					//	wqj加 作品展示 勿删！！！
 				} else if (typeList.get(i).getTyPid() == 5) {
 					literature.add(typeList.get(i));
 					model.addAttribute("oneLiterature", literature.get(0));
 				}  else if (typeList.get(i).getTyPid() == 6) {
 					model.addAttribute("downloadType", typeList.get(i));
-				}
+					//wqj加 教师成长· 勿删 ！！！
+				}else if (typeList.get(i).getTyPid() == 10) {
+					teacherGrow.add(typeList.get(i));
+				} 
 			}
 		}
 		model.addAttribute("typeList", typeList);
@@ -121,12 +127,7 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		model.addAttribute("dynamic", dynamic);
 		model.addAttribute("educate", educate);
 		model.addAttribute("literature", literature);
+		model.addAttribute("teacherGrow", teacherGrow);
 	}
-
-//	@Override
-//	public Type selectTypeByPid(int tyPid) {
-//		return null;
-//	}
-
 }
 

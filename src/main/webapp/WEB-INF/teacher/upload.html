@@ -15,11 +15,11 @@
 <script type="text/javascript" th:src="@{/static/js/fileUpload.js}"></script>
 </head>
 <body>
-	<div class="middle">
+	<div class="middle" style="margin-top: 100px;">
 		<p>
 			<span><td th:text="${msg}"></td></span>
 		</p>
-		<form th:action="@{/teacher/upload?(typeId=${reTypeid})}"
+		<form th:action="@{/teacher/upload?(typeId=${reTypeid},reTypepid=${reTypepid})}"
 			method="post" enctype="multipart/form-data" th:object="${resource}"
 			name="myform">
 			<div class="form-group">
@@ -31,7 +31,7 @@
 			<div class="form-group" >
 				<label class="form-label">所属类型</label>
 				<div class="form-input">
-					<input type="text" name="reTypepid" th:value="${reTypepid}"
+					<input type="text" name="reTypename" th:value="${typeName}"
 						readonly="readonly" class="oinput">
 				</div>
 			</div>

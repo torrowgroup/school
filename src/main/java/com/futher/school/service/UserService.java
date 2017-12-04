@@ -43,7 +43,6 @@ public interface UserService {
 	 * @param password
 	 * @return
 	 */
-
 	/**
 	 * @param usId
 	 * @param password

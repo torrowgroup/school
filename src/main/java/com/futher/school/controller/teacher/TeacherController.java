@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.futher.school.base.BaseController;
 
 import com.futher.school.entity.Resource;
+import com.futher.school.entity.Type;
 import com.futher.school.entity.User;
 import com.futher.school.util.PageBean;
 
@@ -99,13 +100,12 @@ public class TeacherController extends BaseController {
 
 	// 获取所有上传所有资源详细
 	@RequestMapping("/showUpload")
-	public String showUpload(Model model, String uri, int reTypeid,
-			@RequestParam(defaultValue = "1", required = false) int currentPage) {
-		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypeid));
-		model.addAttribute("reTypeid", reTypeid);
+	public String showUpload(Model model, String uri, int reTypepid,
+			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry) {
+		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid,inquiry));
+		model.addAttribute("reTypeid", reTypepid);
 		return "teacher" + "/" + uri;
 	}
-
 	// 获取单个Edit
 	@RequestMapping("/showEditById")
 	public String showEditById(Model model, int reId) {
@@ -137,7 +137,7 @@ public class TeacherController extends BaseController {
 	// 删除资源
 	@RequestMapping(value = "/deleteResource")
 	public String deleteResource(int reId, Model model, int reTypeid, String uri,
-			@RequestParam(defaultValue = "1", required = false) int currentPage) {
+			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry) {
 		String msg;
 		Resource resource = resourceService.selectById(reId);
 		if (resource == null) {
@@ -146,7 +146,7 @@ public class TeacherController extends BaseController {
 			int boo = resourceService.deletResource(reId);
 			msg = "文件上传成功";
 		}
-		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypeid));
+		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypeid, inquiry));
 		model.addAttribute("reTypeid", reTypeid);
 		return "teacher" + "/" + uri;
 	}
@@ -181,5 +181,23 @@ public class TeacherController extends BaseController {
 		}
 		return "login";
 
+	}
+	@RequestMapping(value="getType")
+	public String getType(Model model) {
+		List<Type> typeList = typeService.getAllTypes();
+		if (typeList == null) {
+			model.addAttribute("typeList", typeList);
+		} else {
+			resourceService.getAllResource(typeList, model);
+			typeService.getType(model);
+		}
+		return "teacher/index";
+	}
+	@RequestMapping(value="search")
+	public String search(Model model, @RequestParam String uri, int  reTypepid,
+			@RequestParam(defaultValue = "1", required = false) Integer currentPage,String inquiry) {
+		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid,inquiry));
+		model.addAttribute("reTypeid", reTypepid);
+		return "teacher" + "/" + uri;
 	}
 }

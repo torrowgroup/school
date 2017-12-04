@@ -2,35 +2,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>教学成果</title>
-    <link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
-    <link  href="@{/static/css/harvest.css}" rel="stylesheet" type="text/css">
+<meta charset="UTF-8">
+<title>教学成果</title>
+<link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+<link th:href="@{/static/css/edit.css}" rel="stylesheet">
 </head>
 <body>
-  <div class="middle" style="margin-left: 160px; margin-top:50px;	">
-  <p><span th:text="${msg}" style="color: black; font-size: 20px;"></span></p>
-  <form th:action="@{/teacher/uploadEdit?(reTypeid=${reTypeid},typePid=${reTypepid})}" method="post" enctype="multipart/form-data" th:object="${resource}" name="myform">
-  		<td ><span style="color: black; font-size: 15px; font-weight: 40	0;">标题</span><input type="text" name="reTitle" ></td>
-        <div class="contain" style="width: 800px; margin-top: 20px;;"><td colspan="4"><div id="div1"></div> <textarea style="display: none" name="reContent" id="edit"></textarea></td></div>
-        <div class="form-group">
-         <button class="btn btn-primary" onclick="editor.txt.clear()" type="reset">清&nbsp;&nbsp;&nbsp;&nbsp;空</button>
-        <button class="btn btn-primary" onclick="sub()" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-        </div>
-    </form>
-      <script th:src="@{/static/fonts/wangEditor.min.js}"></script>
-	<script type="text/javascript">
-		var E = window.wangEditor
-		var editor = new E('#div1')
-		editor.customConfig.uploadImgShowBase64 = true
-		editor.create()
-		function sub() {
-			editor.customConfig.uploadImgServer = '/uploading'
-			editor.customConfig.uploadFileName = 'yourFileName'
-			var edit = document.getElementById("edit");
-			edit.value = editor.txt.html();
-		}
-	</script>
-  </div><!-- middle   -->
+	<div class="middle" style="margin-left: 160px; margin-top: 50px;">
+		<span th:text="${msg}" style="color: black; font-size: 20px;"></span>
+		<form
+			th:action="@{/teacher/uploadEdit?(reTypeid=${reTypeid},typePid=${reTypepid})}"
+			method="post" enctype="multipart/form-data" th:object="${resource}"
+			name="myform">
+			<td><span class="otitle">标题</span><input type="text"
+				name="reTitle" class="otitleInput"></td> <br> <br>
+			<td><span class="otitle">类型</span><input type="text"
+				name="reTypename" th:value="${typeName}" readonly="readonly"
+				class="otitleInput"></td>
+			<div class="contain" style="width: 800px; margin-top: 20px;">
+				<td colspan="4"><div id="div1"></div> <textarea
+						style="display: none" name="reContent" id="edit"></textarea></td>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" onclick="editor.txt.clear()"
+					type="reset">清&nbsp;&nbsp;&nbsp;&nbsp;空</button>
+				<button class="btn btn-primary" onclick="sub()" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+			</div>
+		</form>
+		<script th:src="@{/static/fonts/wangEditor.min.js}"></script>
+		<script type="text/javascript">
+			var E = window.wangEditor
+			var editor = new E('#div1')
+			editor.customConfig.uploadImgShowBase64 = true
+			editor.create()
+			function sub() {
+				editor.customConfig.uploadImgServer = '/uploading'
+				editor.customConfig.uploadFileName = 'yourFileName'
+				var edit = document.getElementById("edit");
+				edit.value = editor.txt.html();
+			}
+		</script>
+	</div>
 </body>
 </html>

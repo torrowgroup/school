@@ -7,15 +7,18 @@
 	th:href="@{/static/css/bootstrap.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/details.css}">
+	  <link rel="stylesheet" type="text/css" th:href="@{../static/css/tableall.css}">
 </head>
 <body>
- <form  method="post">
-        <div class="search bar">
+	<div class="middle">
+	   <div class="inside">
+	   <form th:action="@{/teacher/search?(uri=showedit)}"  method="post" enctype="multipart/form-data" >
+	<div class="search bar">
             <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
+            <input type="hidden" name="reTypepid" th:value="${reTypepid}" >
             <button type="submit"></button>
         </div>
-      </form>
-	<div class="middle">
+     </form>
 		<p th:text="${msg}"></p>
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -72,18 +75,20 @@
 			</tr>
 		</table>
 	</div>
-
+</div>
 	<script th:src="@{/static/js/jquery.min.js}"></script>
 	<script th:src="@{/static/js/bootstrap.min.js}"></script>
 	<script th:inline="javascript">
 		window.onload = function() {
 			var num = [[${resourceList.totalCount}]];
+			
 			n = parseInt(num)
 			/* alert(n); */
 			if (n != 0) {
 				 document.getElementsByClassName('middle')[0].style.display = 'block'; 
 			} else {
 				 document.getElementsByClassName('middle')[0].style.display = 'none'; 
+				 alert(n) ;
 				 alert("无数据") 
 			}
 		}

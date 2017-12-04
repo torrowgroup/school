@@ -32,10 +32,8 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "teacher/upload";
 	}
-
 	// 上传优秀教案
 	@RequestMapping("/uploadRecord")
-
 	public String uploadRecord(Model model) {
 		msg = "请上传您的听课记录";
 		model.addAttribute("reTypeid", 16);
@@ -75,10 +73,10 @@ public class Jump extends BaseController {
 
 	// 上传基本功
 	@RequestMapping("/uploadBasicSkill")
-	public String uploadBasicSkill(Model model) {
+	public String uploadBasicSkill(Model model,int reTypepid) {
 		msg = "请上传您的基本功";
-		model.addAttribute("reTypeid", 14);
-		model.addAttribute("reTypepid", 3);
+/*		model.addAttribute("reTypeid", reTypepid);*/
+		model.addAttribute("reTypepid", reTypepid);
 		model.addAttribute("msg", msg);
 		return "teacher/upload";
 	}
@@ -131,5 +129,21 @@ public class Jump extends BaseController {
 	@RequestMapping(value="/welcome")
 	public String welcome() {
 		return "teacher/welcome";
+	}
+	@RequestMapping(value = "/uploadEdit")
+	public String uploadEdit(Model model,int Typepid,int TypeId,String typeName) {
+		msg = "请提交您的量化积分";
+		model.addAttribute("reTypeid", TypeId);
+		model.addAttribute("reTypepid", Typepid);
+		model.addAttribute("typeName", typeName);
+		model.addAttribute("msg", msg);
+		return "teacher/edit";
+	}
+	@RequestMapping(value = "/uploadFile")
+	public String uploadFile(Model model,int Typepid,int TypeId,String typeName ) {
+		model.addAttribute("reTypeid", TypeId);
+		model.addAttribute("reTypepid", Typepid);
+		model.addAttribute("typeName", typeName);
+		return "teacher/upload";
 	}
 }

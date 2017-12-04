@@ -358,13 +358,13 @@
        and concat (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
      </if>
   </select>
-  <!-- 根据分页数据start 和size查询数据 -->
+   <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from tb_resource
         <if test="reTypeid!=null">
-         	where re_typeid = #{reTypeid,jdbcType=INTEGER}
+         	where re_typepid = #{reTypeid,jdbcType=INTEGER}
         </if>
         <if test="inquiry != null">
            and concat (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
@@ -373,6 +373,7 @@
            limit #{start},#{size}
         </if>
     </select>
+
     
      <!--获得所有上传文件名-->
   <select id="getUploadFileName" parameterType="com.futher.school.entity.Resource" resultMap="ResultMapWithBLOBs" >  
