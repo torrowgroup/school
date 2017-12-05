@@ -69,7 +69,6 @@ public class TeacherController extends BaseController {
 		model.addAttribute("reTypepid", reTypepid);
 		model.addAttribute("typeId", typeId);
 		model.addAttribute("msg", msg);
-		
 		return "teacher/upload";
 	}
 
@@ -95,7 +94,6 @@ public class TeacherController extends BaseController {
 		}
 		out.close();
 		bis.close();
-
 	}
 
 	// 获取所有上传所有资源详细
@@ -103,7 +101,8 @@ public class TeacherController extends BaseController {
 	public String showUpload(Model model, String uri, int reTypepid,
 			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry) {
 		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid,inquiry));
-		model.addAttribute("reTypeid", reTypepid);
+		System.out.println(reTypepid+"2222222222222222");
+		model.addAttribute("reTypepid", reTypepid);
 		return "teacher" + "/" + uri;
 	}
 	// 获取单个Edit
@@ -194,10 +193,10 @@ public class TeacherController extends BaseController {
 		return "teacher/index";
 	}
 	@RequestMapping(value="search")
-	public String search(Model model, @RequestParam String uri, int  reTypepid,
-			@RequestParam(defaultValue = "1", required = false) Integer currentPage,String inquiry) {
+	public String search(Model model, @RequestParam String uri, int reTypepid,
+			@RequestParam(defaultValue = "1", required = false) int  currentPage,String inquiry) {
 		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid,inquiry));
-		model.addAttribute("reTypeid", reTypepid);
+		model.addAttribute("reTypepid", reTypepid);
 		return "teacher" + "/" + uri;
 	}
 }

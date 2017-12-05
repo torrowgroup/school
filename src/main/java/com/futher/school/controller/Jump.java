@@ -20,7 +20,7 @@ import com.futher.school.entity.User;
 @RequestMapping("/jump")
 @Controller()
 public class Jump extends BaseController {
-	
+
 	String msg;
 
 	// 上传教学反思
@@ -32,6 +32,7 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "teacher/upload";
 	}
+
 	// 上传优秀教案
 	@RequestMapping("/uploadRecord")
 	public String uploadRecord(Model model) {
@@ -73,14 +74,15 @@ public class Jump extends BaseController {
 
 	// 上传基本功
 	@RequestMapping("/uploadBasicSkill")
-	public String uploadBasicSkill(Model model,int reTypepid) {
+	public String uploadBasicSkill(Model model, int reTypepid) {
 		msg = "请上传您的基本功";
-/*		model.addAttribute("reTypeid", reTypepid);*/
+		/* model.addAttribute("reTypeid", reTypepid); */
 		model.addAttribute("reTypepid", reTypepid);
 		model.addAttribute("msg", msg);
 		return "teacher/upload";
 	}
-	//上传教学成果
+
+	// 上传教学成果
 	@RequestMapping("/uploadaAchievements")
 	public String uploadaAchievements(Model model) {
 		msg = "请上传您的教学成果";
@@ -89,7 +91,8 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
-	//上传教学动态
+
+	// 上传教学动态
 	@RequestMapping("/uploadEducationNews")
 	public String uploadEducationNews(Model model) {
 		msg = "请上传您的教学动态";
@@ -98,7 +101,8 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
-	//上传文学作品
+
+	// 上传文学作品
 	@RequestMapping("/uploadLiterature")
 	public String uploadLiterature(Model model) {
 		msg = "请上传您的文学作品";
@@ -107,6 +111,7 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
+
 	@RequestMapping(value = "/showTeacherResearch")
 	public String showTeacherResourch(String resourceId, Model model) {
 		model.addAttribute("resourceId", resourceId);
@@ -126,21 +131,23 @@ public class Jump extends BaseController {
 		model.addAttribute("msg", msg);
 		return "educationoffice/upload";
 	}
-	@RequestMapping(value="/welcome")
+
+	@RequestMapping(value = "/welcome")
 	public String welcome() {
 		return "teacher/welcome";
 	}
+
 	@RequestMapping(value = "/uploadEdit")
-	public String uploadEdit(Model model,int Typepid,int TypeId,String typeName) {
-		msg = "请提交您的量化积分";
+	public String uploadEdit(Model model, int Typepid, int TypeId, String typeName) {
 		model.addAttribute("reTypeid", TypeId);
 		model.addAttribute("reTypepid", Typepid);
 		model.addAttribute("typeName", typeName);
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
+
 	@RequestMapping(value = "/uploadFile")
-	public String uploadFile(Model model,int Typepid,int TypeId,String typeName ) {
+	public String uploadFile(Model model, int Typepid, int TypeId, String typeName) {
 		model.addAttribute("reTypeid", TypeId);
 		model.addAttribute("reTypepid", Typepid);
 		model.addAttribute("typeName", typeName);
