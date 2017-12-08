@@ -98,6 +98,9 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		List<Type> dynamic =new ArrayList<Type>();
 		List<Type> educate =new ArrayList<Type>();
 		List<Type> literature =new ArrayList<Type>();
+		List<Type> teacher =new ArrayList<Type>();
+		List<Type> schoolViews = new ArrayList<Type>();
+//		List<Type> teacherGroup =new ArrayList<Type>();
 		if (!(typeList.isEmpty())) {
 			for (int i =0; i < typeList.size(); i++) {
 				if (typeList.get(i).getTyPid() == 2) {
@@ -114,6 +117,13 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 					model.addAttribute("oneLiterature", literature.get(0));
 				}  else if (typeList.get(i).getTyPid() == 6) {
 					model.addAttribute("downloadType", typeList.get(i));
+				} else if (typeList.get(i).getTyPid() == 1) {
+					if (typeList.get(i).getTyCategoryname().equals("teacher") || typeList.get(i).getTyCategoryname().equals("teachergroup")) {
+						teacher.add(typeList.get(i));
+						model.addAttribute("oneTeacher", teacher.get(0));
+					}
+				} else if (typeList.get(i).getTyPid() == 9) {
+					schoolViews.add(typeList.get(i));
 				}
 			}
 		}
@@ -122,6 +132,8 @@ public class TypeServiceImpl extends BaseDao<Type,Serializable> implements TypeS
 		model.addAttribute("dynamic", dynamic);
 		model.addAttribute("educate", educate);
 		model.addAttribute("literature", literature);
+		model.addAttribute("teacher", teacher);
+		model.addAttribute("schoolViews", schoolViews);
 	}
 
 //	@Override

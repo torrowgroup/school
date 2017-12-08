@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+   <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+   <link rel="stylesheet" type="text/css" th:href="@{../static/css/public.css}">
+   <link rel="stylesheet" th:href="@{../static/css/bg-scho.css}">
+</head>
+<body>
+ <div th:include="schoolpage/common :: header"></div>
+	 <!-- 身体部分开始 -->
+    <section class="p-img img">
+        
+    </section>
+    <section class="main">
+        <section class="content-info">
+            <div class="info-left">
+                    <h3>校园新闻</h3>
+                    <dl id="cc">
+                    <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
+                	<a th:if="${schoolViews} != null" th:each="type,typeStat:${schoolViews}" th:href="@{/schoolviews/checkSchoolViews?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
+                    </dl>
+                </div>
+            <div class="info-right" id="d-info" th:if="${messages.lists} != null">
+                <section class="top">
+                            <section class="left"></section>
+                            <section class="left-1" id="content_2" th:text="${type.tyCategoryname}">校园风光</section>
+                </section>
+                <div class="bg-img" th:each="resource,resourceStat:${messages.lists}">
+                    <img th:src="@{/static/uploadImg/schoolview/{image}(image=${resource.reSpare})}" alt="">
+                    <p th:text="${resource.reTitle}">这是一个图片的简介</p>
+                </div>
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+<!--                 <div class="bg-img"> -->
+<!--                     <img src="./images/page1-img4.jpeg" alt=""> -->
+<!--                     <p>这是一个图片的简介</p> -->
+<!--                 </div> -->
+                <section class="bottom">
+                    <a style="margin-right:30px;">上一页</a>当前第<span style="color:#20a0f0;padding:0 10px;">5</span>页<a style="margin-left:30px;">下一页</a>
+                </section>
+            </div>
+        </section>
+
+    </section>
+    <div th:include="schoolpage/common :: footer"></div>
+</body>
+<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/counttime.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/xidinghe.js}"></script>
+<script type="text/javascript">
+     function tanchu(ids_1,ids_2,ids_3){
+        var eimgs = $(ids_1)
+        $(ids_2).on('click',function(event) {
+            /* Act on the event */
+            $(ids_2).css('display','none');
+        })
+        eimgs.on('click',function(event) {
+            /* Act on the event */
+            // alert(this.innerHTML);
+            $(ids_2).css('display','block');
+            $(ids_3).html(this.innerHTML);
+        })
+   }
+   $(function(){
+        tanchu('#d-info .bg-img','.end','.end-cneter')
+   }) 
+   function chanceStyle(id_1,id_2,class_chan){
+    var dts= $(id_1);
+    for( var i = 0; i < dts.length; i++ ) {
+        dts[i].className =" ";
+        if(dts[i].innerText==$(id_2).text()){
+            dts[i].className = class_chan;
+        }
+    }
+    }   
+    chanceStyle('#cc dt','#content_2','dt2');
+   xiding("#nav-1")
+</script>
+</html>

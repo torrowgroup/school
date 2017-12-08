@@ -22,6 +22,19 @@
     <p th:text="${news}"></p>
       <form class="form-horizontal" role="form" th:if="${typelist} != null" th:action="@{/resource/addGeneraLization}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data">
         <div class="form-group">
+                <label class="col-sm-2 control-label">主类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="tyPid" id="tyPid">
+			            <option th:value="2">学校概括</option>
+			            <option th:value="3">校园动态</option>
+			            <option th:value="4">教育教研</option>
+			            <option th:value="8">通知</option>
+			            <option th:value="10">教师成长</option>
+                    </select>
+                </div>
+            </div>
+        
+        <div class="form-group">
           <label class="col-sm-2 control-label">类型</label>
           <div class="col-sm-10">
             <select class="form-control" name="reTypeid" id="reTypeid">
@@ -29,6 +42,17 @@
             </select>
           </div>
         </div>
+         <div class="form-group">
+			<div class="message">
+				<label class="col-sm-2 control-label">通知类别</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="reSpare" id="select">
+						<option th:value="一般">一般</option>
+						<option th:value="特别重要">特别重要</option>
+					</select>
+				</div>
+			</div>
+		</div>
         <div class="form-group">
           <label  class="col-sm-2 control-label">标题</label>
           <div class="col-sm-10">
@@ -64,25 +88,6 @@
   </div><!--middle-->
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 <!-- 	<span th:text="${news}"></span> -->
 <!-- 	<form th:if="${typelist} != null" th:action="@{/resource/addGeneraLization}" method="post" onsubmit="modifyContent()" enctype="multipart/form-data"> -->
 <!-- 		type:<select name="reTypeid" id="reTypeid"> -->
@@ -106,4 +111,28 @@
 <!-- 	</form> -->
 <!-- </body> -->
 </body>
+<script type="text/javascript">
+      $('#tyPid').change(function(data) {
+       var value = $('#tyPid').val()
+       if(value == 8) {
+        	$('.message').slideDown()
+        	$('#select').attr("disabled", false);
+        } else {
+        	$('#select').attr("disabled", true);
+        	$('.message').slideUp()
+        }
+        $.ajax({  
+        type: "post",  
+        url: "/school/type/getType?tyPid="+value,
+        contentType: "application/x-www-from-urlencoded; charset=utf-8",
+        success: function (data) {
+        var html
+        $.each(data.type, function(j,val){
+        html+='<option'+' value="'+val.tyId+'">'+val.tyCategoryname+'</option>'
+		});
+		$('#reTypeid').html(html)
+        }   
+    });
+      })  
+  </script>
 </html>

@@ -110,6 +110,9 @@ public class UserController extends BaseController {
 			} else {
 				uploadImage(user, file);
 				user.setUsIdentityid(type.getTyId());
+				if (user.getUsSex() == null) {
+					user.setUsSex("无");
+				}
 				int judge = userService.addUser(user);
 				if (judge == 1) {
 					model.addAttribute("news", "添加成功");
@@ -288,6 +291,9 @@ public class UserController extends BaseController {
 					uploadImage(user, file);
 				}
 				user.setUsIdentityid(type.getTyId());
+				if (user.getUsSex() == null) {
+					user.setUsSex("无");
+				}
 				int judge = userService.updatePassword(user);
 				if (judge == 1) {
 					model.addAttribute("news", "添加成功");

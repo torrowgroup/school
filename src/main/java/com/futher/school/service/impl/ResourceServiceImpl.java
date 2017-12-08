@@ -128,8 +128,8 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 	}
 
 	@Override
-	public List<com.futher.school.entity.Resource> selectByPid(int Pid, int number) {
-		return resourceMapper.selectByPid(Pid, number);
+	public List<com.futher.school.entity.Resource> selectByPid(int Pid, int number, String typeName) {
+		return resourceMapper.selectByPid(Pid, number, typeName);
 	}
 
 	@Override
@@ -146,13 +146,13 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		List<com.futher.school.entity.Resource> newsList = new ArrayList<com.futher.school.entity.Resource>();
 		for (int i = 0; i < typeList.size(); i++) {
 			if (typeList.get(i).getTyPid() == 4) {
-				educateList = this.selectByPid(4, 10);
+				educateList = this.selectByPid(4, 10, null);
 			} else if (typeList.get(i).getTyPid() == 7) {
-				linkList = this.selectByPid(7, 4);
+				linkList = this.selectByPid(7, 4, null);
 			} else if (typeList.get(i).getTyPid() == 8) {
 				informList = this.selectImmediateNews(8, 6);
 			} else if (typeList.get(i).getTyPid() == 9) {
-				schoolviewList = this.selectByPid(9, 4);
+				schoolviewList = this.selectByPid(9, 4, "首页轮播图");
 			} else if (typeList.get(i).getTyPid() == 12) {
 				newsList = this.selectImmediateNews(12, 4);
 			} else if (typeList.get(i).getTyPid() == 11) {
@@ -186,7 +186,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		} else {
 			for (int i = 0; i < typeList.size(); i++) {
 				if (typeList.get(i).getTyPid() == 7) {
-					linkList = this.selectByPid(7, 4);
+					linkList = this.selectByPid(7, 4, null);
 				} else if (typeList.get(i).getTyPid() == 11) {
 					com.futher.school.entity.Resource examTime = this.selectByTypeid(typeList.get(i).getTyId());
 					if (examTime == null) {

@@ -35,6 +35,11 @@
                             <section class="left"></section>
                             <section class="left-1" id="content_2" th:text="${generalNews.reTypename}">校园风光</section>
                 </section>
+                <section class="p-title">
+                            <h3 th:utext="${generalNews.reTitle}">文章标题</h3>
+                            <p>更新时间 <span th:utext="${generalNews.reReleasedate}"> 2017-5-8</span></p>
+                <section>
+                
               	<section th:utext="${generalNews.reContent}">
               	</section>
             </div>

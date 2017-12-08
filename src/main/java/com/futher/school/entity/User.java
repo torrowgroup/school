@@ -26,7 +26,7 @@ public class User implements  Serializable{
 
     private String usIntroduce;//教师介绍
 
-    private String usTeachingresults;//教师教育成果
+    private String usTeachingresults;//教师分类
 
     private String usSpare;//备用
 

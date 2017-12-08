@@ -27,6 +27,10 @@
                             <section class="left"></section>
                             <section class="left-1" id="content_2" th:text="${educateDetails.reTypename}">校园风光</section>
                 </section>
+                <section class="p-title">
+                            <h3 th:utext="${educateDetails.reTitle}">文章标题</h3>
+                            <p>更新时间 <span th:utext="${educateDetails.reReleasedate}"> 2017-5-8</span></p>
+                <section>
               	<section th:utext="${educateDetails.reContent}">
               	</section>
             </div>

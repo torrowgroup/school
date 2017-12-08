@@ -1,13 +1,10 @@
 package com.futher.school.controller.tourist;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.futher.school.base.BaseController;
 import com.futher.school.entity.Resource;
 import com.futher.school.entity.Type;
 @RequestMapping("dynamic")
@@ -27,7 +24,11 @@ public class DynamicController extends CommonController{
 		getLinkAndTime(model);
 		return "schoolpage/dynamic";
 	}
-	
+	/**
+	 * @param reId
+	 * @param model
+	 * @return 阅览学校概括信息内容
+	 */
 	@RequestMapping("readDynamic")
 	public String readDynamic(int reId, Model model) {
 		typeService.getType(model);

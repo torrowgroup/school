@@ -16,7 +16,7 @@ public interface MessageService {
 	//上传留言附加文件
 	String uploadResource(MultipartFile file, String truePath, HttpServletRequest request);
 	//用于留言分页
-	PageBean<Message> findByPage(int currentPage, String meStatus);
+	PageBean<Message> findByPage(int currentPage, String meStatus, String inquiry);
 	//删除留言
 	int deletMessage(int meId);
 	//根据id查找留言

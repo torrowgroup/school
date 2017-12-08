@@ -32,10 +32,10 @@
                    placeholder="请输入邮箱账号" name="usEmail" id="usEmail" th:value="${usernews.usEmail}"><span id="msg"></span>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="sexdiv">
           <label class="col-sm-2 control-label">性别</label>
           <div class="col-sm-10">
-            <select class="form-control" name="usSex">
+            <select class="form-control" name="usSex" id="sexselect">
              <option th:value="男" th:selected="${usernews.usSex=='男'}">男</option>
              <option th:value="女" th:selected="${usernews.usSex=='女'}">女</option>
             </select>
@@ -78,10 +78,24 @@
             <input type="file" name="file" id="file">
           </a>
         </div>
+        <div class="form-group">
+					<div class="teacher">
+						<label class="col-sm-2 control-label">教师分类</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="usTeachingresults" id="select">
+								<option th:selected="${usernews.usTeachingresults} == '省市名师'" th:value="省市名师">省市名师</option>
+								<option th:selected="${usernews.usTeachingresults} == '特级教师'" th:value="特级教师">特级教师</option>
+								<option th:selected="${usernews.usTeachingresults} == '骨干教师'" th:value="骨干教师">骨干教师</option>
+								<option th:selected="${usernews.usTeachingresults} == '青年新秀'" th:value="青年新秀">青年新秀</option>
+							</select>
+						</div>
+					</div>
+				</div>
+        
          <div class="form-group">
           <div class="editor">
              <div class="form-group">
-              <label  class="col-sm-3 control-label">教师简介：</label>
+              <label  class="col-sm-3 control-label">简介：</label>
              </div>
         	   <textarea rows="5" cols="35" name="usIntroduce"  style="display:none;" id="introduce"></textarea><br>
      			<div id="editor"  style="width:100%; height:150px;" th:utext="${usernews.usIntroduce}"></div>
@@ -159,17 +173,41 @@
         var value = $('#choose').val()
         if(value == 'manager'){
             $('.editor').slideUp()
-        } else {
-            $('.editor').slideDown()
-        }
+            $('#sexdiv').slideDown()
+			$('#sexselect').attr("disabled", false);
+        } else if (value === 'teacher') {
+			$('.teacher').slideDown()
+			$('.editor').slideDown()
+			$('#sexdiv').slideDown()
+			$('#sexselect').attr("disabled", false);
+			$('#select').attr("disabled", false);
+		} else {
+			$('.teacher').slideUp()
+			$('.editor').slideDown()
+			$('#sexdiv').slideUp()
+			$('#sexselect').attr("disabled", true);
+			$('#select').attr("disabled", true);
+		}
       });
      $('#choose').change(function(data){
         var value = $(this).val()
         if(value == 'manager'){
             $('.editor').slideUp()
-        } else {
-            $('.editor').slideDown()
-        }
+            $('#sexdiv').slideDown()
+			$('#sexselect').attr("disabled", false);
+        }  else if (value === 'teacher') {
+			$('.teacher').slideDown()
+			$('.editor').slideDown()
+			$('#sexdiv').slideDown()
+			$('#sexselect').attr("disabled", false);
+			$('#select').attr("disabled", false);
+		} else {
+			$('.teacher').slideUp()
+			$('.editor').slideDown()
+			$('#sexdiv').slideUp()
+			$('#sexselect').attr("disabled", true);
+			$('#select').attr("disabled", true);
+		}
     })  
   </script>
 </html>

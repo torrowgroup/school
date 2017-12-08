@@ -2,7 +2,9 @@ package com.futher.school.controller.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.futher.school.base.BaseController;
 import com.futher.school.entity.Type;
 
-import net.sf.json.JSONArray;
 
 @RequestMapping("/type")
 @Controller()
@@ -42,7 +43,7 @@ public class TypeController extends BaseController {
 
 	@RequestMapping("/addType")
 	public String addType(Type type, Model model) {
-		if (type.getTyPid() == 7 || type.getTyPid() == 9 || type.getTyPid() == 12|| type.getTyPid() == 13) {
+		if (type.getTyPid() == 7 || type.getTyPid() == 12|| type.getTyPid() == 13) {
 			int count = typeService.selectTypeName(type.getTyPid()).size();
 			if (count >= 1) {
 				model.addAttribute("news", "已添加过了，不可在添加");
@@ -149,5 +150,13 @@ public class TypeController extends BaseController {
 		}
 		out.print(result);
 		out.close();
+	}
+	@RequestMapping("getType")
+	@ResponseBody
+	public Map<String , Object> getType(int tyPid){
+		List<Type> typeList = typeService.selectTypeName(tyPid);
+		Map<String , Object>  map = new HashMap<String , Object>();
+		map.put("type", typeList);
+		return map;
 	}
 }

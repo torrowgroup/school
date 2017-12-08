@@ -43,7 +43,7 @@
 		<div class="member_ico">
 		<img src="images/a.png" width="43" height="43">
 	     </div>
-		<a href="login.html" class="system_logout">退出</a></div>
+		<a th:href="@{/logout?identity=manager}" class="system_logout">退出</a></div>
 	<!--左侧子菜单-->
 	<div class="left-son">
 		<div class="left_title">常用功能操作</div>
@@ -79,9 +79,9 @@
 					<a href="javascript:"><i class="iconfont icon-ziyuan"></i><span>校园信息</span><i class="my-icon nav-more"></i></a>
 					<ul>
 						<li><a th:href="@{resource/toaddGeneraLization?tyPid=2}" target="content"><span>添加校园概括</span></a></li>
-						<li><a th:href="@{resource/toaddGeneraLization?tyPid=3}" target="content"><span>添加校园动态</span></a></li>
-						<li><a th:href="@{resource/toaddGeneraLization?tyPid=4}" target="content"><span>添加教育教研</span></a></li>
-						<li><a th:href="@{resource/toaddGeneraLization?tyPid=8}" target="content"><span>添加校园通知</span></a></li>
+<!-- 						<li><a th:href="@{resource/toaddGeneraLization?tyPid=3}" target="content"><span>添加校园动态</span></a></li> -->
+<!-- 						<li><a th:href="@{resource/toaddGeneraLization?tyPid=4}" target="content"><span>添加教育教研</span></a></li> -->
+<!-- 						<li><a th:href="@{resource/toaddGeneraLization?tyPid=8}" target="content"><span>添加校园通知</span></a></li> -->
 						<li><a th:href="@{resource/toaddSchoolNews?tyPid=13}" target="content"><span>添加学校信息</span></a></li>
 						<li><a th:href="@{resource/selectResource?reTypeid=2}" target="content"><span>查看校园概括</span></a></li>
 						<li><a th:href="@{resource/selectResource?reTypeid=3}" target="content"><span>查看校园动态</span></a></li>
@@ -104,8 +104,8 @@
 					<ul>
 						<li><a th:href="@{resource/toAddResource?tyPid=12}" target="content"><span>添加校园新闻</span></a></li>
 						<li><a th:href="@{resource/toaddUploadFile?tyPid=5}" target="content"><span>添加校园作品</span></a></li>
-						<li><a th:href="@{resource/toaddUploadFile?tyPid=6}" target="content"><span>添加校园资源</span></a></li>
-						<li><a th:href="@{resource/toaddSchoolView?tyPid=9}" target="content"><span>添加校园风景</span></a></li>
+<!-- 						<li><a th:href="@{resource/toaddUploadFile?tyPid=6}" target="content"><span>添加校园资源</span></a></li> -->
+<!-- 						<li><a th:href="@{resource/toaddSchoolView?tyPid=9}" target="content"><span>添加校园风景</span></a></li> -->
 						<li><a th:href="@{resource/selectResource?reTypeid=12}" target="content"><span>查看校园新闻</span></a></li>
 						<li><a th:href="@{resource/selectResource?reTypeid=5}" target="content"><span>查看校园作品</span></a></li>
 						<li><a th:href="@{resource/selectResource?reTypeid=6}" target="content"><span>查看校园资源</span></a></li>
@@ -132,23 +132,45 @@
 	<script>window.jQuery || document.write('<script> src="./static/js/jquery-3.2.1.min.js"><\/script>')</script>
 	<script type="text/javascript" th:src="@{./static/js/nav.js}"></script>
 </div><!--left-->
+<!-- <!--右侧iframe内容--> -->
+<!-- <div class="right" style="overflow-x:hidden;overflow-y:auto;margin-left:205px;" > -->
+<!-- 	<iframe id="content" name="content" src="default.html" -->
+<!-- 			frameBorder="0" scrolling="no" width="100%" height="1000px"></iframe> -->
+<!-- 	<script type="text/javascript"> -->
+<!-- //         function reinitIframe(){ -->
+<!-- //             var iframe = document.getElementById("content"); -->
+<!-- //             try{ -->
+<!-- //                 var bHeight = iframe.contentWindow.document.body.scrollHeight; -->
+<!-- //                 var dHeight = iframe.contentWindow.document.documentElement.scrollHeight; -->
+<!-- //                 var height = Math.max(bHeight, dHeight); -->
+<!-- //                 iframe.height = height+50; -->
+<!-- //             }catch (ex){} -->
+<!-- //         } -->
+<!-- //         $("#content").load(function () { -->
+<!-- //             reinitIframe(); -->
+<!-- //         }) -->
+<!-- 	</script> -->
+<!-- </div> -->
 <!--右侧iframe内容-->
 <div class="right" style="overflow-x:hidden;overflow-y:auto;margin-left:205px;" >
-	<iframe id="content" name="content" src="default.html"
-			frameBorder="0" scrolling="no" width="100%" height="130%"></iframe>
-	<script type="text/javascript">
+	<iframe style="overflow: visible;" id="content" name="content" src="welcome.html"
+			frameBorder="0" scrolling="no" width="100%"height="100%"></iframe>
+<script type="text/javascript">
         function reinitIframe(){
             var iframe = document.getElementById("content");
             try{
                 var bHeight = iframe.contentWindow.document.body.scrollHeight;
                 var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
                 var height = Math.max(bHeight, dHeight);
-                iframe.height = height+50;
+                iframe.height = height+100;
+                if (height>700){
+                    $("#content").css("height","1100px");
+                }
             }catch (ex){}
         }
-        $("#content").load(function () {
+        $("#content").ready(function () {
             reinitIframe();
-        })
+        });
 	</script>
 </div>
 <script type="text/javascript">

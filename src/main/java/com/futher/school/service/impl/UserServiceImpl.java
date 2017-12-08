@@ -118,9 +118,43 @@ public class UserServiceImpl extends BaseDao<User, Serializable> implements User
 	}
 
 	@Override
-	public List<User> selectByPid(int number) {
+	public List<User> selectByPid(int number, String identity) {
 		String name = "teacher";
-		return userMapper.selectByPid(number, name);
+		return userMapper.selectByPid(number, name, identity);
+	}
+
+	@Override
+	public Object findByTypeId(int currentPage, int tyId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		PageBean<User> pageBean = new PageBean<User>();
+
+		// 封装当前页数
+		pageBean.setCurrPage(currentPage);
+
+		// 每页显示的数据
+		int pageSize = 6;
+		pageBean.setPageSize(pageSize);
+
+		// 封装总记录数
+		int totalCount = userMapper.selectByTypeId(tyId).size();
+		pageBean.setTotalCount(totalCount);
+
+		// 封装总页数
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		pageBean.setTotalPage(num.intValue());
+
+		map.put("start", (currentPage - 1) * pageSize);
+		map.put("size", pageBean.getPageSize());
+		map.put("tyId", tyId);
+		// 封装每页显示的数据
+		List<User> lists = userMapper.findByTypeId(map);
+//		for (int i = 0; i < lists.size(); i++) {
+//			System.out.println(lists.get(i));
+//		}
+		pageBean.setLists(lists);
+
+		return pageBean;
 	}
 
 }

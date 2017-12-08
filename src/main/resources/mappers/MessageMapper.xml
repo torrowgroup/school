@@ -7,7 +7,7 @@
     <result column="me_content" jdbcType="LONGVARCHAR" property="meContent" />
     <result column="me_image" jdbcType="VARCHAR" property="meImage" />
     <result column="me_anonymous" jdbcType="VARCHAR" property="meAnonymous" />
-    <result column="me_releaseDate" jdbcType="TIMESTAMP" property="meReleasedate" />
+    <result column="me_releaseDate" jdbcType="VARCHAR" property="meReleasedate" />
     <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
     <result column="me_replyContent" jdbcType="LONGVARCHAR" property="meReplycontent" />
     <result column="me_spare" jdbcType="VARCHAR" property="meSpare" />
@@ -134,7 +134,7 @@
       me_spare, me_content, me_replyContent
       )
     values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meImage,jdbcType=VARCHAR}, 
-      #{meAnonymous,jdbcType=VARCHAR}, #{meReleasedate,jdbcType=TIMESTAMP}, #{meStatus,jdbcType=VARCHAR}, 
+      #{meAnonymous,jdbcType=VARCHAR}, #{meReleasedate,jdbcType=VARCHAR}, #{meStatus,jdbcType=VARCHAR}, 
       #{meSpare,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meReplycontent,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -183,7 +183,7 @@
         #{meAnonymous,jdbcType=VARCHAR},
       </if>
       <if test="meReleasedate != null">
-        #{meReleasedate,jdbcType=TIMESTAMP},
+        #{meReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="meStatus != null">
         #{meStatus,jdbcType=VARCHAR},
@@ -221,7 +221,7 @@
         me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
       </if>
       <if test="record.meReleasedate != null">
-        me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
+        me_releaseDate = #{record.meReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="record.meStatus != null">
         me_status = #{record.meStatus,jdbcType=VARCHAR},
@@ -246,7 +246,7 @@
       me_title = #{record.meTitle,jdbcType=VARCHAR},
       me_image = #{record.meImage,jdbcType=VARCHAR},
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
-      me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
+      me_releaseDate = #{record.meReleasedate,jdbcType=VARCHAR},
       me_status = #{record.meStatus,jdbcType=VARCHAR},
       me_spare = #{record.meSpare,jdbcType=VARCHAR},
       me_content = #{record.meContent,jdbcType=LONGVARCHAR},
@@ -261,7 +261,7 @@
       me_title = #{record.meTitle,jdbcType=VARCHAR},
       me_image = #{record.meImage,jdbcType=VARCHAR},
       me_anonymous = #{record.meAnonymous,jdbcType=VARCHAR},
-      me_releaseDate = #{record.meReleasedate,jdbcType=TIMESTAMP},
+      me_releaseDate = #{record.meReleasedate,jdbcType=VARCHAR},
       me_status = #{record.meStatus,jdbcType=VARCHAR},
       me_spare = #{record.meSpare,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -281,7 +281,7 @@
         me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
       </if>
       <if test="meReleasedate != null">
-        me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
+        me_releaseDate = #{meReleasedate,jdbcType=VARCHAR},
       </if>
       <if test="meStatus != null">
         me_status = #{meStatus,jdbcType=VARCHAR},
@@ -303,7 +303,7 @@
     set me_title = #{meTitle,jdbcType=VARCHAR},
       me_image = #{meImage,jdbcType=VARCHAR},
       me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
-      me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
+      me_releaseDate = #{meReleasedate,jdbcType=VARCHAR},
       me_status = #{meStatus,jdbcType=VARCHAR},
       me_spare = #{meSpare,jdbcType=VARCHAR},
       me_content = #{meContent,jdbcType=LONGVARCHAR},
@@ -315,8 +315,10 @@
     set me_title = #{meTitle,jdbcType=VARCHAR},
       me_image = #{meImage,jdbcType=VARCHAR},
       me_anonymous = #{meAnonymous,jdbcType=VARCHAR},
-      me_releaseDate = #{meReleasedate,jdbcType=TIMESTAMP},
+      me_releaseDate = #{meReleasedate,jdbcType=VARCHAR},
       me_status = #{meStatus,jdbcType=VARCHAR},
+      me_content = #{meContent,jdbcType=LONGVARCHAR},
+      me_replyContent = #{meReplycontent,jdbcType=LONGVARCHAR},
       me_spare = #{meSpare,jdbcType=VARCHAR}
     where me_id = #{meId,jdbcType=INTEGER}
   </update>
@@ -329,6 +331,9 @@
         <if test="meStatus!=null">
          	where me_status = #{meStatus,jdbcType=VARCHAR}
         </if>
+        <if test="inquiry != null">
+        and concat_ws (me_title,',',me_anonymous,',',me_releaseDate,',',me_status,',',me_id) like concat(concat('%',#{inquiry}),'%')
+        </if>
         <if test="start!=null and size!=null">
            limit #{start},#{size}
         </if>
@@ -339,6 +344,9 @@
 	    <include refid="Base_Column_List" />
 	    from tb_message
 	    where me_status = #{meStatus,jdbcType=VARCHAR}
+	    <if test="inquiry != null">
+        and concat_ws (me_title,',',me_anonymous,',',me_releaseDate,',',me_status,',',me_id) like concat(concat('%',#{inquiry}),'%')
+        </if>
  	</select>
  	
  	<update id="replyMessage" parameterType="Map">

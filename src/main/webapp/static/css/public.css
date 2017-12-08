@@ -5,6 +5,7 @@
     }
     a{
         text-decoration: none;
+        color:#282828;
     }
     a:hover{
         text-decoration: none;
@@ -29,7 +30,7 @@ header{
     height:130px;
     margin: 0 auto;
     position: relative;
-    background-image: url(../images/schoolimages/head.jpg);
+    background-image: url(../images/head.jpg);
    
     min-width: 1000px;
 }
@@ -118,8 +119,8 @@ border-top: 2px solid #883C92;
             height: 100%;
             line-height: 49px;
             display: inline-block;
-            font-size: 14px;
-            text-align: center;  
+            font-size: 16px;
+            text-align: center; 
             vertical-align:top;
             position: relative;
         }
@@ -129,35 +130,37 @@ border-top: 2px solid #883C92;
             height: 100%;
             color: #fff;
         }
-        .color_nav>a{
-            background-color: #fff;
-            color: #883C92;
-            border-bottom: 1px solid #fff;
+        .nav-li:hover{
+            font-weight: 600;
         }
-        .nav-li:hover a{
+        .nav-li:hover>a{
             background-color: #fff;
             color: #883C92;
             border-bottom: 1px solid #fff;
-
         }
             .chances{
                 z-index: 1000;
                 position: absolute;
                 width: 100%;
                 height: 0px;
+                font-size: 14px;
                 transition: height 0.5s;
                 overflow: hidden;
             }
             .nav-li:hover .chances{
-                height: 300px;
+                height: 240px;
+                font-weight:400;
             }
             .chances a{
                 width: 100%;
-                height: 50px;
+                height: 40px;
                 display: block;
                 background-color: #fff;
                 border-bottom: 1px solid #fff;
                 color: #883C92;
+            }
+             .chances>a:hover{
+                font-weight:600;
             }
 
 
@@ -302,3 +305,19 @@ border-top: 2px solid #883C92;
         line-height: 40px;
         margin: 0px;
     }
+    
+    
+    /*分页标题  */
+    .p-title{
+        text-align: center;
+        border-bottom: 1px solid #dadada;
+        margin-bottom: 5px;
+    }
+    .p-title h3{
+        letter-spacing: 10px;
+    }
+    .p-title p{
+        font-size: 12px;
+        line-height: 30px;
+    }
+    

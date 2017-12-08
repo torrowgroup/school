@@ -39,7 +39,7 @@ public interface ResourceService {
 	//wqj 获取resource
 	public List<Resource> getUploadFileName();
 	//首页用
-	List<Resource> selectByPid(int Pid, int number);
+	List<Resource> selectByPid(int Pid, int number, String typeName);
 	//根据类型id查找
 	Resource selectByTypeid(Integer reTypeid);
 	//首页用，获取全部资源

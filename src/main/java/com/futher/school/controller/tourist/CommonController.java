@@ -1,5 +1,6 @@
 package com.futher.school.controller.tourist;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,10 @@ public class CommonController extends BaseController{
 	 */
 	@RequestMapping("addMessage")
 	public String addMessage(Message message, Model model) {
-		message.setMeReleasedate(new Date());
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(currentTime);
+		message.setMeReleasedate(dateString);
 		message.setMeStatus("未回复");
 		int judge = messageService.addMessage(message);
 		if (judge == 1) {

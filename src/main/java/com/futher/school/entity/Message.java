@@ -17,7 +17,7 @@ public class Message implements Serializable {
 
 	private String meAnonymous;// 是否匿名(匿名为是，不匿名随便填)
 
-	private Date meReleasedate;// 留言日期
+	private String meReleasedate;// 留言日期
 
 	private String meStatus;// 状态(未回复，已回复(显示到前台页面))
 
@@ -30,7 +30,7 @@ public class Message implements Serializable {
 	}
 
 	public Message(Integer meId, String meTitle, String meContent, String meImage, String meAnonymous,
-			Date meReleasedate, String meStatus, String meReplycontent, String meSpare) {
+			String meReleasedate, String meStatus, String meReplycontent, String meSpare) {
 		super();
 		this.meId = meId;
 		this.meTitle = meTitle;
@@ -83,11 +83,11 @@ public class Message implements Serializable {
 		this.meAnonymous = meAnonymous;
 	}
 
-	public Date getMeReleasedate() {
+	public String getMeReleasedate() {
 		return meReleasedate;
 	}
 
-	public void setMeReleasedate(Date meReleasedate) {
+	public void setMeReleasedate(String meReleasedate) {
 		this.meReleasedate = meReleasedate;
 	}
 

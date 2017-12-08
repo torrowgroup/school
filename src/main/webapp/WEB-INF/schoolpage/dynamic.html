@@ -23,7 +23,8 @@
             <div class="info-left">
                 <h3>校园新闻</h3>
                 <d id="cc">
-                     <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
+                    <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
+                	<a th:if="${schoolViews} != null" th:each="type,typeStat:${schoolViews}" th:href="@{/schoolviews/checkSchoolViews?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
                 </div>
             <div class="info-right" th:if="${messages.lists} != null">
                 <!-- 附页 定位块     -->

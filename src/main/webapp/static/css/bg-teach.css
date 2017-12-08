@@ -1,6 +1,6 @@
 /* 主体部分开始 */
 .img{
-    background-image: url('../images/scho-info.jpg');
+    background-image: url('../images/schoolimages/picture-5.jpg');
 }
 .bg-img1{
     position: relative;
@@ -13,7 +13,7 @@
     width: 100%;
     height: 180px;
 }
-.bg-img1 p{
+.bg-img1>p{
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -22,7 +22,7 @@
     margin: 0;
     text-align: center;
  }
- .bg-img1 p:last-child{
+ .bg-img1>div{
      display: none;
  }
                     .end1{
@@ -44,7 +44,7 @@
                         padding: 40px;
                         overflow: hidden;
                     }
-                    .end-cneter1 img{
+                    .end-cneter1>img{
                        width: 120px;
                        height: 160px;
                        float: right;
@@ -52,7 +52,7 @@
                        right: 20px;
                        border: 1px solid #000;
                     }
-                    .end-cneter1 p:first-of-type{
+                    .end-cneter1>p{
                         width: 500px;
                         height: 50px;
                         line-height: 50px;
@@ -60,7 +60,7 @@
                         font-size: 22px;
                         border-bottom: 1px solid #666666;
                     }
-                    .end-cneter1 p:last-child{
+                    .end-cneter1>div{
                         margin-top: 20px;
                         width: 500px;
                         height: 300px;
