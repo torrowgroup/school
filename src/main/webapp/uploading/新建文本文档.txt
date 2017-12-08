@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上传页</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.css}">
+    <style>
+    div{
+    left:200px;
+    overflow:hidden;
+    }
+        .cc{
+            width: 200px;
+            height: 100px;
+            background-color: #f00;
+            text-align: center;
+            line-height: 100px;
+             position: relative;
+            z-index:4;
+        }
+        .aa{
+            margin-top:200px;
+            width: 200px;
+            height: 100px;
+            background-color: #ff0;
+            position: relative;
+            z-index:4;
+        }
+        .aa input{
+            position: relative;
+            left: -70px;
+        }
+        .hh{
+        position:absolute;
+        z-index:2;
+        height:0px;
+        padding:0px;
+        border:0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="aa">
+        <input type="file" id="ff" name="file">
+    </div>
+    <div class="cc" id="bb">
+        上传文件
+    </div>
+     
+        <input type="submit" id="ll" name="file" class="hh">
+    
+    <div class="cc" id="jj">
+        上传
+    </div>
+</body>
+</body>
+<script>
+    /*
+    *
+    *  aa 表示要的  被点击的id
+    *  bb 替代点击的 id
+    */
+   function change(aa,bb){
+        function getId(a){
+            return document.getElementById(a);
+        }
+        var div1 = getId(aa);
+        var div2 = getId(bb);
+        div2.onclick = function(){
+            div1.click();
+        }
+   }
+   change('ff','bb');
+   change('ll','jj');
+</script>
+</html>

@@ -41,4 +41,7 @@ public interface UserService {
 	public List<User> selectByPid(int number, String identity);
 	//首页显示老师，教研组信息并分页
 	public Object findByTypeId(int currentPage, int tyId);
+//	public List<User> selectByPid(int number);
+	//重置密码
+	public int updatePassword(int usId, String password);
 }

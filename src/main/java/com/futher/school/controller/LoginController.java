@@ -77,6 +77,7 @@ public class LoginController extends BaseController {
 			}
 
 			else if (identityname.equals("teacher")) {
+				typeService.getType(model);
 				session.setAttribute("teacher", user);
 				pathurl = "teacher/index";
 			} else if (identityname.equals("teachergroup")) {

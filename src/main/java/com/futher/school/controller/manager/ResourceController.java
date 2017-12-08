@@ -378,7 +378,7 @@ public class ResourceController extends BaseController {
 		model.addAttribute("inquiry", inquiry);
 		session.setAttribute("inquiry", inquiry);
 		model.addAttribute("reTypeid", reTypeid);
-		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid,inquiry));// 回显分页数据
+		model.addAttribute("messages", resourceService.findByPage(currentPage, reTypeid, inquiry));// 回显分页数据
 		if (reTypeid == 12) {
 			return "manager/selectresource";
 		} else if (reTypeid == 5 || reTypeid == 6) {
@@ -401,7 +401,7 @@ public class ResourceController extends BaseController {
 	 * @return 删除资源类数据
 	 */
 	@RequestMapping("deletResource")
-	public String deletResource(int reId,int reTypepid, Model model) {
+	public String deletResource(int reId, int reTypepid, Model model) {
 		Resource resource = resourceService.selectById(reId);
 		if (resource == null) {
 			model.addAttribute("news", "因不可知操作,此数据已删除");

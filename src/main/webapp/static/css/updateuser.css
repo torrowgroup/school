@@ -1,0 +1,59 @@
+body{      font-family: Tahoma,'microsoft yahei',Arial,sans-serif; }
+.main{
+  width:780px;   
+  height:600px;
+  position: relative;  
+  left:3em; 
+  top:1em; 
+  margin:0 auto;
+  font-size:1.1em;
+ /* color:#22BAA0;*/
+  font-weight: 999;
+}
+
+.left{
+  width:300px;
+  height:539px;
+  position: relative;    
+  margin:0 auto;
+/* border:5px solid lightgreen;*/
+ float:left; 
+} 
+.left{
+/*  font-size: 1.2em;
+  font-family:"Microsoft YaHei";*/
+}
+.left span{
+ display: inline-block;
+ line-height:1.5em;
+ position: relative;
+ width:4.5em;
+ text-align:right;
+}
+
+.left input,select{
+  /* border:2px solid black;*/
+   position: relative;
+   left:0.5em;
+   line-height: 1.6em;
+}
+form p:nth-last-child(1){ 
+   height:100px;
+   position: relative;
+   left: 1.7em;
+   top:1em;
+ }
+ .editor{
+   width:400px;    
+   height:400px; 
+   position: relative;
+   float:right;
+   border:2px solid lightgreen;
+ }
+ .upload{
+   width:270px;    
+   height:280px; 
+   position: relative;
+   float:right;
+  /* border:2px solid lightgreen;*/
+ }

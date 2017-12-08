@@ -7,47 +7,45 @@
 </head>
 <body>
 	<p th:text="${msg}"></p>
-	<div id="ed">
-		<form th:action="@{/teacherResearch/saveTeacherResearch?reTypeid=4}"
+	<form th:action="@{/teacherResearch/saveTeacherResearch?reTypeid=4}"
 			method="post" th:object="${resource}">
-			<p th :text="${title}">教研</p>
-			教研题目:<input type="text" name="reTitle"><br> 教研内容：
-			<td colspan="4"><div id="div1"></div> <textarea
-						style="display: none" name="reContent" id="edit"></textarea>
-					</td>
-			<button onclick="editor.txt.clear()">清空</button>
-			<input onclick="sub()" type="submit">
-		</form>
+		<div>
+		<table border="4">
+			<tr>
+				<td>标题<input type="text" name="reTitle"
+					style="border: none; outline: none"></td>
+			</tr>
+			<tr>
+				<th colspan="4">内容</th>
+			</tr>
+			<tr>
+				<td colspan="4"><div id="div1"></div> <textarea
+						style="display: none" name="reContent" id="edit"></textarea></td>
+			</tr>
+			</table>
 		</div>
+		<button onclick="editor.txt.clear()">清空</button>
+		<input onclick="sub()" type="submit">
+	</form>
 	<script th:src="@{/static/fonts/wangEditor.min.js}"></script>
 	<script type="text/javascript">
 		var E = window.wangEditor
 		var editor = new E('#div1')
 		editor.customConfig.uploadImgShowBase64 = true
 		editor.create()
-		document.getElementById('btn1').addEventListener('click', function() {
-			// 读取 html
-			alert(editor.txt.html())
-		}, false)
-		document.getElementById('btn2').addEventListener('click', function() {
-			// 读取 text
-			var edit = document.getElementById("edit");
-			edit.value = editor.txt.text();
-			/* alert(edit.value) */
-		}, false)
 		function sub() {
 			// 读取 text
 			editor.customConfig.uploadImgServer = '/uploading'
 			editor.customConfig.uploadFileName = 'yourFileName'
 			var edit = document.getElementById("edit");
-			edit.value = editor.txt.text();
+			edit.value = editor.txt.html();
 			/* alert(edit.value) */
 		}
 	</script>
-	<script>
+	<!-- <script>
 		var div1 = document.getElementById('div1')
 		var textarea = document.getElementsByTagName('textarea')
 		textarea.innerHTML = div1.innerHTML;
-	</script>
+	</script> -->
 </body>
 </html>

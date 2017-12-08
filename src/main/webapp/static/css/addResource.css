@@ -1,0 +1,33 @@
+.upload{
+    width:270px;
+    height:280px;
+    position: relative;
+    /* border:2px solid lightgreen;*/
+}
+.editor{
+    width:400px;
+    height:200px;
+    position: relative;
+    border:2px solid lightgreen;
+}
+.inside{
+    width: 700px;
+    height: 400px;
+    /*  border: 2px solid lightgreen; */
+    font-family: Microsoft YaHei;
+    position: relative;
+    top:10em;
+    margin: 0 auto;
+}
+.left{
+    width: 300px;
+    height: 400px;
+    float:left;
+}
+.right{
+    width:300px;
+    height: 400px;
+    float:right;
+    /*  border: 2px solid lightgreen; */
+    position: relative;
+}

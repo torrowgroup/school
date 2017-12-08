@@ -376,8 +376,14 @@ li{list-style:none}
 	/*position:relative;*/
 	/*width:100%;*/
 	height:100%;
+<<<<<<< HEAD
+	background:#666;
+	background:rgba(66, 127, 184, 0);
+/* 	border:10px solid lightblue; */
+=======
 	background:rgba(66, 127, 184, 0);
 	/* border:10px solid lightblue; */
+>>>>>>> ca3dbdd4fa1c5f3be5e05ffdffd4b5cc1c1d13b8
 }
 .welcom{
 	width:90%;

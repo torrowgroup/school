@@ -32,6 +32,7 @@ public abstract  class BaseController {
 	protected HttpServletResponse response;
 	@Resource
 	protected Producer kaptchaProducer;
+	
 	 /**
      * 返回一个 ModelAndView 实例
      * @return

@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!-- <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,7 +8,7 @@
 <body>
 	<div id="showupload">
 		<ul th:each="resource,resourceStat:${messages.lists}">
-			<li><span><a th:href=@{showResearchById?(reId=${resource.reId})}><p
+			<li><span ><a th:href=@{showResearchById?(reId=${resource.reId})}><p
 							th:text="${resource.reTitle}"></a></span></li>
 		</ul>
 	</div>
@@ -22,7 +22,7 @@
 	<span th:if="${messages.currPage == 1}">
 		[首页][上一页]
 	</span>
-	<span th:each="i:${#numbers.sequence(1,messages.totalPage)}">
+	<span th:each="i:${numbers.sequence(1,messages.totalPage)}">
 			<a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/educationoffice/showIntegral?(currentPage=${i},reTypeid=${reTypeid})}"th:text="${i}">#</a>
 	</span>
     <span th:if ="${messages.currPage < messages.totalPage}">
@@ -34,5 +34,54 @@
 			</td>
 		</tr>
 	</table>
+</body>
+</html> -->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<table>
+			<tr>
+				<th>文件名</th>
+				<th colspan="2">操作</th>
+			</tr>
+			<tr th:each="resource,resourceStat:${resourceList.lists}">
+				<td th:text="${resource.reTitle}">标题</td>
+				<td><a th:href="@{/teacher/download(reId=${resource.reId})}">下载</a></td>
+				<td><a
+					th:href="@{/teacher/deleteResource(reId=${resource.reId},reTypeid=${resource.reTypeid})}">删除</a></td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<table border="0" cellspacing="0" cellpadding="0" width="900px">
+			<tr>
+				<td th:if="${resourceList.totalPage} > 0"><span
+					th:if="${resourceList.currPage} == 1"> <span
+						th:if="${resourceList.totalPage ==1}"> <a
+							th:href="@{/educationoffice/showIntegral?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
+					</span> <span th:if="${resourceList.totalPage > 1}"> <a
+							th:href="@{/educationoffice/showIntegral?(uri=showupload,reTypeid=${reTypeid},currentPage=1)}">[首页]</a>
+							<a
+							th:href="@{/educationoffice/showIntegral?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>
+					</span>
+				</span> <span th:if="${resourceList.currPage} > 1 "> <a
+						th:href="@{/educationoffice/showIntegral?(uri=showupload,reTypeid=11,currentPage=1)}">[首页]</a>
+						<a
+						th:href="@{/educationoffice/showIntegral?(currentPage=${resourceList.currPage-1},reTypeid=${reTypeid})}">[上一页]</a>
+						<span th:if="${resourceList.currPage != resourceList.totalPage}">
+							<a
+							th:href="@{/educationoffice/showIntegral?(currentPage=${resourceList.currPage+1},reTypeid=${reTypeid})}">[下一页]</a>
+					</span> <a
+						th:href="@{/educationoffice/showIntegral?(currentPage=${resourceList.totalPage},reTypeid=${reTypeid})}">[尾页]</a>
+				</span></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

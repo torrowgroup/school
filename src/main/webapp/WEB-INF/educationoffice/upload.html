@@ -1,13 +1,93 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>增加资源</title>
+<link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+<link th:href="@{/static/css/update.css}" rel="stylesheet"
+	type="text/css">
+<link th:href="@{/static/css/iconfont1.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/static/css/fileUpload.css}" rel="stylesheet"
+	type="text/css">
+<link th:href="@{/static/css/formpost.css}" rel="stylesheet"
+	type="text/css">
+<script th:src="@{/static/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/fileUpload.js}"></script>
 </head>
 <body>
-<h1>请上传本期的量化积分</h1>
-<td class="text" th:text="${msg}" ></td>
-	<form  th:action="@{/educationoffice/uploadIntegral?(TypeId=4)}" method="post"  enctype="multipart/form-data">
-		选择文件:<input type="file" name="file" width="120px"> <input
-			type="submit" value="上传">
-	</form>
+	<div class="middle">
+		<p>
+			<span><td th:text="${msg}"></td></span>
+		</p>
+		<form th:action="@{/educationoffice/uploadIntegral?(TypeId=4)}"
+			method="post" enctype="multipart/form-data" th:object="${resource}"
+			name="myform">
+			<div class="form-group">
+				<!-- 文件名称 -->
+				<label class="form-label">文件名称</label>
+				<div class="form-input">
+					<input type="text" name="reTitle" class="oinput" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<!-- 文件类型 -->
+				<label class="form-label">所属类型</label>
+				<div class="form-input">
+					<input type="text" name="reTypepid" th:value="${reTypepid}"
+						readonly="readonly" class="oinput">
+				</div>
+			</div>
+			<!-- 文件名称 -->
+			<!-- <div class="form-group up">
+				上传文件部分
+				<div id="fileUploadContent" class="fileUploadContent"></div>
+				<button type="submit" onclick="testUpload()"
+					class="btn btn-primary tijiao">上传文件</button>
+			</div> -->
+			<div class="form-group paper">
+				<label class="col-sm-2 control-label">文件/作品</label> <a
+					href="javascript:" class="file">选择文件 <input type="file"
+					name="file" id="file">
+				</a>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$("#fileUploadContent").initUpload(
+				{
+					"uploadUrl" : "#",//上传文件信息地址
+					//"size":350,//文件大小限制，单位kb,默认不限制
+					//"maxFileNumber":3,//文件个数限制，为整数
+					//"filelSavePath":"",//文件上传地址，后台设置的根目录
+					"beforeUpload" : beforeUploadFun,//在上传前执行的函数
+					//"onUpload":onUploadFun，//在上传后执行的函数
+					//autoCommit:true,//文件是否自动上传
+					"fileType" : [ 'png', 'jpg', 'docx', 'doc', 'PNG', 'txt',
+							'pdf', 'JPG', 'excel', 'xlsx' ]
+				//文件类型限制，默认不限制，注意写的是文件后缀
+				});
+		function beforeUploadFun(opt) {
+			opt.otherData = [ {
+				"name" : "name",
+				"value" : "zxm"
+			} ];
+		}
+		function onUploadFun(opt, data) {
+			alert(data);
+			uploadTools.uploadError(opt);//显示上传错误
+			uploadTools.uploadSuccess(opt);//显示上传成功
+		}
+		function testUpload() {
+			if (document.myform.name.value == "") {
+				alert("文件名不能为空!");
+				document.myform.name.focus();
+				return false;
+			}
+			var opt = uploadTools.getOpt("fileUploadContent");
+			uploadEvent.uploadFileEvent(opt);
+		}
+	</script>
 </body>
 </html>

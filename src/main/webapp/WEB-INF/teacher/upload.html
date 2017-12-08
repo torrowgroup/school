@@ -1,12 +1,51 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>增加资源</title>
+<link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+<link th:href="@{/static/css/update.css}" rel="stylesheet"
+	type="text/css">
+<link th:href="@{/static/css/iconfont1.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/static/css/fileUpload.css}" rel="stylesheet"
+	type="text/css">
+<script th:src="@{/static/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/fileUpload.js}"></script>
 </head>
 <body>
-<td class="text" th:text="${msg}" ></td>
-	<form  th:action="@{/teacher/upload}" method="post"  enctype="multipart/form-data">
-		选择文件:<input type="file" name="file" width="120px"> <input
-			type="submit" value="上传">
-	</form>
+	<div class="middle" style="margin-top: 100px;">
+		<p>
+			<span><td th:text="${msg}"></td></span>
+		</p>
+		<form th:action="@{/teacher/upload?(typeId=${reTypeid},reTypepid=${reTypepid})}"
+			method="post" enctype="multipart/form-data" th:object="${resource}"
+			name="myform">
+			<div class="form-group">
+				<label class="form-label">文件名称</label>
+				<div class="form-input">
+					<input type="text" name="reTitle" class="oinput" required>
+				</div>
+			</div>
+			<div class="form-group" >
+				<label class="form-label">所属类型</label>
+				<div class="form-input">
+					<input type="text" name="reTypename" th:value="${typeName}"
+						readonly="readonly" class="oinput">
+				</div>
+			</div>
+		<div class="form-group" >
+			<input type="button" value="选择文件"
+				onclick="document.myform.picpath.click()" class="form-label obtn"   >
+				 <input type="file" name="file" id="picpath" style="display: none;"
+				onChange="document.myform.path.value=this.value"  >
+			<div class="form-input">
+				<input name="path" readonly  class="oinput"  >
+				<input type="submit" value="上传"  class="form-label upd" >
+			</div>
+		</div>
+		</form>
+	</div>
 </body>
 </html>

@@ -17,6 +17,10 @@ public interface UserMapper {
 	List<User> findByPage(HashMap<String, Object> map);
 	//根据pid查找教师
 	List<User> selectByPid(@Param("number")int number, @Param("name")String name, @Param("identity")String identity);
+//	List<User> selectByPid(@Param("number")int number, @Param("name")String name);
+	//修改密码
+	int updatePassword(@Param("usId") int usId,@Param("usPassword") String usPassword);
+
 	//用户分页查询，和模糊查询，得到总条数
 	List<User> selectByInquiry(@Param("inquiry")String inquiry);
 	//根据类型ID查找老师和教研组的条数

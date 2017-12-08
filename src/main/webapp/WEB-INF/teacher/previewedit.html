@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>title</title>
+<style>
+.show-message {
+	width: 900px;
+	heitht: 100%;
+	margin-left: 80px;
+}
+</style>
+</head>
+<body>
+	<div class='show-message'>
+		<center>
+			<p1 th:if="${resource.reTitle} != null" th:text="${resource.reTitle}"></p1>
+			<br> <span th:text="${resource.rePublisher}"></span><br> <span
+				th:text="${resource.reReleasedate}"></span><br>
+		</center>
+		<div id="one" th:utext="${resource.reContent}"></div>
+	</div>
+</body>
+</html>

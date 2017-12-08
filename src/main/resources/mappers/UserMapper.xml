@@ -14,6 +14,8 @@
     <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
     <result column="us_teachingResults" jdbcType="LONGVARCHAR" property="usTeachingresults" />
     <result column="us_spare" jdbcType="VARCHAR" property="usSpare" />
+      <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
+    <result column="us_teachingResults" jdbcType="LONGVARCHAR" property="usTeachingresults" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.futher.school.entity.UserWithBLOBs">
     <result column="us_introduce" jdbcType="LONGVARCHAR" property="usIntroduce" />
@@ -346,6 +348,7 @@
     </set>
     where us_id = #{usId,jdbcType=INTEGER}
   </update>
+  
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.futher.school.entity.UserWithBLOBs">
     update tb_user
     set us_email = #{usEmail,jdbcType=VARCHAR},
@@ -379,7 +382,7 @@
   
    <select id="selectByUserValue" parameterType="java.lang.String"  resultMap="BaseResultMap">
   select 
-	<include refid="Base_Column_List" />
+<include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
  from tb_user where us_email = #{usEmail} and us_password = #{usPassword}
@@ -466,4 +469,10 @@
            limit #{start},#{size}
         </if>
     </select>
+    <!--修改密码-->
+     <update id="updatePassword" parameterType="com.futher.school.entity.User">
+    update tb_user
+      us_password = #{usPassword,jdbcType=VARCHAR}
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
 </mapper>
