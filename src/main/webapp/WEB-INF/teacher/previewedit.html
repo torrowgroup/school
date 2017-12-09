@@ -2,23 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>title</title>
-<style>
-.show-message {
-	width: 900px;
-	heitht: 100%;
-	margin-left: 80px;
-}
-</style>
+<meta charset="utf-8">
+<link th:href="@{/static/css/previewedit.css}" rel="stylesheet">
 </head>
 <body>
-	<div class='show-message'>
-		<center>
-			<p1 th:if="${resource.reTitle} != null" th:text="${resource.reTitle}"></p1>
-			<br> <span th:text="${resource.rePublisher}"></span><br> <span
-				th:text="${resource.reReleasedate}"></span><br>
-		</center>
-		<div id="one" th:utext="${resource.reContent}"></div>
-	</div>
+<div class="middle">
+	<div class="title"><td  th:if="${resource.reTitle} != null" th:text="${resource.reTitle}"></div>
+	<div class="time">【发布时间】:<td th:text="${resource.reReleasedate}"></td></div>
+	<div class="author">【作者】:<td  th:text="${resource.rePublisher}"></td></div><br>
+	<div class="article"><td th:utext="${resource.reContent}"></td></div>
+</div>
+<p></p>
 </body>
 </html>

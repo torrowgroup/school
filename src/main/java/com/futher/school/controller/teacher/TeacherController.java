@@ -101,7 +101,6 @@ public class TeacherController extends BaseController {
 	public String showUpload(Model model, String uri, int reTypepid,
 			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry) {
 		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid,inquiry));
-		System.out.println(reTypepid+"2222222222222222");
 		model.addAttribute("reTypepid", reTypepid);
 		return "teacher" + "/" + uri;
 	}
@@ -136,7 +135,7 @@ public class TeacherController extends BaseController {
 	// 删除资源
 	@RequestMapping(value = "/deleteResource")
 	public String deleteResource(int reId, Model model, int reTypeid, String uri,
-			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry) {
+			@RequestParam(defaultValue = "1", required = false) int currentPage,String inquiry,int reTypepid) {
 		String msg;
 		Resource resource = resourceService.selectById(reId);
 		if (resource == null) {
@@ -145,8 +144,8 @@ public class TeacherController extends BaseController {
 			int boo = resourceService.deletResource(reId);
 			msg = "文件上传成功";
 		}
-		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypeid, inquiry));
-		model.addAttribute("reTypeid", reTypeid);
+		model.addAttribute("resourceList", resourceService.findByPage(currentPage, reTypepid, inquiry));
+		model.addAttribute("reTypepid", reTypepid);
 		return "teacher" + "/" + uri;
 	}
 	@RequestMapping(value="/showAllResource")

@@ -39,7 +39,7 @@
 					<td th:text="${resource.reReleasedate}"></td>
 					<td><a th:href="@{/teacher/showEditById?(reId=${resource.reId})}" ><p>查看</p></a></td>
 					<td><a
-						th:href="@{/teacher/deleteResource?(reId=${resource.reId},reTypeid=${reTypeid},uri=showedit)}"><p>删除</p></a></td>
+						th:href="@{/teacher/deleteResource?(reId=${resource.reId},reTypeid=${reTypeid},uri=showedit,reTypepid=${resource.reTypepid})}"><p>删除</p></a></td>
 				</tr>
 			</tbody>
 		</table>

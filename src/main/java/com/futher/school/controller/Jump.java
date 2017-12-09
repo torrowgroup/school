@@ -140,8 +140,8 @@ public class Jump extends BaseController {
 	@RequestMapping(value = "/uploadEdit")
 	public String uploadEdit(Model model, int Typepid, int TypeId, String typeName) {
 		model.addAttribute("reTypeid", TypeId);
+		model.addAttribute("typeName", typeService.selectTypeById(TypeId).getTyCategoryname());
 		model.addAttribute("reTypepid", Typepid);
-		model.addAttribute("typeName", typeName);
 		model.addAttribute("msg", msg);
 		return "teacher/edit";
 	}
@@ -150,7 +150,7 @@ public class Jump extends BaseController {
 	public String uploadFile(Model model, int Typepid, int TypeId, String typeName) {
 		model.addAttribute("reTypeid", TypeId);
 		model.addAttribute("reTypepid", Typepid);
-		model.addAttribute("typeName", typeName);
+		model.addAttribute("typeName", typeService.selectTypeById(TypeId).getTyCategoryname());
 		return "teacher/upload";
 	}
 }

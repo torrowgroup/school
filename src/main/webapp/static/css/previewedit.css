@@ -1,0 +1,34 @@
+		body{
+			background: #f1f1f1;
+		}
+		.middle{
+			width: 1200px;
+			margin:20px auto;
+			text-align: center;
+		}
+		.title{
+			font-family: "宋体";
+			font-weight: bold;
+            font-size: 16pt
+		}
+		 
+		.author{			 
+			width: 300px; 
+			margin: 0px auto;
+			margin-top:5px;
+			font-size: 9pt;
+           font-family: 宋体;
+		}
+		.time{
+			padding-top:10px;
+			width: 400px; 
+			height: 30px;
+			margin: 0 auto;
+			text-align: center; 
+			font-size: 9pt;
+           font-family: 宋体;
+		}
+        .article{
+        	width: 1000px;
+        	margin:10px auto;
+        }
