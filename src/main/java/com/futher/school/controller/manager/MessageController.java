@@ -2,6 +2,7 @@ package com.futher.school.controller.manager;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class MessageController extends BaseController {
 	@RequestMapping("selectMessage")
 	public String selectMessage(
 			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage, int replace,
-			Model model) throws UnsupportedEncodingException {
+			String inquiry, Model model) throws UnsupportedEncodingException {
 		String meStatus = "";
 		if (replace == 0) {
 			meStatus = "未回复";
@@ -30,7 +31,7 @@ public class MessageController extends BaseController {
 		}
 		model.addAttribute("meStatus", meStatus);
 		model.addAttribute("replace", replace);
-		model.addAttribute("messages", messageService.findByPage(currentPage, meStatus));// 回显分页数据
+		model.addAttribute("messages", messageService.findByPage(currentPage, meStatus, inquiry));// 回显分页数据
 		return "manager/selectmessage";
 	}
 
@@ -58,7 +59,8 @@ public class MessageController extends BaseController {
 				model.addAttribute("news", "回复失败");
 			}
 		}
-		return selectMessage(1, 0, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectMessage(1, 0, inquiry, model);
 	}
 
 	@RequestMapping("toUpdateMessage")
@@ -79,13 +81,15 @@ public class MessageController extends BaseController {
 		if (replymessage == null) {
 			model.addAttribute("news", "该留言已被删除");
 		} else {
-//			if (!file.isEmpty()) {
-//				String truePath = "static/uploadImg/messagefile";
-//				String fileName = uploadMessageFile(file, truePath);
-//				message.setMeImage(fileName);
-//			} else {
-//				message.setMeImage(replymessage.getMeImage());
-//			}
+			Date currentTime = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = formatter.format(currentTime);
+			message.setMeReleasedate(dateString);
+			if (message.getMeReplycontent().equals("<p><br></p>")) {
+				message.setMeStatus("未回复");
+			} else {
+				message.setMeStatus("已回复");
+			}
 			int judge = messageService.updateMessage(message);
 			if (judge == 1) {
 				model.addAttribute("news", "修改成功");
@@ -99,7 +103,8 @@ public class MessageController extends BaseController {
 				replace = 1;
 			}
 		}
-		return selectMessage(1, replace, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectMessage(1, replace, inquiry, model);
 	}
 
 	@RequestMapping("deletMessage")
@@ -122,7 +127,8 @@ public class MessageController extends BaseController {
 				replace = 1;
 			}
 		}
-		return selectMessage(1, replace, model);
+		String inquiry = (String) session.getAttribute("inquiry");
+		return selectMessage(1, replace, inquiry, model);
 	}
 
 	@RequestMapping("previewMessage")

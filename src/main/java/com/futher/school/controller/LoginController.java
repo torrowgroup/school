@@ -2,14 +2,19 @@ package com.futher.school.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.futher.school.base.BaseController;
@@ -178,11 +183,11 @@ public class LoginController extends BaseController {
 			session.removeAttribute("user");
 			model.addAttribute("news", "密码修改成功");
 		}
-		return startSchool(model);
+		return startSchool();
 	}
 
 	@RequestMapping("adminschool")
-	public String startSchool(Model model) {
+	public String startSchool() {
 //		String usEmail = "";
 //		String usPassword = "";
 //		// 获取当前站点的所有Cookie
@@ -198,18 +203,33 @@ public class LoginController extends BaseController {
 //		model.addAttribute("usPassword", usPassword);
 		return "index";
 	}
+	
+	@RequestMapping("logout")
+	public String logout(String identity){
+		session.removeAttribute(identity);
+		return startSchool();
+	}
 
 	@RequestMapping("index")
-	public String enterSchool(Model model) {
+	public String enterSchool(@RequestParam(value = "identity", defaultValue = "省市名师", required = false)String identity, Model model) throws UnsupportedEncodingException {
 		List<Type> typeList = typeService.getAllTypes();
 		if (typeList == null) {
 			model.addAttribute("typeList", typeList);
 		} else {
 			resourceService.getAllResource(typeList, model);
-			List<User> teacherList = userService.selectByPid(5);
+			List<User> teacherList = userService.selectByPid(5,identity);
 			typeService.getType(model);
 			model.addAttribute("teacherList", teacherList);
 		}
 		return "schoolpage/index";
+	}
+	@RequestMapping("getTeacher")
+	@ResponseBody
+	public Map<String , Object> getTeacher(String identity) throws IOException{
+		identity = new String(identity.getBytes("iso-8859-1"), "utf-8");
+		List<User> teacherList = userService.selectByPid(5,identity);
+		Map<String , Object>  map = new HashMap<String , Object>();
+		map.put("user", teacherList);
+		return map;
 	}
 }

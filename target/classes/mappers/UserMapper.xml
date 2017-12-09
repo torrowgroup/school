@@ -374,6 +374,8 @@
       us_identityName = #{usIdentityname,jdbcType=VARCHAR},
       us_tel = #{usTel,jdbcType=VARCHAR},
       us_image = #{usImage,jdbcType=VARCHAR},
+      us_introduce = #{usIntroduce,jdbcType=LONGVARCHAR},
+      us_teachingResults = #{usTeachingresults,jdbcType=LONGVARCHAR},
       us_spare = #{usSpare,jdbcType=VARCHAR}
     where us_id = #{usId,jdbcType=INTEGER}
   </update>
@@ -417,7 +419,7 @@
     <include refid="Blob_Column_List" />
   	 from tb_user
   	 	<if test="inquiry != null">
-  	 	where concat (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
+  	 	where concat_ws (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
      	</if>
   </select>
    <!-- 根据分页数据start 和size查询数据 -->
@@ -428,7 +430,7 @@
     	<include refid="Blob_Column_List" />
         from tb_user
         <if test="inquiry != null">
-        where concat (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
+        where concat_ws (us_email,',',us_name,',',us_sex,',',us_identityName,',',us_tel,',',us_id) like concat(concat('%',#{inquiry}),'%')
         </if>
         <if test="start!=null and size!=null">
            limit #{start},#{size}
@@ -441,9 +443,32 @@
     ,
     <include refid="Blob_Column_List" />
     from tb_user
-    where us_identityName = #{name}
+    where us_identityName = #{name} and us_teachingResults = #{identity}
     ORDER BY RAND() LIMIT #{number};
   </select>
+    
+    <select id="selectByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+  	 from tb_user where us_identityId = #{tyId}
+  </select>
+  
+   <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByTypeId" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+    	,
+    	<include refid="Blob_Column_List" />
+        from tb_user
+        <if test="tyId != null">
+          where us_identityId = #{tyId} 
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+    </select>
     <!--修改密码-->
      <update id="updatePassword" parameterType="com.futher.school.entity.User">
     update tb_user

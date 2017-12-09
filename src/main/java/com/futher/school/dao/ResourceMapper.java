@@ -22,7 +22,7 @@ public interface ResourceMapper {
     //wqj用来获取所有resource
     List<Resource> getUploadFileName();//获取所有上传文件名
     //主页的滚动图片
-	List<com.futher.school.entity.Resource> selectByPid(@Param("pid")int pid, @Param("number")int number);
+	List<com.futher.school.entity.Resource> selectByPid(@Param("pid")int pid, @Param("number")int number, @Param("typeName")String typeName);
 	//根据类型id查找资源
 	com.futher.school.entity.Resource selectByid(Integer reTypeid);
 	//根据类型父查询所有资源类符合的条数

@@ -19,7 +19,7 @@
                 <h3>校园新闻</h3>
                 <dl id="cc">
                 <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
-
+                <a th:if="${schoolViews} != null" th:each="type,typeStat:${schoolViews}" th:href="@{/schoolviews/checkSchoolViews?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a>
                 </dl>
             </div>
             <div class="info-right" th:if="${dynamicDetails} != null" >
@@ -27,6 +27,10 @@
                             <section class="left"></section>
                             <section class="left-1" id="content_2" th:text="${dynamicDetails.reTypename}">校园风光</section>
                 </section>
+                 <section class="p-title">
+                            <h3 th:utext="${dynamicDetails.reTitle}">文章标题</h3>
+                            <p>更新时间 <span th:utext="${dynamicDetails.reReleasedate}"> 2017-5-8</span></p>
+                <section>
               	<section th:utext="${dynamicDetails.reContent}">
               	</section>
             </div>

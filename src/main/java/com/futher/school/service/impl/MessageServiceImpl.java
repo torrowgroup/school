@@ -25,7 +25,7 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 	
 	@Override
 	public int addMessage(Message message) {
-		return MessageMapper.insert(message);
+		return this.insertEntity(message);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 	}
 
 	@Override
-	public PageBean<Message> findByPage(int currentPage,String meStatus) {
+	public PageBean<Message> findByPage(int currentPage,String meStatus, String inquiry) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		PageBean<Message> pageBean = new PageBean<Message>();
 
@@ -45,7 +45,7 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 		int pageSize = 6;
 		pageBean.setPageSize(pageSize);
 		// 封装总记录数
-		int totalCount = MessageMapper.selectByStatus(meStatus).size();
+		int totalCount = MessageMapper.selectByStatus(meStatus, inquiry).size();
 		pageBean.setTotalCount(totalCount);
 
 		// 封装总页数
@@ -56,6 +56,7 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageBean.getPageSize());
 		map.put("meStatus", meStatus);
+		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<Message> lists = MessageMapper.findByPage(map);
 		pageBean.setLists(lists);
@@ -83,7 +84,7 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 
 	@Override
 	public int updateMessage(Message message) {
-		return MessageMapper.updateMessage(message);
+		return this.updateEntity(message);
 	}
 
 }

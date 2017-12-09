@@ -30,7 +30,7 @@
                             <section class="left-1" id="content_2" th:text="${type.tyCategoryname}">校园风光</section>
                 </section>
                 <div class="news" th:each="resource,resourceStat:${messages.lists}">
-                     <span class="above">**</span><a th:href="@{/educate/readEducate?(reId=${resource.reId})}" th:text="${resource.reTitle}">我是贺新安 ,新安 ,,你是谁??新安 ,,你是谁??</a>
+                     <span class="above"></span><a th:href="@{/educate/readEducate?(reId=${resource.reId})}" th:text="${resource.reTitle}">我是贺新安 ,新安 ,,你是谁??新安 ,,你是谁??</a>
                      <span class="time back" th:text="${resource.reReleasedate}">2017-17-3</span>
                 </div>
                 <section class="bottom">

@@ -28,7 +28,6 @@
                    placeholder="请输入标题" name="reTitle">
           </div>
         </div>
-        
         <div class="form-group paper">
           <a href="javascript:" class="file">选择文件
             <input type="file" name="file" id="file">
@@ -94,4 +93,30 @@
 <!-- 			<input type="submit" value="添加"> -->
 <!-- 	</form> -->
 </body>
+<script type="text/javascript">
+      $(function(){  
+        var value = $('#choose').val()
+        if(value == 'manager'){
+            $('.editor').slideUp()
+        } else if (value === 'teacher') {
+			$('.teacher').slideDown()
+			$('.editor').slideDown()
+		} else {
+			$('.teacher').slideUp()
+			$('.editor').slideDown()
+		}
+      });
+     $('#choose').change(function(data){
+        var value = $(this).val()
+        if(value == 'manager'){
+            $('.editor').slideUp()
+        }  else if (value === 'teacher') {
+			$('.teacher').slideDown()
+			$('.editor').slideDown()
+		} else {
+			$('.teacher').slideUp()
+			$('.editor').slideDown()
+		}
+    })  
+  </script>
 </html>

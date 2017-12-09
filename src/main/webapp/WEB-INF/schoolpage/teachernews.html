@@ -1,0 +1,88 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>title</title>
+<!--   <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
+<!--   <link rel="stylesheet" href="./css/public.css"> -->
+<!--   <link rel="stylesheet" href="./css/bg-scho.css"> -->
+   <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/public.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/bg-teach.css}">
+    <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+</head>
+<body>
+<div th:include="schoolpage/common :: header"></div>
+ <!-- 身体部分开始 -->
+    <section class="p-img img">
+        
+    </section>
+    <section class="main">
+        <section class="content-info">
+            <div class="info-left">
+                <h3>学校概况</h3>
+                <dl id="cc">
+                 <a th:each="type,typeStat:${teacher}" th:href="@{/teachers/checkTeachers?(tyId=${type.tyId})}" ><dt th:text="${type.tyCategoryname}">教师介绍</dt></a>
+<!--                     <dt><a href="/">学校简介</a></dt> -->
+<!--                     <dt><a href="/">领导机构</a></dt> -->
+<!--                     <dt><a href="/">学校发展</a></dt> -->
+<!--                     <dt><a href="/">校园风光</a></dt>                     -->
+
+                </dl>
+            </div>
+            <div class="info-right" id="d-info">
+                    <section class="top">
+                            <section class="left"></section>
+                            <section class="left-1" id="content_2" th:text="${type.tyCategoryname}">校园风光</section>
+                </section>
+                <div class="bg-img1" th:each="user,userStat:${messages.lists}">
+                    <img th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" alt="暂无图片">
+                    <p th:text="${user.usName}">这是一个图片的简介</p>
+                    <div th:utext="${user.usIntroduce}">.01—2017.02，河南省人民政府副省长、周口市委书记、市人大常委会主任；[2] 
+                        2017.02—2017.06，河南省人民政府副省长、周口市人大常委会主任；</div>
+                </div>
+
+                <section class="bottom">
+                    <a style="margin-right:30px;">上一页</a>当前第<span style="color:#20a0f0;padding:0 10px;">5</span>页<a style="margin-left:30px;">下一页</a>
+                </section>
+        </div>
+        </section>
+
+    </section>
+   <div th:include="schoolpage/common :: footer"></div>
+   <div class="end1">
+        <div class="end-cneter1">
+        </div>
+	</div>
+</body>
+<script type="text/javascript" th:src="@{../static/js/xidinghe.js}"></script>
+<script type="text/javascript">
+function tanchu(ids_1,ids_2,ids_3){
+        var eimgs = $(ids_1)
+        $(ids_2).on('click',function(event) {
+            /* Act on the event */
+            $(ids_2).css('display','none');
+        })
+        eimgs.on('click',function(event) {
+            /* Act on the event */
+            // alert(this.innerHTML);
+            $(ids_2).css('display','block');
+            $(ids_3).html(this.innerHTML);
+        })
+   }
+   $(function(){
+        tanchu('#d-info div','.end1','.end-cneter1')
+   })
+   function chanceStyle(id_1,id_2,class_chan){
+    var dts= $(id_1);
+    for( var i = 0; i < dts.length; i++ ) {
+        dts[i].className =" ";
+        if(dts[i].innerText==$(id_2).text()){
+            dts[i].className = class_chan;
+        }
+    }
+    }   
+   chanceStyle('#cc dt','#content_2','dt2');
+   xiding("#nav-1");
+</script>
+</html>

@@ -33,10 +33,11 @@
 <!--                         <a href="">校园风光</a> -->
                     </div>
             </li>
-            <li class="nav-li" th:if="${dynamic} != null and ${oneDynamic} != null">
+            <li class="nav-li" th:if="${dynamic} != null and ${schoolViews} != null">
                     <a href="" th:href="@{/dynamic/checkDynamic?(tyId=${oneDynamic.tyId})}">校园新闻</a>
                     <div class="chances">
                     <a href=""th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">校园新闻</a>
+                    <a href=""th:each="type,typeStat:${schoolViews}" th:href="@{/schoolviews/checkSchoolViews?(tyId=${type.tyId})}" th:text="${type.tyCategoryname}">校园新闻</a>
 <!--                         <a href="">校园新闻</a> -->
 <!--                         <a href="">教育动态</a> -->
 <!--                         <a href="">德育专题</a> -->
@@ -65,11 +66,11 @@
 <!--                         <a>教师园地</a> -->
                     </div>
             </li>   
-            <li class="nav-li">
-                    <a href="">教师风采</a>
+            <li class="nav-li" th:if="${teacher} != null and ${oneTeacher} != null">
+                    <a href="" th:href="@{/teachers/checkTeachers?(tyId=${oneTeacher.tyId})}">教师风采</a>
                     <div class="chances">
-                        <a>教师介绍</a>
-                        <a>教师成果</a>
+                        <a th:each="type,typeStat:${teacher}" th:href="@{/teachers/checkTeachers?(tyId=${type.tyId})}"  th:text="${type.tyCategoryname}">教师介绍</a>
+<!--                         <a>教师成果</a> -->
                     </div>
             </li>  
             <li class="nav-li">

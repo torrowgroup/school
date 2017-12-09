@@ -19,6 +19,9 @@
         line-height: 50px;
         vertical-align: top;
     }
+    .tongzhi:hover span{
+        transform:rotate(-5deg);
+    }
     .tongzhi .letter{
         width: 95%;
         height: 100%;
@@ -92,7 +95,7 @@
         }
         .spanright{
             right:10%;
-            background-image: url(../images/schoolimages/slider-next.png);
+            background-image: url(../images/schoolimages//slider-next.png);
             background-size: 100% 100%;
         }
 /* 主体    居中部分*/
@@ -135,6 +138,13 @@ main{
         .new-hot img{
             width: 100%;
             height: 80%;
+            position: relative;
+            transition: 0.5s;
+            top:0px;
+        }
+        .new-hot:hover img{
+            top: -5px;
+            box-shadow: 5px 5px 5px #883c92;
         }
         .new-hot p{
             width: 100%;
@@ -144,6 +154,11 @@ main{
             text-overflow: ellipsis;
             line-height: 40px;
             margin: 0;
+            position: relative;
+            transition: 0.5;
+        }
+        .new-hot:hover p{
+         top:-5px;
         }
 /*  近期新闻栏 */
 .newlearn{
@@ -167,6 +182,7 @@ main{
             width: 100%;
             height: 40px;
             line-height: 40px;
+            color:#282828;
         }
         .new-every p{
             margin: 0px;
@@ -227,48 +243,126 @@ main{
             vertical-align: top;
         }
         .title-teach .img-l{
-            background-image: url(../images/schoolimages/left.png);
+            background-image: url(../images/left.png);
         }
         .title-teach .img-r{
-            background-image: url(../images/schoolimages/right.png);
+            background-image: url(../images/right.png);
         }
-    .loop2{
-        width: 100%;
-        height: 200px;
-        position: relative;
-        white-space:nowrap;
-        overflow: hidden;
-    }
-        .loop2 div{
-            height: 100%;
-            white-space:nowrap;
-            display:inline-block;
-            position: relative;
+        .teacher-s{
+            width: 100%;
+            height: 300px;
         }
-            .loop2 a{
-                display: inline-block;
-                vertical-align: top;
-                width: 200px;
+            .teacher-s .t-left{
+                width: 134px;
                 height: 100%;
+                background-color: #883c92;
+                float: left;
+            }
+            .teacher-s .t-left>div{
                 position: relative;
+                width: 100%;
+                height: 25%;
+                background-color: #883c92;
+                border-bottom: 1px solid #dadada;
+                text-align: center;
+                line-height: 72px;
+                cursor:pointer;
+                color: #dadada;
+                transition: 0.5s;
             }
-            .loop2 a:hover .t-infor{
-                bottom: 0px;
-            }
-                .loop2 a img{
-                    width: 100%;
+                .teacher-s .t-left>div .tea-cl{
+                    width: 100px;
                     height: 100%;
+                    font-size: 16px;
+                    text-align: right;
                 }
-                .t-infor{
-                    width: 100%;
-                    height: 40px;
-                    line-height: 40px;
+                .teacher-s .t-left>div span{
                     position: absolute;
-                    bottom: -100px;
-                    background: rgba(0, 0, 10, 0.4);
-                    transition: bottom 0.5s;
-                    color: #fff;
-                    text-align: center;
+                    top: -50%;
+                    left: -10px;
+                    transition: 0.2s ease-in;
+                }
+            .teacher-s .t-left>div:hover{
+                width: 152px;
+            }
+            .teacher-s .t-left>div:hover span{
+                top:0px;
+                left:130px;
+            }
+            #t-left-tea {
+                width: 152px;
+            }
+            #t-left-tea span{
+                top:0px;
+                left:130px;
+            }
+            .teacher-s .t-right{
+                width: 820px;
+                height: 99%;
+                float:right;
+                position: relative;
+                overflow: hidden；
+            }
+
+            .loop2{
+                width: 100%;
+                height: 300px;
+                white-space:nowrap;
+                overflow: hidden;
+            }
+                .loop2 div{
+                    height: 100%;
+                    white-space:nowrap;
+                    display:inline-block;
+                    position: relative;
+                    font-size: 0px;
+                }
+                .loop2 a{
+                     width: 200px;
+                     height: 100%;
+                     display: inline-block;
+                     overflow: hidden;
+                     margin-right:5px; 
+                     position: relative;
+                     color: #282828;
+                }
+                .loop2 a img{
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    z-index: 5;
+                }
+                .loop2 a .scale{
+                    position: absolute;
+                    width: 150%;
+                    height: 100px;
+                    background-color: #fff;
+                    z-index:10;
+                    bottom:-100px;
+                    transition: 0.5s;
+                    border-top:1px solid #883c92;
+                    transform-origin: 0 0;
+                }
+                .loop2 a:hover .scale{
+                    transform:rotate(-24deg)
+                }
+                .loop2 a:hover .t-infor{
+                    bottom: 0px;
+                }
+                .loop2 a .t-infor{
+                    position: absolute;
+                    bottom: -50px;
+                    width: 100%;
+                    height: 50px;
+                    text-align: right;
+                    line-height: 25px;
+                    font-size: 14px;
+                    z-index: 15;
+                    transition: 0.5s;
+                }
+                .loop2 a .t-infor p{
+                    margin: 0;
+                    padding: 0;
                 }
 /*   超链接部分*/
 

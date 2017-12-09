@@ -4,16 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" type="text/css" th:href="@{./static/css/login.css}">
-<!--  <link rel="stylesheet" type="text/css"th:href="css/login.css" /> -->
+ <link rel="stylesheet" type="text/css"th:href="css/login.css" />
  <script language="javascript">
-        //防止页面后退
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
+<!-- //         //防止页面后退 -->
+         history.pushState(null, null, document.URL); 
+         window.addEventListener('popstate', function () {
+             history.pushState(null, null, document.URL); 
+         }); 
  </script>
  <script type="text/javascript">
->>>>>>> 3f3748bb68cad440d70f6255edff3a52cd9ceb9d
     function changeVerifyCode() {  
             var time=new Date().getTime();  
             document.getElementById("kaptchaImage").src="kaptcha?d="+time;//为了不让验证码缓存，为了安全起见，需要次次都刷新  

@@ -257,3 +257,14 @@ select::-ms-expand { display: none; }
     display:none;
 
 }
+.messageeditor{
+    width:600px;
+    height:300px;
+    position: relative;
+    top:-1em;
+    margin:0 auto;
+
+}
+.teacher{
+	display:none;
+}

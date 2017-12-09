@@ -38,15 +38,10 @@ public interface UserService {
 	//富文本上传图片
 	public String uploadimage(MultipartFile myFileName, HttpSession session) throws IllegalStateException, IOException;
 	//根据类型父id查找教师
-	public List<User> selectByPid(int number);
-	/**
-	 * @param password
-	 * @return
-	 */
-	/**
-	 * @param usId
-	 * @param password
-	 * @return
-	 */
+	public List<User> selectByPid(int number, String identity);
+	//首页显示老师，教研组信息并分页
+	public Object findByTypeId(int currentPage, int tyId);
+//	public List<User> selectByPid(int number);
+	//重置密码
 	public int updatePassword(int usId, String password);
 }

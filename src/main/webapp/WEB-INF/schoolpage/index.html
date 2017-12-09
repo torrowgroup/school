@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{./static/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{./static/css/public.css}">
     <link rel="stylesheet" type="text/css" th:href="@{./static/css/index.css}">
+    <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
     <title>郑州某中学</title>
 <!--     <head th:include="schoolpage/common"> -->
 </head>
@@ -70,26 +71,70 @@
             <div class="learn">
                 <div class="title-tongzhi public-title">
                         <h3><i class="glyphicon glyphicon-bullhorn" style="color:#fff"></i>新闻与通知<span style="color:#fff">New and Infor</span></h3>
-                        <a class="new-every" href="" th:each="resource,resourceStat:${informlist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
-                                <p class="infor" th:text="${resource.reTitle}">
-                                    <span>>&nbsp&nbsp</span>
-                                </p>
-                        </a>
-                        <a class="new-every" href="" th:each="resource,resourceStat:${newslist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
-                                <p class="infor" th:text="${resource.reTitle}">
-                                    <span>>&nbsp&nbsp</span>
-                                </p>
-                        </a>
                 </div>
+                 <a class="new-every" href="" th:each="resource,resourceStat:${informlist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
+                                <p class="infor" th:text="${resource.reTitle}">
+                                    <span>>&nbsp&nbsp</span>
+                                </p>
+                  </a>
+                 <a class="new-every" href="" th:each="resource,resourceStat:${newslist}" th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}">
+                   <p class="infor" th:text="${resource.reTitle}">
+                   <span>>&nbsp&nbsp</span>
+                   </p>
+                 </a>
             </div>
         </section>
         <section class="teacher">
-                <h3 class="title-teach">
+                  <h3 class="title-teach">
                     <span class="img-l"></span>
-                    教师风采
+                   		 教师风采
                     <span class="img-r"></span>
                 </h3>
-                <div id="aa" class="loop2">
+                 <div class="teacher-s">
+                    <div class="t-left">
+                        <div id="t-left-tea">
+                            <div class="tea-cl">省市名师</div>
+                            <span>
+                                >
+                            </span>    
+                        </div>
+                         <div>
+                            <div class="tea-cl">特级教师</div>
+                            <span>
+                                >
+                            </span>    
+                        </div>    
+                         <div>
+                            <div class="tea-cl">骨干教师</div>
+                            <span>
+                                >
+                            </span>    
+                        </div>    
+                         <div>
+                            <div class="tea-cl">青年新秀</div>
+                            <span>
+                                >
+                            </span>    
+                        </div>                            
+                    </div>
+                    <div class="t-right">
+                            <div id="aa" class="loop2">
+                                    <div id="bb" class="contain1" >
+                                          <a href="" th:each="user,userStat:${teacherList}" style="margin-right:5px;">
+                                			<img th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="200px"  height="200px" alt="暂无照片">
+                                			 <div class="scale"></div>
+                                			<div class="t-infor" th:text="${user.usName}">
+                                				<p th:text="${user.usName}">贺新安</p>
+                                               
+                                			</div>
+                            			 </a>
+                                    </div>
+                                    <div id="cc" class="contain2">
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+               <!--  <div id="aa" class="loop2">
                         <div id="bb" class="contain1">
                             <a href="" th:each="user,userStat:${teacherList}" style="margin-right:5px;">
                                 <img th:src="@{/static/uploadImg/{image}(image=${user.usImage})}" width="200px"  height="200px" alt="暂无照片">
@@ -98,7 +143,7 @@
                         </div>
                         <div id="cc" class="contain2">
                         </div>
-                </div>
+                </div> -->
                 <div class="study">
 
                 </div>
@@ -114,6 +159,28 @@
 <script type="text/javascript" th:src="@{./static/js/jquery-3.2.1.min.js}"></script>
 <script type="text/javascript" th:src="@{./static/js/xidinghe.js}"></script>
 <script type="text/javascript" th:src="@{./static/js/counttime.js}"></script>
+<script type="text/javascript">
+	function chooseLL(a){
+		var value = a;
+		var params ={"identity":value}
+	$.ajax({  
+        type: "post",  
+        url: "/school/getTeacher?identity="+value,
+        contentType: "application/x-www-from-urlencoded; charset=utf-8",
+        success: function (data) {
+        var html
+        $.each(data.user, function(j,val){
+        html +='<a'+' th:href="@{}"'+' style="margin-right:5px;" >'
+ 		+'<img'+' src="./static/uploadImg/'+val.usImage+'"'+'width="200px"'+'height="200px"'+'alt="暂无照片"'+'>'
+ 		+'<div'+' class="scale"'+'></div>'+
+ 		'<div'+' class="t-infor"'+'>'+'<p>'+val.usName+'</p>'+'</div>'+'</a>';
+		});
+		 $('#bb').html(html)
+		 $('#cc').html(html)  
+        }   
+    });
+    }
+</script>
 <script th:if="${typeList} != null">
  xiding("#nav-1");
 var obj1 = {
@@ -137,7 +204,20 @@ var obj3 = {
     c_copy_id:'ul2' //必要参数
 }
 loop(obj3);
+function click_display(a){
+    var cc = $(a);
+    $(a).click(function(){
+        for(var i = 0;i<cc.length;i++){
+            $(cc[i]).attr('id','');
+        }
+        $(this).attr('id','t-left-tea');
+        var chooseArgu = $(this.getElementsByTagName("div")[0]).text();
+        chooseLL(chooseArgu);
+    });
+}
+click_display('.t-left>div');
 </script>
+
 <script type="text/javascript" th:if="${examTime} != null and ${typeList} != null">
 	var examTime = '[[${examTime.reContent}]]';
 	var spantime =days(examTime);

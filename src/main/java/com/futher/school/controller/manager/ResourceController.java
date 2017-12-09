@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,9 +120,7 @@ public class ResourceController extends BaseController {
 		if (typelist.isEmpty()) {
 			model.addAttribute("news", "未添加类型,请添加类型");
 		} else {
-			for (int i = 0; i < typelist.size(); i++) {
-				model.addAttribute("typeid", typelist.get(i).getTyId());
-			}
+			model.addAttribute("typelist", typelist);
 		}
 		session.setAttribute("tyPid", tyPid);
 		return "/manager/addschoolview";
@@ -349,10 +348,7 @@ public class ResourceController extends BaseController {
 		int tyPid = (int) session.getAttribute("tyPid");
 		boolean sign = setAddResource(resource, model);
 		if (sign == true) {
-			if (file.isEmpty()) {
-				model.addAttribute("news", "请上传新闻图片");
-				return toAddResource(tyPid, model);
-			} else {
+			if (!(file.isEmpty())) {
 				String truePath = "static/uploadImg/uploadnew";
 				String fileName = uploadOpus(file, truePath);
 				resource.setReSpare(fileName);
@@ -533,9 +529,7 @@ public class ResourceController extends BaseController {
 			if (typelist.isEmpty()) {
 				model.addAttribute("news", "未添加类型,请添加类型");
 			} else {
-				for (int i = 0; i < typelist.size(); i++) {
-					model.addAttribute("typeid", typelist.get(i).getTyId());
-				}
+				model.addAttribute("typelist", typelist);
 			}
 		}
 		model.addAttribute("resource", resource);

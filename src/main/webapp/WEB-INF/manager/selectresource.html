@@ -20,6 +20,7 @@
     <div class="inside">
       <form th:action="@{/resource/selectResource}" method="post">
         <div class="search bar">
+        	<input type="hidden" name="reTypeid" th:value="${reTypeid}">
             <input type="text" name="inquiry" required="required" placeholder="请输入您要搜索的内容...">
             <button type="submit"></button>
         </div>
@@ -55,16 +56,16 @@
   </table>
   <div class="fenye" th:if="${messages.totalPage} > 0">
     <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
-      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">首页</a></li>
-      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid})}"th:text="${i}">#</a></li>
-        <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">下一页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid},inquiry=${inquiry})}">首页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+        <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid},inquiry=${inquiry})}">下一页</a></li>
     </ul>
      <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
-      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid})}">首页</a></li>
-      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid})}">上一页</a></li>
-      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid})}"th:text="${i}">#</a></li>
-      <li th:if="${messages.currPage != messages.totalPage}"><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid})}">下一页</a></li>
-      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid})}">尾页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=1,reTypeid=${reTypeid},inquiry=${inquiry})}">首页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage-1},reTypeid=${reTypeid},inquiry=${inquiry})}">上一页</a></li>
+      <li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/resource/selectResource?(currentPage=${i},reTypeid=${reTypeid},inquiry=${inquiry})}"th:text="${i}">#</a></li>
+      <li th:if="${messages.currPage != messages.totalPage}"><a th:href="@{/resource/selectResource?(currentPage=${messages.currPage+1},reTypeid=${reTypeid},inquiry=${inquiry})}">下一页</a></li>
+      <li><a th:href="@{/resource/selectResource?(currentPage=${messages.totalPage},reTypeid=${reTypeid},inquiry=${inquiry})}">尾页</a></li>
     </ul>
   </div>
   </div><!--inside-->

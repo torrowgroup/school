@@ -220,7 +220,7 @@
         <include refid="Base_Column_List" />
         from tb_type
         <if test="inquiry != null">
-        where concat (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
+        where concat_ws (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
      	</if> 
         <if test="start!=null and size!=null">
            limit #{start},#{size}
@@ -232,7 +232,7 @@
     <include refid="Base_Column_List" />
     from tb_type
      <if test="inquiry != null">
-        where concat (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
+        where concat_ws (ty_pid,',',ty_id,',',ty_categoryName) like concat(concat('%',#{inquiry}),'%')
      </if> 
   </select>
     

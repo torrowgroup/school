@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MessageMapper {
 
-    int deleteByPrimaryKey(Integer meId);
-
-    int insert(Message record);
+//    int deleteByPrimaryKey(Integer meId);
+//
+//    int insert(Message record);
 
 //    int insertSelective(Message record);
 
@@ -18,11 +18,11 @@ public interface MessageMapper {
 
 //    int updateByPrimaryKeySelective(Message record);
 
-    int updateByPrimaryKey(Message record);
+//    int updateByPrimaryKey(Message record);
     //取分页数据
 	List<Message> findByPage(HashMap<String, Object> map);
 	//根据状态来查看留言条数
-	List<Message> selectByStatus(String meStatus);
+	List<Message> selectByStatus(@Param("meStatus")String meStatus, @Param("inquiry")String inquiry);
 	//回复留言
 	int replyMessage(HashMap<String, Object> map);
 	//修改留言

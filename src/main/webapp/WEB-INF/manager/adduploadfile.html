@@ -7,12 +7,25 @@
   <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.css}">
   <link rel="stylesheet" type="text/css" th:href="@{../static/css/formpost.css}">
   <link rel="stylesheet" type="text/css" th:href="@{../static/css/user.css}">
+  <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
 </head>
 <body>
 <div class="middle">
     <div class="inside">
     <p th:text="${news}"></p>
       <form class="form-horizontal" role="form" th:if="${typelist} != null" th:action="@{/resource/addUploadFile}" method="post" enctype="multipart/form-data">
+        
+        <div class="form-group">
+                <label class="col-sm-2 control-label">主类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="tyPid" id="tyPid">
+			            <option th:value="5">校园文学</option>
+			            <option th:value="6">资源下载</option>
+			            <option th:value="9">校园风景</option>
+                    </select>
+                </div>
+            </div>
+        
         <div class="form-group">
           <label class="col-sm-2 control-label">类型</label>
           <div class="col-sm-10">
@@ -60,4 +73,21 @@
 <!-- 			<input type="submit" value="添加"> -->
 <!-- 	</form> -->
 </body>
+<script type="text/javascript">
+	 $('#tyPid').change(function(data) {
+       var value = $('#tyPid').val()
+        $.ajax({  
+        type: "post",  
+        url: "/school/type/getType?tyPid="+value,
+        contentType: "application/x-www-from-urlencoded; charset=utf-8",
+        success: function (data) {
+        var html
+        $.each(data.type, function(j,val){
+        html+='<option'+' value="'+val.tyId+'">'+val.tyCategoryname+'</option>'
+		});
+		$('#reTypeid').html(html)
+        }   
+    });
+      })  
+</script>
 </html>
