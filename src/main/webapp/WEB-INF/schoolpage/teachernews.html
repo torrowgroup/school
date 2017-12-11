@@ -2,13 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>title</title>
-<!--   <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
-<!--   <link rel="stylesheet" href="./css/public.css"> -->
-<!--   <link rel="stylesheet" href="./css/bg-scho.css"> -->
+  <title>教师风采</title>
+   <meta name="viewport" content="width=1200, initial-scale=0.3">
    <link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{../static/css/public.css}">
     <link rel="stylesheet" type="text/css" th:href="@{../static/css/bg-teach.css}">
+     <link rel="stylesheet" type="text/css" th:href="@{../static/css/TeachFace.css}">
     <script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
 </head>
 <body>
@@ -42,9 +41,22 @@
                         2017.02—2017.06，河南省人民政府副省长、周口市人大常委会主任；</div>
                 </div>
 
-                <section class="bottom">
-                    <a style="margin-right:30px;">上一页</a>当前第<span style="color:#20a0f0;padding:0 10px;">5</span>页<a style="margin-left:30px;">下一页</a>
-                </section>
+              <section class="bottom">
+                     <section aria-label="Page navigation" th:if="${messages.totalPage} > 0">
+					  <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
+						    <li><a th:href="@{/teachers/checkTeachers?(currentPage=1,tyId=${tyId})}">首页</a></li>
+      						<li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/teachers/checkTeachers?(currentPage=${i},tyId=${tyId})}"th:text="${i}">#</a></li>
+        					<li><a th:href="@{/teachers/checkTeachers?(currentPage=${messages.currPage+1},tyId=${tyId})}">下一页</a></li>
+					  </ul>
+					   <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
+						    <li><a th:href="@{/teachers/checkTeachers?(currentPage=1,tyId=${tyId})}">首页</a></li>
+      						<li><a th:href="@{/teachers/checkTeachers?(currentPage=${messages.currPage-1},tyId=${tyId})}">上一页</a></li>
+      						<li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/teachers/checkTeachers?(currentPage=${i},tyId=${tyId})}"th:text="${i}">#</a></li>
+        					<li><a th:href="@{/teachers/checkTeachers?(currentPage=${messages.currPage+1},tyId=${tyId})}">下一页</a></li>
+					 		 <li><a th:href="@{/teachers/checkTeachers?(currentPage=${messages.totalPage},tyId=${tyId})}">尾页</a></li>
+					  </ul>
+					</section>
+                </section> 
         </div>
         </section>
 

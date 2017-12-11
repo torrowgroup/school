@@ -220,7 +220,7 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		pageBean.setCurrPage(currentPage);
 
 		// 每页显示的数据
-		int pageSize = 8;
+		int pageSize = 9;
 		pageBean.setPageSize(pageSize);
 		// 封装总记录数
 		int totalCount = resourceMapper.selectByTypeId(reTypeid).size();

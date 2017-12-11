@@ -59,6 +59,9 @@ public class MessageServiceImpl extends BaseDao<Message,Serializable> implements
 		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<Message> lists = MessageMapper.findByPage(map);
+		for (int i = 1; i < lists.size(); i++) {
+			System.out.println(lists.get(i));
+		}
 		pageBean.setLists(lists);
 		return pageBean;
 	}

@@ -9,7 +9,7 @@
 <header>
         <div class="header">
             <div class="logo">
-                <img src="./static/images/schoolimages/schoollogo.png" th:src="@{/static/images/schoolimages/schoollogo.png}" alt="">
+                <img src="./static/images/schoolimages/schoollogo.png" th:src="@{/static/images/schoolimages/title.png}" alt="">
             </div>
             <div class="headerRight">
                 <p>距离中招<span id="timecuten">200</span>天</p>
@@ -74,13 +74,13 @@
                     </div>
             </li>  
             <li class="nav-li">
-                    <a href="">校园博客</a>
+                    <a href="jingao.site:8080/wordpress/" target="_blank">校园博客</a>
                     <div class="chances">
                       
                     </div>
             </li>  
             <li class="nav-li">
-                    <a href="">校园论坛</a>
+                    <a href="jingao.site:8080/bbs/forum.php" target="_blank">校园论坛</a>
                     <div class="chances">
                        
                     </div>
@@ -185,7 +185,7 @@
 <div th:fragment="footer">
 <footer>
             <div class="f-center">
-                         <div class="f-l"><img src="./static/images/schoolimages/bottomlogo.png" th:src="@{/static/images/schoolimages/bottomlogo.png}" alt=""></div>
+                         <div class="f-l"><img src="./static/images/schoolimages/title2.png" th:src="@{/static/images/schoolimages/title2.png}" alt=""></div>
                          <div class="f-l" th:if="${schoolNews} != null">
                                 <h3>联系我们:</h3>
                                 <p>电话：<span th:text="${schoolNews.reTitle}"></span></p>
@@ -201,7 +201,8 @@
 <!--                                 <p><a href="">港区教育单位</a></p> -->
                         </div> 
                          <div class="f-l">
-                                <h3><a href="" th:href="@{/common/toAddMessage}">留言板进入留言</a></h3>
+                                <h3><a href="" th:href="@{/common/toAddMessage}">在线留言</a></h3>
+                                <h3><a href="" th:href="@{/common/selectMessage}">留言板</a></h3>
                                 <p>&nbsp;</p>
                                 <p>版权所有@郑州二二一中学</p>
                                 <p>备案信息：<a href="">豫ICP备1111111号</a></p>

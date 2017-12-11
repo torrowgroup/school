@@ -1,5 +1,6 @@
 package com.futher.school.controller.tourist;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.futher.school.base.BaseController;
@@ -28,8 +30,9 @@ public class CommonController extends BaseController{
 	 * @return 转发到留言界面
 	 */
 	@RequestMapping("toAddMessage")
-	public String toAddMessage() {
-		return "manager/addmessage";
+	public String toAddMessage(Model model) {
+		getLinkAndTime(model);
+		return "schoolpage/addmessage";
 	}
 	/**
 	 * @param message
@@ -50,7 +53,30 @@ public class CommonController extends BaseController{
 		} else {
 			model.addAttribute("news", "添加失败");
 		}
-		return toAddMessage();
+		return toAddMessage(model);
+	}
+	/**
+	 * @param currentPage
+	 * @param inquiry
+	 * @param model
+	 * @return 在学校官方页显示已回复的留言
+	 */
+	@RequestMapping("selectMessage")
+	public String selectMessage(
+			@RequestParam(value = "currentPage", defaultValue = "1", required = false) int currentPage,String inquiry, Model model) {
+		getLinkAndTime(model);
+		String meStatus = "已回复";
+		inquiry = null;
+		model.addAttribute("meStatus", meStatus);
+		model.addAttribute("messages", messageService.findByPage(currentPage, meStatus, inquiry));// 回显分页数据
+		return "schoolpage/message";
+	}
+	@RequestMapping("readMessage")
+	public String readMessage(int meId, Model model) {
+		getLinkAndTime(model);
+		Message message = messageService.selectById(meId);
+		model.addAttribute("message", message);
+		return "schoolpage/messagenews";
 	}
 	/**
 	 * @param file

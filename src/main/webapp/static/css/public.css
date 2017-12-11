@@ -30,7 +30,7 @@ header{
     height:130px;
     margin: 0 auto;
     position: relative;
-    background-image: url(../images/head.jpg);
+    background-image: url(../images/schoolimages/head.jpg);
    
     min-width: 1000px;
 }
@@ -46,7 +46,7 @@ header{
         }
             .logo img{
                 width: 80%;
-                height: 100px;
+                height: 120px;
                 margin-top: 20px;
             }
         .headerRight{
@@ -87,7 +87,7 @@ border-top: 2px solid #883C92;
         }
         .f-center>div img{
             width: 80%;
-            margin-top: 20%;
+            margin-top: %;
         }
         .f-center>div>p{
             font-size: 14px;
@@ -257,21 +257,39 @@ border-top: 2px solid #883C92;
             letter-spacing: 5px;
             font-size: 20px;
         }
-        .info-right .bottom{
-            margin-top: 20px;
+      .info-right .bottom{
+            margin-top: 30px;
             width: 100%;
-            height: 50px;
             line-height: 50px;
             text-align: center;
         }
         .info-right .bottom a{
             display: inline-block;
-            width: 100px;
-            height: 40px;
-            background-color: #20a0f0;
             vertical-align: center;
-            line-height: 40px;
+            font-size:12px;
         }
+        .info-right .bottom a li{
+            font-weight: 500;
+        }
+            .info-right .bottom a .sign{
+                width: 20px;
+                height: 20px;
+                border: 1px solid #dadada;
+                line-height: 20px;
+                color: #0010ff; 
+            }
+            .info-right .bottom a .npage{
+                width: 60px;
+                height: 30px;
+                border: 1px solid #dadada;
+                line-height: 30px;
+                color: #282828;
+            }
+            .info-right .bottom a li:hover{
+                border: 1px solid #428bca;
+                font-weight: 600;
+            }
+
     /* 图片  点击出现  蒙版框的效果*/
     .end{
         position: fixed;

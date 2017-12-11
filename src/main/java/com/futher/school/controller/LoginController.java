@@ -71,6 +71,7 @@ public class LoginController extends BaseController {
 				session.setAttribute("manager", user);
 				model.addAttribute("noStatus", "未回复");
 				model.addAttribute("yesStatus", "已回复");
+				model.addAttribute("user", user);
 				pathurl = "/manager/homepage";
 			} else if (identityname.equals("officialemail")) {
 				model.addAttribute("news", "此用户不用作登录");

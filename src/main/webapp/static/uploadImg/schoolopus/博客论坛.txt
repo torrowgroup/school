@@ -1,0 +1,4 @@
+论坛：jingao.site:8080/bbs   账号 admin admin
+phpMyadmin:jingao.site:8080/phpmyadmin  账号root，root
+博客：jingao.site:8080/wordpress  账号 root jingao123
+

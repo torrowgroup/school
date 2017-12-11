@@ -62,7 +62,7 @@
 	    <!--静态资源-->
     <!-- 对静态资源文件的访问 支持访问WEB-INF目录 -->
     <mvc:resources mapping="/static/**" location="/static/" />
-    
+    <mvc:resources mapping="/errorpage/*" location="/errorpage/" />
            <!-- 使用thymeleaf解析 -->
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/"/>

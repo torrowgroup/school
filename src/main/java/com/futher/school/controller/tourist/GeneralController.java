@@ -1,14 +1,11 @@
 package com.futher.school.controller.tourist;
 
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.futher.school.base.BaseController;
 import com.futher.school.entity.Resource;
-import com.futher.school.entity.Type;
 
 @RequestMapping("/general")
 @Controller
