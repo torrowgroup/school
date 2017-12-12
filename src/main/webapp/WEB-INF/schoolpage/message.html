@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=0.3">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--     <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
+<!--     <link rel="stylesheet" href="./css/public.css"> -->
+  	<link rel="stylesheet" type="text/css" th:href="@{../static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/public.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/a-news.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/leaveWord.css}">
+    <title>郑州某中学-校园概括</title>
+</head>
+<body th:if="${typeList} != null">
+   <div th:include="schoolpage/common :: header"></div>
+    <!-- 身体部分开始 -->
+    <section class="p-img img">
+        
+    </section>
+    <section class="main">
+        <section class="content-info">
+            <div class="info-left">
+                <h3>在线留言</h3>
+                <d id="cc">
+                    <a th:href="@{/common/selectMessage}"><dt>留言</dt></a>
+<!--                 	<a   th:href="@{/schoolviews/checkSchoolViews?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a> -->
+                </div>
+            <div class="info-right" th:if="${messages.lists} != null">
+                <!-- 附页 定位块     -->
+                <section class="top">
+                            <section class="left"></section>
+                            <section class="left-1">留言</section>
+                </section>
+                <div class="news" th:each="message,messageStat:${messages.lists}">
+                     <span class="above"></span><a th:href="@{/common/readMessage?(meId=${message.meId})}" th:text="${message.meTitle}">我是贺新安 ,新安 ,,你是谁??新安 ,,你是谁??</a>
+                     <span class="time back" th:text="${message.meReleasedate}">2017-17-3</span>
+                </div>
+                 <section class="bottom">
+                     <section aria-label="Page navigation" th:if="${messages.totalPage} > 0">
+					  <ul class="pagination" th:if="${messages.currPage} == 1 and ${messages.totalPage > 1}">
+						    <li><a th:href="@{/common/selectMessage?(currentPage=1)}">首页</a></li>
+      						<li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/common/selectMessage?(currentPage=${i})}"th:text="${i}">#</a></li>
+        					<li><a th:href="@{/common/selectMessage?(currentPage=${messages.currPage+1})}">下一页</a></li>
+					  </ul>
+					   <ul class="pagination" th:if="${messages.currPage} > 1 and ${messages.currPage > 1}">
+						    <li><a th:href="@{/common/selectMessage?(currentPage=1)}">首页</a></li>
+      						<li><a th:href="@{/common/selectMessage?(currentPage=${messages.currPage-1})}">上一页</a></li>
+      						<li class="active" th:each="i:${#numbers.sequence(1,messages.totalPage)}"><a th:if="${i > messages.currPage-3} and ${i < messages.currPage+3}"  th:href="@{/common/selectMessage?(currentPage=${i})}"th:text="${i}">#</a></li>
+        					<li><a th:href="@{/common/selectMessage?(currentPage=${messages.currPage+1})}">下一页</a></li>
+					 		 <li><a th:href="@{/common/selectMessage?(currentPage=${messages.totalPage})}">尾页</a></li>
+					  </ul>
+					</section>
+                </section>  
+            </div>
+        </section>
+    </section>
+   
+<!--     身体部分开始 -->
+<!--     <section class="p-img img"> -->
+        
+<!--     </section> -->
+<!--     <section class="main"> -->
+<!--         <section class="content-info"> -->
+<!--             <div class="info-left"> -->
+<!--                 <h3>校园新闻</h3> -->
+<!--                 <dl> -->
+<!--                     <a th:if="${dynamic} != null" th:each="type,typeStat:${dynamic}" th:href="@{/dynamic/checkDynamic?(tyId=${type.tyId})}"><dt th:text="${type.tyCategoryname}">校园新闻</dt></a> -->
+<!--                 </dl> -->
+<!--             </div> -->
+<!--             <div class="info-right"> -->
+<!--                 <div class="news" th:if="${messages.lists} != null" th:each="resource,resourceStat:${messages.lists}"> -->
+<!--                 	<span>**</span><a th:href="@{/dynamic/readDynamic?(reId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reReleasedate}"></span> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </section> -->
+
+<!--     </section> -->
+  <div th:include="schoolpage/common :: footer"></div>
+</body>
+<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/counttime.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/xidinghe.js}"></script>
+<script type="text/javascript">
+ function chanceStyle(id_1,id_2,class_chan){
+    var dts= $(id_1);
+    for( var i = 0; i < dts.length; i++ ) {
+        dts[i].className =" ";
+        if(dts[i].innerText==$(id_2).text()){
+            dts[i].className = class_chan;
+        }
+    }
+    }   
+    chanceStyle('#cc dt','#content_2','dt2');
+ xiding("#nav-1");
+</script>
+<script type="text/javascript" th:if="${typeList} != null and ${examTime} != null">
+	var examTime = '[[${examTime.reContent}]]';
+	var spantime =days(examTime);
+ 	$('#timecuten').html(spantime);
+</script>
+</html>

@@ -263,8 +263,8 @@ public class ResourceController extends BaseController {
 	 * @return 添加上传文件
 	 */
 	@RequestMapping("addUploadFile")
-	public String addUploadFile(Resource resource, MultipartFile file, Model model) {
-		int tyPid = (int) session.getAttribute("tyPid");
+	public String addUploadFile(Resource resource,int tyPid , MultipartFile file, Model model) {
+//		int tyPid = (int) session.getAttribute("tyPid");
 		boolean sign = setAddResource(resource, model);
 		if (sign == true) {
 			if (tyPid == 5) {
