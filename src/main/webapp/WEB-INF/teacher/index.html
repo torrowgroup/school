@@ -80,7 +80,7 @@
 				<li class="nav-item feed">
 					<a href="javascript:"><i class="glyphicon glyphicon-book"></i><span>资源中心</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li><a th:href="@{teacher/showUpload(uri=showupload,reTypeid=${downloadType.tyId})}" th:target="content"><span>已上传的资源</span></a></li>
+					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{teacher/showUpload(uri=showupload,reTypeid=${downloadType.tyId})}" th:target="content"><span>已上传的资源</span></a></li>
 					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{jump/uploadFile?(Typepid=${downloadType.tyPid},TypeId=${downloadType.tyId})}" th:target="content"><span>资源上传</span></a></li>
 					</ul>
 				</li>

@@ -59,7 +59,7 @@ public class TeacherController extends BaseController {
 			Date dateStr = new Date();
 			String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(dateStr);
 			resource.setReTypeid(typeId);
-			resource.setRePublisher(user.getUsName());
+			resource.setRePublisher(user.getUsEmail());
 			resource.setReContent(fileName);
 			resource.setReReleasedate(date);
 			resource.setReTypepid(reTypepid);
@@ -71,6 +71,7 @@ public class TeacherController extends BaseController {
 			}
 		}
 		model.addAttribute("reTypepid", reTypepid);
+		model.addAttribute("typeName", typeService.selectTypeById(typeId).getTyCategoryname());
 		model.addAttribute("typeId", typeId);
 		model.addAttribute("msg", msg);
 		return "teacher/upload";
