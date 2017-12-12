@@ -8,8 +8,8 @@
 <link th:href="@{/static/css/edit.css}" rel="stylesheet">
 </head>
 <body>
-	<div class="middle" style="margin-left: 160px; margin-top: 50px;">
-		<span th:text="${msg}" style="color: black; font-size: 20px;"></span>
+	<div class="middle" style="margin-left: 50px; margin-top: 50zpx;">
+		<span th:text="${msg}" style="color: black; font-size: 20px; margin-top: 20px; font-style: initial" ></span> <br> <br>
 		<form
 			th:action="@{/teacher/uploadEdit?(reTypeid=${reTypeid},typePid=${reTypepid})}"
 			method="post" enctype="multipart/form-data" th:object="${resource}"

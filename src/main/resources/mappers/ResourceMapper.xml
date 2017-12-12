@@ -358,6 +358,15 @@
        and concat_ws (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
      </if>
   </select>
+   <select id="selectByTypeUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_resource
+    where re_typeid = #{reTypeid,jdbcType=INTEGER} and re_publisher = #{userEmail,jdbcType=VARCHAR}
+     <if test="inquiry != null">
+       and concat_ws (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
+     </if>
+  </select>
    <!-- 根据分页数据start 和size查询数据 -->
     <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
         select
@@ -373,8 +382,26 @@
            limit #{start},#{size}
         </if>
     </select>
-
-    
+    <!--根据用户查看资源-->
+    <select id="findByPageUser" parameterType="Map" resultMap="BaseResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from tb_resource
+        
+        <if test="reTypeid!=null">
+         	where re_typeid = #{reTypeid,jdbcType=INTEGER}
+        </if>
+        <if test="inquiry != null">
+           and concat_ws (re_typeName,',',re_title,',',re_publisher,',',re_releaseDate,',',re_id) like concat(concat('%',#{inquiry}),'%')
+        </if>
+        <if test="userEmail!=null">
+         	and  re_publisher = #{userEmail,jdbcType=VARCHAR}
+        </if>
+        <if test="start!=null and size!=null">
+           limit #{start},#{size}
+        </if>
+        
+    </select>
      <!--获得所有上传文件名-->
   <select id="getUploadFileName" parameterType="com.futher.school.entity.Resource" resultMap="ResultMapWithBLOBs" >  
    select * from tb_resource 

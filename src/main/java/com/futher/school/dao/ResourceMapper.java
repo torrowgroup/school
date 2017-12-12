@@ -19,14 +19,18 @@ public interface ResourceMapper {
     List<Resource> selectByTypeId(@Param("reTypeid")Integer reTypeid);
 	//把符合条件的数据分页
 	List<Resource> findByPage(HashMap<String, Object> map);
+	//wqj 加 根据用户名区分  勿删
+	List<Resource> findByPageUser(HashMap<String, Object> map);
     //wqj用来获取所有resource
     List<Resource> getUploadFileName();//获取所有上传文件名
     //主页的滚动图片
 	List<com.futher.school.entity.Resource> selectByPid(@Param("pid")int pid, @Param("number")int number, @Param("typeName")String typeName);
-	//根据类型id查找资源
+	//根据类型id查找资源8
 	com.futher.school.entity.Resource selectByid(Integer reTypeid);
 	//根据类型父查询所有资源类符合的条数
 	List<Resource> selectByTypePid(@Param("reTypePid")int reTypePid, @Param("inquiry")String inquiry);
+	//wqj  根据教师查找资源
+	List<Resource> selectByTypeUser(@Param("reTypeid")int reTypeid, @Param("inquiry")String inquiry,@Param("userEmail") String userEmail);
 	//倒叙得到最后几条数据
 	List<com.futher.school.entity.Resource> selectImmediateNews(@Param("pid")int pid,  @Param("number")int number);
 	//把符合类型ID的条件的数据分页

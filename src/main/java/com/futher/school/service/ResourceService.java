@@ -24,6 +24,8 @@ public interface ResourceService {
 	String uploadImage(MultipartFile myFileName,HttpSession session) throws IllegalStateException, IOException;
 	//分页显示资源
 	PageBean<Resource> findByPage(int currentPage, int reTypeid, String inquiry);
+	//wqj 分页显示各个教师资源
+	PageBean<Resource> findByUser(int currentPage, int reTypeid, String inquiry,String userEmail);
 	//根据ID查找资源
 	Resource selectById(Integer reId);
 	//根据ID删除资源

@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>郑州一二一中学管理系统</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin_style.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/static/fonts/iconfont.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/static/css/iconfont.css}">
 	<script th:src="@{/static/js/jquery-2.1.1.min.js}"></script>
@@ -18,7 +19,7 @@
 		<p class="bottom-word"><em>Middle SchoolSysterm</em></p>
 	</div>
 	<div class="top_nav">
-		<ul class="menu">
+		<ul class="menu" style="margin-left:190px">
 			<li><a th:href="@{teacher/checkUser?(uri = checkuser)}" th:target="content">个人资料</a></li>
  			<li><a  href="http://jingao.site:8080/wordpress/">个人博客</a></li>
 			<li><a href="#">回复留言</a></li>
@@ -37,59 +38,60 @@
 <div class="left">
 	<div class="member_info">
 		<div class="member_ico">				
-		<img th:src="@{/static/images/a.png}" width="43" height="43">
+		<img th:src="@{/static/images/admin.png}" width="55" height="55">
 	     </div>
-		<a th:href="@{login.html}" class="system_logout">退出</a></div>
+		<a href="http://localhost:8080/school/login#/" class="system_logout">退出</a></div>
 	<!--左侧子菜单-->
 	<div class="left-son">
 		<div class="left_title">常用功能操作</div>
 		<ul class="side">
 			<li><a  href="http://jingao.site:8080/wordpress/">博客中心</a></li>
-			<li><a th:href="@{teacher/showUpload?(uri=showedit,reTypepid=8)}" th:target="content" >校园通知</a></li>
+					<li><a  href="http://jingao.site:8080/bbs/">个人论坛</a></li>
+			<li><a th:href="@{teacher/showUpload?(uri=showedit,reTypeid=8)}" th:target="content" >校园通知</a></li>
 			<li><a th:href="@{teacher/checkUser?(uri=checkuser)}" th:target="content">个人资料</a></li>
 		</ul>
 		<div class="nav">
 			<ul class="leftmenu">
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-guanliyuan1"></i><span>教学教研</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-th-list"></i><span>教学教研</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li th:each="educate,educateStat:${educate}"><a th:href="@{jump/uploadEdit?(Typepid=${educate.tyPid},TypeId=${educate.tyId},typeName=${educate.tyCategoryname},typeList=${educate})}" th:target="content"><span><td th:text="${educate.tyCategoryname}"></td></span></a></li>
+					<li th:each="educate,educateStat:${educate}"><a th:href="@{jump/uploadEdit?(Typepid=${educate.tyPid},TypeId=${educate.tyId})}" th:target="content"><span><td th:text="${educate.tyCategoryname}"></td></span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-guanliyuan1"></i><span>教学风采</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-send"></i><span>教学风采</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li th:each="literature,literatureStat:${literature}"><a th:href="@{jump/uploadEdit?(Typepid=${literature.tyPid},TypeId=${literature.tyId},typeName=${literature.tyCategoryname},typeList=${literature} )}" th:target="content"><span><td th:text="${literature.tyCategoryname}"></td></span></a></li>
+					<li th:each="literature,literatureStat:${literature}"><a th:href="@{jump/uploadEdit?(Typepid=${literature.tyPid},TypeId=${literature.tyId})}" th:target="content"><span><td th:text="${literature.tyCategoryname}"></td></span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-guanliyuan1"></i><span>教师成长</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-road"></i><span>教师成长</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li th:each="teacherGrow,teacherGrowStat:${teacherGrow}"><a th:href="@{jump/uploadEdit?(Typepid=${teacherGrow.tyPid},TypeId=${teacherGrow.tyId},typeName=${teacherGrow.tyCategoryname},typeList=${teacherGrow})}"th:target="content"><span><td th:text="${teacherGrow.tyCategoryname}"></td></span></a></li>
+					<li th:each="teacherGrow,teacherGrowStat:${teacherGrow}"><a th:href="@{jump/uploadEdit?(Typepid=${teacherGrow.tyPid},TypeId=${teacherGrow.tyId})}"th:target="content"><span><td th:text="${teacherGrow.tyCategoryname}"></td></span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-ziyuan"></i><span>教师园地</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-move"></i><span>教师园地</span><i class="my-icon nav-more"></i></a>
 					<ul>
 					<li><a  href="http://jingao.site:8080/wordpress/"><span>博客</span></a></li>
-					<li><a  href="http://jingao.site:8080/wordpress/"><span>论坛</span></a></li>
+					<li><a  href="http://jingao.site:8080/bbs/"><span>论坛</span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-guanliyuan1"></i><span>资源中心</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-book"></i><span>资源中心</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li><a th:href="@{teacher/showUpload(uri=showupload,reTypepid=${downloadType.tyPid})}" th:target="content"><span>已上传的资源</span></a></li>
-					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{jump/uploadFile?(Typepid=${downloadType.tyPid},TypeId=${downloadType.tyId},typeName=${downloadType.tyCategoryname})}" th:target="content"><span>资源上传</span></a></li>
+					<li><a th:href="@{teacher/showUpload(uri=showupload,reTypeid=${downloadType.tyId})}" th:target="content"><span>已上传的资源</span></a></li>
+					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{jump/uploadFile?(Typepid=${downloadType.tyPid},TypeId=${downloadType.tyId})}" th:target="content"><span>资源上传</span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">
-					<a href="javascript:"><i class="iconfont icon-guanliyuan1"></i><span>共享中心</span><i class="my-icon nav-more"></i></a>
+					<a href="javascript:"><i class="glyphicon glyphicon-tasks"></i><span>共享中心</span><i class="my-icon nav-more"></i></a>
 					<ul >
-					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{teacher/showUpload(uri=showupload,reTypepid=${downloadType.tyPid})}" th:target="content"><span>已上传的资源</span></a></li>
-					<li th:each="educate,educateStat:${educate}"><a th:href="@{teacher/showUpload(uri=showedit,reTypepid=${educate.tyPid})}" th:target="content"><span><td th:text="${educate.tyCategoryname}"></td></span></a></li>
-					<li th:each="literature,literatureStat:${literature}"><a th:href="@{teacher/showUpload(uri=showedit,reTypepid=${literature.tyPid})}" th:target="content"><span><td th:text="${literature.tyCategoryname}"></td></span></a></li>
-					<li th:each="teacherGrow,teacherGrowStat:${teacherGrow}"><a th:href="@{teacher/showUpload(uri=showedit,reTypepid=${teacherGrow.tyPid})}" th:target="content"><span><td th:text="${teacherGrow.tyCategoryname}"></td></span></a></li>
-					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{jump/uploadFile?(Typepid=${downloadType.tyPid},TypeId=${downloadType.tyId},typeName=${downloadType.tyCategoryname})}" th:target="content"><span > <td th:text="${downloadType.tyCategoryname}"></td></span></a></li>
+					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{teacher/showUpload(uri=showupload,reTypeid=${downloadType.tyId})}" th:target="content"><span>已上传的资源</span></a></li>
+					<li th:each="educate,educateStat:${educate}"><a th:href="@{teacher/showUpload(uri=showedit,reTypeid=${educate.tyId})}" th:target="content"><span><td th:text="${educate.tyCategoryname}"></td></span></a></li>
+					<li th:each="literature,literatureStat:${literature}"><a th:href="@{teacher/showUpload(uri=showedit,reTypeid=${literature.tyId})}" th:target="content"><span><td th:text="${literature.tyCategoryname}"></td></span></a></li>
+					<li th:each="teacherGrow,teacherGrowStat:${teacherGrow}"><a th:href="@{teacher/showUpload(uri=showedit,reTypeid=${teacherGrow.tyId})}" th:target="content"><span><td th:text="${teacherGrow.tyCategoryname}"></td></span></a></li>
+					<li th:each="downloadType,downloadTypeStat:${downloadType}"><a th:href="@{jump/uploadFile?(Typepid=${downloadType.tyPid},TypeId=${downloadType.tyId})}" th:target="content"><span > <td th:text="${downloadType.tyCategoryname}"></td></span></a></li>
 					</ul>
 				</li>
 				<li class="nav-item feed">

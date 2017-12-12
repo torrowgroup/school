@@ -96,13 +96,44 @@ public class ResourceServiceImpl extends BaseDao<com.futher.school.entity.Resour
 		map.put("inquiry", inquiry);
 		// 封装每页显示的数据
 		List<com.futher.school.entity.Resource> lists = resourceMapper.findByPage(map);
+		pageBean.setLists(lists);
+		return pageBean;
+	}
+
+	@Override
+	public PageBean<com.futher.school.entity.Resource> findByUser(int currentPage, int reTypeid, String inquiry,String userEmail) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		PageBean<com.futher.school.entity.Resource> pageBean = new PageBean<com.futher.school.entity.Resource>();
+
+		// 封装当前页数
+		pageBean.setCurrPage(currentPage);
+
+		// 每页显示的数据
+		int pageSize = 6;
+		pageBean.setPageSize(pageSize);
+		// 封装总记录数
+
+		int totalCount = resourceMapper.selectByTypeUser(reTypeid, inquiry,userEmail).size();
+		pageBean.setTotalCount(totalCount);
+
+		// 封装总页数
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		pageBean.setTotalPage(num.intValue());
+
+		map.put("start", (currentPage - 1) * pageSize);
+		map.put("size", pageBean.getPageSize());
+		map.put("reTypeid", reTypeid);				
+		map.put("inquiry", inquiry);
+		map.put("userEmail", userEmail);
+		// 封装每页显示的数据
+		List<com.futher.school.entity.Resource> lists = resourceMapper.findByPageUser(map);
 		for(int i=0;i<lists.size();i++) {
 			System.out.println(lists.get(i));
 		}
 		pageBean.setLists(lists);
 		return pageBean;
 	}
-
 	@Override
 	public com.futher.school.entity.Resource selectById(Integer reId) {
 		return (com.futher.school.entity.Resource) this.selectOneEntity(reId);

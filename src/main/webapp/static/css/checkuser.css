@@ -29,4 +29,6 @@ body{
 .form-control{
     height:42px;!important;
     border-radius: 10px;
+    width: 320px;
+    margin-left: 100px;
 }
